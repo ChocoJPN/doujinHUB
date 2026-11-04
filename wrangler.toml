@@ -1,0 +1,8 @@
+name = "doujin-index"
+compatibility_date = "2026-11-01"
+pages_build_output_dir = "."
+
+# FANZA (DMM) API キーは Cloudflare ダッシュボードの
+# Settings > Environment variables、またはローカルの .dev.vars に設定します:
+# DMM_API_ID = "あなたのAPI_ID"
+# DMM_AFFILIATE_ID = "あなたのアフィリエイトID-990"

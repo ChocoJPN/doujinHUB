@@ -1,0 +1,41 @@
+name: Update FANZA Data & Analytics
+
+on:
+  # 6時間ごとに自動実行 (JST 03:00, 09:00, 15:00, 21:00)
+  schedule:
+    - cron: "0 */6 * * *"
+  # GitHubのActionsタブから手動でも即時実行可能
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch latest FANZA works and run analytics
+        env:
+          DMM_API_ID: ${{ secrets.DMM_API_ID }}
+          DMM_AFFILIATE_ID: ${{ secrets.DMM_AFFILIATE_ID }}
+        run: node scripts/fetch_works.js
+
+      - name: Commit and push updated data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/fanza_latest.json
+          if git diff --staged --quiet; then
+            echo "データに変更はありませんでした"
+          else
+            git commit -m "chore(data): update FANZA works and analytics"
+            git push
+          fi

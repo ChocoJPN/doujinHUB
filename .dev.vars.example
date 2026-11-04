@@ -1,0 +1,5 @@
+# ローカル開発用の環境変数テンプレート
+# FANZA APIを取得したら、このファイルを .dev.vars にコピーして値を入力してください
+
+DMM_API_ID="あなたのDMM_API_ID"
+DMM_AFFILIATE_ID="あなたのアフィリエイトID-990"

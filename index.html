@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOUJIN INDEX — FANZA同人 新着・ランキング・市場データ分析</title>
+  <meta name="description" content="FANZA同人の同人誌・ボイス/ASMR・CG集の新着、人気ランキング、作家アーカイブ、およびジャンル・価格帯のデータ分析サイト。" />
+  <style>
+    :root {
+      --bg: #09090b;
+      --surface: #121215;
+      --surface-hover: #18181c;
+      --border: #27272a;
+      --border-hover: #3f3f46;
+      --text: #fafafa;
+      --text-sub: #a1a1aa;
+      --text-muted: #71717a;
+      --accent: #e11d48;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 80px;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(9, 9, 11, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 10px 0;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .brand-bar {
+      width: 4px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: -0.01em;
+    }
+
+    .api-status {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .api-status.live {
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-sub);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-btn:hover {
+      color: var(--text);
+    }
+
+    .nav-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 600;
+    }
+
+    .search-box {
+      position: relative;
+      width: 250px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px 7px 32px;
+      font-size: 0.82rem;
+      color: var(--text);
+      transition: border-color 0.15s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--text-sub);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Sub Toolbar */
+    .subbar {
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+      margin-bottom: 28px;
+    }
+
+    .subbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .cat-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-sub);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .cat-btn:hover {
+      color: var(--text);
+    }
+
+    .cat-btn.active {
+      background: var(--surface);
+      border-color: var(--border);
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .controls-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .select-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      outline: none;
+    }
+
+    /* Active Filter Bar */
+    .filter-notice {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.82rem;
+    }
+
+    /* Grid & Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .card-cover {
+      height: 150px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .card-cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(9,9,11,0.55), rgba(9,9,11,0.75));
+      pointer-events: none;
+    }
+
+    .cover-top, .cover-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .type-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #e4e4e7;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .rank-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #fafafa;
+      color: #09090b;
+      margin-right: 6px;
+    }
+
+    .discount-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .mono-meta {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.74rem;
+      color: #d4d4d8;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .circle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+    }
+
+    .circle-link {
+      background: none;
+      border: none;
+      color: var(--text-sub);
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+    }
+
+    .circle-link:hover {
+      color: var(--text);
+      text-decoration: underline;
+    }
+
+    .card-title {
+      font-size: 0.94rem;
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 0.74rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      cursor: pointer;
+    }
+
+    .tag:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    .card-footer {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(9, 9, 11, 0.4);
+    }
+
+    .price-current {
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .price-orig {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+      margin-left: 6px;
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-sub);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .icon-btn.active {
+      border-color: rgba(225, 29, 72, 0.5);
+      background: rgba(225, 29, 72, 0.12);
+      color: var(--accent);
+    }
+
+    .primary-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: var(--text);
+      color: var(--bg);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .primary-btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Analytics Dashboard */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+    }
+
+    .kpi-label {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+
+    .kpi-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .analytics-panels {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 20px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+    }
+
+    .panel-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar-row {
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+    }
+
+    .bar-head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .bar-track {
+      height: 6px;
+      background: var(--bg);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--text);
+      border-radius: 99px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-inner">
+      <div class="header-left">
+        <button type="button" class="brand" id="logoReset">
+          <span class="brand-bar"></span>
+          <span class="brand-name">DOUJIN INDEX</span>
+          <span id="apiStatusBadge" class="api-status">DEMO DATA</span>
+        </button>
+
+        <nav class="nav">
+          <button type="button" class="nav-btn active" data-tab="new">新着作品</button>
+          <button type="button" class="nav-btn" data-tab="ranking">ランキング</button>
+          <button type="button" class="nav-btn" data-tab="creators">作家・サークル</button>
+          <button type="button" class="nav-btn" data-tab="analytics">データ分析</button>
+          <button type="button" class="nav-btn" data-tab="favorites">ブックマーク (<span id="favCount">2</span>)</button>
+        </nav>
+      </div>
+
+      <div class="search-box">
+        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="作品・サークル・声優・タグ..." />
+      </div>
+    </div>
+  </header>
+
+  <div class="subbar" id="subBar">
+    <div class="container subbar-inner">
+      <div class="cat-group">
+        <button type="button" class="cat-btn active" data-cat="all">すべて</button>
+        <button type="button" class="cat-btn" data-cat="comic">同人誌・コミック</button>
+        <button type="button" class="cat-btn" data-cat="audio">ボイス・ASMR</button>
+        <button type="button" class="cat-btn" data-cat="cg">CG・イラスト</button>
+      </div>
+
+      <div class="controls-right">
+        <label class="checkbox-label">
+          <input type="checkbox" id="saleCheck" />
+          <span>セール対象のみ</span>
+        </label>
+        <select id="sortSelect" class="select-box">
+          <option value="newest">新着順</option>
+          <option value="popular">人気順</option>
+          <option value="priceAsc">価格が安い順</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <div id="filterNotice" class="filter-notice">
+      <div>
+        <span style="color:var(--text-muted); margin-right:6px;">絞り込み条件:</span>
+        <strong id="filterNoticeText"></strong>
+      </div>
+      <button type="button" id="clearFilterBtn" style="background:none; border:none; text-decoration:underline; cursor:pointer; font-size:0.8rem; color:var(--text-sub);">
+        すべて解除
+      </button>
+    </div>
+
+    <div id="mainView"></div>
+  </main>
+
+  <script>
+    const CATEGORY_META = {
+      comic: { label: "COMIC", ja: "同人誌・コミック" },
+      audio: { label: "VOICE / ASMR", ja: "ボイス・ASMR" },
+      cg: { label: "ILLUSTRATION", ja: "CG・イラスト" }
+    };
+
+    let CREATORS = [
+      { id: "c1", name: "月影レン", circle: "月影アトリエ", cat: "COMIC", works: 34, latest: "2026.11.04", bio: "透明感のある色彩と丁寧な心理描写で支持される同人サークル。総集編シリーズは累計10万DLを記録。" },
+      { id: "c2", name: "CV: 白雪みう", circle: "星空サウンドラボ", cat: "VOICE / ASMR", works: 48, latest: "2026.11.04", bio: "NEUMANN KU100マイクを用いた高精細バイノーラル録音に特化。耳かき・環境音ミックス作品を中心に発表。" },
+      { id: "c3", name: "琥珀クロエ", circle: "琥珀亭", cat: "COMIC", works: 27, latest: "2026.11.02", bio: "緻密な世界観設計と重厚なストーリー展開で人気のファンタジー系同人サークル。" },
+      { id: "c4", name: "結城ひなの・琴音りり", circle: "甘蜜ショコラティエ", cat: "VOICE / ASMR", works: 19, latest: "2026.11.03", bio: "左右独立チャンネルによるデュアルボイス演出を得意とする音声制作サークル。" },
+      { id: "c5", name: "蒼井ハルカ", circle: "蒼穹デジタルワークス", cat: "ILLUSTRATION", works: 41, latest: "2026.11.03", bio: "4K解像度のデジタルイラストとLive2Dアニメーションを組み合わせたハイブリッドCG集を制作。" },
+      { id: "c6", name: "夜々アリス", circle: "黒猫ノクターン", cat: "COMIC", works: 22, latest: "2026.11.01", bio: "SNS連載のショートラブコメ作品に大幅な描き下ろしを加えたパッケージ版を展開。" }
+    ];
+
+    let WORKS = [
+      {
+        id: "w1",
+        code: "d_410101",
+        title: "放課後の図書室で、君と秘密のページをめくる総集編 [描き下ろし32P収録]",
+        category: "comic",
+        creatorId: "c1",
+        author: "月影レン",
+        circle: "月影アトリエ",
+        date: "2026.11.04",
+        spec: "148P / PDF・JPG",
+        price: 1320,
+        origPrice: 1650,
+        discount: 20,
+        rating: 4.92,
+        dlCount: 12800,
+        rank: 1,
+        accent: "#27272a",
+        tags: ["純愛", "幼馴染", "フルカラー", "総集編"]
+      },
+      {
+        id: "w2",
+        code: "d_410205",
+        title: "星空温泉宿でとろける極上耳かき＆密着ささやき添い寝 [KU100バイノーラル]",
+        category: "audio",
+        creatorId: "c2",
+        author: "CV: 白雪みう",
+        circle: "星空サウンドラボ",
+        date: "2026.11.04",
+        spec: "165min / WAV・FLAC",
+        price: 1540,
+        origPrice: 2200,
+        discount: 30,
+        rating: 4.96,
+        dlCount: 19400,
+        rank: 2,
+        accent: "#1e293b",
+        tags: ["バイノーラル", "耳かき", "ささやき", "KU100"]
+      },
+      {
+        id: "w3",
+        code: "d_410599",
+        title: "憧れの生徒会長と二人きりの放課後アトリエ [4Kイラスト＋60fps動画同梱]",
+        category: "cg",
+        creatorId: "c5",
+        author: "蒼井ハルカ",
+        circle: "蒼穹デジタルワークス",
+        date: "2026.11.03",
+        spec: "基本24枚 (差分680枚) + MP4",
+        price: 990,
+        origPrice: 1980,
+        discount: 50,
+        rating: 4.88,
+        dlCount: 9600,
+        rank: 3,
+        accent: "#18181b",
+        tags: ["4K高画質", "Live2D動画", "学園"]
+      },
+      {
+        id: "w4",
+        code: "d_410488",
+        title: "ダウナー系妹＆世話焼き姉に左右から挟まれる休日 [Wキャスト完全別録り]",
+        category: "audio",
+        creatorId: "c4",
+        author: "CV: 結城ひなの・琴音りり",
+        circle: "甘蜜ショコラティエ",
+        date: "2026.11.03",
+        spec: "190min / WAV・MP3",
+        price: 1848,
+        origPrice: 2640,
+        discount: 30,
+        rating: 4.94,
+        dlCount: 15800,
+        rank: 4,
+        accent: "#262626",
+        tags: ["Wキャスト", "両耳ささやき", "添い寝", "バイノーラル"]
+      },
+      {
+        id: "w5",
+        code: "d_410312",
+        title: "銀翼の聖女と黒き竜騎士 IV ―王都奪還編― [デジタル版限定ラフ集20P付]",
+        category: "comic",
+        creatorId: "c3",
+        author: "琥珀クロエ",
+        circle: "琥珀亭",
+        date: "2026.11.02",
+        spec: "104P / PDF・EPUB",
+        price: 1100,
+        origPrice: 1100,
+        discount: 0,
+        rating: 4.86,
+        dlCount: 8400,
+        rank: 5,
+        accent: "#1c1917",
+        tags: ["ファンタジー", "長編シリーズ", "特典付"]
+      },
+      {
+        id: "w6",
+        code: "d_409900",
+        title: "クールな黒猫先輩は私の前だけではしゃぎたい！ Complete Box",
+        category: "comic",
+        creatorId: "c6",
+        author: "夜々アリス",
+        circle: "黒猫ノクターン",
+        date: "2026.11.01",
+        spec: "212P / PDF・EPUB",
+        price: 1540,
+        origPrice: 2200,
+        discount: 30,
+        rating: 4.91,
+        dlCount: 16200,
+        rank: 6,
+        accent: "#172554",
+        tags: ["ラブコメ", "先輩・後輩", "総集編", "純愛"]
+      }
+    ];
+
+    const state = {
+      tab: "new",
+      cat: "all",
+      saleOnly: false,
+      sort: "newest",
+      creatorId: null,
+      tag: null,
+      query: "",
+      favs: ["w1", "w2"]
+    };
+
+    // 1) Cloudflare Pages Functions (/api/fanza) または 2) GitHub Actions 自動更新JSON (./data/fanza_latest.json) から実データを取得
+    async function tryFetchLiveFanzaData() {
+      // 1. Cloudflare Pages Functions のリアルタイムAPIを試行
+      try {
+        const res = await fetch("/api/fanza?sort=date&hits=40");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.mode === "live" && Array.isArray(data.works) && data.works.length > 0) {
+            WORKS = data.works;
+            const badge = document.getElementById("apiStatusBadge");
+            if (badge) {
+              badge.textContent = "FANZA API LIVE";
+              badge.classList.add("live");
+            }
+            render();
+            return;
+          }
+        }
+      } catch (e) {}
+
+      // 2. GitHub Actions で定期更新された JSON ファイル (./data/fanza_latest.json) を試行
+      try {
+        const res = await fetch("./data/fanza_latest.json");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.mode === "live" && Array.isArray(data.works) && data.works.length > 0) {
+            WORKS = data.works;
+            if (Array.isArray(data.creators) && data.creators.length > 0) {
+              CREATORS = data.creators;
+            }
+            const badge = document.getElementById("apiStatusBadge");
+            if (badge) {
+              badge.textContent = "AUTO UPDATED";
+              badge.classList.add("live");
+            }
+            render();
+          }
+        }
+      } catch (e) {}
+    }
+
+    function computeAnalytics(worksList) {
+      if (!worksList.length) return null;
+      let priceSum = 0;
+      let ratingSum = 0;
+      let saleCount = 0;
+      const catCounts = { comic: 0, audio: 0, cg: 0 };
+      const tagMap = new Map();
+
+      worksList.forEach((w) => {
+        priceSum += w.price;
+        ratingSum += w.rating;
+        if (w.discount > 0) saleCount++;
+        catCounts[w.category] = (catCounts[w.category] || 0) + 1;
+        w.tags.forEach((t) => {
+          const cur = tagMap.get(t) || { name: t, count: 0, priceSum: 0 };
+          cur.count++;
+          cur.priceSum += w.price;
+          tagMap.set(t, cur);
+        });
+      });
+
+      const topTags = Array.from(tagMap.values())
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 8);
+
+      return {
+        total: worksList.length,
+        avgPrice: Math.round(priceSum / worksList.length),
+        avgRating: (ratingSum / worksList.length).toFixed(2),
+        saleRatio: Math.round((saleCount / worksList.length) * 100),
+        catCounts,
+        topTags
+      };
+    }
+
+    function renderAnalyticsView() {
+      const stats = computeAnalytics(WORKS);
+      if (!stats) return `<p>データがありません。</p>`;
+
+      return `
+        <div style="margin-top:24px;">
+          <div class="kpi-grid">
+            <div class="kpi-card">
+              <div class="kpi-label">分析対象作品数</div>
+              <div class="kpi-value">${stats.total} <span style="font-size:0.85rem; font-weight:400; color:var(--text-sub);">works</span></div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">平均販売価格</div>
+              <div class="kpi-value">¥${stats.avgPrice.toLocaleString()}</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">セール実施率</div>
+              <div class="kpi-value">${stats.saleRatio}%</div>
+            </div>
+            <div class="kpi-card">
+              <div class="kpi-label">平均レビュースコア</div>
+              <div class="kpi-value">★ ${stats.avgRating}</div>
+            </div>
+          </div>
+
+          <div class="analytics-panels">
+            <div class="panel">
+              <h3 class="panel-title">カテゴリ別シェア</h3>
+              ${["comic", "audio", "cg"]
+                .map((cid) => {
+                  const cnt = stats.catCounts[cid] || 0;
+                  const pct = Math.round((cnt / stats.total) * 100);
+                  return `
+                    <div class="bar-row">
+                      <div class="bar-head">
+                        <span>${CATEGORY_META[cid].ja}</span>
+                        <span class="mono-meta">${cnt}件 (${pct}%)</span>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width:${pct}%;"></div>
+                      </div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+
+            <div class="panel">
+              <h3 class="panel-title">頻出タグ・ジャンル別 平均価格分析</h3>
+              ${stats.topTags
+                .map((t) => {
+                  const avg = Math.round(t.priceSum / t.count);
+                  const pct = Math.min(100, Math.round((t.count / stats.total) * 100 * 1.8));
+                  return `
+                    <div class="bar-row">
+                      <div class="bar-head">
+                        <button type="button" class="circle-link" data-tag="${t.name}">#${t.name}</button>
+                        <span class="mono-meta">${t.count}作品 · 平均 ¥${avg.toLocaleString()}</span>
+                      </div>
+                      <div class="bar-track">
+                        <div class="bar-fill" style="width:${pct}%; background:var(--accent);"></div>
+                      </div>
+                    </div>
+                  `;
+                })
+                .join("")}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCard(w, isRanking) {
+      const isFav = state.favs.includes(w.id);
+      const fanzaUrl = w.affiliateUrl || `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${w.code}/`;
+      const coverStyle = w.imageUrl
+        ? `background-image:url('${w.imageUrl}'); background-color:#18181b;`
+        : `background:${w.accent || "#27272a"};`;
+
+      return `
+        <article class="card">
+          <div>
+            <div class="card-cover" style="${coverStyle}">
+              <div class="cover-top">
+                <div>
+                  ${isRanking ? `<span class="rank-badge">#${w.rank}</span>` : ""}
+                  <span class="type-label">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
+                </div>
+                ${w.discount > 0 ? `<span class="discount-badge">-${w.discount}%</span>` : ""}
+              </div>
+              <div class="cover-bottom">
+                <span class="mono-meta">${w.spec}</span>
+                <span class="mono-meta">${w.date}</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="circle-row">
+                <button type="button" class="circle-link" data-creator="${w.creatorId}">${w.circle} / ${w.author}</button>
+                <span class="mono-meta">★ ${Number(w.rating).toFixed(2)}</span>
+              </div>
+              <h3 class="card-title">${w.title}</h3>
+              <div class="tags">
+                ${w.tags.map((t) => `<button type="button" class="tag" data-tag="${t}">#${t}</button>`).join("")}
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div>
+              <span class="price-current">¥${w.price.toLocaleString()}</span>
+              ${w.discount > 0 ? `<span class="price-orig">¥${w.origPrice.toLocaleString()}</span>` : ""}
+            </div>
+            <div class="footer-actions">
+              <button type="button" class="icon-btn ${isFav ? "active" : ""}" data-fav="${w.id}" title="ブックマーク">
+                <svg width="15" height="15" fill="${isFav ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </button>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener noreferrer" class="primary-btn">FANZAで見る</a>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function render() {
+      document.getElementById("favCount").textContent = state.favs.length;
+      document.querySelectorAll(".nav-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
+      document.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.cat));
+
+      const notice = document.getElementById("filterNotice");
+      if (state.creatorId || state.tag) {
+        notice.style.display = "flex";
+        const c = state.creatorId ? CREATORS.find((x) => x.id === state.creatorId) : null;
+        document.getElementById("filterNoticeText").textContent = [c ? `${c.circle} (${c.name})` : "", state.tag ? `#${state.tag}` : ""].filter(Boolean).join(" / ");
+      } else {
+        notice.style.display = "none";
+      }
+
+      const view = document.getElementById("mainView");
+      const subBar = document.getElementById("subBar");
+
+      if (state.tab === "analytics") {
+        subBar.style.display = "none";
+        view.innerHTML = renderAnalyticsView();
+        return;
+      }
+
+      if (state.tab === "creators") {
+        subBar.style.display = "none";
+        view.innerHTML = `
+          <div class="grid" style="margin-top:24px;">
+            ${CREATORS.map(
+              (c) => `
+              <div class="card" style="padding:20px; gap:14px;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:0.74rem; color:var(--text-muted); margin-bottom:6px;">
+                    <span class="mono-meta">${c.cat}</span>
+                    <span class="mono-meta">最終更新: ${c.latest}</span>
+                  </div>
+                  <h3 style="font-size:1.02rem; font-weight:700;">${c.circle} <span style="font-weight:400; font-size:0.85rem; color:var(--text-sub);">/ ${c.name}</span></h3>
+                  <p style="font-size:0.82rem; color:var(--text-sub); margin-top:8px;">${c.bio}</p>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid var(--border);">
+                  <span class="mono-meta" style="color:var(--text-muted);">${c.works} Works</span>
+                  <button type="button" class="primary-btn" data-creator="${c.id}">作品一覧を見る →</button>
+                </div>
+              </div>
+            `
+            ).join("")}
+          </div>
+        `;
+        return;
+      }
+
+      subBar.style.display = "block";
+
+      let list = WORKS.filter((w) => {
+        if (state.tab === "favorites" && !state.favs.includes(w.id)) return false;
+        if (state.cat !== "all" && w.category !== state.cat) return false;
+        if (state.saleOnly && w.discount <= 0) return false;
+        if (state.creatorId && w.creatorId !== state.creatorId) return false;
+        if (state.tag && !w.tags.includes(state.tag)) return false;
+        if (state.query) {
+          const q = state.query.toLowerCase();
+          return w.title.toLowerCase().includes(q) || w.author.toLowerCase().includes(q) || w.circle.toLowerCase().includes(q) || w.tags.some((t) => t.toLowerCase().includes(q));
+        }
+        return true;
+      });
+
+      if (state.tab === "ranking") list.sort((a, b) => a.rank - b.rank);
+      else if (state.sort === "popular") list.sort((a, b) => b.dlCount - a.dlCount);
+      else if (state.sort === "priceAsc") list.sort((a, b) => a.price - b.price);
+      else list.sort((a, b) => b.date.localeCompare(a.date));
+
+      view.innerHTML = `<div class="grid">${list.map((w) => renderCard(w, state.tab === "ranking")).join("")}</div>`;
+    }
+
+    document.addEventListener("click", (e) => {
+      const tab = e.target.closest("[data-tab]");
+      if (tab) {
+        state.tab = tab.dataset.tab;
+        render();
+        return;
+      }
+      const cat = e.target.closest("[data-cat]");
+      if (cat) {
+        state.cat = cat.dataset.cat;
+        render();
+        return;
+      }
+      const creator = e.target.closest("[data-creator]");
+      if (creator) {
+        state.creatorId = creator.dataset.creator;
+        state.tab = "new";
+        render();
+        return;
+      }
+      const tag = e.target.closest("[data-tag]");
+      if (tag) {
+        state.tag = state.tag === tag.dataset.tag ? null : tag.dataset.tag;
+        state.tab = "new";
+        render();
+        return;
+      }
+      const fav = e.target.closest("[data-fav]");
+      if (fav) {
+        const id = fav.dataset.fav;
+        const i = state.favs.indexOf(id);
+        if (i >= 0) state.favs.splice(i, 1);
+        else state.favs.push(id);
+        render();
+        return;
+      }
+      if (e.target.closest("#clearFilterBtn") || e.target.closest("#logoReset")) {
+        state.creatorId = null;
+        state.tag = null;
+        state.cat = "all";
+        state.saleOnly = false;
+        state.query = "";
+        state.tab = "new";
+        document.getElementById("saleCheck").checked = false;
+        document.getElementById("searchInput").value = "";
+        render();
+      }
+    });
+
+    document.getElementById("saleCheck").addEventListener("change", (e) => {
+      state.saleOnly = e.target.checked;
+      render();
+    });
+
+    document.getElementById("sortSelect").addEventListener("change", (e) => {
+      state.sort = e.target.value;
+      render();
+    });
+
+    document.getElementById("searchInput").addEventListener("input", (e) => {
+      state.query = e.target.value.trim();
+      render();
+    });
+
+    render();
+    tryFetchLiveFanzaData();
+  </script>
+</body>
+</html>

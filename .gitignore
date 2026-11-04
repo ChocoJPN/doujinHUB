@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Cloudflare Wrangler & Local Secrets (APIキー漏洩防止)
+.dev.vars
+.wrangler/
+.env
+.env.local
+
+# OS / Editor
+.DS_Store
+Thumbs.db

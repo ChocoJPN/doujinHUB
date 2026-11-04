@@ -1,0 +1,13 @@
+{
+  "name": "doujin-index",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FANZA同人 新着・ランキング・データ分析ポータル (Cloudflare Pages対応)",
+  "scripts": {
+    "dev": "npx wrangler pages dev .",
+    "deploy": "npx wrangler pages deploy . --project-name=doujin-index"
+  },
+  "devDependencies": {
+    "wrangler": "^3.80.0"
+  }
+}
