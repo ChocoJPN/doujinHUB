@@ -40,7 +40,7 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
     }
@@ -55,9 +55,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 16px;
       flex-wrap: wrap;
       padding-bottom: 14px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -72,14 +79,14 @@
 
     .brand-bar {
       width: 5px;
-      height: 26px;
+      height: 28px;
       background: var(--accent);
       border-radius: 2px;
     }
 
     .brand-name {
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       letter-spacing: -0.01em;
       display: block;
       line-height: 1.2;
@@ -90,9 +97,46 @@
       color: var(--text-sub);
     }
 
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .link-mode-select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      color: var(--text-sub);
+      cursor: pointer;
+    }
+
     .search-box {
       position: relative;
-      width: 300px;
+      width: 290px;
       max-width: 100%;
     }
 
@@ -123,7 +167,7 @@
       pointer-events: none;
     }
 
-    /* 2. Main Tab Bar (大きく見やすい独立タブバー) */
+    /* 2. Main Tab Bar */
     .tab-bar {
       position: sticky;
       top: 0;
@@ -136,7 +180,7 @@
     .tab-list {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       overflow-x: auto;
     }
 
@@ -168,7 +212,8 @@
     }
 
     .count-pill {
-      font-size: 0.74rem;
+      font-size: 0.72rem;
+      font-weight: 700;
       padding: 1px 8px;
       border-radius: 99px;
       background: var(--bg);
@@ -176,11 +221,11 @@
       color: var(--text-sub);
     }
 
-    /* 3. Sub Genre Bar (同人誌 / 同人音声 / CG集 のはっきりした切替) */
+    /* 3. Sub Genre Bar */
     .subbar {
       border-bottom: 1px solid var(--border);
       padding: 14px 0;
-      margin-bottom: 26px;
+      margin-bottom: 24px;
       background: var(--bg);
     }
 
@@ -203,7 +248,7 @@
     }
 
     .cat-btn {
-      padding: 7px 16px;
+      padding: 7px 14px;
       border-radius: 7px;
       border: none;
       background: transparent;
@@ -212,6 +257,9 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .cat-btn:hover {
@@ -224,12 +272,23 @@
       font-weight: 700;
     }
 
+    .cat-count {
+      font-size: 0.72rem;
+      opacity: 0.75;
+    }
+
     .sort-wrap {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       font-size: 0.82rem;
       color: var(--text-sub);
+    }
+
+    .result-summary {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      margin-right: 6px;
     }
 
     .select-box {
@@ -280,22 +339,29 @@
     }
 
     .card-cover {
-      height: 150px;
-      padding: 14px 16px;
+      height: 195px;
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       border-bottom: 1px solid var(--border);
       background-size: cover;
-      background-position: center;
+      background-position: center top;
       position: relative;
+      cursor: pointer;
     }
 
     .card-cover::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(9,9,11,0.5), rgba(9,9,11,0.75));
+      background: linear-gradient(
+        to bottom,
+        rgba(9, 9, 11, 0.65) 0%,
+        rgba(9, 9, 11, 0.05) 35%,
+        rgba(9, 9, 11, 0.08) 65%,
+        rgba(9, 9, 11, 0.82) 100%
+      );
       pointer-events: none;
     }
 
@@ -305,22 +371,24 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
     }
 
     .type-label {
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 6px;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(9, 9, 11, 0.82);
       color: #f4f4f5;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
     }
 
     .rank-badge {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
-      padding: 3px 9px;
+      padding: 4px 9px;
       border-radius: 6px;
       background: #fafafa;
       color: #09090b;
@@ -328,9 +396,9 @@
     }
 
     .discount-badge {
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       font-weight: 800;
-      padding: 3px 9px;
+      padding: 4px 9px;
       border-radius: 6px;
       background: var(--accent);
       color: #fff;
@@ -338,12 +406,14 @@
 
     .mono-meta {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.76rem;
-      color: #e4e4e7;
+      font-size: 0.75rem;
+      color: #f4f4f5;
+      font-weight: 600;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
     }
 
     .card-body {
-      padding: 18px;
+      padding: 16px 18px;
     }
 
     .circle-row {
@@ -353,6 +423,7 @@
       margin-bottom: 8px;
       font-size: 0.8rem;
       color: var(--text-sub);
+      gap: 8px;
     }
 
     .circle-link {
@@ -363,6 +434,9 @@
       cursor: pointer;
       padding: 0;
       text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .circle-link:hover {
@@ -370,16 +444,31 @@
       text-decoration: underline;
     }
 
-    .card-title {
-      font-size: 0.98rem;
+    .rating-meta {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.76rem;
+      color: #fbbf24;
       font-weight: 700;
-      line-height: 1.45;
-      color: var(--text);
-      margin-bottom: 14px;
+      white-space: nowrap;
+    }
+
+    .card-title-link {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      min-height: 2.85em;
+      font-size: 0.96rem;
+      font-weight: 700;
+      line-height: 1.45;
+      color: var(--text);
+      text-decoration: none;
+      margin-bottom: 12px;
+    }
+
+    .card-title-link:hover {
+      color: #fda4af;
+      text-decoration: underline;
     }
 
     .tags {
@@ -389,8 +478,8 @@
     }
 
     .tag {
-      font-size: 0.75rem;
-      padding: 3px 9px;
+      font-size: 0.73rem;
+      padding: 3px 8px;
       border-radius: 5px;
       background: var(--bg);
       border: 1px solid var(--border);
@@ -404,30 +493,31 @@
     }
 
     .card-footer {
-      padding: 14px 18px;
+      padding: 13px 18px;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: rgba(9, 9, 11, 0.45);
+      gap: 8px;
     }
 
     .price-current {
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       font-weight: 800;
     }
 
     .price-orig {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       color: var(--text-muted);
       text-decoration: line-through;
-      margin-left: 6px;
+      margin-left: 5px;
     }
 
     .footer-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .icon-btn {
@@ -449,20 +539,165 @@
       color: var(--accent);
     }
 
-    .primary-btn {
-      padding: 8px 14px;
+    .sub-btn {
+      padding: 7px 10px;
       border-radius: 8px;
-      background: var(--text);
-      color: var(--bg);
-      font-size: 0.8rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .sub-btn:hover {
+      color: var(--text);
+      border-color: var(--border-hover);
+    }
+
+    .primary-btn {
+      padding: 8px 13px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.78rem;
       font-weight: 700;
       text-decoration: none;
       border: none;
       cursor: pointer;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
     .primary-btn:hover {
-      opacity: 0.9;
+      opacity: 0.92;
+    }
+
+    /* Load More Button */
+    .load-more-wrap {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    .load-more-btn {
+      padding: 12px 32px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .load-more-btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+
+    /* Creator Card */
+    .creator-thumb {
+      width: 68px;
+      height: 68px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      flex-shrink: 0;
+    }
+
+    /* Sample Preview Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      max-width: 860px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .modal-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .modal-close {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text-sub);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .sample-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .sample-img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      display: block;
+    }
+
+    .modal-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: var(--bg);
     }
 
     @media (max-width: 640px) {
@@ -481,20 +716,34 @@
   <!-- 1. サイトヘッダー -->
   <header class="header">
     <div class="container header-top">
-      <button type="button" class="brand" id="logoReset">
-        <span class="brand-bar"></span>
-        <div>
-          <span class="brand-name">DOUJIN INDEX</span>
-          <span class="brand-sub">FANZA同人 新着・ランキング・有名作家まとめ</span>
+      <div class="brand-group">
+        <button type="button" class="brand" id="logoReset">
+          <span class="brand-bar"></span>
+          <div>
+            <span class="brand-name">DOUJIN INDEX</span>
+            <span class="brand-sub">FANZA同人 新着・ランキング・有名作家まとめ</span>
+          </div>
+        </button>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span id="liveStatusText">データ読み込み中...</span>
         </div>
-      </button>
+      </div>
 
-      <div class="search-box">
-        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.3-4.3"></path>
-        </svg>
-        <input type="text" id="searchInput" class="search-input" placeholder="作品名・作家・サークル・声優で検索..." />
+      <div class="header-controls">
+        <select id="linkModeSelect" class="link-mode-select" title="FANZAへの遷移方式を切り替えできます">
+          <option value="af_001">リンク設定: 通常アフィリエイト (douzinINFO-001)</option>
+          <option value="af_990">リンク設定: APIアフィリエイト (douzinINFO-990)</option>
+          <option value="direct">リンク設定: FANZA作品ページ直リンク (広告ブロック回避)</option>
+        </select>
+
+        <div class="search-box">
+          <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+          <input type="text" id="searchInput" class="search-input" placeholder="作品名・作家・サークル・タグで検索..." />
+        </div>
       </div>
     </div>
   </header>
@@ -503,13 +752,22 @@
   <div class="tab-bar">
     <div class="container">
       <nav class="tab-list" aria-label="メインタブ">
-        <button type="button" class="tab-btn active" data-tab="new">新着作品</button>
+        <button type="button" class="tab-btn active" data-tab="new">
+          <span>新着作品</span>
+          <span id="totalWorksCount" class="count-pill">0</span>
+        </button>
         <button type="button" class="tab-btn" data-tab="ranking">人気ランキング</button>
-        <button type="button" class="tab-btn" data-tab="creators">有名作家・サークル別</button>
-        <button type="button" class="tab-btn" data-tab="sale">セール・割引中</button>
+        <button type="button" class="tab-btn" data-tab="creators">
+          <span>有名作家・サークル別</span>
+          <span id="totalCreatorsCount" class="count-pill">0</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="sale">
+          <span>セール・割引中</span>
+          <span id="saleWorksCount" class="count-pill">0</span>
+        </button>
         <button type="button" class="tab-btn" data-tab="favorites">
           <span>お気に入り</span>
-          <span id="favCount" class="count-pill">2</span>
+          <span id="favCount" class="count-pill">0</span>
         </button>
       </nav>
     </div>
@@ -519,17 +777,19 @@
   <div class="subbar" id="subBar">
     <div class="container subbar-inner">
       <div class="cat-segment">
-        <button type="button" class="cat-btn active" data-cat="all">すべて</button>
-        <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画</button>
-        <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR</button>
-        <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集</button>
+        <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count" id="catCountAll"></span></button>
+        <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画 <span class="cat-count" id="catCountComic"></span></button>
+        <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR <span class="cat-count" id="catCountAudio"></span></button>
+        <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集 <span class="cat-count" id="catCountCg"></span></button>
+        <button type="button" class="cat-btn" data-cat="game">ゲーム・動画 <span class="cat-count" id="catCountGame"></span></button>
       </div>
 
       <div class="sort-wrap" id="sortWrap">
+        <span class="result-summary" id="resultSummary"></span>
         <span>並び順:</span>
         <select id="sortSelect" class="select-box">
           <option value="newest">配信日が新しい順</option>
-          <option value="popular">お気に入り・人気順</option>
+          <option value="popular">人気・レビュー順</option>
           <option value="priceAsc">価格が安い順</option>
         </select>
       </div>
@@ -550,195 +810,182 @@
     <div id="mainView"></div>
   </main>
 
+  <!-- 4. サンプル立ち読み・プレビュー用モーダル -->
+  <div class="modal-backdrop" id="sampleModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalTitle">サンプルプレビュー</h3>
+        <button type="button" class="modal-close" id="closeModalBtn">✕ 閉じる</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <div id="modalPriceInfo"></div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <a href="#" target="_blank" rel="noopener" class="sub-btn" id="modalDirectLink">
+            直リンクで開く
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink" style="padding:10px 18px; font-size:0.86rem;">
+            FANZA公式ページで見る ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ローカル直開き(file://)でも即時反映される実データスクリプト -->
+  <script src="./data/fanza_latest.js"></script>
+
   <script>
     const CATEGORY_META = {
       comic: { label: "同人誌・漫画" },
       audio: { label: "同人音声・ASMR" },
-      cg: { label: "CG・イラスト集" }
+      cg: { label: "CG・イラスト集" },
+      game: { label: "ゲーム・動画" }
     };
 
-    let CREATORS = [
-      { id: "c1", name: "月影レン", circle: "月影アトリエ", category: "comic", works: 34, latest: "2026.11.04", bio: "透明感のある色彩と丁寧な心理描写で支持される人気サークル。総集編シリーズは累計10万DLを記録。" },
-      { id: "c2", name: "CV: 白雪みう", circle: "星空サウンドラボ", category: "audio", works: 48, latest: "2026.11.04", bio: "NEUMANN KU100マイクを用いた高精細バイノーラル録音に特化。耳かき・添い寝ボイス作品でランキング常連。" },
-      { id: "c3", name: "琥珀クロエ", circle: "琥珀亭", category: "comic", works: 27, latest: "2026.11.02", bio: "緻密な世界観設計と重厚なストーリー展開で人気のファンタジー系同人サークル。" },
-      { id: "c4", name: "結城ひなの・琴音りり", circle: "甘蜜ショコラティエ", category: "audio", works: 19, latest: "2026.11.03", bio: "左右独立チャンネルによるWキャスト掛け合い演出を得意とする音声制作サークル。" },
-      { id: "c5", name: "蒼井ハルカ", circle: "蒼穹デジタルワークス", category: "cg", works: 41, latest: "2026.11.03", bio: "4K解像度のデジタルイラストとLive2Dアニメーションを組み合わせたハイブリッドCG集を制作。" },
-      { id: "c6", name: "夜々アリス", circle: "黒猫ノクターン", category: "comic", works: 22, latest: "2026.11.01", bio: "SNS連載のショートラブコメ作品に大幅な描き下ろしを加えた総集編シリーズが人気。" }
-    ];
+    function normalizeWorkOnClient(w) {
+      const url = String(w.imageUrl || "");
+      let category = w.category || "comic";
+      if (url.includes("/digital/voice/")) category = "audio";
+      else if (url.includes("/digital/comic/")) category = "comic";
+      else if (url.includes("/digital/cg/")) category = "cg";
+      else if (url.includes("/digital/game/")) category = "game";
 
-    let WORKS = [
-      {
-        id: "w1",
-        code: "d_410101",
-        title: "放課後の図書室で、君と秘密のページをめくる総集編 [描き下ろし32P収録]",
-        category: "comic",
-        creatorId: "c1",
-        author: "月影レン",
-        circle: "月影アトリエ",
-        date: "2026.11.04",
-        spec: "漫画 148P",
-        price: 1320,
-        origPrice: 1650,
-        discount: 20,
-        rating: 4.92,
-        dlCount: 12800,
-        rank: 1,
-        accent: "#27272a",
-        tags: ["純愛", "幼馴染", "フルカラー", "総集編"]
-      },
-      {
-        id: "w2",
-        code: "d_410205",
-        title: "星空温泉宿でとろける極上耳かき＆密着ささやき添い寝 [KU100バイノーラル]",
-        category: "audio",
-        creatorId: "c2",
-        author: "CV: 白雪みう",
-        circle: "星空サウンドラボ",
-        date: "2026.11.04",
-        spec: "音声 165分 (WAV/FLAC)",
-        price: 1540,
-        origPrice: 2200,
-        discount: 30,
-        rating: 4.96,
-        dlCount: 19400,
-        rank: 2,
-        accent: "#1e293b",
-        tags: ["バイノーラル", "耳かき", "ささやき", "KU100"]
-      },
-      {
-        id: "w3",
-        code: "d_410599",
-        title: "憧れの生徒会長と二人きりの放課後アトリエ [4Kイラスト＋60fps動画同梱]",
-        category: "cg",
-        creatorId: "c5",
-        author: "蒼井ハルカ",
-        circle: "蒼穹デジタルワークス",
-        date: "2026.11.03",
-        spec: "CG 680枚 + MP4動画",
-        price: 990,
-        origPrice: 1980,
-        discount: 50,
-        rating: 4.88,
-        dlCount: 9600,
-        rank: 3,
-        accent: "#18181b",
-        tags: ["4K高画質", "Live2D動画", "学園"]
-      },
-      {
-        id: "w4",
-        code: "d_410488",
-        title: "ダウナー系妹＆世話焼き姉に左右から挟まれる休日 [Wキャスト完全別録り]",
-        category: "audio",
-        creatorId: "c4",
-        author: "CV: 結城ひなの・琴音りり",
-        circle: "甘蜜ショコラティエ",
-        date: "2026.11.03",
-        spec: "音声 190分 (WAV/MP3)",
-        price: 1848,
-        origPrice: 2640,
-        discount: 30,
-        rating: 4.94,
-        dlCount: 15800,
-        rank: 4,
-        accent: "#262626",
-        tags: ["Wキャスト", "両耳ささやき", "添い寝", "バイノーラル"]
-      },
-      {
-        id: "w5",
-        code: "d_410312",
-        title: "銀翼の聖女と黒き竜騎士 IV ―王都奪還編― [デジタル版限定ラフ集20P付]",
-        category: "comic",
-        creatorId: "c3",
-        author: "琥珀クロエ",
-        circle: "琥珀亭",
-        date: "2026.11.02",
-        spec: "漫画 104P",
-        price: 1100,
-        origPrice: 1100,
-        discount: 0,
-        rating: 4.86,
-        dlCount: 8400,
-        rank: 5,
-        accent: "#1c1917",
-        tags: ["ファンタジー", "長編シリーズ", "特典付"]
-      },
-      {
-        id: "w6",
-        code: "d_409900",
-        title: "クールな黒猫先輩は私の前だけではしゃぎたい！ Complete Box",
-        category: "comic",
-        creatorId: "c6",
-        author: "夜々アリス",
-        circle: "黒猫ノクターン",
-        date: "2026.11.01",
-        spec: "漫画 212P",
-        price: 1540,
-        origPrice: 2200,
-        discount: 30,
-        rating: 4.91,
-        dlCount: 16200,
-        rank: 6,
-        accent: "#172554",
-        tags: ["ラブコメ", "先輩・後輩", "総集編", "純愛"]
+      let spec = String(w.spec || "").trim();
+      if (/^\d+$/.test(spec)) {
+        spec = category === "comic" ? `漫画 ${spec}P` : category === "cg" ? `CG ${spec}枚` : `${spec}P`;
+      } else if (!spec || spec === "同人誌" || spec === "ボイス・ASMR") {
+        spec = (CATEGORY_META[category] || CATEGORY_META.comic).label;
       }
-    ];
+
+      return {
+        ...w,
+        category,
+        spec,
+        tags: Array.isArray(w.tags) ? w.tags : [],
+        sampleImages: Array.isArray(w.sampleImages) ? w.sampleImages : []
+      };
+    }
+
+    let WORKS = [];
+    let CREATORS = [];
+
+    function applyDataset(data) {
+      if (!data || !Array.isArray(data.works) || data.works.length === 0) return false;
+      WORKS = data.works.map(normalizeWorkOnClient);
+      if (Array.isArray(data.creators) && data.creators.length > 0) {
+        CREATORS = data.creators.map((c) => {
+          const url = String(c.imageUrl || "");
+          let cat = c.category || "comic";
+          if (url.includes("/digital/voice/")) cat = "audio";
+          else if (url.includes("/digital/comic/")) cat = "comic";
+          else if (url.includes("/digital/cg/")) cat = "cg";
+          else if (url.includes("/digital/game/")) cat = "game";
+          return { ...c, category: cat };
+        });
+      }
+      document.getElementById("liveStatusText").textContent = `FANZA実データ反映済み (${WORKS.length}作品 / ${CREATORS.length}サークル)`;
+      return true;
+    }
+
+    if (window.FANZA_LIVE_DATA) {
+      applyDataset(window.FANZA_LIVE_DATA);
+    }
 
     const state = {
-      tab: "new", // 'new' | 'ranking' | 'creators' | 'sale' | 'favorites'
+      tab: "new",
       cat: "all",
       sort: "newest",
+      linkMode: "af_001", // 'af_001' | 'af_990' | 'direct'
       creatorId: null,
       tag: null,
       query: "",
-      favs: ["w1", "w2"]
+      limit: 24,
+      favs: []
     };
 
-    // Cloudflare Pages Functions (/api/fanza) または GitHub Actions 自動更新JSON (./data/fanza_latest.json) から実データを取得
+    /**
+     * 作品コードと選択中のリンクモードから遷移先URLを生成する
+     * - af_001: 通常サイト用アフィリエイトID (douzinINFO-001)
+     * - af_990: API用アフィリエイトID (douzinINFO-990)
+     * - direct: FANZA同人 作品詳細ページ直リンク（AdBlock等によるal.fanza.co.jp遮断を100%回避）
+     */
+    function buildFanzaUrl(w, modeOverride) {
+      const code = w.code || w.id;
+      const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
+      const mode = modeOverride || state.linkMode;
+
+      if (mode === "direct") {
+        return directUrl;
+      }
+      if (mode === "af_001") {
+        const rawAf = w.affiliateUrl || "";
+        if (rawAf.includes("af_id=")) {
+          return rawAf.replace(/af_id=[^&]+/, "af_id=douzinINFO-001");
+        }
+        return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-001&ch=link_tool&ch_id=link`;
+      }
+      // af_990
+      return w.affiliateUrl || `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-990&ch=api`;
+    }
+
     async function tryFetchLiveFanzaData() {
       try {
-        const res = await fetch("/api/fanza?sort=date&hits=40");
+        const res = await fetch("./data/fanza_latest.json", { cache: "no-store" });
         if (res.ok) {
           const data = await res.json();
-          if (data && data.mode === "live" && Array.isArray(data.works) && data.works.length > 0) {
-            WORKS = data.works;
-            if (Array.isArray(data.creators) && data.creators.length > 0) {
-              CREATORS = data.creators;
-            }
+          if (data && Array.isArray(data.works) && data.works.length >= WORKS.length) {
+            applyDataset(data);
             render();
-            return;
           }
         }
       } catch (e) {}
 
       try {
-        const res = await fetch("./data/fanza_latest.json");
+        const res = await fetch("/api/fanza");
         if (res.ok) {
           const data = await res.json();
-          if (data && data.mode === "live" && Array.isArray(data.works) && data.works.length > 0) {
-            WORKS = data.works;
-            if (Array.isArray(data.creators) && data.creators.length > 0) {
-              CREATORS = data.creators;
-            }
+          if (data && data.mode === "live" && Array.isArray(data.works) && data.works.length > WORKS.length) {
+            applyDataset(data);
             render();
           }
         }
       } catch (e) {}
     }
 
-    function renderCard(w, isRanking) {
+    function updateCounters() {
+      document.getElementById("totalWorksCount").textContent = WORKS.length;
+      document.getElementById("totalCreatorsCount").textContent = CREATORS.length;
+      document.getElementById("saleWorksCount").textContent = WORKS.filter((w) => w.discount > 0).length;
+      document.getElementById("favCount").textContent = state.favs.length;
+
+      const counts = { all: WORKS.length, comic: 0, audio: 0, cg: 0, game: 0 };
+      WORKS.forEach((w) => {
+        counts[w.category] = (counts[w.category] || 0) + 1;
+      });
+      document.getElementById("catCountAll").textContent = `(${counts.all})`;
+      document.getElementById("catCountComic").textContent = `(${counts.comic})`;
+      document.getElementById("catCountAudio").textContent = `(${counts.audio})`;
+      document.getElementById("catCountCg").textContent = `(${counts.cg})`;
+      document.getElementById("catCountGame").textContent = `(${counts.game})`;
+    }
+
+    function renderCard(w, displayRank) {
       const isFav = state.favs.includes(w.id);
-      const fanzaUrl = w.affiliateUrl || `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${w.code}/`;
+      const fanzaUrl = buildFanzaUrl(w);
+      const directUrl = buildFanzaUrl(w, "direct");
       const coverStyle = w.imageUrl
         ? `background-image:url('${w.imageUrl}'); background-color:#18181b;`
-        : `background:${w.accent || "#27272a"};`;
+        : `background:#27272a;`;
+      const sampleCount = (w.sampleImages || []).length;
 
       return `
         <article class="card">
           <div>
-            <div class="card-cover" style="${coverStyle}">
+            <div class="card-cover" style="${coverStyle}" data-preview="${w.id}" title="クリックでサンプル画像をプレビュー">
               <div class="cover-top">
                 <div>
-                  ${isRanking ? `<span class="rank-badge">${w.rank}位</span>` : ""}
+                  ${displayRank ? `<span class="rank-badge">${displayRank}位</span>` : ""}
                   <span class="type-label">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
                 </div>
                 ${w.discount > 0 ? `<span class="discount-badge">${w.discount}%OFF</span>` : ""}
@@ -751,28 +998,30 @@
 
             <div class="card-body">
               <div class="circle-row">
-                <button type="button" class="circle-link" data-creator="${w.creatorId}">${w.circle} / ${w.author}</button>
-                <span class="mono-meta">★ ${Number(w.rating).toFixed(2)}</span>
+                <button type="button" class="circle-link" data-creator="${w.creatorId}">${w.circle}</button>
+                <span class="rating-meta">★ ${Number(w.rating || 4.5).toFixed(2)}${w.reviewsCount ? ` (${w.reviewsCount})` : ""}</span>
               </div>
-              <h3 class="card-title">${w.title}</h3>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="card-title-link" title="${w.title}">${w.title}</a>
               <div class="tags">
-                ${w.tags.map((t) => `<button type="button" class="tag" data-tag="${t}">#${t}</button>`).join("")}
+                ${(w.tags || []).slice(0, 5).map((t) => `<button type="button" class="tag" data-tag="${t}">#${t}</button>`).join("")}
               </div>
             </div>
           </div>
 
           <div class="card-footer">
             <div>
-              <span class="price-current">¥${w.price.toLocaleString()}</span>
-              ${w.discount > 0 ? `<span class="price-orig">¥${w.origPrice.toLocaleString()}</span>` : ""}
+              <span class="price-current">¥${Number(w.price || 0).toLocaleString()}</span>
+              ${w.discount > 0 ? `<span class="price-orig">¥${Number(w.origPrice || 0).toLocaleString()}</span>` : ""}
             </div>
             <div class="footer-actions">
+              ${sampleCount > 0 ? `<button type="button" class="sub-btn" data-preview="${w.id}">サンプル(${sampleCount})</button>` : ""}
+              <a href="${directUrl}" target="_blank" rel="noopener" class="sub-btn" title="広告ブロッカー等で飛べない場合の直リンク">直リンク</a>
               <button type="button" class="icon-btn ${isFav ? "active" : ""}" data-fav="${w.id}" title="お気に入り保存">
                 <svg width="16" height="16" fill="${isFav ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                 </svg>
               </button>
-              <a href="${fanzaUrl}" target="_blank" rel="noopener noreferrer" class="primary-btn">FANZAで見る</a>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn">FANZAで見る ↗</a>
             </div>
           </div>
         </article>
@@ -780,7 +1029,8 @@
     }
 
     function render() {
-      document.getElementById("favCount").textContent = state.favs.length;
+      updateCounters();
+
       document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
       document.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.cat));
 
@@ -788,7 +1038,8 @@
       if (state.creatorId || state.tag) {
         notice.style.display = "flex";
         const c = state.creatorId ? CREATORS.find((x) => x.id === state.creatorId) : null;
-        document.getElementById("filterNoticeText").textContent = [c ? `作家/サークル: ${c.circle} (${c.name})` : "", state.tag ? `タグ: #${state.tag}` : ""].filter(Boolean).join(" / ");
+        const cName = c ? c.circle : (WORKS.find((w) => w.creatorId === state.creatorId)?.circle || state.creatorId);
+        document.getElementById("filterNoticeText").textContent = [state.creatorId ? `サークル: ${cName}` : "", state.tag ? `タグ: #${state.tag}` : ""].filter(Boolean).join(" / ");
       } else {
         notice.style.display = "none";
       }
@@ -802,7 +1053,7 @@
           if (state.cat !== "all" && c.category && c.category !== state.cat) return false;
           if (state.query) {
             const q = state.query.toLowerCase();
-            return c.name.toLowerCase().includes(q) || c.circle.toLowerCase().includes(q) || c.bio.toLowerCase().includes(q);
+            return (c.name || "").toLowerCase().includes(q) || (c.circle || "").toLowerCase().includes(q) || (c.bio || "").toLowerCase().includes(q);
           }
           return true;
         });
@@ -812,18 +1063,21 @@
             ${creatorList
               .map(
                 (c) => `
-              <div class="card" style="padding:22px; gap:14px;">
-                <div>
-                  <div style="display:flex; justify-content:space-between; font-size:0.76rem; color:var(--text-muted); margin-bottom:8px;">
-                    <span style="padding:2px 8px; border-radius:4px; background:var(--bg); border:1px solid var(--border); color:var(--text-sub); font-weight:600;">${(CATEGORY_META[c.category] || CATEGORY_META.comic).label}</span>
-                    <span class="mono-meta">最新作: ${c.latest}</span>
+              <div class="card" style="padding:20px; gap:14px;">
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${c.circle}" class="creator-thumb" loading="lazy" />` : ""}
+                  <div style="flex:1; min-width:0;">
+                    <div style="display:flex; justify-content:space-between; font-size:0.74rem; color:var(--text-muted); margin-bottom:6px;">
+                      <span style="padding:2px 8px; border-radius:4px; background:var(--bg); border:1px solid var(--border); color:var(--text-sub); font-weight:600;">${(CATEGORY_META[c.category] || CATEGORY_META.comic).label}</span>
+                      <span>最新: ${c.latest || "-"}</span>
+                    </div>
+                    <h3 style="font-size:1.02rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${c.circle}</h3>
+                    <p style="font-size:0.81rem; color:var(--text-sub); margin-top:6px; line-height:1.45;">${c.bio || ""}</p>
                   </div>
-                  <h3 style="font-size:1.05rem; font-weight:700;">${c.circle} <span style="font-weight:400; font-size:0.86rem; color:var(--text-sub);">/ ${c.name}</span></h3>
-                  <p style="font-size:0.84rem; color:var(--text-sub); margin-top:8px;">${c.bio}</p>
                 </div>
-                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:1px solid var(--border);">
-                  <span style="font-size:0.8rem; color:var(--text-sub);">配信数: <strong style="color:var(--text);">${c.works}作品</strong></span>
-                  <button type="button" class="primary-btn" data-creator="${c.id}">この作家の作品を見る →</button>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid var(--border);">
+                  <span style="font-size:0.8rem; color:var(--text-sub);">収録数: <strong style="color:var(--text);">${c.works}作品</strong></span>
+                  <button type="button" class="primary-btn" data-creator="${c.id}">作品一覧を見る →</button>
                 </div>
               </div>
             `
@@ -841,32 +1095,101 @@
         if (state.tab === "sale" && w.discount <= 0) return false;
         if (state.cat !== "all" && w.category !== state.cat) return false;
         if (state.creatorId && w.creatorId !== state.creatorId) return false;
-        if (state.tag && !w.tags.includes(state.tag)) return false;
+        if (state.tag && !(w.tags || []).includes(state.tag)) return false;
         if (state.query) {
           const q = state.query.toLowerCase();
-          return w.title.toLowerCase().includes(q) || w.author.toLowerCase().includes(q) || w.circle.toLowerCase().includes(q) || w.tags.some((t) => t.toLowerCase().includes(q));
+          return (
+            (w.title || "").toLowerCase().includes(q) ||
+            (w.author || "").toLowerCase().includes(q) ||
+            (w.circle || "").toLowerCase().includes(q) ||
+            (w.tags || []).some((t) => t.toLowerCase().includes(q))
+          );
         }
         return true;
       });
 
-      if (state.tab === "ranking") list.sort((a, b) => a.rank - b.rank);
-      else if (state.sort === "popular") list.sort((a, b) => b.dlCount - a.dlCount);
-      else if (state.sort === "priceAsc") list.sort((a, b) => a.price - b.price);
-      else list.sort((a, b) => b.date.localeCompare(a.date));
+      if (state.tab === "ranking") {
+        list.sort((a, b) => (a.rank || 999) - (b.rank || 999) || (b.dlCount || 0) - (a.dlCount || 0));
+      } else if (state.sort === "popular") {
+        list.sort((a, b) => (b.dlCount || 0) - (a.dlCount || 0));
+      } else if (state.sort === "priceAsc") {
+        list.sort((a, b) => (a.price || 0) - (b.price || 0));
+      } else {
+        list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      }
 
-      view.innerHTML = `<div class="grid">${list.map((w) => renderCard(w, state.tab === "ranking")).join("")}</div>`;
+      document.getElementById("resultSummary").textContent = `全 ${list.length} 件`;
+
+      const visibleList = list.slice(0, state.limit);
+      const hasMore = list.length > state.limit;
+
+      if (visibleList.length === 0) {
+        view.innerHTML = `
+          <div style="text-align:center; padding:60px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
+            該当する作品が見つかりませんでした。検索条件やジャンルを変更してお試しください。
+          </div>
+        `;
+        return;
+      }
+
+      view.innerHTML = `
+        <div class="grid">
+          ${visibleList.map((w, idx) => renderCard(w, state.tab === "ranking" ? idx + 1 : null)).join("")}
+        </div>
+        ${
+          hasMore
+            ? `<div class="load-more-wrap">
+                <button type="button" class="load-more-btn" id="loadMoreBtn">
+                  さらに作品を表示する（残り ${list.length - state.limit} 件）
+                </button>
+              </div>`
+            : ""
+        }
+      `;
+    }
+
+    function openPreviewModal(workId) {
+      const w = WORKS.find((x) => x.id === workId);
+      if (!w) return;
+      const modal = document.getElementById("sampleModal");
+      document.getElementById("modalTitle").textContent = `${w.title} — ${w.circle}`;
+      document.getElementById("modalFanzaLink").href = buildFanzaUrl(w);
+      document.getElementById("modalDirectLink").href = buildFanzaUrl(w, "direct");
+      document.getElementById("modalPriceInfo").innerHTML = `
+        <span style="font-size:1.15rem; font-weight:800;">¥${Number(w.price || 0).toLocaleString()}</span>
+        ${w.discount > 0 ? `<span style="color:var(--text-muted); text-decoration:line-through; margin-left:8px; font-size:0.85rem;">¥${Number(w.origPrice || 0).toLocaleString()}</span> <span class="discount-badge" style="margin-left:6px;">${w.discount}%OFF</span>` : ""}
+      `;
+
+      const images = w.sampleImages && w.sampleImages.length > 0 ? w.sampleImages : w.imageUrl ? [w.imageUrl] : [];
+      document.getElementById("modalBody").innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:0.82rem; color:var(--text-sub);">
+          <span style="padding:3px 10px; border-radius:6px; background:var(--bg); border:1px solid var(--border); color:var(--text);">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
+          <span>サークル: <strong style="color:var(--text);">${w.circle}</strong></span>
+          <span>仕様: ${w.spec}</span>
+          <span>配信日: ${w.date}</span>
+        </div>
+        <div class="sample-gallery">
+          ${images.map((src, i) => `<img src="${src}" alt="サンプル ${i + 1}" class="sample-img" loading="lazy" />`).join("")}
+        </div>
+      `;
+      modal.classList.add("open");
     }
 
     document.addEventListener("click", (e) => {
+      // <a>タグのクリックは一切妨害せずブラウザ標準の遷移に任せる
+      if (e.target.closest("a")) return;
+
       const tab = e.target.closest("[data-tab]");
       if (tab) {
         state.tab = tab.dataset.tab;
+        state.limit = 24;
         render();
         return;
       }
       const cat = e.target.closest("[data-cat]");
       if (cat) {
         state.cat = cat.dataset.cat;
+        state.limit = 24;
         render();
         return;
       }
@@ -874,6 +1197,8 @@
       if (creator) {
         state.creatorId = creator.dataset.creator;
         state.tab = "new";
+        state.cat = "all";
+        state.limit = 24;
         render();
         return;
       }
@@ -881,6 +1206,7 @@
       if (tag) {
         state.tag = state.tag === tag.dataset.tag ? null : tag.dataset.tag;
         state.tab = "new";
+        state.limit = 24;
         render();
         return;
       }
@@ -893,24 +1219,46 @@
         render();
         return;
       }
+      const preview = e.target.closest("[data-preview]");
+      if (preview) {
+        openPreviewModal(preview.dataset.preview);
+        return;
+      }
+      if (e.target.closest("#loadMoreBtn")) {
+        state.limit += 36;
+        render();
+        return;
+      }
+      if (e.target.closest("#closeModalBtn") || e.target.id === "sampleModal") {
+        document.getElementById("sampleModal").classList.remove("open");
+        return;
+      }
       if (e.target.closest("#clearFilterBtn") || e.target.closest("#logoReset")) {
         state.creatorId = null;
         state.tag = null;
         state.cat = "all";
         state.query = "";
         state.tab = "new";
+        state.limit = 24;
         document.getElementById("searchInput").value = "";
         render();
       }
     });
 
+    document.getElementById("linkModeSelect").addEventListener("change", (e) => {
+      state.linkMode = e.target.value;
+      render();
+    });
+
     document.getElementById("sortSelect").addEventListener("change", (e) => {
       state.sort = e.target.value;
+      state.limit = 24;
       render();
     });
 
     document.getElementById("searchInput").addEventListener("input", (e) => {
       state.query = e.target.value.trim();
+      state.limit = 24;
       render();
     });
 

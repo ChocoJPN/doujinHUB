@@ -1,8 +1,8 @@
 /**
  * Cloudflare Pages Functions: /api/fanza
  *
- * FANZA (DMM Affiliate API v3) から同人作品（ランキング・新着・音声）を取得し、
- * 作品一覧と人気サークル/作家の自動集計データを返します。
+ * FANZA (DMM Affiliate API v3) から同人作品（ランキング・新着・同人音声・同人誌）を大量取得し、
+ * 画像URLパスに基づく正確なカテゴリ判定と人気サークル/作家の自動集計データを返します。
  */
 
 export async function onRequestGet(context) {
@@ -16,7 +16,7 @@ export async function onRequestGet(context) {
       JSON.stringify({
         ok: true,
         mode: "sample",
-        message: "DMM_API_ID が未設定のためデモデータを表示しています。"
+        message: "DMM_API_ID が未設定のためローカルデータまたはデモデータを表示しています。"
       }),
       {
         headers: {
@@ -27,7 +27,7 @@ export async function onRequestGet(context) {
     );
   }
 
-  async function callFanza({ sort = "rank", hits = 80, keyword = "" }) {
+  async function callFanza({ sort = "rank", hits = 100, offset = 1, keyword = "" }) {
     const params = new URLSearchParams({
       api_id: apiId,
       affiliate_id: affiliateId,
@@ -35,6 +35,7 @@ export async function onRequestGet(context) {
       service: "doujin",
       floor: "digital_doujin",
       hits: String(hits),
+      offset: String(offset),
       sort,
       output: "json"
     });
@@ -47,28 +48,33 @@ export async function onRequestGet(context) {
   }
 
   try {
-    const [rankItems, newItems, audioItems] = await Promise.all([
-      callFanza({ sort: "rank", hits: 80 }),
-      callFanza({ sort: "date", hits: 80 }),
-      callFanza({ sort: "rank", hits: 50, keyword: "バイノーラル" })
+    const [rank1, rank2, new1, new2, audio1, audio2, comic1] = await Promise.all([
+      callFanza({ sort: "rank", hits: 100, offset: 1 }),
+      callFanza({ sort: "rank", hits: 100, offset: 101 }),
+      callFanza({ sort: "date", hits: 100, offset: 1 }),
+      callFanza({ sort: "date", hits: 100, offset: 101 }),
+      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "バイノーラル" }),
+      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "KU100" }),
+      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "総集編" })
     ]);
 
     const mergedMap = new Map();
 
-    rankItems.forEach((item, idx) => {
+    rank1.forEach((item, idx) => {
       const norm = normalizeItem(item, idx + 1);
       mergedMap.set(norm.id, norm);
     });
-    newItems.forEach((item) => {
-      if (!mergedMap.has(item.content_id)) {
-        mergedMap.set(item.content_id, normalizeItem(item, 999));
-      }
+    rank2.forEach((item, idx) => {
+      const norm = normalizeItem(item, idx + 101);
+      if (!mergedMap.has(norm.id)) mergedMap.set(norm.id, norm);
     });
-    audioItems.forEach((item) => {
-      if (!mergedMap.has(item.content_id)) {
-        mergedMap.set(item.content_id, normalizeItem(item, 999));
-      }
-    });
+    for (const list of [new1, new2, audio1, audio2, comic1]) {
+      list.forEach((item) => {
+        if (!mergedMap.has(item.content_id)) {
+          mergedMap.set(item.content_id, normalizeItem(item, 999));
+        }
+      });
+    }
 
     const works = Array.from(mergedMap.values());
     const creators = analyzeTopCreators(works);
@@ -103,24 +109,58 @@ export async function onRequestGet(context) {
   }
 }
 
+function detectCategory(imageUrl, genres, volumeStr, titleStr) {
+  const url = String(imageUrl || "");
+  if (url.includes("/digital/voice/")) return "audio";
+  if (url.includes("/digital/comic/")) return "comic";
+  if (url.includes("/digital/cg/")) return "cg";
+  if (url.includes("/digital/game/")) return "game";
+
+  const isAudio =
+    genres.some((g) => g.includes("ボイス") || g.includes("ASMR") || g.includes("バイノーラル")) ||
+    volumeStr.includes("分") ||
+    titleStr.includes("【音声】") ||
+    titleStr.includes("KU100");
+  if (isAudio) return "audio";
+
+  const isCg =
+    genres.some((g) => g.includes("CG") || g.includes("イラスト")) ||
+    volumeStr.includes("画像") ||
+    titleStr.includes("CG集");
+  if (isCg) return "cg";
+
+  return "comic";
+}
+
+function formatSpec(rawSpec, category) {
+  const s = String(rawSpec || "").trim();
+  if (!s || s === "同人誌" || s === "ボイス・ASMR" || s === "CG集") {
+    if (category === "audio") return "ボイス・ASMR";
+    if (category === "cg") return "CG・イラスト集";
+    if (category === "game") return "同人ゲーム・動画";
+    return "同人誌・漫画";
+  }
+  if (/^\d+$/.test(s)) {
+    if (category === "comic") return `漫画 ${s}P`;
+    if (category === "cg") return `CG ${s}枚`;
+    if (category === "audio") return `音声 ${s}分`;
+    return `${s}P`;
+  }
+  return s;
+}
+
 function normalizeItem(item, rankNumber) {
   const genres = (item.iteminfo?.genre || []).map((g) => g.name);
   const makers = item.iteminfo?.maker || [];
   const circleName = makers[0]?.name || "同人サークル";
   const circleId = makers[0]?.id ? `maker_${makers[0].id}` : `circle_${circleName}`;
 
+  const imageUrl = item.imageURL?.large || item.imageURL?.list || "";
   const volumeStr = String(item.volume || "");
   const titleStr = String(item.title || "");
-  const isAudio =
-    genres.some((g) => g.includes("音声") || g.includes("ASMR") || g.includes("バイノーラル") || g.includes("ボイス")) ||
-    volumeStr.includes("分") ||
-    titleStr.includes("【音声】") ||
-    titleStr.includes("バイノーラル");
-  const isCg =
-    !isAudio &&
-    (genres.some((g) => g.includes("CG") || g.includes("イラスト")) || titleStr.includes("CG集"));
 
-  const category = isAudio ? "audio" : isCg ? "cg" : "comic";
+  const category = detectCategory(imageUrl, genres, volumeStr, titleStr);
+  const spec = formatSpec(volumeStr, category);
 
   const priceStr = String(item.prices?.price || "0").replace(/[^0-9]/g, "");
   const listPriceStr = String(item.prices?.list_price || priceStr).replace(/[^0-9]/g, "");
@@ -130,27 +170,29 @@ function normalizeItem(item, rankNumber) {
 
   const rating = Number(item.review?.average || 0);
   const reviewsCount = Number(item.review?.count || 0);
-  const sampleImages = item.sampleImageURL?.sample_s?.image || [];
+  const sampleLarge = item.sampleImageURL?.sample_l?.image || [];
+  const sampleSmall = item.sampleImageURL?.sample_s?.image || [];
+  const sampleImages = (sampleLarge.length > 0 ? sampleLarge : sampleSmall).slice(0, 10);
 
   return {
     id: item.content_id,
     code: item.content_id,
-    title: item.title || "",
+    title: titleStr,
     category,
     creatorId: circleId,
     author: circleName,
     circle: circleName,
     date: (item.date || "").split(" ")[0].replace(/-/g, "."),
-    spec: volumeStr ? volumeStr : category === "audio" ? "ボイス・ASMR" : category === "cg" ? "CG集" : "同人誌",
+    spec,
     price,
     origPrice,
     discount,
-    rating: rating > 0 ? rating : 4.5,
+    rating: rating > 0 ? Number(rating.toFixed(2)) : 4.5,
     reviewsCount,
-    dlCount: reviewsCount * 30 + (rankNumber ? Math.max(0, 100 - rankNumber) * 50 : 100),
+    dlCount: reviewsCount * 35 + (rankNumber && rankNumber <= 300 ? Math.max(0, 310 - rankNumber) * 30 : 120),
     rank: rankNumber || 999,
-    imageUrl: item.imageURL?.large || item.imageURL?.list || "",
-    sampleImages: sampleImages.slice(0, 8),
+    imageUrl,
+    sampleImages,
     affiliateUrl: item.affiliateURL,
     tags: genres.slice(0, 6)
   };
@@ -163,42 +205,50 @@ function analyzeTopCreators(works) {
       id: w.creatorId,
       name: w.author,
       circle: w.circle,
-      category: w.category,
+      categoryCounts: { comic: 0, audio: 0, cg: 0, game: 0 },
       works: 0,
       totalReviews: 0,
       ratingSum: 0,
       bestRank: 999,
-      latest: w.date,
-      topWorkTitle: w.title
+      latest: w.date || "",
+      topWorkTitle: w.title || "",
+      sampleImageUrl: w.imageUrl || ""
     };
     existing.works++;
+    existing.categoryCounts[w.category] = (existing.categoryCounts[w.category] || 0) + 1;
     existing.totalReviews += w.reviewsCount || 0;
     existing.ratingSum += w.rating || 4.5;
     if (w.rank < existing.bestRank) {
       existing.bestRank = w.rank;
       existing.topWorkTitle = w.title;
+      if (w.imageUrl) existing.sampleImageUrl = w.imageUrl;
     }
-    if (w.date > existing.latest) existing.latest = w.date;
+    if ((w.date || "") > existing.latest) existing.latest = w.date;
     map.set(w.creatorId, existing);
   }
 
   return Array.from(map.values())
     .sort((a, b) => {
-      const scoreA = a.works * 100 + a.totalReviews * 5 + (100 - Math.min(100, a.bestRank)) * 10;
-      const scoreB = b.works * 100 + b.totalReviews * 5 + (100 - Math.min(100, b.bestRank)) * 10;
+      const scoreA = a.works * 120 + a.totalReviews * 5 + (300 - Math.min(300, a.bestRank)) * 8;
+      const scoreB = b.works * 120 + b.totalReviews * 5 + (300 - Math.min(300, b.bestRank)) * 8;
       return scoreB - scoreA;
     })
-    .slice(0, 36)
+    .slice(0, 60)
     .map((c) => {
       const avgRating = (c.ratingSum / c.works).toFixed(2);
+      const mainCategory = Object.entries(c.categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "comic";
+      const shortTitle = c.topWorkTitle.length > 30 ? `${c.topWorkTitle.slice(0, 30)}...` : c.topWorkTitle;
       return {
         id: c.id,
         name: c.name,
         circle: c.circle,
-        category: c.category,
+        category: mainCategory,
         works: c.works,
+        totalReviews: c.totalReviews,
+        avgRating: Number(avgRating),
         latest: c.latest,
-        bio: `代表作『${c.topWorkTitle.slice(0, 28)}...』など計${c.works}作品がランクイン（平均評価 ★${avgRating} / レビュー計${c.totalReviews}件）。`
+        imageUrl: c.sampleImageUrl,
+        bio: `代表作『${shortTitle}』など計${c.works}作品を配信中（平均評価 ★${avgRating} / レビュー計${c.totalReviews}件）。`
       };
     });
 }
