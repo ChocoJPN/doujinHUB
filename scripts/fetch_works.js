@@ -104,6 +104,18 @@ function detectCategory(imageUrl, genres, volumeStr, titleStr) {
 }
 
 /**
+ * ジャンル配列・タイトル・サークル名からAI生成作品かどうかを判定する
+ */
+function detectIsAi(genres, titleStr, circleName) {
+  const genreHit = (genres || []).some(
+    (g) => g.includes("AI生成") || g === "AI" || g.includes("AIイラスト") || g.includes("AI使用")
+  );
+  if (genreHit) return true;
+  const text = `${titleStr || ""} ${circleName || ""}`;
+  return /(^|[^a-zA-Z0-9])AI([^a-zA-Z0-9]|$)|AI生成|AIイラスト|AI使用|AIグラビア|AI美女|ai$/i.test(text);
+}
+
+/**
  * ページ数や収録時間の表記を見やすく整形する
  */
 function formatSpec(rawSpec, category) {
@@ -139,6 +151,14 @@ function normalizeItem(item, rankNumber) {
 
   const category = detectCategory(imageUrl, genres, volumeStr, titleStr);
   const spec = formatSpec(volumeStr, category);
+  const isAi = detectIsAi(genres, titleStr, circleName);
+
+  // タグ抽出（AI生成が含まれる場合は先頭6件から漏れないよう優先保持）
+  const baseTags = genres.slice(0, 6);
+  if (isAi && genres.includes("AI生成") && !baseTags.includes("AI生成")) {
+    baseTags.pop();
+    baseTags.push("AI生成");
+  }
 
   // 価格とセール割引率の計算
   const priceStr = String(item.prices?.price || "0").replace(/[^0-9]/g, "");
@@ -164,6 +184,7 @@ function normalizeItem(item, rankNumber) {
     code: item.content_id,
     title: titleStr,
     category,
+    isAi,
     creatorId: circleId,
     author: circleName,
     circle: circleName,
@@ -180,7 +201,7 @@ function normalizeItem(item, rankNumber) {
     imageUrl,
     sampleImages,
     affiliateUrl: item.affiliateURL,
-    tags: genres.slice(0, 6)
+    tags: baseTags
   };
 }
 
@@ -190,10 +211,12 @@ function normalizeItem(item, rankNumber) {
 function renormalizeExistingWork(w) {
   const category = detectCategory(w.imageUrl, w.tags || [], w.spec || "", w.title || "");
   const spec = formatSpec(w.spec, category);
+  const isAi = Boolean(w.isAi) || detectIsAi(w.tags || [], w.title || "", w.circle || w.author || "");
   return {
     ...w,
     category,
-    spec
+    spec,
+    isAi
   };
 }
 

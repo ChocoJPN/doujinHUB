@@ -149,6 +149,15 @@ function formatSpec(rawSpec, category) {
   return s;
 }
 
+function detectIsAi(genres, titleStr, circleName) {
+  const genreHit = (genres || []).some(
+    (g) => g.includes("AI生成") || g === "AI" || g.includes("AIイラスト") || g.includes("AI使用")
+  );
+  if (genreHit) return true;
+  const text = `${titleStr || ""} ${circleName || ""}`;
+  return /(^|[^a-zA-Z0-9])AI([^a-zA-Z0-9]|$)|AI生成|AIイラスト|AI使用|AIグラビア|AI美女|ai$/i.test(text);
+}
+
 function normalizeItem(item, rankNumber) {
   const genres = (item.iteminfo?.genre || []).map((g) => g.name);
   const makers = item.iteminfo?.maker || [];
@@ -161,6 +170,13 @@ function normalizeItem(item, rankNumber) {
 
   const category = detectCategory(imageUrl, genres, volumeStr, titleStr);
   const spec = formatSpec(volumeStr, category);
+  const isAi = detectIsAi(genres, titleStr, circleName);
+
+  const baseTags = genres.slice(0, 6);
+  if (isAi && genres.includes("AI生成") && !baseTags.includes("AI生成")) {
+    baseTags.pop();
+    baseTags.push("AI生成");
+  }
 
   const priceStr = String(item.prices?.price || "0").replace(/[^0-9]/g, "");
   const listPriceStr = String(item.prices?.list_price || priceStr).replace(/[^0-9]/g, "");
@@ -179,6 +195,7 @@ function normalizeItem(item, rankNumber) {
     code: item.content_id,
     title: titleStr,
     category,
+    isAi,
     creatorId: circleId,
     author: circleName,
     circle: circleName,
@@ -194,7 +211,7 @@ function normalizeItem(item, rankNumber) {
     imageUrl,
     sampleImages,
     affiliateUrl: item.affiliateURL,
-    tags: genres.slice(0, 6)
+    tags: baseTags
   };
 }
 

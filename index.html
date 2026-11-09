@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DOUJIN INDEX — FANZA同人 新着・ランキング・有名作家まとめ</title>
-  <meta name="description" content="FANZA同人の同人誌・同人音声(ASMR)・CG集の新着、人気ランキング、有名作家・サークル別まとめサイト。" />
+  <meta name="description" content="FANZA同人の同人誌・同人音声(ASMR)・CG集の新着、人気ランキング、有名作家・サークル別まとめサイト。AI作品と非AI（手描き・通常）作品の切り替えフィルター対応。" />
   <style>
     :root {
       --bg: #09090b;
@@ -16,7 +16,8 @@
       --text-sub: #a1a1aa;
       --text-muted: #71717a;
       --accent: #e11d48;
-      --radius: 12px;
+      --ai-badge: #7c3aed;
+      --radius: 10px;
     }
 
     * {
@@ -29,7 +30,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.5;
+      line-height: 1.45;
       -webkit-font-smoothing: antialiased;
       padding-bottom: 80px;
     }
@@ -39,16 +40,17 @@
       color: inherit;
     }
 
+    /* 横5列がゆったり見やすく並ぶワイドコンテナ */
     .container {
-      max-width: 1240px;
+      max-width: 1580px;
       margin: 0 auto;
-      padding: 0 24px;
+      padding: 0 20px;
     }
 
     /* 1. Top Header */
     .header {
       background: var(--surface);
-      padding-top: 16px;
+      padding-top: 14px;
     }
 
     .header-top {
@@ -57,7 +59,7 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      padding-bottom: 14px;
+      padding-bottom: 12px;
     }
 
     .brand-group {
@@ -70,7 +72,7 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       background: none;
       border: none;
       cursor: pointer;
@@ -79,21 +81,21 @@
 
     .brand-bar {
       width: 5px;
-      height: 28px;
+      height: 26px;
       background: var(--accent);
       border-radius: 2px;
     }
 
     .brand-name {
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       letter-spacing: -0.01em;
       display: block;
       line-height: 1.2;
     }
 
     .brand-sub {
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       color: var(--text-sub);
     }
 
@@ -101,9 +103,9 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
+      font-size: 0.73rem;
       font-weight: 600;
-      padding: 4px 10px;
+      padding: 3px 10px;
       border-radius: 99px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--border);
@@ -111,8 +113,8 @@
     }
 
     .status-dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
       background: #10b981;
     }
@@ -124,19 +126,9 @@
       flex-wrap: wrap;
     }
 
-    .link-mode-select {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 10px;
-      font-size: 0.78rem;
-      color: var(--text-sub);
-      cursor: pointer;
-    }
-
     .search-box {
       position: relative;
-      width: 290px;
+      width: 320px;
       max-width: 100%;
     }
 
@@ -145,8 +137,8 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 9px 14px 9px 36px;
-      font-size: 0.85rem;
+      padding: 8px 14px 8px 34px;
+      font-size: 0.84rem;
       color: var(--text);
       transition: border-color 0.15s;
     }
@@ -158,7 +150,7 @@
 
     .search-icon {
       position: absolute;
-      left: 12px;
+      left: 11px;
       top: 50%;
       transform: translateY(-50%);
       width: 15px;
@@ -180,24 +172,24 @@
     .tab-list {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
       overflow-x: auto;
     }
 
     .tab-btn {
-      padding: 14px 20px;
+      padding: 12px 18px;
       border: none;
       border-bottom: 3px solid transparent;
       background: transparent;
       color: var(--text-sub);
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       transition: color 0.15s, border-color 0.15s, background 0.15s;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
     }
 
     .tab-btn:hover {
@@ -212,20 +204,20 @@
     }
 
     .count-pill {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      padding: 1px 8px;
+      padding: 1px 7px;
       border-radius: 99px;
       background: var(--bg);
       border: 1px solid var(--border);
       color: var(--text-sub);
     }
 
-    /* 3. Sub Genre Bar */
+    /* 3. Sub Genre & AI Filter Bar */
     .subbar {
       border-bottom: 1px solid var(--border);
-      padding: 14px 0;
-      margin-bottom: 24px;
+      padding: 12px 0;
+      margin-bottom: 20px;
       background: var(--bg);
     }
 
@@ -234,35 +226,43 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 12px;
     }
 
-    .cat-segment {
+    .filter-groups {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cat-segment, .ai-segment {
       display: inline-flex;
-      padding: 4px;
-      border-radius: 10px;
+      padding: 3px;
+      border-radius: 9px;
       background: var(--surface);
       border: 1px solid var(--border);
-      gap: 4px;
+      gap: 3px;
       flex-wrap: wrap;
     }
 
-    .cat-btn {
-      padding: 7px 14px;
-      border-radius: 7px;
+    .cat-btn, .ai-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
       border: none;
       background: transparent;
       color: var(--text-sub);
-      font-size: 0.84rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      white-space: nowrap;
     }
 
-    .cat-btn:hover {
+    .cat-btn:hover, .ai-btn:hover {
       color: var(--text);
     }
 
@@ -272,31 +272,50 @@
       font-weight: 700;
     }
 
+    .ai-btn.active[data-ai="all"] {
+      background: #27272a;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .ai-btn.active[data-ai="non_ai"] {
+      background: #10b981;
+      color: #052e16;
+      font-weight: 800;
+    }
+
+    .ai-btn.active[data-ai="ai"] {
+      background: var(--ai-badge);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
     .cat-count {
-      font-size: 0.72rem;
-      opacity: 0.75;
+      font-size: 0.7rem;
+      opacity: 0.8;
     }
 
     .sort-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.82rem;
+      gap: 8px;
+      font-size: 0.8rem;
       color: var(--text-sub);
     }
 
     .result-summary {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-sub);
-      margin-right: 6px;
+      margin-right: 4px;
+      font-weight: 600;
     }
 
     .select-box {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 7px 12px;
-      font-size: 0.82rem;
+      padding: 6px 10px;
+      font-size: 0.8rem;
       font-weight: 600;
       outline: none;
       cursor: pointer;
@@ -307,19 +326,66 @@
       display: none;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 18px;
+      padding: 10px 16px;
       background: rgba(225, 29, 72, 0.1);
       border: 1px solid rgba(225, 29, 72, 0.35);
-      border-radius: 10px;
-      margin-bottom: 22px;
-      font-size: 0.85rem;
+      border-radius: 9px;
+      margin-bottom: 18px;
+      font-size: 0.82rem;
     }
 
-    /* Grid & Cards */
+    /* 5-Column Grid & Compact High-Visibility Cards */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .creator-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    @media (max-width: 1360px) {
+      .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .creator-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1040px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .creator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 740px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .creator-grid {
+        grid-template-columns: 1fr;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .tab-btn {
+        padding: 10px 12px;
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .card {
@@ -330,7 +396,8 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.18s, transform 0.18s;
+      min-width: 0;
     }
 
     .card:hover {
@@ -339,8 +406,8 @@
     }
 
     .card-cover {
-      height: 195px;
-      padding: 12px 14px;
+      aspect-ratio: 4 / 3;
+      padding: 8px 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -357,10 +424,10 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(9, 9, 11, 0.65) 0%,
-        rgba(9, 9, 11, 0.05) 35%,
-        rgba(9, 9, 11, 0.08) 65%,
-        rgba(9, 9, 11, 0.82) 100%
+        rgba(9, 9, 11, 0.68) 0%,
+        rgba(9, 9, 11, 0.03) 35%,
+        rgba(9, 9, 11, 0.05) 62%,
+        rgba(9, 9, 11, 0.85) 100%
       );
       pointer-events: none;
     }
@@ -371,59 +438,90 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 4px;
+    }
+
+    .badge-group {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
     }
 
     .type-label {
-      font-size: 0.74rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      background: rgba(9, 9, 11, 0.82);
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(9, 9, 11, 0.84);
       color: #f4f4f5;
       border: 1px solid rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(4px);
+      white-space: nowrap;
+    }
+
+    .ai-label {
+      font-size: 0.66rem;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 5px;
+      background: rgba(124, 58, 237, 0.9);
+      color: #ffffff;
+      white-space: nowrap;
     }
 
     .rank-badge {
-      font-size: 0.76rem;
+      font-size: 0.7rem;
       font-weight: 800;
-      padding: 4px 9px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
       background: #fafafa;
       color: #09090b;
-      margin-right: 6px;
+      white-space: nowrap;
     }
 
     .discount-badge {
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       font-weight: 800;
-      padding: 4px 9px;
-      border-radius: 6px;
+      padding: 2px 7px;
+      border-radius: 5px;
       background: var(--accent);
       color: #fff;
+      white-space: nowrap;
     }
 
     .mono-meta {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: #f4f4f5;
       font-weight: 600;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+      white-space: nowrap;
+    }
+
+    .sample-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(24, 24, 27, 0.85);
+      color: #e4e4e7;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      white-space: nowrap;
     }
 
     .card-body {
-      padding: 16px 18px;
+      padding: 10px 12px;
     }
 
     .circle-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.8rem;
+      margin-bottom: 5px;
+      font-size: 0.74rem;
       color: var(--text-sub);
-      gap: 8px;
+      gap: 6px;
     }
 
     .circle-link {
@@ -437,6 +535,8 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      flex: 1;
+      min-width: 0;
     }
 
     .circle-link:hover {
@@ -446,10 +546,11 @@
 
     .rating-meta {
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       color: #fbbf24;
       font-weight: 700;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .card-title-link {
@@ -457,13 +558,13 @@
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      min-height: 2.85em;
-      font-size: 0.96rem;
+      min-height: 2.8em;
+      font-size: 0.85rem;
       font-weight: 700;
-      line-height: 1.45;
+      line-height: 1.4;
       color: var(--text);
       text-decoration: none;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
     .card-title-link:hover {
@@ -474,17 +575,20 @@
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
+      max-height: 44px;
+      overflow: hidden;
     }
 
     .tag {
-      font-size: 0.73rem;
-      padding: 3px 8px;
-      border-radius: 5px;
+      font-size: 0.67rem;
+      padding: 2px 6px;
+      border-radius: 4px;
       background: var(--bg);
       border: 1px solid var(--border);
       color: var(--text-sub);
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .tag:hover {
@@ -493,37 +597,47 @@
     }
 
     .card-footer {
-      padding: 13px 18px;
+      padding: 8px 12px;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: rgba(9, 9, 11, 0.45);
-      gap: 8px;
+      gap: 6px;
+    }
+
+    .price-wrap {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      min-width: 0;
     }
 
     .price-current {
-      font-size: 1.12rem;
+      font-size: 0.98rem;
       font-weight: 800;
+      white-space: nowrap;
     }
 
     .price-orig {
-      font-size: 0.76rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
       text-decoration: line-through;
-      margin-left: 5px;
+      white-space: nowrap;
     }
 
     .footer-actions {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+      flex-shrink: 0;
     }
 
     .icon-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
       border: 1px solid var(--border);
       background: var(--surface);
       color: var(--text-sub);
@@ -539,29 +653,12 @@
       color: var(--accent);
     }
 
-    .sub-btn {
-      padding: 7px 10px;
-      border-radius: 8px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-sub);
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .sub-btn:hover {
-      color: var(--text);
-      border-color: var(--border-hover);
-    }
-
     .primary-btn {
-      padding: 8px 13px;
-      border-radius: 8px;
+      padding: 6px 10px;
+      border-radius: 7px;
       background: var(--accent);
       color: #ffffff;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
       text-decoration: none;
       border: none;
@@ -569,7 +666,7 @@
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
     }
 
     .primary-btn:hover {
@@ -578,17 +675,17 @@
 
     /* Load More Button */
     .load-more-wrap {
-      margin-top: 32px;
+      margin-top: 28px;
       text-align: center;
     }
 
     .load-more-btn {
-      padding: 12px 32px;
-      border-radius: 10px;
+      padding: 11px 30px;
+      border-radius: 9px;
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text);
-      font-size: 0.9rem;
+      font-size: 0.86rem;
       font-weight: 700;
       cursor: pointer;
       transition: background 0.15s, border-color 0.15s;
@@ -601,8 +698,8 @@
 
     /* Creator Card */
     .creator-thumb {
-      width: 68px;
-      height: 68px;
+      width: 60px;
+      height: 60px;
       border-radius: 8px;
       object-fit: cover;
       border: 1px solid var(--border);
@@ -631,7 +728,7 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      max-width: 860px;
+      max-width: 900px;
       width: 100%;
       max-height: 90vh;
       display: flex;
@@ -640,7 +737,7 @@
     }
 
     .modal-header {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -649,7 +746,7 @@
     }
 
     .modal-title {
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       font-weight: 700;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -661,24 +758,24 @@
       border: 1px solid var(--border);
       color: var(--text-sub);
       border-radius: 8px;
-      padding: 6px 12px;
-      font-size: 0.8rem;
+      padding: 5px 12px;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
     }
 
     .modal-body {
-      padding: 20px;
+      padding: 18px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     .sample-gallery {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
+      gap: 10px;
     }
 
     .sample-img {
@@ -690,7 +787,7 @@
     }
 
     .modal-footer {
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -698,16 +795,6 @@
       flex-wrap: wrap;
       gap: 12px;
       background: var(--bg);
-    }
-
-    @media (max-width: 640px) {
-      .search-box {
-        width: 100%;
-      }
-      .tab-btn {
-        padding: 12px 14px;
-        font-size: 0.84rem;
-      }
     }
   </style>
 </head>
@@ -731,12 +818,6 @@
       </div>
 
       <div class="header-controls">
-        <select id="linkModeSelect" class="link-mode-select" title="FANZAへの遷移方式を切り替えできます">
-          <option value="af_001">リンク設定: 通常アフィリエイト (douzinINFO-001)</option>
-          <option value="af_990">リンク設定: APIアフィリエイト (douzinINFO-990)</option>
-          <option value="direct">リンク設定: FANZA作品ページ直リンク (広告ブロック回避)</option>
-        </select>
-
         <div class="search-box">
           <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8"></circle>
@@ -773,15 +854,25 @@
     </div>
   </div>
 
-  <!-- 3. ジャンル切り替え ＆ 並び替えバー -->
+  <!-- 3. ジャンル切り替え ＆ AI作品分離フィルター ＆ 並び替えバー -->
   <div class="subbar" id="subBar">
     <div class="container subbar-inner">
-      <div class="cat-segment">
-        <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count" id="catCountAll"></span></button>
-        <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画 <span class="cat-count" id="catCountComic"></span></button>
-        <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR <span class="cat-count" id="catCountAudio"></span></button>
-        <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集 <span class="cat-count" id="catCountCg"></span></button>
-        <button type="button" class="cat-btn" data-cat="game">ゲーム・動画 <span class="cat-count" id="catCountGame"></span></button>
+      <div class="filter-groups">
+        <!-- ジャンル切替 -->
+        <div class="cat-segment" aria-label="ジャンル絞り込み">
+          <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count" id="catCountAll"></span></button>
+          <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画 <span class="cat-count" id="catCountComic"></span></button>
+          <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR <span class="cat-count" id="catCountAudio"></span></button>
+          <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集 <span class="cat-count" id="catCountCg"></span></button>
+          <button type="button" class="cat-btn" data-cat="game">ゲーム・動画 <span class="cat-count" id="catCountGame"></span></button>
+        </div>
+
+        <!-- AI作品 / 非AI作品 切替 -->
+        <div class="ai-segment" aria-label="AI作品フィルター">
+          <button type="button" class="ai-btn active" data-ai="all">すべて <span class="cat-count" id="aiCountAll"></span></button>
+          <button type="button" class="ai-btn" data-ai="non_ai">非AI（手描き・通常） <span class="cat-count" id="aiCountNonAi"></span></button>
+          <button type="button" class="ai-btn" data-ai="ai">AI作品のみ <span class="cat-count" id="aiCountAi"></span></button>
+        </div>
       </div>
 
       <div class="sort-wrap" id="sortWrap">
@@ -802,7 +893,7 @@
         <span style="color:#fda4af; font-weight:700; margin-right:8px;">絞り込み表示中:</span>
         <strong id="filterNoticeText"></strong>
       </div>
-      <button type="button" id="clearFilterBtn" style="background:var(--surface); border:1px solid var(--border); padding:5px 12px; border-radius:6px; cursor:pointer; font-size:0.8rem; font-weight:600;">
+      <button type="button" id="clearFilterBtn" style="background:var(--surface); border:1px solid var(--border); padding:4px 11px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">
         ✕ 絞り込みを解除
       </button>
     </div>
@@ -820,14 +911,9 @@
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-footer">
         <div id="modalPriceInfo"></div>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <a href="#" target="_blank" rel="noopener" class="sub-btn" id="modalDirectLink">
-            直リンクで開く
-          </a>
-          <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink" style="padding:10px 18px; font-size:0.86rem;">
-            FANZA公式ページで見る ↗
-          </a>
-        </div>
+        <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink" style="padding:10px 18px; font-size:0.86rem;">
+          FANZA公式ページで見る ↗
+        </a>
       </div>
     </div>
   </div>
@@ -837,11 +923,24 @@
 
   <script>
     const CATEGORY_META = {
-      comic: { label: "同人誌・漫画" },
-      audio: { label: "同人音声・ASMR" },
-      cg: { label: "CG・イラスト集" },
-      game: { label: "ゲーム・動画" }
+      comic: { label: "同人誌・漫画", short: "漫画" },
+      audio: { label: "同人音声・ASMR", short: "音声・ASMR" },
+      cg: { label: "CG・イラスト集", short: "CG集" },
+      game: { label: "ゲーム・動画", short: "ゲーム" }
     };
+
+    /**
+     * 作品情報（タグ・タイトル・サークル名）からAI生成作品かどうかを判定
+     */
+    function detectWorkIsAi(w) {
+      if (typeof w.isAi === "boolean") return w.isAi;
+      const tags = Array.isArray(w.tags) ? w.tags : [];
+      if (tags.some((t) => t.includes("AI生成") || t === "AI" || t.includes("AIイラスト") || t.includes("AI使用"))) {
+        return true;
+      }
+      const text = `${w.title || ""} ${w.circle || ""} ${w.author || ""}`;
+      return /(^|[^a-zA-Z0-9])AI([^a-zA-Z0-9]|$)|AI生成|AIイラスト|AI使用|AIグラビア|AI美女|ai$/i.test(text);
+    }
 
     function normalizeWorkOnClient(w) {
       const url = String(w.imageUrl || "");
@@ -855,13 +954,16 @@
       if (/^\d+$/.test(spec)) {
         spec = category === "comic" ? `漫画 ${spec}P` : category === "cg" ? `CG ${spec}枚` : `${spec}P`;
       } else if (!spec || spec === "同人誌" || spec === "ボイス・ASMR") {
-        spec = (CATEGORY_META[category] || CATEGORY_META.comic).label;
+        spec = (CATEGORY_META[category] || CATEGORY_META.comic).short;
       }
+
+      const isAi = detectWorkIsAi(w);
 
       return {
         ...w,
         category,
         spec,
+        isAi,
         tags: Array.isArray(w.tags) ? w.tags : [],
         sampleImages: Array.isArray(w.sampleImages) ? w.sampleImages : []
       };
@@ -873,6 +975,16 @@
     function applyDataset(data) {
       if (!data || !Array.isArray(data.works) || data.works.length === 0) return false;
       WORKS = data.works.map(normalizeWorkOnClient);
+
+      // サークルごとのAI作品比率を算出してサークル一覧でも非AI/AIフィルターを機能させる
+      const creatorAiStat = new Map();
+      WORKS.forEach((w) => {
+        const cur = creatorAiStat.get(w.creatorId) || { total: 0, ai: 0 };
+        cur.total++;
+        if (w.isAi) cur.ai++;
+        creatorAiStat.set(w.creatorId, cur);
+      });
+
       if (Array.isArray(data.creators) && data.creators.length > 0) {
         CREATORS = data.creators.map((c) => {
           const url = String(c.imageUrl || "");
@@ -881,10 +993,16 @@
           else if (url.includes("/digital/comic/")) cat = "comic";
           else if (url.includes("/digital/cg/")) cat = "cg";
           else if (url.includes("/digital/game/")) cat = "game";
-          return { ...c, category: cat };
+
+          const st = creatorAiStat.get(c.id);
+          const isAiCreator = st
+            ? st.ai > 0 && st.ai >= st.total / 2
+            : detectWorkIsAi({ title: c.bio || "", circle: c.circle || "", tags: c.tags || [] });
+
+          return { ...c, category: cat, isAi: isAiCreator };
         });
       }
-      document.getElementById("liveStatusText").textContent = `FANZA実データ反映済み (${WORKS.length}作品 / ${CREATORS.length}サークル)`;
+      document.getElementById("liveStatusText").textContent = `収録: ${WORKS.length.toLocaleString()}作品 / ${CREATORS.length}サークル`;
       return true;
     }
 
@@ -895,38 +1013,25 @@
     const state = {
       tab: "new",
       cat: "all",
+      aiFilter: "all", // 'all' | 'non_ai' | 'ai'
       sort: "newest",
-      linkMode: "af_001", // 'af_001' | 'af_990' | 'direct'
       creatorId: null,
       tag: null,
       query: "",
-      limit: 24,
+      limit: 30, // 横5列 × 6段 = 30件単位
       favs: []
     };
 
     /**
-     * 作品コードと選択中のリンクモードから遷移先URLを生成する
-     * - af_001: 通常サイト用アフィリエイトID (douzinINFO-001)
-     * - af_990: API用アフィリエイトID (douzinINFO-990)
-     * - direct: FANZA同人 作品詳細ページ直リンク（AdBlock等によるal.fanza.co.jp遮断を100%回避）
+     * 作品のアフィリエイトURLを生成（ユーザー側には設定UIを出さず内部で処理）
      */
-    function buildFanzaUrl(w, modeOverride) {
+    function buildFanzaUrl(w) {
+      if (w.affiliateUrl) {
+        return w.affiliateUrl;
+      }
       const code = w.code || w.id;
       const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
-      const mode = modeOverride || state.linkMode;
-
-      if (mode === "direct") {
-        return directUrl;
-      }
-      if (mode === "af_001") {
-        const rawAf = w.affiliateUrl || "";
-        if (rawAf.includes("af_id=")) {
-          return rawAf.replace(/af_id=[^&]+/, "af_id=douzinINFO-001");
-        }
-        return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-001&ch=link_tool&ch_id=link`;
-      }
-      // af_990
-      return w.affiliateUrl || `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-990&ch=api`;
+      return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-001&ch=link_tool&ch_id=link`;
     }
 
     async function tryFetchLiveFanzaData() {
@@ -954,13 +1059,26 @@
     }
 
     function updateCounters() {
-      document.getElementById("totalWorksCount").textContent = WORKS.length;
-      document.getElementById("totalCreatorsCount").textContent = CREATORS.length;
-      document.getElementById("saleWorksCount").textContent = WORKS.filter((w) => w.discount > 0).length;
+      // AIフィルター適用後の作品群でタブやカテゴリの件数を集計
+      const aiFilteredWorks = WORKS.filter((w) => {
+        if (state.aiFilter === "non_ai") return !w.isAi;
+        if (state.aiFilter === "ai") return w.isAi;
+        return true;
+      });
+
+      const aiFilteredCreators = CREATORS.filter((c) => {
+        if (state.aiFilter === "non_ai") return !c.isAi;
+        if (state.aiFilter === "ai") return c.isAi;
+        return true;
+      });
+
+      document.getElementById("totalWorksCount").textContent = aiFilteredWorks.length;
+      document.getElementById("totalCreatorsCount").textContent = aiFilteredCreators.length;
+      document.getElementById("saleWorksCount").textContent = aiFilteredWorks.filter((w) => w.discount > 0).length;
       document.getElementById("favCount").textContent = state.favs.length;
 
-      const counts = { all: WORKS.length, comic: 0, audio: 0, cg: 0, game: 0 };
-      WORKS.forEach((w) => {
+      const counts = { all: aiFilteredWorks.length, comic: 0, audio: 0, cg: 0, game: 0 };
+      aiFilteredWorks.forEach((w) => {
         counts[w.category] = (counts[w.category] || 0) + 1;
       });
       document.getElementById("catCountAll").textContent = `(${counts.all})`;
@@ -968,56 +1086,63 @@
       document.getElementById("catCountAudio").textContent = `(${counts.audio})`;
       document.getElementById("catCountCg").textContent = `(${counts.cg})`;
       document.getElementById("catCountGame").textContent = `(${counts.game})`;
+
+      // 現在のジャンルにおけるAI/非AI件数
+      const catFilteredWorks = WORKS.filter((w) => state.cat === "all" || w.category === state.cat);
+      const nonAiCount = catFilteredWorks.filter((w) => !w.isAi).length;
+      const aiCount = catFilteredWorks.filter((w) => w.isAi).length;
+      document.getElementById("aiCountAll").textContent = `(${catFilteredWorks.length})`;
+      document.getElementById("aiCountNonAi").textContent = `(${nonAiCount})`;
+      document.getElementById("aiCountAi").textContent = `(${aiCount})`;
     }
 
     function renderCard(w, displayRank) {
       const isFav = state.favs.includes(w.id);
       const fanzaUrl = buildFanzaUrl(w);
-      const directUrl = buildFanzaUrl(w, "direct");
       const coverStyle = w.imageUrl
         ? `background-image:url('${w.imageUrl}'); background-color:#18181b;`
         : `background:#27272a;`;
       const sampleCount = (w.sampleImages || []).length;
+      const catMeta = CATEGORY_META[w.category] || CATEGORY_META.comic;
 
       return `
         <article class="card">
           <div>
             <div class="card-cover" style="${coverStyle}" data-preview="${w.id}" title="クリックでサンプル画像をプレビュー">
               <div class="cover-top">
-                <div>
+                <div class="badge-group">
                   ${displayRank ? `<span class="rank-badge">${displayRank}位</span>` : ""}
-                  <span class="type-label">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
+                  <span class="type-label">${catMeta.short}</span>
+                  ${w.isAi ? `<span class="ai-label">AI</span>` : ""}
                 </div>
                 ${w.discount > 0 ? `<span class="discount-badge">${w.discount}%OFF</span>` : ""}
               </div>
               <div class="cover-bottom">
                 <span class="mono-meta">${w.spec}</span>
-                <span class="mono-meta">${w.date}</span>
+                ${sampleCount > 0 ? `<span class="sample-pill">サンプル ${sampleCount}枚</span>` : `<span class="mono-meta">${w.date}</span>`}
               </div>
             </div>
 
             <div class="card-body">
               <div class="circle-row">
-                <button type="button" class="circle-link" data-creator="${w.creatorId}">${w.circle}</button>
-                <span class="rating-meta">★ ${Number(w.rating || 4.5).toFixed(2)}${w.reviewsCount ? ` (${w.reviewsCount})` : ""}</span>
+                <button type="button" class="circle-link" data-creator="${w.creatorId}" title="${w.circle}">${w.circle}</button>
+                <span class="rating-meta">★${Number(w.rating || 4.5).toFixed(1)}${w.reviewsCount ? `(${w.reviewsCount})` : ""}</span>
               </div>
               <a href="${fanzaUrl}" target="_blank" rel="noopener" class="card-title-link" title="${w.title}">${w.title}</a>
               <div class="tags">
-                ${(w.tags || []).slice(0, 5).map((t) => `<button type="button" class="tag" data-tag="${t}">#${t}</button>`).join("")}
+                ${(w.tags || []).slice(0, 4).map((t) => `<button type="button" class="tag" data-tag="${t}">#${t}</button>`).join("")}
               </div>
             </div>
           </div>
 
           <div class="card-footer">
-            <div>
+            <div class="price-wrap">
               <span class="price-current">¥${Number(w.price || 0).toLocaleString()}</span>
               ${w.discount > 0 ? `<span class="price-orig">¥${Number(w.origPrice || 0).toLocaleString()}</span>` : ""}
             </div>
             <div class="footer-actions">
-              ${sampleCount > 0 ? `<button type="button" class="sub-btn" data-preview="${w.id}">サンプル(${sampleCount})</button>` : ""}
-              <a href="${directUrl}" target="_blank" rel="noopener" class="sub-btn" title="広告ブロッカー等で飛べない場合の直リンク">直リンク</a>
               <button type="button" class="icon-btn ${isFav ? "active" : ""}" data-fav="${w.id}" title="お気に入り保存">
-                <svg width="16" height="16" fill="${isFav ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <svg width="14" height="14" fill="${isFav ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                 </svg>
               </button>
@@ -1033,6 +1158,7 @@
 
       document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
       document.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.cat));
+      document.querySelectorAll(".ai-btn").forEach((b) => b.classList.toggle("active", b.dataset.ai === state.aiFilter));
 
       const notice = document.getElementById("filterNotice");
       if (state.creatorId || state.tag) {
@@ -1051,6 +1177,8 @@
         sortWrap.style.display = "none";
         const creatorList = CREATORS.filter((c) => {
           if (state.cat !== "all" && c.category && c.category !== state.cat) return false;
+          if (state.aiFilter === "non_ai" && c.isAi) return false;
+          if (state.aiFilter === "ai" && !c.isAi) return false;
           if (state.query) {
             const q = state.query.toLowerCase();
             return (c.name || "").toLowerCase().includes(q) || (c.circle || "").toLowerCase().includes(q) || (c.bio || "").toLowerCase().includes(q);
@@ -1059,24 +1187,27 @@
         });
 
         view.innerHTML = `
-          <div class="grid">
+          <div class="creator-grid">
             ${creatorList
               .map(
                 (c) => `
-              <div class="card" style="padding:20px; gap:14px;">
-                <div style="display:flex; gap:14px; align-items:flex-start;">
+              <div class="card" style="padding:16px; gap:12px;">
+                <div style="display:flex; gap:12px; align-items:flex-start;">
                   ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${c.circle}" class="creator-thumb" loading="lazy" />` : ""}
                   <div style="flex:1; min-width:0;">
-                    <div style="display:flex; justify-content:space-between; font-size:0.74rem; color:var(--text-muted); margin-bottom:6px;">
-                      <span style="padding:2px 8px; border-radius:4px; background:var(--bg); border:1px solid var(--border); color:var(--text-sub); font-weight:600;">${(CATEGORY_META[c.category] || CATEGORY_META.comic).label}</span>
+                    <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.7rem; color:var(--text-muted); margin-bottom:5px; gap:4px;">
+                      <div style="display:flex; gap:4px; align-items:center;">
+                        <span style="padding:2px 6px; border-radius:4px; background:var(--bg); border:1px solid var(--border); color:var(--text-sub); font-weight:600;">${(CATEGORY_META[c.category] || CATEGORY_META.comic).short}</span>
+                        ${c.isAi ? `<span class="ai-label">AI</span>` : ""}
+                      </div>
                       <span>最新: ${c.latest || "-"}</span>
                     </div>
-                    <h3 style="font-size:1.02rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${c.circle}</h3>
-                    <p style="font-size:0.81rem; color:var(--text-sub); margin-top:6px; line-height:1.45;">${c.bio || ""}</p>
+                    <h3 style="font-size:0.95rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${c.circle}</h3>
+                    <p style="font-size:0.76rem; color:var(--text-sub); margin-top:4px; line-height:1.4;">${c.bio || ""}</p>
                   </div>
                 </div>
-                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:12px; border-top:1px solid var(--border);">
-                  <span style="font-size:0.8rem; color:var(--text-sub);">収録数: <strong style="color:var(--text);">${c.works}作品</strong></span>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--border);">
+                  <span style="font-size:0.76rem; color:var(--text-sub);">収録数: <strong style="color:var(--text);">${c.works}作品</strong></span>
                   <button type="button" class="primary-btn" data-creator="${c.id}">作品一覧を見る →</button>
                 </div>
               </div>
@@ -1094,6 +1225,8 @@
         if (state.tab === "favorites" && !state.favs.includes(w.id)) return false;
         if (state.tab === "sale" && w.discount <= 0) return false;
         if (state.cat !== "all" && w.category !== state.cat) return false;
+        if (state.aiFilter === "non_ai" && w.isAi) return false;
+        if (state.aiFilter === "ai" && !w.isAi) return false;
         if (state.creatorId && w.creatorId !== state.creatorId) return false;
         if (state.tag && !(w.tags || []).includes(state.tag)) return false;
         if (state.query) {
@@ -1118,7 +1251,7 @@
         list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
       }
 
-      document.getElementById("resultSummary").textContent = `全 ${list.length} 件`;
+      document.getElementById("resultSummary").textContent = `表示: ${list.length} 件`;
 
       const visibleList = list.slice(0, state.limit);
       const hasMore = list.length > state.limit;
@@ -1126,7 +1259,7 @@
       if (visibleList.length === 0) {
         view.innerHTML = `
           <div style="text-align:center; padding:60px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
-            該当する作品が見つかりませんでした。検索条件やジャンルを変更してお試しください。
+            該当する作品が見つかりませんでした。検索条件やフィルターを変更してお試しください。
           </div>
         `;
         return;
@@ -1154,7 +1287,6 @@
       const modal = document.getElementById("sampleModal");
       document.getElementById("modalTitle").textContent = `${w.title} — ${w.circle}`;
       document.getElementById("modalFanzaLink").href = buildFanzaUrl(w);
-      document.getElementById("modalDirectLink").href = buildFanzaUrl(w, "direct");
       document.getElementById("modalPriceInfo").innerHTML = `
         <span style="font-size:1.15rem; font-weight:800;">¥${Number(w.price || 0).toLocaleString()}</span>
         ${w.discount > 0 ? `<span style="color:var(--text-muted); text-decoration:line-through; margin-left:8px; font-size:0.85rem;">¥${Number(w.origPrice || 0).toLocaleString()}</span> <span class="discount-badge" style="margin-left:6px;">${w.discount}%OFF</span>` : ""}
@@ -1164,6 +1296,7 @@
       document.getElementById("modalBody").innerHTML = `
         <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:0.82rem; color:var(--text-sub);">
           <span style="padding:3px 10px; border-radius:6px; background:var(--bg); border:1px solid var(--border); color:var(--text);">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
+          ${w.isAi ? `<span class="ai-label">AI生成作品</span>` : ""}
           <span>サークル: <strong style="color:var(--text);">${w.circle}</strong></span>
           <span>仕様: ${w.spec}</span>
           <span>配信日: ${w.date}</span>
@@ -1182,14 +1315,21 @@
       const tab = e.target.closest("[data-tab]");
       if (tab) {
         state.tab = tab.dataset.tab;
-        state.limit = 24;
+        state.limit = 30;
         render();
         return;
       }
       const cat = e.target.closest("[data-cat]");
       if (cat) {
         state.cat = cat.dataset.cat;
-        state.limit = 24;
+        state.limit = 30;
+        render();
+        return;
+      }
+      const ai = e.target.closest("[data-ai]");
+      if (ai) {
+        state.aiFilter = ai.dataset.ai;
+        state.limit = 30;
         render();
         return;
       }
@@ -1198,7 +1338,7 @@
         state.creatorId = creator.dataset.creator;
         state.tab = "new";
         state.cat = "all";
-        state.limit = 24;
+        state.limit = 30;
         render();
         return;
       }
@@ -1206,7 +1346,7 @@
       if (tag) {
         state.tag = state.tag === tag.dataset.tag ? null : tag.dataset.tag;
         state.tab = "new";
-        state.limit = 24;
+        state.limit = 30;
         render();
         return;
       }
@@ -1225,7 +1365,7 @@
         return;
       }
       if (e.target.closest("#loadMoreBtn")) {
-        state.limit += 36;
+        state.limit += 30;
         render();
         return;
       }
@@ -1237,28 +1377,24 @@
         state.creatorId = null;
         state.tag = null;
         state.cat = "all";
+        state.aiFilter = "all";
         state.query = "";
         state.tab = "new";
-        state.limit = 24;
+        state.limit = 30;
         document.getElementById("searchInput").value = "";
         render();
       }
     });
 
-    document.getElementById("linkModeSelect").addEventListener("change", (e) => {
-      state.linkMode = e.target.value;
-      render();
-    });
-
     document.getElementById("sortSelect").addEventListener("change", (e) => {
       state.sort = e.target.value;
-      state.limit = 24;
+      state.limit = 30;
       render();
     });
 
     document.getElementById("searchInput").addEventListener("input", (e) => {
       state.query = e.target.value.trim();
-      state.limit = 24;
+      state.limit = 30;
       render();
     });
 
