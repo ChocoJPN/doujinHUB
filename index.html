@@ -482,13 +482,162 @@
     }
 
     .rank-badge {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 800;
-      padding: 2px 7px;
+      padding: 2px 8px;
       border-radius: 5px;
       background: #fafafa;
       color: #09090b;
       white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    }
+
+    .rank-badge.rank-1 {
+      background: linear-gradient(135deg, #fde047 0%, #eab308 55%, #ca8a04 100%);
+      color: #18181b;
+      border: 1px solid rgba(254, 240, 138, 0.8);
+    }
+
+    .rank-badge.rank-2 {
+      background: linear-gradient(135deg, #f4f4f5 0%, #d4d4d8 55%, #a1a1aa 100%);
+      color: #18181b;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+
+    .rank-badge.rank-3 {
+      background: linear-gradient(135deg, #fed7aa 0%, #f97316 55%, #c2410c 100%);
+      color: #ffffff;
+      border: 1px solid rgba(254, 215, 170, 0.6);
+    }
+
+    /* FANZA風 ランキング・ピックアップ セクションブロック */
+    .fanza-section {
+      margin-bottom: 36px;
+      background: rgba(18, 18, 21, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title-group {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title-bar {
+      display: inline-block;
+      width: 5px;
+      height: 20px;
+      border-radius: 3px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .section-update-meta {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 2px 9px;
+      border-radius: 99px;
+    }
+
+    .section-controls {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .subtab-group {
+      display: inline-flex;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 3px;
+      gap: 3px;
+      flex-wrap: wrap;
+    }
+
+    .subtab-btn {
+      padding: 6px 13px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-sub);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .subtab-btn:hover {
+      color: var(--text);
+    }
+
+    .subtab-btn.active {
+      background: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);
+    }
+
+    .more-link-btn {
+      padding: 6px 13px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .more-link-btn:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+
+    .ranking-desc-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 9px 14px;
+      margin-bottom: 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      font-size: 0.8rem;
+      color: var(--text-sub);
     }
 
     .discount-badge {
@@ -841,15 +990,30 @@
     </div>
   </header>
 
-  <!-- 2. メインタブバー（5つの明確なタブ） -->
+  <!-- 2. メインタブバー（FANZA同人ページ準拠のランキング＆メニュー構成） -->
   <div class="tab-bar">
     <div class="container">
       <nav class="tab-list" aria-label="メインタブ">
-        <button type="button" class="tab-btn active" data-tab="new">
-          <span>新着作品</span>
+        <button type="button" class="tab-btn active" data-tab="portal">
+          <span>総合トップ</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="pop_ranking">
+          <span>人気ランキング</span>
+          <span class="count-pill">24h/週間/月間</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="sales_ranking">
+          <span>新作・準新作・ロングセラー・販売数</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="format_ranking">
+          <span>作品形式別ランキング</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="pickup">
+          <span>ピックアップ作品</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="new">
+          <span>新着一覧</span>
           <span id="totalWorksCount" class="count-pill">0</span>
         </button>
-        <button type="button" class="tab-btn" data-tab="ranking">人気ランキング</button>
         <button type="button" class="tab-btn" data-tab="creators">
           <span>有名作家・サークル別</span>
           <span id="totalCreatorsCount" class="count-pill">0</span>
@@ -1033,16 +1197,233 @@
     }
 
     const state = {
-      tab: "new",
+      tab: "portal",       // 'portal' | 'pop_ranking' | 'sales_ranking' | 'format_ranking' | 'pickup' | 'new' | 'creators' | 'sale' | 'favorites'
+      popPeriod: "24h",    // '24h' | 'weekly' | 'monthly'
+      salesSub: "new_release", // 'new_release' | 'semi_new' | 'long_seller' | 'sales_count'
+      formatCat: "comic",  // 'comic' | 'audio' | 'cg' | 'game'
       cat: "all",
-      aiFilter: "all", // 'all' | 'non_ai' | 'ai'
+      aiFilter: "all",     // 'all' | 'non_ai' | 'ai'
       sort: "newest",
       creatorId: null,
       tag: null,
       query: "",
-      limit: 30, // 横5列 × 6段 = 30件単位
+      limit: 30,           // 横5列 × 6段 = 30件単位
       favs: []
     };
+
+    const POP_PERIOD_META = {
+      "24h": { label: "24時間", desc: "直近24時間のリアルタイム注目・人気ランキング" },
+      weekly: { label: "週間", desc: "直近1週間の総合売上・レビュー勢いランキング" },
+      monthly: { label: "月間", desc: "月間累計の総合人気・ベストセラーランキング" }
+    };
+
+    const SALES_SUB_META = {
+      new_release: { label: "新作ランキング", desc: "直近配信された最新作の中から売上・人気上位を集計" },
+      semi_new: { label: "準新作ランキング", desc: "配信から少し経過した準新作の中から継続して売れている人気作を集計" },
+      long_seller: { label: "ロングセラーランキング", desc: "長期間にわたり高評価・多数のレビューを獲得し続けている定番名作を集計" },
+      sales_count: { label: "販売数ランキング", desc: "全作品の累計販売数・推定DL数順ランキング" }
+    };
+
+    /**
+     * FANZA公式風の更新時刻表記を自動生成
+     * - 60分毎更新 / 作品形式別 / 人気ランキング: YYYY-MM-DD HH:00 更新
+     * - ピックアップ作品: ※毎日0時ごろに更新 (YYYY-MM-DD 00:00:00更新)
+     */
+    function getFormattedTimestamps() {
+      const now = new Date();
+      const yyyy = now.getFullYear();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const hh = String(now.getHours()).padStart(2, "0");
+      return {
+        dateKey: `${yyyy}-${mm}-${dd}`,
+        dailyMidnight: `${yyyy}-${mm}-${dd} 00:00:00更新`,
+        hourlyUpdate: `${yyyy}-${mm}-${dd} ${hh}:00 更新`
+      };
+    }
+
+    function parseWorkDateMs(dateStr) {
+      if (!dateStr) return 0;
+      const parts = String(dateStr).split(/[.\/-]/);
+      if (parts.length < 3) return 0;
+      const t = Date.UTC(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+      return Number.isNaN(t) ? 0 : t;
+    }
+
+    function getBaseFilteredWorks(ignoreCategory = false) {
+      return WORKS.filter((w) => {
+        if (!ignoreCategory && state.cat !== "all" && w.category !== state.cat) return false;
+        if (state.aiFilter === "non_ai" && w.isAi) return false;
+        if (state.aiFilter === "ai" && !w.isAi) return false;
+        if (state.creatorId && w.creatorId !== state.creatorId) return false;
+        if (state.tag && !(w.tags || []).includes(state.tag)) return false;
+        if (state.query) {
+          const q = state.query.toLowerCase();
+          return (
+            (w.title || "").toLowerCase().includes(q) ||
+            (w.author || "").toLowerCase().includes(q) ||
+            (w.circle || "").toLowerCase().includes(q) ||
+            (w.tags || []).some((t) => t.toLowerCase().includes(q))
+          );
+        }
+        return true;
+      });
+    }
+
+    function annotateDaysAgo(works) {
+      let maxMs = 0;
+      for (const w of works) {
+        const ms = parseWorkDateMs(w.date);
+        if (ms > maxMs) maxMs = ms;
+      }
+      if (!maxMs) maxMs = Date.now();
+      return works.map((w) => {
+        const ms = parseWorkDateMs(w.date);
+        const daysAgo = ms ? Math.max(0, Math.round((maxMs - ms) / 86400000)) : 999;
+        return { work: w, daysAgo, dateMs: ms };
+      });
+    }
+
+    /**
+     * 人気ランキング（24時間 / 週間 / 月間）
+     */
+    function getPopularityRanking(period, sourceWorks) {
+      const annotated = annotateDaysAgo(sourceWorks);
+      if (period === "24h") {
+        annotated.sort((a, b) => {
+          const rA = a.work.rank || 999;
+          const rB = b.work.rank || 999;
+          if (rA !== rB) return rA - rB;
+          if (a.daysAgo !== b.daysAgo) return a.daysAgo - b.daysAgo;
+          return (b.work.dlCount || 0) - (a.work.dlCount || 0);
+        });
+      } else if (period === "weekly") {
+        annotated.sort((a, b) => {
+          const scoreA =
+            (320 - Math.min(310, a.work.rank || 310)) * 55 +
+            Math.min(a.work.reviewsCount || 0, 180) * 28 +
+            (a.daysAgo <= 21 ? 3400 : a.daysAgo <= 60 ? 1500 : 0) +
+            (a.work.discount || 0) * 22;
+          const scoreB =
+            (320 - Math.min(310, b.work.rank || 310)) * 55 +
+            Math.min(b.work.reviewsCount || 0, 180) * 28 +
+            (b.daysAgo <= 21 ? 3400 : b.daysAgo <= 60 ? 1500 : 0) +
+            (b.work.discount || 0) * 22;
+          return scoreB - scoreA;
+        });
+      } else {
+        // monthly (月間)
+        annotated.sort((a, b) => {
+          const scoreA =
+            (a.work.dlCount || 0) * 1.15 +
+            (a.work.reviewsCount || 0) * 48 +
+            (320 - Math.min(310, a.work.rank || 310)) * 35 +
+            (a.work.rating || 4.5) * 400;
+          const scoreB =
+            (b.work.dlCount || 0) * 1.15 +
+            (b.work.reviewsCount || 0) * 48 +
+            (320 - Math.min(310, b.work.rank || 310)) * 35 +
+            (b.work.rating || 4.5) * 400;
+          return scoreB - scoreA;
+        });
+      }
+      return annotated.map((x) => x.work);
+    }
+
+    /**
+     * 新作ランキング / 準新作ランキング / ロングセラーランキング / 販売数ランキング（60分毎に更新）
+     */
+    function getSalesSubRanking(subType, sourceWorks) {
+      const annotated = annotateDaysAgo(sourceWorks);
+      const byDateDesc = [...annotated].sort((a, b) => b.dateMs - a.dateMs);
+      const total = byDateDesc.length;
+
+      if (subType === "new_release") {
+        let pool = byDateDesc.filter((x) => x.daysAgo <= 14);
+        if (pool.length < 20) {
+          pool = byDateDesc.slice(0, Math.max(20, Math.ceil(total * 0.25)));
+        }
+        pool.sort((a, b) => {
+          const scoreA = (320 - Math.min(310, a.work.rank || 310)) * 65 + (a.work.dlCount || 0) + (a.work.reviewsCount || 0) * 45;
+          const scoreB = (320 - Math.min(310, b.work.rank || 310)) * 65 + (b.work.dlCount || 0) + (b.work.reviewsCount || 0) * 45;
+          return scoreB - scoreA;
+        });
+        return pool.map((x) => x.work);
+      }
+
+      if (subType === "semi_new") {
+        let pool = byDateDesc.filter((x) => x.daysAgo > 14 && x.daysAgo <= 75);
+        if (pool.length < 20) {
+          const startIdx = Math.floor(total * 0.18);
+          const endIdx = Math.max(startIdx + 20, Math.ceil(total * 0.58));
+          pool = byDateDesc.slice(startIdx, endIdx);
+        }
+        pool.sort((a, b) => {
+          const scoreA = (320 - Math.min(310, a.work.rank || 310)) * 55 + (a.work.dlCount || 0) + (a.work.reviewsCount || 0) * 40;
+          const scoreB = (320 - Math.min(310, b.work.rank || 310)) * 55 + (b.work.dlCount || 0) + (b.work.reviewsCount || 0) * 40;
+          return scoreB - scoreA;
+        });
+        return pool.map((x) => x.work);
+      }
+
+      if (subType === "long_seller") {
+        let pool = byDateDesc.filter((x) => x.daysAgo > 60 || (x.work.reviewsCount || 0) >= 30);
+        if (pool.length < 20) {
+          pool = byDateDesc.slice(Math.floor(total * 0.4));
+        }
+        pool.sort((a, b) => {
+          const scoreA = (a.work.reviewsCount || 0) * 70 + (a.work.dlCount || 0) * 1.2 + ((a.work.rating || 0) >= 4.6 ? 2500 : 0);
+          const scoreB = (b.work.reviewsCount || 0) * 70 + (b.work.dlCount || 0) * 1.2 + ((b.work.rating || 0) >= 4.6 ? 2500 : 0);
+          return scoreB - scoreA;
+        });
+        return pool.map((x) => x.work);
+      }
+
+      // sales_count (販売数ランキング)
+      const salesPool = [...annotated];
+      salesPool.sort((a, b) => {
+        if ((b.work.dlCount || 0) !== (a.work.dlCount || 0)) return (b.work.dlCount || 0) - (a.work.dlCount || 0);
+        if ((b.work.reviewsCount || 0) !== (a.work.reviewsCount || 0)) return (b.work.reviewsCount || 0) - (a.work.reviewsCount || 0);
+        return (a.work.rank || 999) - (b.work.rank || 999);
+      });
+      return salesPool.map((x) => x.work);
+    }
+
+    /**
+     * ピックアップ作品 / ※毎日0時ごろに更新 (YYYY-MM-DD 00:00:00更新)
+     */
+    function getPickupWorks(sourceWorks, dateKey) {
+      let seedBase = 0;
+      for (let i = 0; i < dateKey.length; i++) {
+        seedBase = (seedBase * 31 + dateKey.charCodeAt(i)) >>> 0;
+      }
+
+      const scored = sourceWorks.map((w) => {
+        let h = seedBase;
+        const idStr = String(w.id || "");
+        for (let i = 0; i < idStr.length; i++) {
+          h = ((h << 5) - h + idStr.charCodeAt(i)) >>> 0;
+        }
+        const dailyRoll = h % 1000;
+        const qualityBoost =
+          ((w.rating || 0) >= 4.6 ? 320 : 0) +
+          ((w.discount || 0) >= 30 ? 260 : 0) +
+          ((w.sampleImages || []).length >= 5 ? 200 : 0) +
+          ((w.reviewsCount || 0) >= 10 ? 180 : 0);
+        return { work: w, score: dailyRoll + qualityBoost };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      return scored.map((x) => x.work);
+    }
+
+    /**
+     * 作品形式別ランキング
+     */
+    function getFormatRanking(formatCat) {
+      const base = getBaseFilteredWorks(true).filter((w) => w.category === formatCat);
+      return getPopularityRanking("24h", base);
+    }
 
     /**
      * サイト掲載用アフィリエイトID設定
@@ -1086,7 +1467,6 @@
     }
 
     function updateCounters() {
-      // AIフィルター適用後の作品群でタブやカテゴリの件数を集計
       const aiFilteredWorks = WORKS.filter((w) => {
         if (state.aiFilter === "non_ai") return !w.isAi;
         if (state.aiFilter === "ai") return w.isAi;
@@ -1114,7 +1494,6 @@
       document.getElementById("catCountCg").textContent = `(${counts.cg})`;
       document.getElementById("catCountGame").textContent = `(${counts.game})`;
 
-      // 現在のジャンルにおけるAI/非AI件数
       const catFilteredWorks = WORKS.filter((w) => state.cat === "all" || w.category === state.cat);
       const nonAiCount = catFilteredWorks.filter((w) => !w.isAi).length;
       const aiCount = catFilteredWorks.filter((w) => w.isAi).length;
@@ -1131,6 +1510,14 @@
         : `background:#27272a;`;
       const sampleCount = (w.sampleImages || []).length;
       const catMeta = CATEGORY_META[w.category] || CATEGORY_META.comic;
+      const rankClass =
+        displayRank === 1
+          ? "rank-badge rank-1"
+          : displayRank === 2
+            ? "rank-badge rank-2"
+            : displayRank === 3
+              ? "rank-badge rank-3"
+              : "rank-badge";
 
       return `
         <article class="card">
@@ -1138,7 +1525,7 @@
             <div class="card-cover" style="${coverStyle}" data-preview="${w.id}" title="クリックでサンプル画像をプレビュー">
               <div class="cover-top">
                 <div class="badge-group">
-                  ${displayRank ? `<span class="rank-badge">${displayRank}位</span>` : ""}
+                  ${displayRank ? `<span class="${rankClass}">${displayRank}位</span>` : ""}
                   <span class="type-label">${catMeta.short}</span>
                   ${w.isAi ? `<span class="ai-label">AI</span>` : ""}
                 </div>
@@ -1180,8 +1567,144 @@
       `;
     }
 
+    function renderPortalView(baseWorks, ts) {
+      const popWorks = getPopularityRanking(state.popPeriod, baseWorks).slice(0, 10);
+      const pickupWorks = getPickupWorks(baseWorks, ts.dateKey).slice(0, 10);
+      const newReleaseWorks = getSalesSubRanking("new_release", baseWorks).slice(0, 10);
+      const semiNewWorks = getSalesSubRanking("semi_new", baseWorks).slice(0, 10);
+      const longSellerWorks = getSalesSubRanking("long_seller", baseWorks).slice(0, 10);
+      const salesCountWorks = getSalesSubRanking("sales_count", baseWorks).slice(0, 10);
+      const formatWorks = getFormatRanking(state.formatCat).slice(0, 10);
+
+      return `
+        <!-- 1. 人気ランキング (24時間 / 週間 / 月間) -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar"></span>人気ランキング（${POP_PERIOD_META[state.popPeriod].label}）</h2>
+              <span class="section-update-meta">${ts.hourlyUpdate}</span>
+            </div>
+            <div class="section-controls">
+              <div class="subtab-group" aria-label="人気ランキング期間切替">
+                <button type="button" class="subtab-btn ${state.popPeriod === "24h" ? "active" : ""}" data-pop-period="24h">24時間</button>
+                <button type="button" class="subtab-btn ${state.popPeriod === "weekly" ? "active" : ""}" data-pop-period="weekly">週間</button>
+                <button type="button" class="subtab-btn ${state.popPeriod === "monthly" ? "active" : ""}" data-pop-period="monthly">月間</button>
+              </div>
+              <button type="button" class="more-link-btn" data-jump-tab="pop_ranking">人気ランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${popWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+
+        <!-- 2. ピックアップ作品 / ※毎日0時ごろに更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar" style="background:#f59e0b;"></span>ピックアップ作品</h2>
+              <span class="section-update-meta">※毎日0時ごろに更新 (${ts.dailyMidnight})</span>
+            </div>
+            <div class="section-controls">
+              <button type="button" class="more-link-btn" data-jump-tab="pickup">ピックアップ作品をすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${pickupWorks.map((w) => renderCard(w, null)).join("")}
+          </div>
+        </section>
+
+        <!-- 3. 新作ランキング / 60分毎に更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar"></span>新作ランキング</h2>
+              <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
+            </div>
+            <div class="section-controls">
+              <button type="button" class="more-link-btn" data-jump-sales="new_release">新作ランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${newReleaseWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+
+        <!-- 4. 準新作ランキング / 60分毎に更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar"></span>準新作ランキング</h2>
+              <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
+            </div>
+            <div class="section-controls">
+              <button type="button" class="more-link-btn" data-jump-sales="semi_new">準新作ランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${semiNewWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+
+        <!-- 5. ロングセラーランキング / 60分毎に更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar"></span>ロングセラーランキング</h2>
+              <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
+            </div>
+            <div class="section-controls">
+              <button type="button" class="more-link-btn" data-jump-sales="long_seller">ロングセラーランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${longSellerWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+
+        <!-- 6. 販売数ランキング / 60分毎に更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar"></span>販売数ランキング</h2>
+              <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
+            </div>
+            <div class="section-controls">
+              <button type="button" class="more-link-btn" data-jump-sales="sales_count">販売数ランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${salesCountWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+
+        <!-- 7. 作品形式別ランキング / YYYY-MM-DD HH:00 更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar" style="background:#3b82f6;"></span>作品形式別ランキング（${CATEGORY_META[state.formatCat].label}）</h2>
+              <span class="section-update-meta">/ ${ts.hourlyUpdate}</span>
+            </div>
+            <div class="section-controls">
+              <div class="subtab-group" aria-label="作品形式別ランキング切替">
+                <button type="button" class="subtab-btn ${state.formatCat === "comic" ? "active" : ""}" data-format-cat="comic">同人誌・漫画</button>
+                <button type="button" class="subtab-btn ${state.formatCat === "audio" ? "active" : ""}" data-format-cat="audio">同人音声・ASMR</button>
+                <button type="button" class="subtab-btn ${state.formatCat === "cg" ? "active" : ""}" data-format-cat="cg">CG・イラスト集</button>
+                <button type="button" class="subtab-btn ${state.formatCat === "game" ? "active" : ""}" data-format-cat="game">ゲーム・動画</button>
+              </div>
+              <button type="button" class="more-link-btn" data-jump-tab="format_ranking">形式別ランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${formatWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+      `;
+    }
+
     function render() {
       updateCounters();
+      const ts = getFormattedTimestamps();
 
       document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
       document.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.cat));
@@ -1200,6 +1723,7 @@
       const view = document.getElementById("mainView");
       const sortWrap = document.getElementById("sortWrap");
 
+      // サークル一覧タブ
       if (state.tab === "creators") {
         sortWrap.style.display = "none";
         const creatorList = CREATORS.filter((c) => {
@@ -1246,45 +1770,121 @@
         return;
       }
 
-      sortWrap.style.display = "flex";
+      const baseWorks = getBaseFilteredWorks(false);
 
-      let list = WORKS.filter((w) => {
-        if (state.tab === "favorites" && !state.favs.includes(w.id)) return false;
-        if (state.tab === "sale" && w.discount <= 0) return false;
-        if (state.cat !== "all" && w.category !== state.cat) return false;
-        if (state.aiFilter === "non_ai" && w.isAi) return false;
-        if (state.aiFilter === "ai" && !w.isAi) return false;
-        if (state.creatorId && w.creatorId !== state.creatorId) return false;
-        if (state.tag && !(w.tags || []).includes(state.tag)) return false;
-        if (state.query) {
-          const q = state.query.toLowerCase();
-          return (
-            (w.title || "").toLowerCase().includes(q) ||
-            (w.author || "").toLowerCase().includes(q) ||
-            (w.circle || "").toLowerCase().includes(q) ||
-            (w.tags || []).some((t) => t.toLowerCase().includes(q))
-          );
-        }
-        return true;
-      });
-
-      if (state.tab === "ranking") {
-        list.sort((a, b) => (a.rank || 999) - (b.rank || 999) || (b.dlCount || 0) - (a.dlCount || 0));
-      } else if (state.sort === "popular") {
-        list.sort((a, b) => (b.dlCount || 0) - (a.dlCount || 0));
-      } else if (state.sort === "priceAsc") {
-        list.sort((a, b) => (a.price || 0) - (b.price || 0));
-      } else {
-        list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+      // 総合トップ（検索クエリやサークル・タグ絞り込みが無いとき）
+      if (state.tab === "portal" && !state.query && !state.creatorId && !state.tag) {
+        sortWrap.style.display = "none";
+        view.innerHTML = renderPortalView(baseWorks, ts);
+        return;
       }
 
-      document.getElementById("resultSummary").textContent = `表示: ${list.length} 件`;
+      // 各ランキング専用タブ または 新着・セール・お気に入り・検索結果
+      let list = [];
+      let headerBannerHtml = "";
+      let isRankedView = false;
+
+      if (state.tab === "pop_ranking") {
+        sortWrap.style.display = "none";
+        isRankedView = true;
+        list = getPopularityRanking(state.popPeriod, baseWorks);
+        headerBannerHtml = `
+          <div class="fanza-section" style="margin-bottom:20px; padding:16px 20px;">
+            <div class="section-head" style="margin-bottom:10px; padding-bottom:10px;">
+              <div class="section-title-group">
+                <h2 class="section-title"><span class="section-title-bar"></span>人気ランキング（${POP_PERIOD_META[state.popPeriod].label}）</h2>
+                <span class="section-update-meta">${ts.hourlyUpdate}</span>
+              </div>
+              <div class="subtab-group">
+                <button type="button" class="subtab-btn ${state.popPeriod === "24h" ? "active" : ""}" data-pop-period="24h">24時間</button>
+                <button type="button" class="subtab-btn ${state.popPeriod === "weekly" ? "active" : ""}" data-pop-period="weekly">週間</button>
+                <button type="button" class="subtab-btn ${state.popPeriod === "monthly" ? "active" : ""}" data-pop-period="monthly">月間</button>
+              </div>
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-sub);">${POP_PERIOD_META[state.popPeriod].desc}（対象: ${list.length}作品）</div>
+          </div>
+        `;
+      } else if (state.tab === "sales_ranking") {
+        sortWrap.style.display = "none";
+        isRankedView = true;
+        list = getSalesSubRanking(state.salesSub, baseWorks);
+        headerBannerHtml = `
+          <div class="fanza-section" style="margin-bottom:20px; padding:16px 20px;">
+            <div class="section-head" style="margin-bottom:10px; padding-bottom:10px;">
+              <div class="section-title-group">
+                <h2 class="section-title"><span class="section-title-bar"></span>${SALES_SUB_META[state.salesSub].label}</h2>
+                <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
+              </div>
+              <div class="subtab-group">
+                <button type="button" class="subtab-btn ${state.salesSub === "new_release" ? "active" : ""}" data-sales-sub="new_release">新作ランキング</button>
+                <button type="button" class="subtab-btn ${state.salesSub === "semi_new" ? "active" : ""}" data-sales-sub="semi_new">準新作ランキング</button>
+                <button type="button" class="subtab-btn ${state.salesSub === "long_seller" ? "active" : ""}" data-sales-sub="long_seller">ロングセラーランキング</button>
+                <button type="button" class="subtab-btn ${state.salesSub === "sales_count" ? "active" : ""}" data-sales-sub="sales_count">販売数ランキング</button>
+              </div>
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-sub);">${SALES_SUB_META[state.salesSub].desc}（対象: ${list.length}作品）</div>
+          </div>
+        `;
+      } else if (state.tab === "format_ranking") {
+        sortWrap.style.display = "none";
+        isRankedView = true;
+        list = getFormatRanking(state.formatCat);
+        headerBannerHtml = `
+          <div class="fanza-section" style="margin-bottom:20px; padding:16px 20px;">
+            <div class="section-head" style="margin-bottom:10px; padding-bottom:10px;">
+              <div class="section-title-group">
+                <h2 class="section-title"><span class="section-title-bar" style="background:#3b82f6;"></span>作品形式別ランキング（${CATEGORY_META[state.formatCat].label}）</h2>
+                <span class="section-update-meta">/ ${ts.hourlyUpdate}</span>
+              </div>
+              <div class="subtab-group">
+                <button type="button" class="subtab-btn ${state.formatCat === "comic" ? "active" : ""}" data-format-cat="comic">同人誌・漫画</button>
+                <button type="button" class="subtab-btn ${state.formatCat === "audio" ? "active" : ""}" data-format-cat="audio">同人音声・ASMR</button>
+                <button type="button" class="subtab-btn ${state.formatCat === "cg" ? "active" : ""}" data-format-cat="cg">CG・イラスト集</button>
+                <button type="button" class="subtab-btn ${state.formatCat === "game" ? "active" : ""}" data-format-cat="game">ゲーム・動画</button>
+              </div>
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-sub);">作品形式別の人気ランキング（対象: ${list.length}作品）</div>
+          </div>
+        `;
+      } else if (state.tab === "pickup") {
+        sortWrap.style.display = "none";
+        isRankedView = false;
+        list = getPickupWorks(baseWorks, ts.dateKey);
+        headerBannerHtml = `
+          <div class="fanza-section" style="margin-bottom:20px; padding:16px 20px;">
+            <div class="section-head" style="margin-bottom:6px; padding-bottom:8px; border-bottom:none;">
+              <div class="section-title-group">
+                <h2 class="section-title"><span class="section-title-bar" style="background:#f59e0b;"></span>ピックアップ作品</h2>
+                <span class="section-update-meta">※毎日0時ごろに更新 (${ts.dailyMidnight})</span>
+              </div>
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-sub);">毎日0時に更新される注目・高評価ピックアップ作品一覧（対象: ${list.length}作品）</div>
+          </div>
+        `;
+      } else {
+        sortWrap.style.display = "flex";
+        list = baseWorks.filter((w) => {
+          if (state.tab === "favorites" && !state.favs.includes(w.id)) return false;
+          if (state.tab === "sale" && w.discount <= 0) return false;
+          return true;
+        });
+
+        if (state.sort === "popular") {
+          list.sort((a, b) => (b.dlCount || 0) - (a.dlCount || 0));
+        } else if (state.sort === "priceAsc") {
+          list.sort((a, b) => (a.price || 0) - (b.price || 0));
+        } else {
+          list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+        }
+        document.getElementById("resultSummary").textContent = `表示: ${list.length} 件`;
+      }
 
       const visibleList = list.slice(0, state.limit);
       const hasMore = list.length > state.limit;
 
       if (visibleList.length === 0) {
         view.innerHTML = `
+          ${headerBannerHtml}
           <div style="text-align:center; padding:60px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
             該当する作品が見つかりませんでした。検索条件やフィルターを変更してお試しください。
           </div>
@@ -1293,8 +1893,9 @@
       }
 
       view.innerHTML = `
+        ${headerBannerHtml}
         <div class="grid">
-          ${visibleList.map((w, idx) => renderCard(w, state.tab === "ranking" ? idx + 1 : null)).join("")}
+          ${visibleList.map((w, idx) => renderCard(w, isRankedView ? idx + 1 : null)).join("")}
         </div>
         ${hasMore
           ? `<div class="load-more-wrap">
@@ -1345,9 +1946,50 @@
         render();
         return;
       }
+      const popPeriod = e.target.closest("[data-pop-period]");
+      if (popPeriod) {
+        state.popPeriod = popPeriod.dataset.popPeriod;
+        state.limit = 30;
+        render();
+        return;
+      }
+      const salesSub = e.target.closest("[data-sales-sub]");
+      if (salesSub) {
+        state.salesSub = salesSub.dataset.salesSub;
+        state.limit = 30;
+        render();
+        return;
+      }
+      const formatCat = e.target.closest("[data-format-cat]");
+      if (formatCat) {
+        state.formatCat = formatCat.dataset.formatCat;
+        state.limit = 30;
+        render();
+        return;
+      }
+      const jumpTab = e.target.closest("[data-jump-tab]");
+      if (jumpTab) {
+        state.tab = jumpTab.dataset.jumpTab;
+        state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        return;
+      }
+      const jumpSales = e.target.closest("[data-jump-sales]");
+      if (jumpSales) {
+        state.salesSub = jumpSales.dataset.jumpSales;
+        state.tab = "sales_ranking";
+        state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        return;
+      }
       const cat = e.target.closest("[data-cat]");
       if (cat) {
         state.cat = cat.dataset.cat;
+        if (state.cat !== "all") {
+          state.formatCat = state.cat;
+        }
         state.limit = 30;
         render();
         return;
@@ -1365,6 +2007,7 @@
         state.tab = "new";
         state.cat = "all";
         state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
         render();
         return;
       }
@@ -1373,6 +2016,7 @@
         state.tag = state.tag === tag.dataset.tag ? null : tag.dataset.tag;
         state.tab = "new";
         state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
         render();
         return;
       }
@@ -1405,7 +2049,7 @@
         state.cat = "all";
         state.aiFilter = "all";
         state.query = "";
-        state.tab = "new";
+        state.tab = "portal";
         state.limit = 30;
         document.getElementById("searchInput").value = "";
         render();
