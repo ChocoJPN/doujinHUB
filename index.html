@@ -1228,10 +1228,16 @@
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-footer">
         <div id="modalPriceInfo"></div>
-        <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink"
-          style="padding:10px 18px; font-size:0.86rem;">
-          FANZA公式ページで見る ↗
-        </a>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button type="button" id="copyShareUrlBtn"
+            style="padding:9px 14px; border-radius:8px; background:var(--surface-hover); border:1px solid var(--border-hover); color:var(--text-sub); font-size:0.78rem; font-weight:700; cursor:pointer;">
+            🔗 X紹介用URLをコピー
+          </button>
+          <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink"
+            style="padding:10px 18px; font-size:0.86rem;">
+            FANZA公式ページで見る ↗
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -2048,12 +2054,24 @@
       `;
     }
 
+    let currentModalWorkId = null;
+
+    function buildSiteShareUrl(workId) {
+      const base = "https://doujin-index-17g.pages.dev/";
+      return workId ? `${base}?id=${encodeURIComponent(workId)}` : base;
+    }
+
     function openPreviewModal(workId) {
-      const w = WORKS.find((x) => x.id === workId);
+      const w = WORKS.find((x) => x.id === workId || x.code === workId);
       if (!w) return;
+      currentModalWorkId = w.id;
       const modal = document.getElementById("sampleModal");
       document.getElementById("modalTitle").textContent = `${w.title} — ${w.circle}`;
       document.getElementById("modalFanzaLink").href = buildFanzaUrl(w);
+      const copyBtn = document.getElementById("copyShareUrlBtn");
+      if (copyBtn) {
+        copyBtn.textContent = "🔗 X紹介用URLをコピー";
+      }
       document.getElementById("modalPriceInfo").innerHTML = `
         <span style="font-size:1.15rem; font-weight:800;">¥${Number(w.price || 0).toLocaleString()}</span>
         ${w.discount > 0 ? `<span style="color:var(--text-muted); text-decoration:line-through; margin-left:8px; font-size:0.85rem;">¥${Number(w.origPrice || 0).toLocaleString()}</span> <span class="discount-badge" style="margin-left:6px;">${w.discount}%OFF</span>` : ""}
@@ -2179,6 +2197,16 @@
         render();
         return;
       }
+      if (e.target.closest("#copyShareUrlBtn")) {
+        if (currentModalWorkId) {
+          const shareUrl = buildSiteShareUrl(currentModalWorkId);
+          navigator.clipboard.writeText(shareUrl).then(() => {
+            const btn = document.getElementById("copyShareUrlBtn");
+            if (btn) btn.textContent = "✅ コピーしました！";
+          });
+        }
+        return;
+      }
       if (e.target.closest("#closeModalBtn") || e.target.id === "sampleModal") {
         document.getElementById("sampleModal").classList.remove("open");
         return;
@@ -2208,6 +2236,28 @@
       render();
     });
 
+    function applyUrlQueryParams() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const ai = params.get("ai");
+        if (ai && ["all", "non_ai", "ai"].includes(ai)) state.aiFilter = ai;
+        const cat = params.get("cat");
+        if (cat && ["all", "comic", "audio", "cg", "game"].includes(cat)) state.cat = cat;
+        const tab = params.get("tab");
+        if (tab) state.tab = tab;
+        const creator = params.get("creator");
+        if (creator) {
+          state.creatorId = creator;
+          state.tab = "new";
+        }
+        const workId = params.get("id") || params.get("work") || params.get("cid");
+        if (workId) {
+          setTimeout(() => openPreviewModal(workId), 80);
+        }
+      } catch (e) { }
+    }
+
+    applyUrlQueryParams();
     render();
     tryFetchLiveFanzaData();
   </script>
