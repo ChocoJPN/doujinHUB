@@ -9,17 +9,22 @@
     content="FANZA同人の同人誌・同人音声(ASMR)・CG集の新着、人気ランキング、有名作家・サークル別まとめサイト。AI作品と非AI（手描き・通常）作品の切り替えフィルター対応。" />
   <style>
     :root {
-      --bg: #09090b;
-      --surface: #121215;
-      --surface-hover: #18181c;
-      --border: #27272a;
-      --border-hover: #3f3f46;
+      --bg: #0b0b10;
+      --surface: #14141d;
+      --surface-hover: #1c1c29;
+      --border: #2a2a3c;
+      --border-hover: #464663;
       --text: #fafafa;
-      --text-sub: #a1a1aa;
-      --text-muted: #71717a;
-      --accent: #e11d48;
-      --ai-badge: #7c3aed;
-      --radius: 10px;
+      --text-sub: #b4b4c7;
+      --text-muted: #7c7c94;
+      --accent: #f43f5e;
+      --accent-grad: linear-gradient(135deg, #e11d48 0%, #f43f5e 55%, #fb7185 100%);
+      --ai-badge: #8b5cf6;
+      --comic-color: #f43f5e;
+      --audio-color: #06b6d4;
+      --cg-color: #f59e0b;
+      --game-color: #10b981;
+      --radius: 11px;
     }
 
     * {
@@ -31,6 +36,11 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
       background-color: var(--bg);
+      background-image:
+        radial-gradient(ellipse 80% 45% at 15% -5%, rgba(244, 63, 94, 0.14), transparent 60%),
+        radial-gradient(ellipse 70% 40% at 85% 0%, rgba(139, 92, 246, 0.13), transparent 60%),
+        radial-gradient(ellipse 60% 50% at 50% 100%, rgba(6, 182, 212, 0.07), transparent 65%);
+      background-attachment: fixed;
       color: var(--text);
       line-height: 1.45;
       -webkit-font-smoothing: antialiased;
@@ -53,7 +63,8 @@
 
     /* 1. Top Header */
     .header {
-      background: var(--surface);
+      background: linear-gradient(180deg, rgba(24, 20, 36, 0.96) 0%, rgba(18, 18, 27, 0.92) 100%);
+      border-bottom: 1px solid rgba(244, 63, 94, 0.18);
       padding-top: 14px;
     }
 
@@ -84,18 +95,22 @@
     }
 
     .brand-bar {
-      width: 5px;
-      height: 26px;
-      background: var(--accent);
-      border-radius: 2px;
+      width: 6px;
+      height: 28px;
+      background: linear-gradient(180deg, #f43f5e 0%, #ec4899 50%, #8b5cf6 100%);
+      border-radius: 3px;
+      box-shadow: 0 0 12px rgba(244, 63, 94, 0.55);
     }
 
     .brand-name {
-      font-weight: 800;
-      font-size: 1.12rem;
+      font-weight: 900;
+      font-size: 1.18rem;
       letter-spacing: -0.01em;
       display: block;
       line-height: 1.2;
+      background: linear-gradient(90deg, #ffffff 0%, #ffe4e6 55%, #fda4af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .brand-sub {
@@ -109,18 +124,32 @@
       gap: 6px;
       font-size: 0.73rem;
       font-weight: 600;
-      padding: 3px 10px;
+      padding: 3px 11px;
       border-radius: 99px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      color: var(--text-sub);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.32);
+      color: #6ee7b7;
     }
 
     .status-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    .age-pr-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      color: #fda4af;
     }
 
     .header-controls {
@@ -274,27 +303,54 @@
     }
 
     .cat-btn.active {
-      background: var(--text);
-      color: var(--bg);
+      background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);
+      color: #ffffff;
       font-weight: 700;
+      box-shadow: 0 2px 8px rgba(244, 63, 94, 0.35);
+    }
+
+    .cat-btn.active[data-cat="comic"] {
+      background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
+      color: #ffffff;
+    }
+
+    .cat-btn.active[data-cat="audio"] {
+      background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(6, 182, 212, 0.35);
+    }
+
+    .cat-btn.active[data-cat="cg"] {
+      background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+      color: #18181b;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+    }
+
+    .cat-btn.active[data-cat="game"] {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
     }
 
     .ai-btn.active[data-ai="all"] {
-      background: #27272a;
+      background: #2e2e42;
       color: var(--text);
       font-weight: 700;
     }
 
     .ai-btn.active[data-ai="non_ai"] {
-      background: #10b981;
+      background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
       color: #052e16;
       font-weight: 800;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
     }
 
     .ai-btn.active[data-ai="ai"] {
-      background: var(--ai-badge);
+      background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
       color: #ffffff;
       font-weight: 700;
+      box-shadow: 0 2px 8px rgba(139, 92, 246, 0.35);
     }
 
     .cat-count {
@@ -401,20 +457,21 @@
     }
 
     .card {
-      background: var(--surface);
+      background: linear-gradient(180deg, rgba(24, 24, 36, 0.96) 0%, rgba(18, 18, 27, 0.98) 100%);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: border-color 0.18s, transform 0.18s;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
       min-width: 0;
     }
 
     .card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
+      border-color: rgba(244, 63, 94, 0.55);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.65), 0 0 16px rgba(244, 63, 94, 0.14);
     }
 
     .card-cover {
@@ -435,10 +492,10 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(to bottom,
-          rgba(9, 9, 11, 0.68) 0%,
-          rgba(9, 9, 11, 0.03) 35%,
-          rgba(9, 9, 11, 0.05) 62%,
-          rgba(9, 9, 11, 0.85) 100%);
+          rgba(9, 9, 14, 0.68) 0%,
+          rgba(9, 9, 14, 0.02) 35%,
+          rgba(9, 9, 14, 0.04) 62%,
+          rgba(9, 9, 14, 0.88) 100%);
       pointer-events: none;
     }
 
@@ -461,14 +518,38 @@
 
     .type-label {
       font-size: 0.68rem;
-      font-weight: 700;
+      font-weight: 800;
       padding: 2px 7px;
       border-radius: 5px;
-      background: rgba(9, 9, 11, 0.84);
+      background: rgba(15, 15, 22, 0.88);
       color: #f4f4f5;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       backdrop-filter: blur(4px);
       white-space: nowrap;
+    }
+
+    .type-label.cat-comic {
+      background: rgba(244, 63, 94, 0.88);
+      border-color: rgba(253, 164, 175, 0.45);
+      color: #ffffff;
+    }
+
+    .type-label.cat-audio {
+      background: rgba(6, 182, 212, 0.88);
+      border-color: rgba(103, 232, 249, 0.45);
+      color: #ffffff;
+    }
+
+    .type-label.cat-cg {
+      background: rgba(245, 158, 11, 0.92);
+      border-color: rgba(253, 224, 71, 0.5);
+      color: #18181b;
+    }
+
+    .type-label.cat-game {
+      background: rgba(16, 185, 129, 0.88);
+      border-color: rgba(110, 231, 183, 0.45);
+      color: #ffffff;
     }
 
     .ai-label {
@@ -476,7 +557,8 @@
       font-weight: 800;
       padding: 2px 6px;
       border-radius: 5px;
-      background: rgba(124, 58, 237, 0.9);
+      background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+      border: 1px solid rgba(216, 180, 254, 0.45);
       color: #ffffff;
       white-space: nowrap;
     }
@@ -513,10 +595,11 @@
     /* FANZA風 ランキング・ピックアップ セクションブロック */
     .fanza-section {
       margin-bottom: 36px;
-      background: rgba(18, 18, 21, 0.65);
+      background: linear-gradient(180deg, rgba(25, 23, 38, 0.82) 0%, rgba(17, 17, 26, 0.88) 100%);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 20px;
+      box-shadow: 0 8px 28px -8px rgba(0, 0, 0, 0.5);
     }
 
     .section-head {
@@ -552,16 +635,17 @@
       width: 5px;
       height: 20px;
       border-radius: 3px;
-      background: var(--accent);
+      background: var(--accent-grad);
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.5);
       flex-shrink: 0;
     }
 
     .section-update-meta {
       font-size: 0.76rem;
       font-weight: 600;
-      color: var(--text-sub);
+      color: #cbd5e1;
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      background: rgba(255, 255, 255, 0.04);
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       padding: 2px 9px;
       border-radius: 99px;
@@ -602,27 +686,28 @@
     }
 
     .subtab-btn.active {
-      background: var(--accent);
+      background: var(--accent-grad);
       color: #ffffff;
-      box-shadow: 0 2px 8px rgba(225, 29, 72, 0.35);
+      box-shadow: 0 2px 8px rgba(244, 63, 94, 0.4);
     }
 
     .more-link-btn {
       padding: 6px 13px;
       border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      background: rgba(244, 63, 94, 0.1);
+      color: #fda4af;
       font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
+      transition: all 0.15s;
       white-space: nowrap;
     }
 
     .more-link-btn:hover {
-      background: var(--surface-hover);
-      border-color: var(--border-hover);
+      background: rgba(244, 63, 94, 0.22);
+      border-color: rgba(244, 63, 94, 0.65);
+      color: #ffffff;
     }
 
     .ranking-desc-banner {
@@ -645,9 +730,10 @@
       font-weight: 800;
       padding: 2px 7px;
       border-radius: 5px;
-      background: var(--accent);
+      background: linear-gradient(135deg, #f43f5e 0%, #f97316 100%);
       color: #fff;
       white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(244, 63, 94, 0.45);
     }
 
     .mono-meta {
@@ -664,9 +750,9 @@
       font-weight: 700;
       padding: 2px 7px;
       border-radius: 5px;
-      background: rgba(24, 24, 27, 0.85);
-      color: #e4e4e7;
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(24, 24, 34, 0.88);
+      color: #bae6fd;
+      border: 1px solid rgba(56, 189, 248, 0.32);
       white-space: nowrap;
     }
 
@@ -687,7 +773,7 @@
     .circle-link {
       background: none;
       border: none;
-      color: var(--text-sub);
+      color: #93c5fd;
       font-weight: 600;
       cursor: pointer;
       padding: 0;
@@ -700,7 +786,7 @@
     }
 
     .circle-link:hover {
-      color: var(--text);
+      color: #bfdbfe;
       text-decoration: underline;
     }
 
@@ -744,16 +830,18 @@
       font-size: 0.67rem;
       padding: 2px 6px;
       border-radius: 4px;
-      background: var(--bg);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       color: var(--text-sub);
       cursor: pointer;
       white-space: nowrap;
+      transition: all 0.15s;
     }
 
     .tag:hover {
-      color: var(--text);
-      border-color: var(--border-hover);
+      color: #fda4af;
+      border-color: rgba(244, 63, 94, 0.5);
+      background: rgba(244, 63, 94, 0.1);
     }
 
     .card-footer {
@@ -762,7 +850,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(9, 9, 11, 0.45);
+      background: rgba(11, 11, 16, 0.55);
       gap: 6px;
     }
 
@@ -778,6 +866,10 @@
       font-size: 0.98rem;
       font-weight: 800;
       white-space: nowrap;
+    }
+
+    .price-current.is-sale {
+      color: #fb7185;
     }
 
     .price-orig {
@@ -808,18 +900,18 @@
     }
 
     .icon-btn.active {
-      border-color: rgba(225, 29, 72, 0.5);
-      background: rgba(225, 29, 72, 0.15);
+      border-color: rgba(244, 63, 94, 0.5);
+      background: rgba(244, 63, 94, 0.15);
       color: var(--accent);
     }
 
     .primary-btn {
-      padding: 6px 10px;
+      padding: 6px 11px;
       border-radius: 7px;
-      background: var(--accent);
+      background: var(--accent-grad);
       color: #ffffff;
       font-size: 0.74rem;
-      font-weight: 700;
+      font-weight: 800;
       text-decoration: none;
       border: none;
       cursor: pointer;
@@ -827,10 +919,32 @@
       display: inline-flex;
       align-items: center;
       gap: 3px;
+      box-shadow: 0 2px 8px rgba(244, 63, 94, 0.32);
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
     }
 
     .primary-btn:hover {
-      opacity: 0.92;
+      opacity: 0.96;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(244, 63, 94, 0.5);
+    }
+
+    /* サイトフッター（アフィリエイト・18禁・FANZAクレジット表記） */
+    .site-footer {
+      margin-top: 60px;
+      padding: 28px 0 20px;
+      border-top: 1px solid var(--border);
+      background: rgba(14, 14, 22, 0.9);
+      color: var(--text-sub);
+      font-size: 0.78rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
     /* Load More Button */
@@ -976,6 +1090,7 @@
           <span class="status-dot"></span>
           <span id="liveStatusText">データ読み込み中...</span>
         </div>
+        <span class="age-pr-badge" title="18歳未満閲覧禁止・アフィリエイト広告(PR)を含みます">R18 / 広告(PR)</span>
       </div>
 
       <div class="header-controls">
@@ -1085,6 +1200,23 @@
 
     <div id="mainView"></div>
   </main>
+
+  <!-- サイトフッター（DMMアフィリエイト規約・PR表記・18禁表記） -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="footer-brand">DOUJIN INDEX — FANZA同人 新着・ランキング・有名作家まとめ</div>
+        <div class="footer-disclaimer">
+          ※当サイトは成人向け（18歳未満閲覧禁止）の同人作品情報まとめサイトです。18歳未満の方の閲覧は固くお断りいたします。<br />
+          ※当サイトはアフィリエイト広告（DMMアフィリエイトプログラム）を利用しており、各作品リンクにはプロモーション（PR）が含まれます。<br />
+          ※掲載されている画像・作品データの著作権は各サークル・著作者および株式会社デジタルコマースに帰属します。
+        </div>
+      </div>
+      <div class="footer-credit">
+        <a href="https://affiliate.dmm.com/api/" target="_blank" rel="noopener">Powered by FANZA Webサービス</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- 4. サンプル立ち読み・プレビュー用モーダル -->
   <div class="modal-backdrop" id="sampleModal">
@@ -1534,7 +1666,7 @@
               <div class="cover-top">
                 <div class="badge-group">
                   ${displayRank ? `<span class="${rankClass}">${displayRank}位</span>` : ""}
-                  <span class="type-label">${catMeta.short}</span>
+                  <span class="type-label cat-${w.category}">${catMeta.short}</span>
                   ${w.isAi ? `<span class="ai-label">AI</span>` : ""}
                 </div>
                 ${w.discount > 0 ? `<span class="discount-badge">${w.discount}%OFF</span>` : ""}
@@ -1559,7 +1691,7 @@
 
           <div class="card-footer">
             <div class="price-wrap">
-              <span class="price-current">¥${Number(w.price || 0).toLocaleString()}</span>
+              <span class="price-current ${w.discount > 0 ? "is-sale" : ""}">¥${Number(w.price || 0).toLocaleString()}</span>
               ${w.discount > 0 ? `<span class="price-orig">¥${Number(w.origPrice || 0).toLocaleString()}</span>` : ""}
             </div>
             <div class="footer-actions">
@@ -1626,7 +1758,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar"></span>新作ランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #10b981, #059669); box-shadow:0 0 10px rgba(16,185,129,0.4);"></span>新作ランキング</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -1642,7 +1774,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar"></span>準新作ランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #06b6d4, #2563eb); box-shadow:0 0 10px rgba(6,182,212,0.4);"></span>準新作ランキング</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -1658,7 +1790,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar"></span>ロングセラーランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #a855f7, #6366f1); box-shadow:0 0 10px rgba(168,85,247,0.4);"></span>ロングセラーランキング</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -1674,7 +1806,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar"></span>販売数ランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #f97316, #e11d48); box-shadow:0 0 10px rgba(249,115,22,0.4);"></span>販売数ランキング</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
