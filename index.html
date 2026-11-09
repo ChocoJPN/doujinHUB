@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DOUJIN INDEX — FANZA同人 新着・ランキング・有名作家まとめ</title>
-  <meta name="description" content="FANZA同人の同人誌・同人音声(ASMR)・CG集の新着、人気ランキング、有名作家・サークル別まとめサイト。AI作品と非AI（手描き・通常）作品の切り替えフィルター対応。" />
+  <meta name="description"
+    content="FANZA同人の同人誌・同人音声(ASMR)・CG集の新着、人気ランキング、有名作家・サークル別まとめサイト。AI作品と非AI（手描き・通常）作品の切り替えフィルター対応。" />
   <style>
     :root {
       --bg: #09090b;
@@ -35,7 +37,9 @@
       padding-bottom: 80px;
     }
 
-    button, input, select {
+    button,
+    input,
+    select {
       font-family: inherit;
       color: inherit;
     }
@@ -236,7 +240,8 @@
       gap: 10px;
     }
 
-    .cat-segment, .ai-segment {
+    .cat-segment,
+    .ai-segment {
       display: inline-flex;
       padding: 3px;
       border-radius: 9px;
@@ -246,7 +251,8 @@
       flex-wrap: wrap;
     }
 
-    .cat-btn, .ai-btn {
+    .cat-btn,
+    .ai-btn {
       padding: 6px 12px;
       border-radius: 6px;
       border: none;
@@ -262,7 +268,8 @@
       white-space: nowrap;
     }
 
-    .cat-btn:hover, .ai-btn:hover {
+    .cat-btn:hover,
+    .ai-btn:hover {
       color: var(--text);
     }
 
@@ -351,6 +358,7 @@
       .grid {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
+
       .creator-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -360,6 +368,7 @@
       .grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+
       .creator-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -370,12 +379,15 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
       }
+
       .creator-grid {
         grid-template-columns: 1fr;
       }
+
       .search-box {
         width: 100%;
       }
+
       .tab-btn {
         padding: 10px 12px;
         font-size: 0.82rem;
@@ -422,17 +434,16 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(9, 9, 11, 0.68) 0%,
-        rgba(9, 9, 11, 0.03) 35%,
-        rgba(9, 9, 11, 0.05) 62%,
-        rgba(9, 9, 11, 0.85) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(9, 9, 11, 0.68) 0%,
+          rgba(9, 9, 11, 0.03) 35%,
+          rgba(9, 9, 11, 0.05) 62%,
+          rgba(9, 9, 11, 0.85) 100%);
       pointer-events: none;
     }
 
-    .cover-top, .cover-bottom {
+    .cover-top,
+    .cover-bottom {
       position: relative;
       z-index: 1;
       display: flex;
@@ -798,6 +809,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- 1. サイトヘッダー -->
@@ -860,18 +872,26 @@
       <div class="filter-groups">
         <!-- ジャンル切替 -->
         <div class="cat-segment" aria-label="ジャンル絞り込み">
-          <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count" id="catCountAll"></span></button>
-          <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画 <span class="cat-count" id="catCountComic"></span></button>
-          <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR <span class="cat-count" id="catCountAudio"></span></button>
-          <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集 <span class="cat-count" id="catCountCg"></span></button>
-          <button type="button" class="cat-btn" data-cat="game">ゲーム・動画 <span class="cat-count" id="catCountGame"></span></button>
+          <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count"
+              id="catCountAll"></span></button>
+          <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画 <span class="cat-count"
+              id="catCountComic"></span></button>
+          <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR <span class="cat-count"
+              id="catCountAudio"></span></button>
+          <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集 <span class="cat-count"
+              id="catCountCg"></span></button>
+          <button type="button" class="cat-btn" data-cat="game">ゲーム・動画 <span class="cat-count"
+              id="catCountGame"></span></button>
         </div>
 
         <!-- AI作品 / 非AI作品 切替 -->
         <div class="ai-segment" aria-label="AI作品フィルター">
-          <button type="button" class="ai-btn active" data-ai="all">すべて <span class="cat-count" id="aiCountAll"></span></button>
-          <button type="button" class="ai-btn" data-ai="non_ai">非AI（手描き・通常） <span class="cat-count" id="aiCountNonAi"></span></button>
-          <button type="button" class="ai-btn" data-ai="ai">AI作品のみ <span class="cat-count" id="aiCountAi"></span></button>
+          <button type="button" class="ai-btn active" data-ai="all">すべて <span class="cat-count"
+              id="aiCountAll"></span></button>
+          <button type="button" class="ai-btn" data-ai="non_ai">非AI（手描き・通常） <span class="cat-count"
+              id="aiCountNonAi"></span></button>
+          <button type="button" class="ai-btn" data-ai="ai">AI作品のみ <span class="cat-count"
+              id="aiCountAi"></span></button>
         </div>
       </div>
 
@@ -893,7 +913,8 @@
         <span style="color:#fda4af; font-weight:700; margin-right:8px;">絞り込み表示中:</span>
         <strong id="filterNoticeText"></strong>
       </div>
-      <button type="button" id="clearFilterBtn" style="background:var(--surface); border:1px solid var(--border); padding:4px 11px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">
+      <button type="button" id="clearFilterBtn"
+        style="background:var(--surface); border:1px solid var(--border); padding:4px 11px; border-radius:6px; cursor:pointer; font-size:0.78rem; font-weight:600;">
         ✕ 絞り込みを解除
       </button>
     </div>
@@ -911,7 +932,8 @@
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-footer">
         <div id="modalPriceInfo"></div>
-        <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink" style="padding:10px 18px; font-size:0.86rem;">
+        <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink"
+          style="padding:10px 18px; font-size:0.86rem;">
           FANZA公式ページで見る ↗
         </a>
       </div>
@@ -1023,15 +1045,25 @@
     };
 
     /**
-     * 作品のアフィリエイトURLを生成（ユーザー側には設定UIを出さず内部で処理）
+     * アフィリエイトID設定
+     * - DMM管理画面で「FANZA（アダルト）対応」および「Webサービス用(-990)またはサイト用(-001)」として
+     *   正式に有効化されているIDを設定するとアフィリエイトリンク経由になります。
+     * - 空文字 "" の場合は、エラー画面（al.fanza.co.jpの無効リンク画面）を回避し、
+     *   100%確実にFANZA同人の作品詳細ページへ直接遷移します。
      */
+    const ACTIVE_AFFILIATE_ID = "douzinINFO-990";
+
     function buildFanzaUrl(w) {
-      if (w.affiliateUrl) {
-        return w.affiliateUrl;
-      }
       const code = w.code || w.id;
       const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
-      return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-001&ch=link_tool&ch_id=link`;
+
+      if (!ACTIVE_AFFILIATE_ID) {
+        return directUrl;
+      }
+      if (ACTIVE_AFFILIATE_ID.endsWith("-990") && w.affiliateUrl) {
+        return w.affiliateUrl;
+      }
+      return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(ACTIVE_AFFILIATE_ID)}&ch=link_tool&ch_id=link`;
     }
 
     async function tryFetchLiveFanzaData() {
@@ -1044,7 +1076,7 @@
             render();
           }
         }
-      } catch (e) {}
+      } catch (e) { }
 
       try {
         const res = await fetch("/api/fanza");
@@ -1055,7 +1087,7 @@
             render();
           }
         }
-      } catch (e) {}
+      } catch (e) { }
     }
 
     function updateCounters() {
@@ -1189,8 +1221,8 @@
         view.innerHTML = `
           <div class="creator-grid">
             ${creatorList
-              .map(
-                (c) => `
+            .map(
+              (c) => `
               <div class="card" style="padding:16px; gap:12px;">
                 <div style="display:flex; gap:12px; align-items:flex-start;">
                   ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${c.circle}" class="creator-thumb" loading="lazy" />` : ""}
@@ -1212,8 +1244,8 @@
                 </div>
               </div>
             `
-              )
-              .join("")}
+            )
+            .join("")}
           </div>
         `;
         return;
@@ -1269,14 +1301,13 @@
         <div class="grid">
           ${visibleList.map((w, idx) => renderCard(w, state.tab === "ranking" ? idx + 1 : null)).join("")}
         </div>
-        ${
-          hasMore
-            ? `<div class="load-more-wrap">
+        ${hasMore
+          ? `<div class="load-more-wrap">
                 <button type="button" class="load-more-btn" id="loadMoreBtn">
                   さらに作品を表示する（残り ${list.length - state.limit} 件）
                 </button>
               </div>`
-            : ""
+          : ""
         }
       `;
     }
@@ -1402,4 +1433,5 @@
     tryFetchLiveFanzaData();
   </script>
 </body>
+
 </html>
