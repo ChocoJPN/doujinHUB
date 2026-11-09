@@ -1,14 +1,14 @@
 {
-  "updatedAt": "2026-11-09T13:13:24.805Z",
+  "updatedAt": "2026-11-09T14:35:21.422Z",
   "mode": "live",
-  "totalCount": 1167,
-  "aiCount": 338,
-  "nonAiCount": 829,
+  "totalCount": 1174,
+  "aiCount": 342,
+  "nonAiCount": 832,
   "categoryCounts": {
-    "comic": 451,
-    "audio": 327,
-    "cg": 255,
-    "game": 134
+    "comic": 452,
+    "audio": 330,
+    "cg": 257,
+    "game": 135
   },
   "works": [
     {
@@ -68,9 +68,9 @@
       "origPrice": 5500,
       "discount": 30,
       "campaignTitle": "30%OFF",
-      "rating": 4.76,
-      "reviewsCount": 1024,
-      "dlCount": 45080,
+      "rating": 4.77,
+      "reviewsCount": 1029,
+      "dlCount": 45255,
       "rank": 2,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_837399/d_837399pl.jpg",
       "sampleImages": [
@@ -153,8 +153,8 @@
       "discount": 50,
       "campaignTitle": "50%OFF",
       "rating": 4.64,
-      "reviewsCount": 158,
-      "dlCount": 14710,
+      "reviewsCount": 160,
+      "dlCount": 14780,
       "rank": 4,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_833309/d_833309pl.jpg",
       "sampleImages": [
@@ -399,8 +399,8 @@
       "discount": 40,
       "campaignTitle": "40%OFF",
       "rating": 4.65,
-      "reviewsCount": 845,
-      "dlCount": 38575,
+      "reviewsCount": 852,
+      "dlCount": 38820,
       "rank": 10,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_837979/d_837979pl.jpg",
       "sampleImages": [
@@ -482,8 +482,8 @@
       "campaignTitle": "30%OFF",
       "rating": 3.85,
       "reviewsCount": 13,
-      "dlCount": 9395,
-      "rank": 12,
+      "dlCount": 9365,
+      "rank": 13,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_824853/d_824853pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_824853/d_824853jp-001.jpg",
@@ -523,8 +523,8 @@
       "campaignTitle": "64%OFF",
       "rating": 4.78,
       "reviewsCount": 41,
-      "dlCount": 10345,
-      "rank": 13,
+      "dlCount": 10375,
+      "rank": 12,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_646552/d_646552pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_646552/d_646552jp-001.jpg",
@@ -722,8 +722,8 @@
       "discount": 20,
       "campaignTitle": "20%OFFセール",
       "rating": 5,
-      "reviewsCount": 7,
-      "dlCount": 9005,
+      "reviewsCount": 8,
+      "dlCount": 9040,
       "rank": 18,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_667531/d_667531pl.jpg",
       "sampleImages": [
@@ -848,8 +848,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 14,
-      "dlCount": 9160,
-      "rank": 21,
+      "dlCount": 9130,
+      "rank": 22,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_810740/d_810740pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_810740/d_810740jp-001.jpg",
@@ -887,10 +887,10 @@
       "origPrice": 3300,
       "discount": 50,
       "campaignTitle": "50%OFF",
-      "rating": 4.77,
-      "reviewsCount": 79,
-      "dlCount": 11405,
-      "rank": 22,
+      "rating": 4.78,
+      "reviewsCount": 80,
+      "dlCount": 11470,
+      "rank": 21,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_836995/d_836995pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_836995/d_836995jp-001.jpg",
@@ -931,8 +931,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 6,
-      "dlCount": 8820,
-      "rank": 23,
+      "dlCount": 8760,
+      "rank": 25,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_836456/d_836456pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_836456/d_836456jp-001.jpg",
@@ -968,9 +968,9 @@
       "discount": 50,
       "campaignTitle": "50%OFF",
       "rating": 4.62,
-      "reviewsCount": 892,
-      "dlCount": 39800,
-      "rank": 24,
+      "reviewsCount": 894,
+      "dlCount": 39900,
+      "rank": 23,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_811449/d_811449pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_811449/d_811449jp-001.jpg",
@@ -1011,8 +1011,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.54,
       "reviewsCount": 337,
-      "dlCount": 20345,
-      "rank": 25,
+      "dlCount": 20375,
+      "rank": 24,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_826868/d_826868pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_826868/d_826868jp-001.jpg",
@@ -1093,8 +1093,8 @@
       "campaignTitle": "25%OFFセール",
       "rating": 4.91,
       "reviewsCount": 11,
-      "dlCount": 8875,
-      "rank": 27,
+      "dlCount": 8785,
+      "rank": 30,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_730214/d_730214pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_730214/d_730214jp-001.jpg",
@@ -1135,8 +1135,8 @@
       "campaignTitle": "33%OFF",
       "rating": 4.04,
       "reviewsCount": 46,
-      "dlCount": 10070,
-      "rank": 28,
+      "dlCount": 10040,
+      "rank": 29,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_828591/d_828591pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_828591/d_828591jp-001.jpg",
@@ -1175,10 +1175,10 @@
       "origPrice": 3300,
       "discount": 35,
       "campaignTitle": "35%OFF",
-      "rating": 4.44,
-      "reviewsCount": 154,
-      "dlCount": 13820,
-      "rank": 29,
+      "rating": 4.45,
+      "reviewsCount": 155,
+      "dlCount": 13885,
+      "rank": 28,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_833982/d_833982pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_833982/d_833982jp-001.jpg",
@@ -1219,8 +1219,8 @@
       "campaignTitle": "55%OFF",
       "rating": 4.79,
       "reviewsCount": 43,
-      "dlCount": 9905,
-      "rank": 30,
+      "dlCount": 9995,
+      "rank": 27,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_567776/d_567776pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_567776/d_567776jp-001.jpg",
@@ -1261,8 +1261,8 @@
       "campaignTitle": "",
       "rating": 4.73,
       "reviewsCount": 15,
-      "dlCount": 8895,
-      "rank": 31,
+      "dlCount": 8865,
+      "rank": 32,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_825560/d_825560pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_825560/d_825560jp-001.jpg",
@@ -1300,8 +1300,8 @@
       "campaignTitle": "30%OFF",
       "rating": 5,
       "reviewsCount": 4,
-      "dlCount": 8480,
-      "rank": 32,
+      "dlCount": 8510,
+      "rank": 31,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_568505/d_568505pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_568505/d_568505jp-001.jpg",
@@ -1340,8 +1340,8 @@
       "campaignTitle": "30%OFF",
       "rating": 5,
       "reviewsCount": 16,
-      "dlCount": 8870,
-      "rank": 33,
+      "dlCount": 8840,
+      "rank": 34,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_812259/d_812259pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_812259/d_812259jp-001.jpg",
@@ -1382,8 +1382,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 4.5,
       "reviewsCount": 4,
-      "dlCount": 8420,
-      "rank": 34,
+      "dlCount": 8450,
+      "rank": 33,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_802235/d_802235pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_802235/d_802235jp-001.jpg",
@@ -1418,8 +1418,8 @@
       "campaignTitle": "60%OFF",
       "rating": 4.82,
       "reviewsCount": 44,
-      "dlCount": 9790,
-      "rank": 35,
+      "dlCount": 9760,
+      "rank": 36,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_461871/d_461871pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_461871/d_461871jp-001.jpg",
@@ -1456,8 +1456,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 8325,
-      "rank": 36,
+      "dlCount": 8355,
+      "rank": 35,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_842989/d_842989pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_842989/d_842989jp-001.jpg",
@@ -1658,8 +1658,8 @@
       "campaignTitle": "",
       "rating": 3.85,
       "reviewsCount": 39,
-      "dlCount": 9435,
-      "rank": 41,
+      "dlCount": 9405,
+      "rank": 42,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_312759/d_312759pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_312759/d_312759jp-001.jpg",
@@ -1699,8 +1699,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 4.67,
       "reviewsCount": 3,
-      "dlCount": 8145,
-      "rank": 42,
+      "dlCount": 8175,
+      "rank": 41,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_832947/d_832947pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_832947/d_832947jp-001.jpg",
@@ -1736,8 +1736,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.09,
       "reviewsCount": 23,
-      "dlCount": 8815,
-      "rank": 43,
+      "dlCount": 8785,
+      "rank": 44,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_738103/d_738103pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_738103/d_738103jp-001.jpg",
@@ -1775,8 +1775,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.92,
       "reviewsCount": 59,
-      "dlCount": 10045,
-      "rank": 44,
+      "dlCount": 10015,
+      "rank": 45,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_657533/d_657533pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_657533/d_657533jp-001.jpg",
@@ -1817,8 +1817,8 @@
       "campaignTitle": "55%OFF",
       "rating": 4.94,
       "reviewsCount": 49,
-      "dlCount": 9665,
-      "rank": 45,
+      "dlCount": 9725,
+      "rank": 43,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_567766/d_567766pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_567766/d_567766jp-001.jpg",
@@ -2025,8 +2025,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.5,
       "reviewsCount": 8,
-      "dlCount": 8080,
-      "rank": 50,
+      "dlCount": 8050,
+      "rank": 51,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_832408/d_832408pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_832408/d_832408jp-001.jpg",
@@ -2067,8 +2067,8 @@
       "campaignTitle": "30%OFF",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 7875,
-      "rank": 51,
+      "dlCount": 7815,
+      "rank": 53,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840812/d_840812pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_840812/d_840812jp-001.jpg",
@@ -2106,8 +2106,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.36,
       "reviewsCount": 11,
-      "dlCount": 8125,
-      "rank": 52,
+      "dlCount": 8065,
+      "rank": 54,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_824638/d_824638pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_824638/d_824638jp-001.jpg",
@@ -2148,8 +2148,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.89,
       "reviewsCount": 46,
-      "dlCount": 9320,
-      "rank": 53,
+      "dlCount": 9350,
+      "rank": 52,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_797607/d_797607pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_797607/d_797607jp-001.jpg",
@@ -2189,8 +2189,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 7,
-      "dlCount": 7925,
-      "rank": 54,
+      "dlCount": 7865,
+      "rank": 56,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_839899/d_839899pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_839899/d_839899jp-001.jpg",
@@ -2230,9 +2230,9 @@
       "discount": 10,
       "campaignTitle": "10%OFFセール",
       "rating": 5,
-      "reviewsCount": 5,
-      "dlCount": 7825,
-      "rank": 55,
+      "reviewsCount": 6,
+      "dlCount": 8010,
+      "rank": 50,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_823062/d_823062pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_823062/d_823062jp-001.jpg",
@@ -2273,8 +2273,8 @@
       "campaignTitle": "15%OFFセール",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 7690,
-      "rank": 56,
+      "dlCount": 7720,
+      "rank": 55,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_837945/d_837945pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/cg/d_837945/d_837945jp-001.jpg",
@@ -2311,8 +2311,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.5,
       "reviewsCount": 2,
-      "dlCount": 7660,
-      "rank": 57,
+      "dlCount": 7630,
+      "rank": 58,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_834050/d_834050pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_834050/d_834050jp-001.jpg",
@@ -2350,8 +2350,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 4.97,
       "reviewsCount": 62,
-      "dlCount": 9730,
-      "rank": 58,
+      "dlCount": 9760,
+      "rank": 57,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_597172/d_597172pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_597172/d_597172jp-001.jpg",
@@ -2431,8 +2431,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.14,
       "reviewsCount": 49,
-      "dlCount": 9215,
-      "rank": 60,
+      "dlCount": 9185,
+      "rank": 61,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_278563/d_278563pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_278563/d_278563jp-001.jpg",
@@ -2473,8 +2473,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 7575,
-      "rank": 61,
+      "dlCount": 7455,
+      "rank": 65,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_833102/d_833102pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_833102/d_833102jp-001.jpg",
@@ -2549,8 +2549,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 7445,
-      "rank": 63,
+      "dlCount": 7535,
+      "rank": 60,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_800944/d_800944pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_800944/d_800944jp-001.jpg",
@@ -2628,8 +2628,8 @@
       "campaignTitle": "55%OFF",
       "rating": 4.83,
       "reviewsCount": 70,
-      "dlCount": 9800,
-      "rank": 65,
+      "dlCount": 9860,
+      "rank": 63,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_472626/d_472626pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_472626/d_472626jp-001.jpg",
@@ -2710,8 +2710,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.72,
       "reviewsCount": 18,
-      "dlCount": 7920,
-      "rank": 67,
+      "dlCount": 7890,
+      "rank": 68,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_788042/d_788042pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_788042/d_788042jp-001.jpg",
@@ -2752,8 +2752,8 @@
       "campaignTitle": "50%OFF",
       "rating": 3.42,
       "reviewsCount": 19,
-      "dlCount": 7925,
-      "rank": 68,
+      "dlCount": 7835,
+      "rank": 71,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_806491/d_806491pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_806491/d_806491jp-001.jpg",
@@ -2789,8 +2789,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 5,
-      "dlCount": 7405,
-      "rank": 69,
+      "dlCount": 7465,
+      "rank": 67,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840192/d_840192pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_840192/d_840192jp-001.jpg",
@@ -2828,8 +2828,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.8,
       "reviewsCount": 5,
-      "dlCount": 7375,
-      "rank": 70,
+      "dlCount": 7225,
+      "rank": 75,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_836461/d_836461pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_836461/d_836461jp-001.jpg",
@@ -2864,10 +2864,10 @@
       "origPrice": 1320,
       "discount": 20,
       "campaignTitle": "20%OFFセール",
-      "rating": 4.69,
-      "reviewsCount": 13,
-      "dlCount": 7625,
-      "rank": 71,
+      "rating": 4.71,
+      "reviewsCount": 14,
+      "dlCount": 7630,
+      "rank": 72,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_819250/d_819250pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_819250/d_819250jp-001.jpg",
@@ -2908,8 +2908,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.53,
       "reviewsCount": 74,
-      "dlCount": 9730,
-      "rank": 72,
+      "dlCount": 9790,
+      "rank": 70,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_523258/d_523258pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_523258/d_523258jp-001.jpg",
@@ -2950,8 +2950,8 @@
       "campaignTitle": "25%OFFセール",
       "rating": 4,
       "reviewsCount": 2,
-      "dlCount": 7180,
-      "rank": 73,
+      "dlCount": 7300,
+      "rank": 69,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_845337/d_845337pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_845337/d_845337jp-001.jpg",
@@ -3034,8 +3034,8 @@
       "campaignTitle": "50%OFF",
       "rating": 3.23,
       "reviewsCount": 26,
-      "dlCount": 7960,
-      "rank": 75,
+      "dlCount": 7900,
+      "rank": 77,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_828172/d_828172pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_828172/d_828172jp-001.jpg",
@@ -3074,8 +3074,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.5,
       "reviewsCount": 0,
-      "dlCount": 7020,
-      "rank": 76,
+      "dlCount": 6960,
+      "rank": 78,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_841706/d_841706pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_841706/d_841706jp-001.jpg",
@@ -3116,8 +3116,8 @@
       "campaignTitle": "25%OFFセール",
       "rating": 4.32,
       "reviewsCount": 108,
-      "dlCount": 10770,
-      "rank": 77,
+      "dlCount": 10890,
+      "rank": 73,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_836369/d_836369pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_836369/d_836369jp-001.jpg",
@@ -3158,8 +3158,8 @@
       "campaignTitle": "55%OFF",
       "rating": 4.8,
       "reviewsCount": 5,
-      "dlCount": 7135,
-      "rank": 78,
+      "dlCount": 7105,
+      "rank": 79,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_780112/d_780112pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_780112/d_780112jp-001.jpg",
@@ -3195,8 +3195,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.5,
       "reviewsCount": 0,
-      "dlCount": 6930,
-      "rank": 79,
+      "dlCount": 7020,
+      "rank": 76,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_837740/d_837740pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_837740/d_837740jp-001.jpg",
@@ -3321,8 +3321,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4,
       "reviewsCount": 3,
-      "dlCount": 6945,
-      "rank": 82,
+      "dlCount": 6915,
+      "rank": 83,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_743065/d_743065pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_743065/d_743065jp-001.jpg",
@@ -3358,8 +3358,8 @@
       "campaignTitle": "30%OFF",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 6880,
-      "rank": 83,
+      "dlCount": 6910,
+      "rank": 82,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_838808/d_838808pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_838808/d_838808jp-001.jpg",
@@ -3400,8 +3400,8 @@
       "campaignTitle": "",
       "rating": 4.42,
       "reviewsCount": 81,
-      "dlCount": 9615,
-      "rank": 84,
+      "dlCount": 9555,
+      "rank": 86,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_748896/d_748896pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_748896/d_748896jp-001.jpg",
@@ -3442,8 +3442,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 6855,
-      "rank": 85,
+      "dlCount": 6885,
+      "rank": 84,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_843801/d_843801pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/cg/d_843801/d_843801jp-001.jpg",
@@ -3482,9 +3482,9 @@
       "discount": 50,
       "campaignTitle": "50%OFF",
       "rating": 3.51,
-      "reviewsCount": 120,
-      "dlCount": 10920,
-      "rank": 86,
+      "reviewsCount": 121,
+      "dlCount": 10925,
+      "rank": 87,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_725012/d_725012pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_725012/d_725012jp-001.jpg",
@@ -3525,8 +3525,8 @@
       "campaignTitle": "40%OFF",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 6795,
-      "rank": 87,
+      "dlCount": 6735,
+      "rank": 89,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_831446/d_831446pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_831446/d_831446jp-001.jpg",
@@ -3567,8 +3567,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 4.87,
       "reviewsCount": 61,
-      "dlCount": 8795,
-      "rank": 88,
+      "dlCount": 8885,
+      "rank": 85,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_428678/d_428678pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_428678/d_428678jp-001.jpg",
@@ -3606,8 +3606,8 @@
       "campaignTitle": "50%OFF",
       "rating": 3.84,
       "reviewsCount": 19,
-      "dlCount": 7295,
-      "rank": 89,
+      "dlCount": 7325,
+      "rank": 88,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_829237/d_829237pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_829237/d_829237jp-001.jpg",
@@ -3690,8 +3690,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 14,
-      "dlCount": 7060,
-      "rank": 91,
+      "dlCount": 6880,
+      "rank": 97,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_827757/d_827757pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_827757/d_827757jp-001.jpg",
@@ -3730,8 +3730,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 4.86,
       "reviewsCount": 7,
-      "dlCount": 6785,
-      "rank": 92,
+      "dlCount": 6755,
+      "rank": 93,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_830839/d_830839pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_830839/d_830839jp-001.jpg",
@@ -3772,8 +3772,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 4.95,
       "reviewsCount": 22,
-      "dlCount": 7280,
-      "rank": 93,
+      "dlCount": 7190,
+      "rank": 96,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_841747/d_841747pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_841747/d_841747jp-001.jpg",
@@ -3808,8 +3808,8 @@
       "campaignTitle": "",
       "rating": 4.71,
       "reviewsCount": 14,
-      "dlCount": 6970,
-      "rank": 94,
+      "dlCount": 6850,
+      "rank": 98,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_833491/d_833491pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_833491/d_833491jp-001.jpg",
@@ -3844,8 +3844,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 6,
-      "dlCount": 6660,
-      "rank": 95,
+      "dlCount": 6780,
+      "rank": 91,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840223/d_840223pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_840223/d_840223jp-001.jpg",
@@ -3881,8 +3881,8 @@
       "campaignTitle": "64%OFF",
       "rating": 4.77,
       "reviewsCount": 57,
-      "dlCount": 8415,
-      "rank": 96,
+      "dlCount": 8475,
+      "rank": 94,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_442612/d_442612pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_442612/d_442612jp-001.jpg",
@@ -3923,8 +3923,8 @@
       "campaignTitle": "60%OFF",
       "rating": 4.4,
       "reviewsCount": 123,
-      "dlCount": 10695,
-      "rank": 97,
+      "dlCount": 10755,
+      "rank": 95,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_831209/d_831209pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_831209/d_831209jp-001.jpg",
@@ -3965,8 +3965,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.82,
       "reviewsCount": 34,
-      "dlCount": 7550,
-      "rank": 98,
+      "dlCount": 7490,
+      "rank": 100,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_793664/d_793664pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_793664/d_793664jp-001.jpg",
@@ -4041,8 +4041,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.5,
       "reviewsCount": 14,
-      "dlCount": 6790,
-      "rank": 100,
+      "dlCount": 7030,
+      "rank": 92,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_727934/d_727934pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_727934/d_727934jp-001.jpg",
@@ -7876,8 +7876,8 @@
       "campaignTitle": "",
       "rating": 4.5,
       "reviewsCount": 0,
-      "dlCount": 6090,
-      "rank": 107,
+      "dlCount": 6060,
+      "rank": 108,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_771358/d_771358pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/voice/d_771358/d_771358jp-001.jpg",
@@ -7916,8 +7916,8 @@
       "campaignTitle": "30%OFF",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 5050,
-      "rank": 144,
+      "dlCount": 5170,
+      "rank": 140,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_805271/d_805271pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/voice/d_805271/d_805271jp-001.jpg",
@@ -7951,8 +7951,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.5,
       "reviewsCount": 0,
-      "dlCount": 4740,
-      "rank": 152,
+      "dlCount": 4710,
+      "rank": 153,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_782868/d_782868pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/voice/d_782868/d_782868jp-001.jpg",
@@ -7979,6 +7979,7 @@
       "code": "d_725640",
       "title": "【たっぷり長編】敬礼！オマンコ軍人サクラとカレンの誇りある慰安任務活動♪【KU100】",
       "category": "audio",
+      "isAi": false,
       "creatorId": "maker_215290",
       "author": "デュオナほ！",
       "circle": "デュオナほ！",
@@ -7990,8 +7991,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4,
       "reviewsCount": 1,
-      "dlCount": 3305,
-      "rank": 201,
+      "dlCount": 3335,
+      "rank": 200,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_725640/d_725640pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/voice/d_725640/d_725640jp-001.jpg",
@@ -8012,8 +8013,7 @@
         "アナル",
         "ハーレム",
         "軍服"
-      ],
-      "isAi": false
+      ]
     },
     {
       "id": "d_733819",
@@ -10111,8 +10111,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 6310,
-      "rank": 102,
+      "dlCount": 6280,
+      "rank": 103,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840872/d_840872pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_840872/d_840872jp-001.jpg",
@@ -10153,8 +10153,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.91,
       "reviewsCount": 44,
-      "dlCount": 7750,
-      "rank": 103,
+      "dlCount": 7690,
+      "rank": 105,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_507053/d_507053pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_507053/d_507053jp-001.jpg",
@@ -10191,8 +10191,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.88,
       "reviewsCount": 51,
-      "dlCount": 7965,
-      "rank": 104,
+      "dlCount": 7905,
+      "rank": 106,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_784354/d_784354pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_784354/d_784354jp-001.jpg",
@@ -10233,8 +10233,8 @@
       "campaignTitle": "50%OFF",
       "rating": 3.67,
       "reviewsCount": 6,
-      "dlCount": 6360,
-      "rank": 105,
+      "dlCount": 6300,
+      "rank": 107,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_820758/d_820758pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_820758/d_820758jp-001.jpg",
@@ -10272,8 +10272,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.86,
       "reviewsCount": 7,
-      "dlCount": 6365,
-      "rank": 106,
+      "dlCount": 6425,
+      "rank": 104,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_826661/d_826661pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_826661/d_826661jp-001.jpg",
@@ -10309,8 +10309,8 @@
       "campaignTitle": "55%OFF",
       "rating": 5,
       "reviewsCount": 19,
-      "dlCount": 6725,
-      "rank": 108,
+      "dlCount": 6905,
+      "rank": 102,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_623157/d_623157pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_623157/d_623157jp-001.jpg",
@@ -10347,8 +10347,8 @@
       "campaignTitle": "",
       "rating": 4.74,
       "reviewsCount": 19,
-      "dlCount": 6695,
-      "rank": 109,
+      "dlCount": 6635,
+      "rank": 111,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_803160/d_803160pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_803160/d_803160jp-001.jpg",
@@ -10429,8 +10429,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 6005,
-      "rank": 111,
+      "dlCount": 6065,
+      "rank": 109,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_759949/d_759949pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/voice/d_759949/d_759949jp-001.jpg",
@@ -10469,8 +10469,8 @@
       "campaignTitle": "",
       "rating": 4.58,
       "reviewsCount": 24,
-      "dlCount": 6780,
-      "rank": 112,
+      "dlCount": 6750,
+      "rank": 113,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_738198/d_738198pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_738198/d_738198jp-001.jpg",
@@ -10510,8 +10510,8 @@
       "campaignTitle": "30%OFF",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 5980,
-      "rank": 113,
+      "dlCount": 5830,
+      "rank": 118,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_823369/d_823369pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_823369/d_823369jp-001.jpg",
@@ -10552,8 +10552,8 @@
       "campaignTitle": "90%OFF",
       "rating": 5,
       "reviewsCount": 5,
-      "dlCount": 6055,
-      "rank": 114,
+      "dlCount": 6025,
+      "rank": 115,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_788356/d_788356pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_788356/d_788356jp-001.jpg",
@@ -10590,8 +10590,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 5885,
-      "rank": 115,
+      "dlCount": 5975,
+      "rank": 112,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_830436/d_830436pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_830436/d_830436jp-001.jpg",
@@ -10672,8 +10672,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 5860,
-      "rank": 117,
+      "dlCount": 5620,
+      "rank": 125,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_822413/d_822413pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_822413/d_822413jp-001.jpg",
@@ -10712,8 +10712,8 @@
       "campaignTitle": "",
       "rating": 4.5,
       "reviewsCount": 0,
-      "dlCount": 5760,
-      "rank": 118,
+      "dlCount": 5670,
+      "rank": 121,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_795560/d_795560pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/voice/d_795560/d_795560jp-001.jpg",
@@ -10792,8 +10792,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.69,
       "reviewsCount": 35,
-      "dlCount": 6925,
-      "rank": 120,
+      "dlCount": 7015,
+      "rank": 117,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_845222/d_845222pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_845222/d_845222jp-001.jpg",
@@ -10834,8 +10834,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.42,
       "reviewsCount": 38,
-      "dlCount": 7000,
-      "rank": 121,
+      "dlCount": 7030,
+      "rank": 120,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_796482/d_796482pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_796482/d_796482jp-001.jpg",
@@ -10876,8 +10876,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 5745,
-      "rank": 122,
+      "dlCount": 5985,
+      "rank": 114,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_834970/d_834970pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_834970/d_834970jp-001.jpg",
@@ -10914,8 +10914,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4,
       "reviewsCount": 1,
-      "dlCount": 5645,
-      "rank": 123,
+      "dlCount": 5615,
+      "rank": 124,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_314619/d_314619pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_314619/d_314619jp-001.jpg",
@@ -10956,8 +10956,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.23,
       "reviewsCount": 26,
-      "dlCount": 6490,
-      "rank": 124,
+      "dlCount": 6550,
+      "rank": 122,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_808337/d_808337pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_808337/d_808337jp-001.jpg",
@@ -11030,8 +11030,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.88,
       "reviewsCount": 8,
-      "dlCount": 5830,
-      "rank": 125,
+      "dlCount": 5800,
+      "rank": 126,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_809121/d_809121pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_809121/d_809121jp-001.jpg",
@@ -11069,8 +11069,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.8,
       "reviewsCount": 81,
-      "dlCount": 8355,
-      "rank": 126,
+      "dlCount": 8265,
+      "rank": 129,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_758663/d_758663pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_758663/d_758663jp-001.jpg",
@@ -11111,8 +11111,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 4.5,
       "reviewsCount": 0,
-      "dlCount": 5490,
-      "rank": 127,
+      "dlCount": 5400,
+      "rank": 130,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_839221/d_839221pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_839221/d_839221jp-001.jpg",
@@ -11152,8 +11152,8 @@
       "campaignTitle": "85%OFF",
       "rating": 4.67,
       "reviewsCount": 30,
-      "dlCount": 6480,
-      "rank": 129,
+      "dlCount": 6660,
+      "rank": 123,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_570535/d_570535pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_570535/d_570535jp-001.jpg",
@@ -11193,8 +11193,8 @@
       "campaignTitle": "50%OFF",
       "rating": 3.78,
       "reviewsCount": 41,
-      "dlCount": 6835,
-      "rank": 130,
+      "dlCount": 6925,
+      "rank": 127,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_756723/d_756723pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_756723/d_756723jp-001.jpg",
@@ -11235,8 +11235,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 9,
-      "dlCount": 5685,
-      "rank": 131,
+      "dlCount": 5625,
+      "rank": 133,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_817364/d_817364pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_817364/d_817364jp-001.jpg",
@@ -11271,8 +11271,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 5375,
-      "rank": 132,
+      "dlCount": 5255,
+      "rank": 136,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_841590/d_841590pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/cg/d_841590/d_841590jp-001.jpg",
@@ -11312,8 +11312,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.89,
       "reviewsCount": 27,
-      "dlCount": 6255,
-      "rank": 133,
+      "dlCount": 6225,
+      "rank": 134,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_785965/d_785965pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_785965/d_785965jp-001.jpg",
@@ -11352,8 +11352,8 @@
       "campaignTitle": "30%OFF",
       "rating": 3.92,
       "reviewsCount": 12,
-      "dlCount": 5700,
-      "rank": 134,
+      "dlCount": 5760,
+      "rank": 132,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_831194/d_831194pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_831194/d_831194jp-001.jpg",
@@ -11389,8 +11389,8 @@
       "campaignTitle": "25%OFFセール",
       "rating": 5,
       "reviewsCount": 4,
-      "dlCount": 5390,
-      "rank": 135,
+      "dlCount": 5510,
+      "rank": 131,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_848146/d_848146pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_848146/d_848146jp-001.jpg",
@@ -11431,8 +11431,8 @@
       "campaignTitle": "40%OFF",
       "rating": 4.61,
       "reviewsCount": 76,
-      "dlCount": 7880,
-      "rank": 136,
+      "dlCount": 7910,
+      "rank": 135,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_804420/d_804420pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_804420/d_804420jp-001.jpg",
@@ -11473,8 +11473,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 5,
       "reviewsCount": 14,
-      "dlCount": 5680,
-      "rank": 137,
+      "dlCount": 5530,
+      "rank": 142,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_822794/d_822794pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_822794/d_822794jp-001.jpg",
@@ -11557,8 +11557,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.94,
       "reviewsCount": 18,
-      "dlCount": 5760,
-      "rank": 139,
+      "dlCount": 5700,
+      "rank": 141,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_757110/d_757110pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_757110/d_757110jp-001.jpg",
@@ -11595,8 +11595,8 @@
       "campaignTitle": "",
       "rating": 4.65,
       "reviewsCount": 20,
-      "dlCount": 5800,
-      "rank": 140,
+      "dlCount": 5680,
+      "rank": 144,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_160993/d_160993pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_160993/d_160993jp-001.jpg",
@@ -11635,8 +11635,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 5140,
-      "rank": 141,
+      "dlCount": 5200,
+      "rank": 139,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_826606/d_826606pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_826606/d_826606jp-001.jpg",
@@ -11675,8 +11675,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 5145,
-      "rank": 142,
+      "dlCount": 5295,
+      "rank": 137,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_837804/d_837804pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_837804/d_837804jp-001.jpg",
@@ -11716,8 +11716,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 4,
-      "dlCount": 5150,
-      "rank": 143,
+      "dlCount": 5090,
+      "rank": 145,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_817671/d_817671pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_817671/d_817671jp-001.jpg",
@@ -11758,8 +11758,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 9,
-      "dlCount": 5265,
-      "rank": 145,
+      "dlCount": 5325,
+      "rank": 143,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_700902/d_700902pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_700902/d_700902jp-001.jpg",
@@ -11800,8 +11800,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 4955,
-      "rank": 146,
+      "dlCount": 4865,
+      "rank": 149,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_834036/d_834036pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_834036/d_834036jp-001.jpg",
@@ -11838,8 +11838,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 4.86,
       "reviewsCount": 7,
-      "dlCount": 5135,
-      "rank": 147,
+      "dlCount": 5165,
+      "rank": 146,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_831785/d_831785pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_831785/d_831785jp-001.jpg",
@@ -11879,8 +11879,8 @@
       "campaignTitle": "",
       "rating": 4.97,
       "reviewsCount": 35,
-      "dlCount": 6085,
-      "rank": 148,
+      "dlCount": 6115,
+      "rank": 147,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_787103/d_787103pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_787103/d_787103jp-001.jpg",
@@ -11917,8 +11917,8 @@
       "campaignTitle": "",
       "rating": 4.81,
       "reviewsCount": 27,
-      "dlCount": 5775,
-      "rank": 149,
+      "dlCount": 5805,
+      "rank": 148,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_823213/d_823213pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_823213/d_823213jp-001.jpg",
@@ -12000,8 +12000,8 @@
       "campaignTitle": "",
       "rating": 4.14,
       "reviewsCount": 7,
-      "dlCount": 5015,
-      "rank": 151,
+      "dlCount": 4895,
+      "rank": 155,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_818566/d_818566pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_818566/d_818566jp-001.jpg",
@@ -12039,8 +12039,8 @@
       "campaignTitle": "",
       "rating": 4.94,
       "reviewsCount": 36,
-      "dlCount": 5970,
-      "rank": 153,
+      "dlCount": 6000,
+      "rank": 152,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_781049/d_781049pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_781049/d_781049jp-001.jpg",
@@ -12081,8 +12081,8 @@
       "campaignTitle": "25%OFFセール",
       "rating": 5,
       "reviewsCount": 7,
-      "dlCount": 4925,
-      "rank": 154,
+      "dlCount": 4865,
+      "rank": 156,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_715039/d_715039pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_715039/d_715039jp-001.jpg",
@@ -12123,8 +12123,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.55,
       "reviewsCount": 20,
-      "dlCount": 5350,
-      "rank": 155,
+      "dlCount": 5230,
+      "rank": 159,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_732501/d_732501pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_732501/d_732501jp-001.jpg",
@@ -12165,8 +12165,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.75,
       "reviewsCount": 12,
-      "dlCount": 5040,
-      "rank": 156,
+      "dlCount": 5010,
+      "rank": 157,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_806649/d_806649pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_806649/d_806649jp-001.jpg",
@@ -12202,8 +12202,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.5,
       "reviewsCount": 2,
-      "dlCount": 4660,
-      "rank": 157,
+      "dlCount": 4840,
+      "rank": 151,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_840188/d_840188pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_840188/d_840188jp-001.jpg",
@@ -12240,8 +12240,8 @@
       "campaignTitle": "70%OFF",
       "rating": 3.73,
       "reviewsCount": 11,
-      "dlCount": 4945,
-      "rank": 158,
+      "dlCount": 4825,
+      "rank": 162,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_533900/d_533900pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_533900/d_533900jp-001.jpg",
@@ -12282,8 +12282,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.95,
       "reviewsCount": 19,
-      "dlCount": 5195,
-      "rank": 159,
+      "dlCount": 5225,
+      "rank": 158,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_801486/d_801486pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_801486/d_801486jp-001.jpg",
@@ -12319,8 +12319,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 4535,
-      "rank": 160,
+      "dlCount": 4715,
+      "rank": 154,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_839692/d_839692pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/cg/d_839692/d_839692jp-001.jpg",
@@ -12360,8 +12360,8 @@
       "campaignTitle": "",
       "rating": 4.89,
       "reviewsCount": 9,
-      "dlCount": 4755,
-      "rank": 162,
+      "dlCount": 4785,
+      "rank": 161,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_837939/d_837939pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_837939/d_837939jp-001.jpg",
@@ -12402,8 +12402,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.87,
       "reviewsCount": 15,
-      "dlCount": 4935,
-      "rank": 163,
+      "dlCount": 4905,
+      "rank": 164,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_799407/d_799407pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_799407/d_799407jp-001.jpg",
@@ -12444,8 +12444,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 21,
-      "dlCount": 5115,
-      "rank": 164,
+      "dlCount": 5055,
+      "rank": 166,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_795389/d_795389pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_795389/d_795389jp-001.jpg",
@@ -12523,8 +12523,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 4,
-      "dlCount": 4610,
-      "rank": 161,
+      "dlCount": 4640,
+      "rank": 160,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_724193/d_724193pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_724193/d_724193jp-001.jpg",
@@ -12563,10 +12563,10 @@
       "origPrice": 3630,
       "discount": 50,
       "campaignTitle": "50%OFF",
-      "rating": 4.58,
-      "reviewsCount": 12,
-      "dlCount": 4740,
-      "rank": 166,
+      "rating": 4.62,
+      "reviewsCount": 13,
+      "dlCount": 4865,
+      "rank": 163,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_833503/d_833503pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_833503/d_833503jp-001.jpg",
@@ -12607,8 +12607,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 4325,
-      "rank": 167,
+      "dlCount": 4205,
+      "rank": 171,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_834031/d_834031pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_834031/d_834031jp-001.jpg",
@@ -12645,8 +12645,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.71,
       "reviewsCount": 14,
-      "dlCount": 4750,
-      "rank": 168,
+      "dlCount": 4720,
+      "rank": 169,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_739366/d_739366pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_739366/d_739366jp-001.jpg",
@@ -12683,8 +12683,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 4265,
-      "rank": 169,
+      "dlCount": 4175,
+      "rank": 172,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_821737/d_821737pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_821737/d_821737jp-001.jpg",
@@ -12721,8 +12721,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 38,
-      "dlCount": 5530,
-      "rank": 170,
+      "dlCount": 5620,
+      "rank": 167,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_761881/d_761881pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_761881/d_761881jp-001.jpg",
@@ -12762,8 +12762,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 4.8,
       "reviewsCount": 5,
-      "dlCount": 4345,
-      "rank": 171,
+      "dlCount": 4255,
+      "rank": 174,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_800326/d_800326pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_800326/d_800326jp-001.jpg",
@@ -12845,8 +12845,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.67,
       "reviewsCount": 6,
-      "dlCount": 4350,
-      "rank": 172,
+      "dlCount": 4410,
+      "rank": 170,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_807471/d_807471pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_807471/d_807471jp-001.jpg",
@@ -12925,8 +12925,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 4150,
-      "rank": 174,
+      "dlCount": 3970,
+      "rank": 180,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_837899/d_837899pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/cg/d_837899/d_837899jp-001.jpg",
@@ -12967,8 +12967,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 5,
-      "dlCount": 4195,
-      "rank": 176,
+      "dlCount": 3685,
+      "rank": 193,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840581/d_840581pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_840581/d_840581jp-001.jpg",
@@ -13009,8 +13009,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 5,
-      "dlCount": 4165,
-      "rank": 177,
+      "dlCount": 4435,
+      "rank": 168,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_839923/d_839923pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_839923/d_839923jp-001.jpg",
@@ -13051,8 +13051,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.7,
       "reviewsCount": 10,
-      "dlCount": 4310,
-      "rank": 178,
+      "dlCount": 4340,
+      "rank": 177,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_739546/d_739546pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_739546/d_739546jp-001.jpg",
@@ -13092,8 +13092,8 @@
       "campaignTitle": "60%OFF",
       "rating": 4.74,
       "reviewsCount": 34,
-      "dlCount": 5120,
-      "rank": 179,
+      "dlCount": 5150,
+      "rank": 178,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_579119/d_579119pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_579119/d_579119jp-001.jpg",
@@ -13128,8 +13128,8 @@
       "campaignTitle": "20%OFFセール",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 4005,
-      "rank": 180,
+      "dlCount": 4035,
+      "rank": 179,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_843170/d_843170pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_843170/d_843170jp-001.jpg",
@@ -13165,8 +13165,8 @@
       "campaignTitle": "10%OFFセール",
       "rating": 5,
       "reviewsCount": 2,
-      "dlCount": 3940,
-      "rank": 181,
+      "dlCount": 3790,
+      "rank": 186,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_845890/d_845890pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_845890/d_845890jp-001.jpg",
@@ -13207,8 +13207,8 @@
       "campaignTitle": "",
       "rating": 4.5,
       "reviewsCount": 6,
-      "dlCount": 4050,
-      "rank": 182,
+      "dlCount": 4230,
+      "rank": 176,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_832295/d_832295pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_832295/d_832295jp-001.jpg",
@@ -13246,8 +13246,8 @@
       "campaignTitle": "60%OFF",
       "rating": 4.95,
       "reviewsCount": 37,
-      "dlCount": 5105,
-      "rank": 183,
+      "dlCount": 5165,
+      "rank": 181,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_519939/d_519939pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_519939/d_519939jp-001.jpg",
@@ -13283,8 +13283,8 @@
       "campaignTitle": "",
       "rating": 4.33,
       "reviewsCount": 3,
-      "dlCount": 3885,
-      "rank": 184,
+      "dlCount": 3675,
+      "rank": 191,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_844930/d_844930pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_844930/d_844930jp-001.jpg",
@@ -13325,8 +13325,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 3,
-      "dlCount": 3855,
-      "rank": 185,
+      "dlCount": 3945,
+      "rank": 182,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_841396/d_841396pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_841396/d_841396jp-001.jpg",
@@ -13367,8 +13367,8 @@
       "campaignTitle": "60%OFF",
       "rating": 4.95,
       "reviewsCount": 22,
-      "dlCount": 4490,
-      "rank": 186,
+      "dlCount": 4550,
+      "rank": 184,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_660402/d_660402pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_660402/d_660402jp-001.jpg",
@@ -13408,8 +13408,8 @@
       "campaignTitle": "",
       "rating": 5,
       "reviewsCount": 36,
-      "dlCount": 4950,
-      "rank": 187,
+      "dlCount": 5010,
+      "rank": 185,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_766017/d_766017pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_766017/d_766017jp-001.jpg",
@@ -13445,8 +13445,8 @@
       "campaignTitle": "90%OFF",
       "rating": 4.83,
       "reviewsCount": 6,
-      "dlCount": 3870,
-      "rank": 188,
+      "dlCount": 4020,
+      "rank": 183,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_810973/d_810973pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_810973/d_810973jp-001.jpg",
@@ -13483,8 +13483,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.5,
       "reviewsCount": 2,
-      "dlCount": 3700,
-      "rank": 189,
+      "dlCount": 3760,
+      "rank": 187,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_832059/d_832059pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/cg/d_832059/d_832059jp-001.jpg",
@@ -13525,8 +13525,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.56,
       "reviewsCount": 9,
-      "dlCount": 3915,
-      "rank": 190,
+      "dlCount": 3945,
+      "rank": 189,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_545856/d_545856pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_545856/d_545856jp-001.jpg",
@@ -13561,8 +13561,8 @@
       "campaignTitle": "50%OFF",
       "rating": 3.75,
       "reviewsCount": 12,
-      "dlCount": 3990,
-      "rank": 191,
+      "dlCount": 3960,
+      "rank": 192,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_667763/d_667763pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_667763/d_667763jp-001.jpg",
@@ -13602,8 +13602,8 @@
       "campaignTitle": "30%OFF",
       "rating": 4.93,
       "reviewsCount": 70,
-      "dlCount": 5990,
-      "rank": 192,
+      "dlCount": 6110,
+      "rank": 188,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_735427/d_735427pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_735427/d_735427jp-001.jpg",
@@ -13642,8 +13642,8 @@
       "campaignTitle": "50%OFF",
       "rating": 4.67,
       "reviewsCount": 6,
-      "dlCount": 3720,
-      "rank": 193,
+      "dlCount": 3660,
+      "rank": 195,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_810956/d_810956pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_810956/d_810956jp-001.jpg",
@@ -13722,8 +13722,8 @@
       "campaignTitle": "35%OFF",
       "rating": 5,
       "reviewsCount": 6,
-      "dlCount": 3660,
-      "rank": 195,
+      "dlCount": 3810,
+      "rank": 190,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_729072/d_729072pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/comic/d_729072/d_729072jp-001.jpg",
@@ -13890,8 +13890,8 @@
       "campaignTitle": "50%OFF",
       "rating": 5,
       "reviewsCount": 1,
-      "dlCount": 3395,
-      "rank": 198,
+      "dlCount": 3425,
+      "rank": 197,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_830684/d_830684pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_830684/d_830684jp-001.jpg",
@@ -13953,6 +13953,7 @@
       "code": "d_799208",
       "title": "【アニメ・フルボイス大型アプデ！】【ゲーム】人見知り保育士ちゃんと、臨時職員の俺がコスプレ中出しするまでの14日間",
       "category": "game",
+      "isAi": true,
       "creatorId": "maker_215228",
       "author": "実話本舗",
       "circle": "実話本舗",
@@ -13963,9 +13964,9 @@
       "discount": 50,
       "campaignTitle": "50%OFF",
       "rating": 4.66,
-      "reviewsCount": 757,
-      "dlCount": 29735,
-      "rank": 202,
+      "reviewsCount": 758,
+      "dlCount": 29890,
+      "rank": 198,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_799208/d_799208pl.jpg",
       "sampleImages": [
         "https://doujin-assets.dmm.co.jp/digital/game/d_799208/d_799208jp-001.jpg",
@@ -13987,8 +13988,7 @@
         "巨乳",
         "コスプレ",
         "AI生成"
-      ],
-      "isAi": true
+      ]
     },
     {
       "id": "d_816141",
@@ -14363,8 +14363,8 @@
       "discount": 0,
       "campaignTitle": "",
       "rating": 4.92,
-      "reviewsCount": 49,
-      "dlCount": 4565,
+      "reviewsCount": 50,
+      "dlCount": 4600,
       "rank": 215,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_836306/d_836306pl.jpg",
       "sampleImages": [
@@ -16280,9 +16280,9 @@
       "origPrice": 3080,
       "discount": 50,
       "campaignTitle": "50%OFF",
-      "rating": 4.67,
-      "reviewsCount": 3,
-      "dlCount": 1575,
+      "rating": 4.75,
+      "reviewsCount": 4,
+      "dlCount": 1610,
       "rank": 261,
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_848195/d_848195pl.jpg",
       "sampleImages": [
@@ -45055,6 +45055,284 @@
         "アナル",
         "AI生成"
       ]
+    },
+    {
+      "id": "d_773407",
+      "code": "d_773407",
+      "title": "【逆NTR×巫女×ビッチ】巫女ノお種もらい「お前のデカちんぽで、私を一人前の巫女にして？」〜彼女に内緒で背徳浮気中出し種付け孕ませ！〜【KU100】",
+      "category": "audio",
+      "isAi": true,
+      "creatorId": "maker_76122",
+      "author": "ドM女史団",
+      "circle": "ドM女史団",
+      "date": "2026.05.29",
+      "spec": "5本 (約68分)+α",
+      "price": 770,
+      "origPrice": 1100,
+      "discount": 30,
+      "campaignTitle": "30%OFF",
+      "rating": 4.5,
+      "reviewsCount": 0,
+      "dlCount": 120,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_773407/d_773407pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_773407/d_773407jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_773407/d_773407jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_773407/d_773407jp-003.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_773407/d_773407jp-004.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_773407%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "巨乳",
+        "寝取り・寝取られ・NTR",
+        "中出し",
+        "フェラ",
+        "ぶっかけ",
+        "AI生成"
+      ]
+    },
+    {
+      "id": "d_440790",
+      "code": "d_440790",
+      "title": "【極悪NTR】最愛の妹がいじめっ子のギャル彼女になるまで",
+      "category": "audio",
+      "isAi": false,
+      "creatorId": "maker_219363",
+      "author": "バイコーンの森",
+      "circle": "バイコーンの森",
+      "date": "2024.09.23",
+      "spec": "8本 (約97分)+α",
+      "price": 924,
+      "origPrice": 1320,
+      "discount": 30,
+      "campaignTitle": "30%OFF",
+      "rating": 5,
+      "reviewsCount": 2,
+      "dlCount": 190,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_440790/d_440790pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_440790/d_440790jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_440790/d_440790jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_440790/d_440790jp-003.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_440790%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "寝取り・寝取られ・NTR",
+        "中出し",
+        "フェラ",
+        "パイズリ",
+        "実妹",
+        "男性向け"
+      ]
+    },
+    {
+      "id": "d_284061",
+      "code": "d_284061",
+      "title": "みだれうち 前期総集編",
+      "category": "comic",
+      "isAi": false,
+      "creatorId": "maker_73178",
+      "author": "サイクロン",
+      "circle": "サイクロン",
+      "date": "2023.09.02",
+      "spec": "漫画 386P",
+      "price": 2772,
+      "origPrice": 3960,
+      "discount": 30,
+      "campaignTitle": "30%OFF",
+      "rating": 4.8,
+      "reviewsCount": 80,
+      "dlCount": 2920,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-003.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-004.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-005.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-006.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/comic/d_284061/d_284061jp-007.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_284061%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "辱め",
+        "制服",
+        "処女",
+        "学園もの",
+        "巨乳",
+        "寝取り・寝取られ・NTR"
+      ]
+    },
+    {
+      "id": "d_842965",
+      "code": "d_842965",
+      "title": "【特典31P漫画付き！】キスフレ〇〇のすゝめ！After 〜夢咲ほのか編♪〜「キスフレ卒業→ついに恋人！→そして同棲」真夏にハードな交尾で汗だく潮吹き☆《幸せ・純愛・屈服》【ASMR Ver.】",
+      "category": "audio",
+      "isAi": false,
+      "creatorId": "maker_238860",
+      "author": "屈服のすゝめ！",
+      "circle": "屈服のすゝめ！",
+      "date": "2026.11.06",
+      "spec": "13本 (約453分)+α",
+      "price": 1980,
+      "origPrice": 3300,
+      "discount": 40,
+      "campaignTitle": "40%OFF",
+      "rating": 4.5,
+      "reviewsCount": 0,
+      "dlCount": 120,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-003.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-004.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-005.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-006.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-007.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-008.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-009.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/voice/d_842965/d_842965jp-010.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_842965%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "拘束",
+        "ラブラブ・あまあま",
+        "恋人同士",
+        "純愛",
+        "男性向け",
+        "成人向け"
+      ]
+    },
+    {
+      "id": "d_752299",
+      "code": "d_752299",
+      "title": "同居のルール ―義父に堕ちた計算高い妻―＜ノベルゲーム＞（実写系）",
+      "category": "game",
+      "isAi": true,
+      "creatorId": "maker_208988",
+      "author": "AIART REINA",
+      "circle": "AIART REINA",
+      "date": "2026.04.07",
+      "spec": "同人ゲーム・動画",
+      "price": 825,
+      "origPrice": 1650,
+      "discount": 50,
+      "campaignTitle": "50%OFF",
+      "rating": 4.11,
+      "reviewsCount": 19,
+      "dlCount": 785,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-003.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-004.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-005.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-006.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-007.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-008.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-009.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/game/d_752299/d_752299jp-010.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_752299%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "動画・アニメーション",
+        "音声付き",
+        "辱め",
+        "人妻・主婦",
+        "巨乳",
+        "AI生成"
+      ]
+    },
+    {
+      "id": "d_813142",
+      "code": "d_813142",
+      "title": "モモの監禁部屋",
+      "category": "cg",
+      "isAi": true,
+      "creatorId": "maker_223709",
+      "author": "Xion",
+      "circle": "Xion",
+      "date": "2026.09.06",
+      "spec": "画像500枚",
+      "price": 990,
+      "origPrice": 1980,
+      "discount": 50,
+      "campaignTitle": "50%OFF",
+      "rating": 5,
+      "reviewsCount": 1,
+      "dlCount": 155,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-003.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-004.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-005.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-006.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-007.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-008.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-009.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_813142/d_813142jp-010.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_813142%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "拘束",
+        "羞恥",
+        "デモ・体験版あり",
+        "制服",
+        "中出し",
+        "AI生成"
+      ]
+    },
+    {
+      "id": "d_842798",
+      "code": "d_842798",
+      "title": "【西〇寺春菜×古〇川唯】美少女2人が「あなたにだけ、見せてあげる…」って俺専用のメスになった話",
+      "category": "cg",
+      "isAi": true,
+      "creatorId": "maker_209594",
+      "author": "画像生成マン",
+      "circle": "画像生成マン",
+      "date": "2026.11.04",
+      "spec": "画像400枚",
+      "price": 330,
+      "origPrice": 1100,
+      "discount": 70,
+      "campaignTitle": "70%OFF",
+      "rating": 4.5,
+      "reviewsCount": 0,
+      "dlCount": 120,
+      "rank": 999,
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798pl.jpg",
+      "sampleImages": [
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-001.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-002.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-003.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-004.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-005.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-006.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-007.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-008.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-009.jpg",
+        "https://doujin-assets.dmm.co.jp/digital/cg/d_842798/d_842798jp-010.jpg"
+      ],
+      "affiliateUrl": "https://al.fanza.co.jp/?lurl=https%3A%2F%2Fwww.dmm.co.jp%2Fdc%2Fdoujin%2F-%2Fdetail%2F%3D%2Fcid%3Dd_842798%2F&af_id=douzinINFO-001&ch=toolbar&ch_id=link",
+      "tags": [
+        "拘束",
+        "デモ・体験版あり",
+        "学園もの",
+        "巨乳",
+        "中出し",
+        "AI生成"
+      ]
     }
   ],
   "creators": [
@@ -45064,8 +45342,8 @@
       "circle": "セフィロンソフト",
       "category": "game",
       "works": 2,
-      "totalReviews": 1916,
-      "avgRating": 4.69,
+      "totalReviews": 1923,
+      "avgRating": 4.7,
       "latest": "2026.10.26",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_837399/d_837399pl.jpg",
       "tags": [
@@ -45074,7 +45352,7 @@
         "制服",
         "学園もの"
       ],
-      "bio": "代表作『【スマホ対応】時間停止催●でJKにいたずらし放題な件について...』など計2作品を配信中（平均評価 ★4.69 / レビュー計1916件）。"
+      "bio": "代表作『【スマホ対応】時間停止催●でJKにいたずらし放題な件について...』など計2作品を配信中（平均評価 ★4.70 / レビュー計1923件）。"
     },
     {
       "id": "maker_237526",
@@ -45082,7 +45360,7 @@
       "circle": "催スタジオ",
       "category": "game",
       "works": 1,
-      "totalReviews": 845,
+      "totalReviews": 852,
       "avgRating": 4.65,
       "latest": "2026.10.22",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_837979/d_837979pl.jpg",
@@ -45092,7 +45370,7 @@
         "巨乳",
         "寝取り・寝取られ・NTR"
       ],
-      "bio": "代表作『【フルモーション×フルボイス】人妻寝取られ調教〜夫に差し出さ...』など計1作品を配信中（平均評価 ★4.65 / レビュー計845件）。"
+      "bio": "代表作『【フルモーション×フルボイス】人妻寝取られ調教〜夫に差し出さ...』など計1作品を配信中（平均評価 ★4.65 / レビュー計852件）。"
     },
     {
       "id": "maker_236213",
@@ -45118,7 +45396,7 @@
       "circle": "実話本舗",
       "category": "comic",
       "works": 2,
-      "totalReviews": 757,
+      "totalReviews": 758,
       "avgRating": 4.58,
       "latest": "2026.11.08",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_799208/d_799208pl.jpg",
@@ -45128,7 +45406,7 @@
         "メイド",
         "巨乳"
       ],
-      "bio": "代表作『【アニメ・フルボイス大型アプデ！】【ゲーム】人見知り保育士ち...』など計2作品を配信中（平均評価 ★4.58 / レビュー計757件）。"
+      "bio": "代表作『【アニメ・フルボイス大型アプデ！】【ゲーム】人見知り保育士ち...』など計2作品を配信中（平均評価 ★4.58 / レビュー計758件）。"
     },
     {
       "id": "maker_205707",
@@ -45167,24 +45445,6 @@
       "bio": "代表作『完全同意型性風俗SS株式会社《ぐらんデトックス！》』など計7作品を配信中（平均評価 ★4.73 / レビュー計260件）。"
     },
     {
-      "id": "maker_29143",
-      "name": "にゅう工房",
-      "circle": "にゅう工房",
-      "category": "game",
-      "works": 3,
-      "totalReviews": 399,
-      "avgRating": 4.47,
-      "latest": "2026.10.15",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_828591/d_828591pl.jpg",
-      "tags": [
-        "辱め",
-        "デモ・体験版あり",
-        "中出し",
-        "アナル"
-      ],
-      "bio": "代表作『ヤリステナイメスブター  世界を救った後の  ボクの日常『性...』など計3作品を配信中（平均評価 ★4.47 / レビュー計399件）。"
-    },
-    {
       "id": "maker_78983",
       "name": "Deep；Dahlia",
       "circle": "Deep；Dahlia",
@@ -45201,6 +45461,24 @@
         "3P・4P"
       ],
       "bio": "代表作『【KU100】超人気アイドルグループの裏ランキング＆スペシャ...』など計25作品を配信中（平均評価 ★4.57 / レビュー計182件）。"
+    },
+    {
+      "id": "maker_29143",
+      "name": "にゅう工房",
+      "circle": "にゅう工房",
+      "category": "game",
+      "works": 3,
+      "totalReviews": 399,
+      "avgRating": 4.47,
+      "latest": "2026.10.15",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_828591/d_828591pl.jpg",
+      "tags": [
+        "辱め",
+        "デモ・体験版あり",
+        "中出し",
+        "アナル"
+      ],
+      "bio": "代表作『ヤリステナイメスブター  世界を救った後の  ボクの日常『性...』など計3作品を配信中（平均評価 ★4.47 / レビュー計399件）。"
     },
     {
       "id": "maker_203522",
@@ -45280,7 +45558,7 @@
       "circle": "もみじもみもみ工房",
       "category": "game",
       "works": 2,
-      "totalReviews": 307,
+      "totalReviews": 308,
       "avgRating": 4.61,
       "latest": "2026.11.06",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_836995/d_836995pl.jpg",
@@ -45290,7 +45568,7 @@
         "巨乳",
         "寝取り・寝取られ・NTR"
       ],
-      "bio": "代表作『昼下がりのマッサージ〜夫に秘密で溶かされて〜』など計2作品を配信中（平均評価 ★4.61 / レビュー計307件）。"
+      "bio": "代表作『昼下がりのマッサージ〜夫に秘密で溶かされて〜』など計2作品を配信中（平均評価 ★4.61 / レビュー計308件）。"
     },
     {
       "id": "maker_206217",
@@ -45352,7 +45630,7 @@
       "circle": "ひえ子",
       "category": "game",
       "works": 2,
-      "totalReviews": 183,
+      "totalReviews": 185,
       "avgRating": 4.52,
       "latest": "2026.10.16",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_833309/d_833309pl.jpg",
@@ -45362,7 +45640,7 @@
         "巨乳",
         "水着"
       ],
-      "bio": "代表作『孕ませコンカフェ生活シミュレーター 〜悪魔と賭けて、推しを嫁...』など計2作品を配信中（平均評価 ★4.52 / レビュー計183件）。"
+      "bio": "代表作『孕ませコンカフェ生活シミュレーター 〜悪魔と賭けて、推しを嫁...』など計2作品を配信中（平均評価 ★4.52 / レビュー計185件）。"
     },
     {
       "id": "maker_25530",
@@ -45496,7 +45774,7 @@
       "circle": "いぬ",
       "category": "game",
       "works": 3,
-      "totalReviews": 203,
+      "totalReviews": 204,
       "avgRating": 3.73,
       "latest": "2026.07.04",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_725012/d_725012pl.jpg",
@@ -45506,7 +45784,7 @@
         "人妻・主婦",
         "巨乳"
       ],
-      "bio": "代表作『無人島ハーレム漂流記』など計3作品を配信中（平均評価 ★3.73 / レビュー計203件）。"
+      "bio": "代表作『無人島ハーレム漂流記』など計3作品を配信中（平均評価 ★3.73 / レビュー計204件）。"
     },
     {
       "id": "maker_238334",
@@ -45514,8 +45792,8 @@
       "circle": "もしもえっち",
       "category": "game",
       "works": 1,
-      "totalReviews": 154,
-      "avgRating": 4.44,
+      "totalReviews": 155,
+      "avgRating": 4.45,
       "latest": "2026.10.14",
       "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_833982/d_833982pl.jpg",
       "tags": [
@@ -45524,7 +45802,7 @@
         "中出し",
         "フェラ"
       ],
-      "bio": "代表作『俺だけが動ける街』など計1作品を配信中（平均評価 ★4.44 / レビュー計154件）。"
+      "bio": "代表作『俺だけが動ける街』など計1作品を配信中（平均評価 ★4.45 / レビュー計155件）。"
     },
     {
       "id": "maker_238335",
@@ -45563,24 +45841,6 @@
       "bio": "代表作『Trop 2 〜内定祝いは人妻のはじめてアナル〜』など計2作品を配信中（平均評価 ★4.92 / レビュー計87件）。"
     },
     {
-      "id": "maker_232064",
-      "name": "異世界チート工房×コミックアニマ",
-      "circle": "異世界チート工房×コミックアニマ",
-      "category": "comic",
-      "works": 2,
-      "totalReviews": 65,
-      "avgRating": 3.53,
-      "latest": "2026.10.02",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_824853/d_824853pl.jpg",
-      "tags": [
-        "制服",
-        "処女",
-        "ラブコメ",
-        "ギャル"
-      ],
-      "bio": "代表作『バレンタインにダウナー系銀髪ギャルから魔法のオナホをもらった...』など計2作品を配信中（平均評価 ★3.53 / レビュー計65件）。"
-    },
-    {
       "id": "maker_238282",
       "name": "バーチャルむちむち屋",
       "circle": "バーチャルむちむち屋",
@@ -45597,6 +45857,24 @@
         "寝取り・寝取られ・NTR"
       ],
       "bio": "代表作『VIPルームへようこそ〜カジノで勝って、美女とご褒美〜』など計2作品を配信中（平均評価 ★4.45 / レビュー計169件）。"
+    },
+    {
+      "id": "maker_232064",
+      "name": "異世界チート工房×コミックアニマ",
+      "circle": "異世界チート工房×コミックアニマ",
+      "category": "comic",
+      "works": 2,
+      "totalReviews": 65,
+      "avgRating": 3.53,
+      "latest": "2026.10.02",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_824853/d_824853pl.jpg",
+      "tags": [
+        "制服",
+        "処女",
+        "ラブコメ",
+        "ギャル"
+      ],
+      "bio": "代表作『バレンタインにダウナー系銀髪ギャルから魔法のオナホをもらった...』など計2作品を配信中（平均評価 ★3.53 / レビュー計65件）。"
     },
     {
       "id": "maker_78332",
@@ -45617,24 +45895,6 @@
       "bio": "代表作『オタク友達とのセックスは最高に気持ちいい 総集編I』など計4作品を配信中（平均評価 ★4.93 / レビュー計251件）。"
     },
     {
-      "id": "maker_75924",
-      "name": "やまなし娘。",
-      "circle": "やまなし娘。",
-      "category": "game",
-      "works": 3,
-      "totalReviews": 67,
-      "avgRating": 4.36,
-      "latest": "2026.05.01",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_738103/d_738103pl.jpg",
-      "tags": [
-        "動画・アニメーション",
-        "デモ・体験版あり",
-        "制服",
-        "中出し"
-      ],
-      "bio": "代表作『家出娘、拾いました。』など計3作品を配信中（平均評価 ★4.36 / レビュー計67件）。"
-    },
-    {
       "id": "maker_238132",
       "name": "EROS",
       "circle": "EROS",
@@ -45651,6 +45911,24 @@
         "フェラ"
       ],
       "bio": "代表作『ヤリ上がりアイランド！』など計1作品を配信中（平均評価 ★4.20 / レビュー計445件）。"
+    },
+    {
+      "id": "maker_75924",
+      "name": "やまなし娘。",
+      "circle": "やまなし娘。",
+      "category": "game",
+      "works": 3,
+      "totalReviews": 67,
+      "avgRating": 4.36,
+      "latest": "2026.05.01",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_738103/d_738103pl.jpg",
+      "tags": [
+        "動画・アニメーション",
+        "デモ・体験版あり",
+        "制服",
+        "中出し"
+      ],
+      "bio": "代表作『家出娘、拾いました。』など計3作品を配信中（平均評価 ★4.36 / レビュー計67件）。"
     },
     {
       "id": "maker_77422",
@@ -45725,24 +46003,6 @@
       "bio": "代表作『【スマホ対応】To L〇VE 校内ハンティング〜捕まえて・犯...』など計4作品を配信中（平均評価 ★4.02 / レビュー計26件）。"
     },
     {
-      "id": "maker_75370",
-      "name": "真珠貝",
-      "circle": "真珠貝",
-      "category": "comic",
-      "works": 2,
-      "totalReviews": 35,
-      "avgRating": 4.69,
-      "latest": "2026.10.23",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_825560/d_825560pl.jpg",
-      "tags": [
-        "人妻・主婦",
-        "巨乳",
-        "寝取り・寝取られ・NTR",
-        "専売"
-      ],
-      "bio": "代表作『武田弘光のSS＋ラクガキまとめ本』など計2作品を配信中（平均評価 ★4.69 / レビュー計35件）。"
-    },
-    {
       "id": "maker_213983",
       "name": "腰の神様",
       "circle": "腰の神様",
@@ -45761,6 +46021,42 @@
       "bio": "代表作『国家種馬法〜一番多く着床させた男は国宝に〜』など計2作品を配信中（平均評価 ★4.00 / レビュー計140件）。"
     },
     {
+      "id": "maker_208988",
+      "name": "AIART REINA",
+      "circle": "AIART REINA",
+      "category": "game",
+      "works": 5,
+      "totalReviews": 102,
+      "avgRating": 4.35,
+      "latest": "2026.11.06",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_845222/d_845222pl.jpg",
+      "tags": [
+        "動画・アニメーション",
+        "音声付き",
+        "アクション・格闘",
+        "巨乳"
+      ],
+      "bio": "代表作『会員制格闘クラブ ―一本取るまで、帰さない―（実写系）』など計5作品を配信中（平均評価 ★4.35 / レビュー計102件）。"
+    },
+    {
+      "id": "maker_75370",
+      "name": "真珠貝",
+      "circle": "真珠貝",
+      "category": "comic",
+      "works": 2,
+      "totalReviews": 35,
+      "avgRating": 4.69,
+      "latest": "2026.10.23",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_825560/d_825560pl.jpg",
+      "tags": [
+        "人妻・主婦",
+        "巨乳",
+        "寝取り・寝取られ・NTR",
+        "専売"
+      ],
+      "bio": "代表作『武田弘光のSS＋ラクガキまとめ本』など計2作品を配信中（平均評価 ★4.69 / レビュー計35件）。"
+    },
+    {
       "id": "maker_202968",
       "name": "UDS",
       "circle": "UDS",
@@ -45777,24 +46073,6 @@
         "中出し"
       ],
       "bio": "代表作『5人部屋』など計2作品を配信中（平均評価 ★5.00 / レビュー計9件）。"
-    },
-    {
-      "id": "maker_75698",
-      "name": "三崎",
-      "circle": "三崎",
-      "category": "comic",
-      "works": 2,
-      "totalReviews": 16,
-      "avgRating": 4.96,
-      "latest": "2026.11.09",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_730214/d_730214pl.jpg",
-      "tags": [
-        "制服",
-        "巨乳",
-        "お尻・ヒップ",
-        "焦らし"
-      ],
-      "bio": "代表作『彼女がいるから負けちゃダメなのに…！わるぅ〜い女の子のマゾ誘...』など計2作品を配信中（平均評価 ★4.96 / レビュー計16件）。"
     },
     {
       "id": "maker_24820",
@@ -45849,6 +46127,24 @@
         "巨乳"
       ],
       "bio": "代表作『処女が童貞との初体験で目覚めちゃう話4』など計5作品を配信中（平均評価 ★4.84 / レビュー計378件）。"
+    },
+    {
+      "id": "maker_75698",
+      "name": "三崎",
+      "circle": "三崎",
+      "category": "comic",
+      "works": 2,
+      "totalReviews": 17,
+      "avgRating": 4.96,
+      "latest": "2026.11.09",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_730214/d_730214pl.jpg",
+      "tags": [
+        "制服",
+        "巨乳",
+        "お尻・ヒップ",
+        "焦らし"
+      ],
+      "bio": "代表作『彼女がいるから負けちゃダメなのに…！わるぅ〜い女の子のマゾ誘...』など計2作品を配信中（平均評価 ★4.96 / レビュー計17件）。"
     },
     {
       "id": "maker_20320",
@@ -45923,6 +46219,24 @@
       "bio": "代表作『大っ嫌いな上司に頭おかしくなるまでハメ倒されました』など計2作品を配信中（平均評価 ★4.65 / レビュー計34件）。"
     },
     {
+      "id": "maker_227237",
+      "name": "こんなに大きくなりました",
+      "circle": "こんなに大きくなりました",
+      "category": "game",
+      "works": 1,
+      "totalReviews": 8,
+      "avgRating": 5,
+      "latest": "2026.11.07",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_667531/d_667531pl.jpg",
+      "tags": [
+        "ファンタジー",
+        "デモ・体験版あり",
+        "巨乳",
+        "寝取り・寝取られ・NTR"
+      ],
+      "bio": "代表作『【NTR×純愛×RPG】NighTmare Re:curse...』など計1作品を配信中（平均評価 ★5.00 / レビュー計8件）。"
+    },
+    {
       "id": "maker_77050",
       "name": "山紺屋",
       "circle": "山紺屋",
@@ -45939,24 +46253,6 @@
         "フェラ"
       ],
       "bio": "代表作『俺にだけ懐いている気弱な姪をオ◯ホにする話。』など計1作品を配信中（平均評価 ★5.00 / レビュー計6件）。"
-    },
-    {
-      "id": "maker_227237",
-      "name": "こんなに大きくなりました",
-      "circle": "こんなに大きくなりました",
-      "category": "game",
-      "works": 1,
-      "totalReviews": 7,
-      "avgRating": 5,
-      "latest": "2026.11.07",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_667531/d_667531pl.jpg",
-      "tags": [
-        "ファンタジー",
-        "デモ・体験版あり",
-        "巨乳",
-        "寝取り・寝取られ・NTR"
-      ],
-      "bio": "代表作『【NTR×純愛×RPG】NighTmare Re:curse...』など計1作品を配信中（平均評価 ★5.00 / レビュー計7件）。"
     },
     {
       "id": "maker_206994",
@@ -45995,42 +46291,6 @@
       "bio": "代表作『貧乳コンプレックスなジト目姉の育乳を手伝ったが大きくならない...』など計5作品を配信中（平均評価 ★4.79 / レビュー計54件）。"
     },
     {
-      "id": "maker_211420",
-      "name": "黄金紳士倶楽部",
-      "circle": "黄金紳士倶楽部",
-      "category": "comic",
-      "works": 3,
-      "totalReviews": 16,
-      "avgRating": 4.93,
-      "latest": "2026.11.02",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_833102/d_833102pl.jpg",
-      "tags": [
-        "制服",
-        "学園もの",
-        "巨乳",
-        "中出し"
-      ],
-      "bio": "代表作『僕のことが好きすぎる陰キャストーカー女子になら何をヤってもい...』など計3作品を配信中（平均評価 ★4.93 / レビュー計16件）。"
-    },
-    {
-      "id": "maker_208988",
-      "name": "AIART REINA",
-      "circle": "AIART REINA",
-      "category": "game",
-      "works": 4,
-      "totalReviews": 82,
-      "avgRating": 4.4,
-      "latest": "2026.11.06",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/game/d_845222/d_845222pl.jpg",
-      "tags": [
-        "動画・アニメーション",
-        "音声付き",
-        "アクション・格闘",
-        "巨乳"
-      ],
-      "bio": "代表作『会員制格闘クラブ ―一本取るまで、帰さない―（実写系）』など計4作品を配信中（平均評価 ★4.40 / レビュー計82件）。"
-    },
-    {
       "id": "maker_76297",
       "name": "STANKY",
       "circle": "STANKY",
@@ -46049,22 +46309,22 @@
       "bio": "代表作『剣道部主将で幼馴染の美人で強い僕の彼女が、チャラ男にあっさり...』など計1作品を配信中（平均評価 ★4.89 / レビュー計46件）。"
     },
     {
-      "id": "maker_77584",
-      "name": "クレージュアクセル",
-      "circle": "クレージュアクセル",
+      "id": "maker_211420",
+      "name": "黄金紳士倶楽部",
+      "circle": "黄金紳士倶楽部",
       "category": "comic",
-      "works": 2,
-      "totalReviews": 17,
-      "avgRating": 4.86,
-      "latest": "2026.11.01",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840812/d_840812pl.jpg",
+      "works": 3,
+      "totalReviews": 16,
+      "avgRating": 4.93,
+      "latest": "2026.11.02",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_833102/d_833102pl.jpg",
       "tags": [
         "制服",
         "学園もの",
-        "ギャル",
-        "巨乳"
+        "巨乳",
+        "中出し"
       ],
-      "bio": "代表作『放課後奉仕部（仮）〜なんでも出来ちゃう天才ギャル〜』など計2作品を配信中（平均評価 ★4.86 / レビュー計17件）。"
+      "bio": "代表作『僕のことが好きすぎる陰キャストーカー女子になら何をヤってもい...』など計3作品を配信中（平均評価 ★4.93 / レビュー計16件）。"
     },
     {
       "id": "maker_204379",
@@ -46085,6 +46345,24 @@
       "bio": "代表作『僕の部屋が幼馴染ギャルのヤリ部屋になった話』など計1作品を配信中（平均評価 ★4.79 / レビュー計19件）。"
     },
     {
+      "id": "maker_77584",
+      "name": "クレージュアクセル",
+      "circle": "クレージュアクセル",
+      "category": "comic",
+      "works": 2,
+      "totalReviews": 17,
+      "avgRating": 4.86,
+      "latest": "2026.11.01",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/comic/d_840812/d_840812pl.jpg",
+      "tags": [
+        "制服",
+        "学園もの",
+        "ギャル",
+        "巨乳"
+      ],
+      "bio": "代表作『放課後奉仕部（仮）〜なんでも出来ちゃう天才ギャル〜』など計2作品を配信中（平均評価 ★4.86 / レビュー計17件）。"
+    },
+    {
       "id": "maker_204289",
       "name": "SORAREVO",
       "circle": "SORAREVO",
@@ -46103,24 +46381,6 @@
       "bio": "代表作『ROOM』など計1作品を配信中（平均評価 ★4.14 / レビュー計49件）。"
     },
     {
-      "id": "maker_204643",
-      "name": "アトリエTODO",
-      "circle": "アトリエTODO",
-      "category": "audio",
-      "works": 6,
-      "totalReviews": 36,
-      "avgRating": 4.86,
-      "latest": "2026.08.24",
-      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_649069/d_649069pl.jpg",
-      "tags": [
-        "人妻・主婦",
-        "巨乳",
-        "寝取り・寝取られ・NTR",
-        "中出し"
-      ],
-      "bio": "代表作『アトリエTODO ASMR総集編  累計200万本突破記念！...』など計6作品を配信中（平均評価 ★4.86 / レビュー計36件）。"
-    },
-    {
       "id": "maker_27753",
       "name": "azcat",
       "circle": "azcat",
@@ -46137,6 +46397,24 @@
         "レズビアン"
       ],
       "bio": "代表作『姦落のダークエルフ』など計1作品を配信中（平均評価 ★4.50 / レビュー計4件）。"
+    },
+    {
+      "id": "maker_204643",
+      "name": "アトリエTODO",
+      "circle": "アトリエTODO",
+      "category": "audio",
+      "works": 6,
+      "totalReviews": 36,
+      "avgRating": 4.86,
+      "latest": "2026.08.24",
+      "imageUrl": "https://doujin-assets.dmm.co.jp/digital/voice/d_649069/d_649069pl.jpg",
+      "tags": [
+        "人妻・主婦",
+        "巨乳",
+        "寝取り・寝取られ・NTR",
+        "中出し"
+      ],
+      "bio": "代表作『アトリエTODO ASMR総集編  累計200万本突破記念！...』など計6作品を配信中（平均評価 ★4.86 / レビュー計36件）。"
     }
   ]
 }
