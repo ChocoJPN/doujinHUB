@@ -701,6 +701,9 @@
           const data = await res.json();
           if (data && data.mode === "live" && Array.isArray(data.works) && data.works.length > 0) {
             WORKS = data.works;
+            if (Array.isArray(data.creators) && data.creators.length > 0) {
+              CREATORS = data.creators;
+            }
             render();
             return;
           }

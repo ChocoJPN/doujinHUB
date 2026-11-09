@@ -1,22 +1,16 @@
 /**
  * Cloudflare Pages Functions: /api/fanza
  *
- * FANZA (DMM Affiliate API v3) から同人作品データを取得し、
- * 作品一覧・作家/サークル集計・市場データ分析（ジャンル傾向・価格帯・割引率）を返します。
+ * FANZA (DMM Affiliate API v3) から同人作品（ランキング・新着・音声）を取得し、
+ * 作品一覧と人気サークル/作家の自動集計データを返します。
  */
 
 export async function onRequestGet(context) {
-  const { request, env } = context;
-  const url = new URL(request.url);
-
-  const sort = url.searchParams.get("sort") || "date"; // 'date' (新着) | 'rank' (人気ランキング)
-  const keyword = url.searchParams.get("keyword") || "";
-  const hits = Math.min(Number(url.searchParams.get("hits") || 40), 100);
+  const { env } = context;
 
   const apiId = env.DMM_API_ID;
   const affiliateId = env.DMM_AFFILIATE_ID;
 
-  // APIキーが未設定の場合はステータスを返し、フロントエンド側でサンプルデータにフォールバックさせる
   if (!apiId || !affiliateId || apiId === "あなたのDMM_API_ID") {
     return new Response(
       JSON.stringify({
@@ -33,95 +27,64 @@ export async function onRequestGet(context) {
     );
   }
 
-  try {
-    const apiParams = new URLSearchParams({
+  async function callFanza({ sort = "rank", hits = 80, keyword = "" }) {
+    const params = new URLSearchParams({
       api_id: apiId,
       affiliate_id: affiliateId,
       site: "FANZA",
       service: "doujin",
       floor: "digital_doujin",
       hits: String(hits),
-      sort: sort,
+      sort,
       output: "json"
     });
+    if (keyword) params.set("keyword", keyword);
 
-    if (keyword) {
-      apiParams.set("keyword", keyword);
-    }
+    const res = await fetch(`https://api.dmm.com/affiliate/v3/ItemList?${params.toString()}`);
+    if (!res.ok) throw new Error(`DMM API HTTP Error: ${res.status}`);
+    const json = await res.json();
+    return json?.result?.items || [];
+  }
 
-    const dmmEndpoint = `https://api.dmm.com/affiliate/v3/ItemList?${apiParams.toString()}`;
-    const res = await fetch(dmmEndpoint);
+  try {
+    const [rankItems, newItems, audioItems] = await Promise.all([
+      callFanza({ sort: "rank", hits: 80 }),
+      callFanza({ sort: "date", hits: 80 }),
+      callFanza({ sort: "rank", hits: 50, keyword: "バイノーラル" })
+    ]);
 
-    if (!res.ok) {
-      throw new Error(`DMM API HTTP Error: ${res.status}`);
-    }
+    const mergedMap = new Map();
 
-    const raw = await res.json();
-    const items = raw?.result?.items || [];
-
-    // 1. 作品データの正規化
-    const works = items.map((item, idx) => {
-      const genres = (item.iteminfo?.genre || []).map((g) => g.name);
-      const makers = (item.iteminfo?.maker || []).map((m) => m.name);
-      const circleName = makers[0] || "同人サークル";
-      const circleId = item.iteminfo?.maker?.[0]?.id ? `maker_${item.iteminfo.maker[0].id}` : `c_${idx}`;
-
-      // カテゴリ判定 (コミック / 音声 / CG)
-      const isAudio =
-        genres.some((g) => g.includes("音声") || g.includes("ASMR") || g.includes("バイノーラル")) ||
-        (item.volume && String(item.volume).includes("分"));
-      const isCg = genres.some((g) => g.includes("CG") || g.includes("イラスト"));
-      const category = isAudio ? "audio" : isCg ? "cg" : "comic";
-
-      // 価格・割引計算
-      const priceStr = String(item.prices?.price || "0").replace(/[^0-9]/g, "");
-      const listPriceStr = String(item.prices?.list_price || priceStr).replace(/[^0-9]/g, "");
-      const price = Number(priceStr) || 0;
-      const origPrice = Number(listPriceStr) || price;
-      const discount = origPrice > price ? Math.round(((origPrice - price) / origPrice) * 100) : 0;
-
-      // レビュー・評価
-      const rating = Number(item.review?.average || 0);
-      const reviewsCount = Number(item.review?.count || 0);
-
-      return {
-        id: item.content_id || `w_${idx}`,
-        code: item.content_id || "",
-        title: item.title || "",
-        category,
-        creatorId: circleId,
-        author: circleName,
-        circle: circleName,
-        date: (item.date || "").split(" ")[0].replace(/-/g, "."),
-        spec: item.volume ? `${item.volume}` : category === "audio" ? "VOICE" : "COMIC",
-        price,
-        origPrice,
-        discount,
-        rating: rating || 4.5,
-        reviewsCount,
-        dlCount: reviewsCount * 35,
-        rank: idx + 1,
-        imageUrl: item.imageURL?.large || item.imageURL?.list || "",
-        affiliateUrl: item.affiliateURL || `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${item.content_id}/`,
-        tags: genres.slice(0, 6)
-      };
+    rankItems.forEach((item, idx) => {
+      const norm = normalizeItem(item, idx + 1);
+      mergedMap.set(norm.id, norm);
+    });
+    newItems.forEach((item) => {
+      if (!mergedMap.has(item.content_id)) {
+        mergedMap.set(item.content_id, normalizeItem(item, 999));
+      }
+    });
+    audioItems.forEach((item) => {
+      if (!mergedMap.has(item.content_id)) {
+        mergedMap.set(item.content_id, normalizeItem(item, 999));
+      }
     });
 
-    // 2. データ分析 (Analytics) の集計
-    const analytics = analyzeWorks(works);
+    const works = Array.from(mergedMap.values());
+    const creators = analyzeTopCreators(works);
 
     return new Response(
       JSON.stringify({
         ok: true,
         mode: "live",
-        totalCount: raw?.result?.total_count || works.length,
+        totalCount: works.length,
         works,
-        analytics
+        creators
       }),
       {
         headers: {
           "Content-Type": "application/json; charset=utf-8",
-          "Cache-Control": "public, max-age=600"
+          "Cache-Control": "public, max-age=900"
         }
       }
     );
@@ -140,77 +103,102 @@ export async function onRequestGet(context) {
   }
 }
 
-/**
- * 取得したFANZA同人作品の市場傾向・ジャンル・価格帯を分析する
- */
-function analyzeWorks(works) {
-  if (!works.length) {
-    return {
-      totalAnalyzed: 0,
-      averagePrice: 0,
-      averageRating: 0,
-      saleRatioPercent: 0,
-      categoryBreakdown: { comic: 0, audio: 0, cg: 0 },
-      topGenres: [],
-      priceDistribution: []
-    };
-  }
+function normalizeItem(item, rankNumber) {
+  const genres = (item.iteminfo?.genre || []).map((g) => g.name);
+  const makers = item.iteminfo?.maker || [];
+  const circleName = makers[0]?.name || "同人サークル";
+  const circleId = makers[0]?.id ? `maker_${makers[0].id}` : `circle_${circleName}`;
 
-  let priceSum = 0;
-  let ratingSum = 0;
-  let saleCount = 0;
-  const catCounts = { comic: 0, audio: 0, cg: 0 };
-  const genreMap = new Map();
-  const priceBuckets = {
-    "〜¥500": 0,
-    "¥501〜¥1,000": 0,
-    "¥1,001〜¥1,500": 0,
-    "¥1,501〜": 0
-  };
+  const volumeStr = String(item.volume || "");
+  const titleStr = String(item.title || "");
+  const isAudio =
+    genres.some((g) => g.includes("音声") || g.includes("ASMR") || g.includes("バイノーラル") || g.includes("ボイス")) ||
+    volumeStr.includes("分") ||
+    titleStr.includes("【音声】") ||
+    titleStr.includes("バイノーラル");
+  const isCg =
+    !isAudio &&
+    (genres.some((g) => g.includes("CG") || g.includes("イラスト")) || titleStr.includes("CG集"));
 
-  for (const w of works) {
-    priceSum += w.price;
-    ratingSum += w.rating;
-    if (w.discount > 0) saleCount++;
-    catCounts[w.category] = (catCounts[w.category] || 0) + 1;
+  const category = isAudio ? "audio" : isCg ? "cg" : "comic";
 
-    if (w.price <= 500) priceBuckets["〜¥500"]++;
-    else if (w.price <= 1000) priceBuckets["¥501〜¥1,000"]++;
-    else if (w.price <= 1500) priceBuckets["¥1,001〜¥1,500"]++;
-    else priceBuckets["¥1,501〜"]++;
+  const priceStr = String(item.prices?.price || "0").replace(/[^0-9]/g, "");
+  const listPriceStr = String(item.prices?.list_price || priceStr).replace(/[^0-9]/g, "");
+  const price = Number(priceStr) || 0;
+  const origPrice = Number(listPriceStr) || price;
+  const discount = origPrice > price ? Math.round(((origPrice - price) / origPrice) * 100) : 0;
 
-    for (const tag of w.tags) {
-      const prev = genreMap.get(tag) || { name: tag, count: 0, totalPrice: 0, totalRating: 0 };
-      prev.count++;
-      prev.totalPrice += w.price;
-      prev.totalRating += w.rating;
-      genreMap.set(tag, prev);
-    }
-  }
-
-  const topGenres = Array.from(genreMap.values())
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 10)
-    .map((g) => ({
-      name: g.name,
-      count: g.count,
-      avgPrice: Math.round(g.totalPrice / g.count),
-      avgRating: Number((g.totalRating / g.count).toFixed(2))
-    }));
-
-  const priceDistribution = Object.entries(priceBuckets).map(([range, count]) => ({
-    range,
-    count,
-    percent: Math.round((count / works.length) * 100)
-  }));
+  const rating = Number(item.review?.average || 0);
+  const reviewsCount = Number(item.review?.count || 0);
+  const sampleImages = item.sampleImageURL?.sample_s?.image || [];
 
   return {
-    totalAnalyzed: works.length,
-    averagePrice: Math.round(priceSum / works.length),
-    averageRating: Number((ratingSum / works.length).toFixed(2)),
-    saleRatioPercent: Math.round((saleCount / works.length) * 100),
-    categoryBreakdown: catCounts,
-    topGenres,
-    priceDistribution
+    id: item.content_id,
+    code: item.content_id,
+    title: item.title || "",
+    category,
+    creatorId: circleId,
+    author: circleName,
+    circle: circleName,
+    date: (item.date || "").split(" ")[0].replace(/-/g, "."),
+    spec: volumeStr ? volumeStr : category === "audio" ? "ボイス・ASMR" : category === "cg" ? "CG集" : "同人誌",
+    price,
+    origPrice,
+    discount,
+    rating: rating > 0 ? rating : 4.5,
+    reviewsCount,
+    dlCount: reviewsCount * 30 + (rankNumber ? Math.max(0, 100 - rankNumber) * 50 : 100),
+    rank: rankNumber || 999,
+    imageUrl: item.imageURL?.large || item.imageURL?.list || "",
+    sampleImages: sampleImages.slice(0, 8),
+    affiliateUrl: item.affiliateURL,
+    tags: genres.slice(0, 6)
   };
+}
+
+function analyzeTopCreators(works) {
+  const map = new Map();
+  for (const w of works) {
+    const existing = map.get(w.creatorId) || {
+      id: w.creatorId,
+      name: w.author,
+      circle: w.circle,
+      category: w.category,
+      works: 0,
+      totalReviews: 0,
+      ratingSum: 0,
+      bestRank: 999,
+      latest: w.date,
+      topWorkTitle: w.title
+    };
+    existing.works++;
+    existing.totalReviews += w.reviewsCount || 0;
+    existing.ratingSum += w.rating || 4.5;
+    if (w.rank < existing.bestRank) {
+      existing.bestRank = w.rank;
+      existing.topWorkTitle = w.title;
+    }
+    if (w.date > existing.latest) existing.latest = w.date;
+    map.set(w.creatorId, existing);
+  }
+
+  return Array.from(map.values())
+    .sort((a, b) => {
+      const scoreA = a.works * 100 + a.totalReviews * 5 + (100 - Math.min(100, a.bestRank)) * 10;
+      const scoreB = b.works * 100 + b.totalReviews * 5 + (100 - Math.min(100, b.bestRank)) * 10;
+      return scoreB - scoreA;
+    })
+    .slice(0, 36)
+    .map((c) => {
+      const avgRating = (c.ratingSum / c.works).toFixed(2);
+      return {
+        id: c.id,
+        name: c.name,
+        circle: c.circle,
+        category: c.category,
+        works: c.works,
+        latest: c.latest,
+        bio: `代表作『${c.topWorkTitle.slice(0, 28)}...』など計${c.works}作品がランクイン（平均評価 ★${avgRating} / レビュー計${c.totalReviews}件）。`
+      };
+    });
 }
