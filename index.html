@@ -1045,13 +1045,11 @@
     };
 
     /**
-     * アフィリエイトID設定
-     * - DMM管理画面で「FANZA（アダルト）対応」および「Webサービス用(-990)またはサイト用(-001)」として
-     *   正式に有効化されているIDを設定するとアフィリエイトリンク経由になります。
-     * - 空文字 "" の場合は、エラー画面（al.fanza.co.jpの無効リンク画面）を回避し、
-     *   100%確実にFANZA同人の作品詳細ページへ直接遷移します。
+     * サイト掲載用アフィリエイトID設定
+     * - APIデータ取得には douzinINFO-990 を使い、
+     *   サイト上の作品リンクにはサイト承認済みの douzinINFO-001（テスト②の形式）を使用します。
      */
-    const ACTIVE_AFFILIATE_ID = "douzinINFO-990";
+    const ACTIVE_AFFILIATE_ID = "douzinINFO-001";
 
     function buildFanzaUrl(w) {
       const code = w.code || w.id;
@@ -1060,10 +1058,7 @@
       if (!ACTIVE_AFFILIATE_ID) {
         return directUrl;
       }
-      if (ACTIVE_AFFILIATE_ID.endsWith("-990") && w.affiliateUrl) {
-        return w.affiliateUrl;
-      }
-      return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(ACTIVE_AFFILIATE_ID)}&ch=link_tool&ch_id=link`;
+      return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(ACTIVE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
     }
 
     async function tryFetchLiveFanzaData() {

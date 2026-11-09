@@ -190,9 +190,13 @@ function normalizeItem(item, rankNumber) {
   const sampleSmall = item.sampleImageURL?.sample_s?.image || [];
   const sampleImages = (sampleLarge.length > 0 ? sampleLarge : sampleSmall).slice(0, 10);
 
+  const cid = item.content_id;
+  const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${cid}/`;
+  const siteAffiliateUrl = `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-001&ch=toolbar&ch_id=link`;
+
   return {
-    id: item.content_id,
-    code: item.content_id,
+    id: cid,
+    code: cid,
     title: titleStr,
     category,
     isAi,
@@ -210,7 +214,7 @@ function normalizeItem(item, rankNumber) {
     rank: rankNumber || 999,
     imageUrl,
     sampleImages,
-    affiliateUrl: item.affiliateURL,
+    affiliateUrl: siteAffiliateUrl,
     tags: baseTags
   };
 }

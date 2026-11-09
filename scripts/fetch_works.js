@@ -41,6 +41,10 @@ loadLocalEnv();
 
 const DMM_API_ID = process.env.DMM_API_ID || "";
 const DMM_AFFILIATE_ID = process.env.DMM_AFFILIATE_ID || "";
+// サイト掲載用の通常アフィリエイトID（末尾を -001 に変換してリンク生成に使用）
+const DMM_SITE_AFFILIATE_ID =
+  process.env.DMM_SITE_AFFILIATE_ID ||
+  (DMM_AFFILIATE_ID ? DMM_AFFILIATE_ID.replace(/-\d+$/, "-001") : "douzinINFO-001");
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -179,6 +183,10 @@ function normalizeItem(item, rankNumber) {
   // キャンペーン情報
   const campaignTitle = item.campaign?.[0]?.title || (discount > 0 ? `${discount}%OFFセール` : "");
 
+  // サイト掲載用のアフィリエイトリンク（承認済みサイトID -001 の形式）を生成
+  const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${item.content_id}/`;
+  const siteAffiliateUrl = `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(DMM_SITE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
+
   return {
     id: item.content_id,
     code: item.content_id,
@@ -200,7 +208,7 @@ function normalizeItem(item, rankNumber) {
     rank: rankNumber || 999,
     imageUrl,
     sampleImages,
-    affiliateUrl: item.affiliateURL,
+    affiliateUrl: siteAffiliateUrl,
     tags: baseTags
   };
 }
@@ -212,11 +220,15 @@ function renormalizeExistingWork(w) {
   const category = detectCategory(w.imageUrl, w.tags || [], w.spec || "", w.title || "");
   const spec = formatSpec(w.spec, category);
   const isAi = Boolean(w.isAi) || detectIsAi(w.tags || [], w.title || "", w.circle || w.author || "");
+  const code = w.code || w.id;
+  const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
+  const affiliateUrl = `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(DMM_SITE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
   return {
     ...w,
     category,
     spec,
-    isAi
+    isAi,
+    affiliateUrl
   };
 }
 
