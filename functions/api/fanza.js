@@ -48,15 +48,29 @@ export async function onRequestGet(context) {
   }
 
   try {
-    const [rank1, rank2, new1, new2, audio1, audio2, comic1] = await Promise.all([
+    const [rank1, rank2, new1, new2, audio1, audio2, comic1, ai1, ai2, ai3, ai4] = await Promise.all([
       callFanza({ sort: "rank", hits: 100, offset: 1 }),
       callFanza({ sort: "rank", hits: 100, offset: 101 }),
       callFanza({ sort: "date", hits: 100, offset: 1 }),
       callFanza({ sort: "date", hits: 100, offset: 101 }),
       callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "バイノーラル" }),
       callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "KU100" }),
-      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "総集編" })
+      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "総集編" }),
+      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "AI生成" }),
+      callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "生成AI" }),
+      callFanza({ sort: "date", hits: 100, offset: 1, keyword: "AI生成" }),
+      callFanza({ sort: "date", hits: 100, offset: 1, keyword: "生成AI" })
     ]);
+
+    const aiCidSet = new Set();
+    const aiMakerSet = new Set();
+    for (const list of [ai1, ai2, ai3, ai4]) {
+      list.forEach((it) => {
+        aiCidSet.add(it.content_id);
+        const mId = it.iteminfo?.maker?.[0]?.id;
+        if (mId) aiMakerSet.add(`maker_${mId}`);
+      });
+    }
 
     const mergedMap = new Map();
 
@@ -76,7 +90,16 @@ export async function onRequestGet(context) {
       });
     }
 
-    const works = Array.from(mergedMap.values());
+    const works = Array.from(mergedMap.values()).map((w) => {
+      if (aiCidSet.has(w.id) || aiMakerSet.has(w.creatorId)) {
+        w.isAi = true;
+        if (!w.tags.includes("AI生成")) {
+          if (w.tags.length >= 6) w.tags.pop();
+          w.tags.push("AI生成");
+        }
+      }
+      return w;
+    });
     const creators = analyzeTopCreators(works);
 
     return new Response(

@@ -50,7 +50,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function fetchFanzaList({ sort = "rank", hits = 100, offset = 1, keyword = "" } = {}) {
+async function fetchFanzaList({ sort = "rank", hits = 100, offset = 1, keyword = "", article = "", article_id = "" } = {}) {
   const params = new URLSearchParams({
     api_id: DMM_API_ID,
     affiliate_id: DMM_AFFILIATE_ID,
@@ -59,22 +59,135 @@ async function fetchFanzaList({ sort = "rank", hits = 100, offset = 1, keyword =
     floor: "digital_doujin",
     hits: String(hits),
     offset: String(offset),
-    sort: sort, // 'date' (新着順) | 'rank' (人気ランキング順)
+    sort: sort,
     output: "json"
   });
 
-  if (keyword) {
-    params.set("keyword", keyword);
-  }
+  if (keyword) params.set("keyword", keyword);
+  if (article) params.set("article", article);
+  if (article_id) params.set("article_id", article_id);
 
   const url = `https://api.dmm.com/affiliate/v3/ItemList?${params.toString()}`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`FANZA API HTTP Error (${res.status}): ${errText}`);
+  for (let attempt = 0; attempt < 4; attempt++) {
+    try {
+      const res = await fetch(url, { headers: { Connection: "close" } });
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(`FANZA API HTTP Error (${res.status}): ${errText}`);
+      }
+      const json = await res.json();
+      return json?.result?.items || [];
+    } catch (err) {
+      if (attempt === 3) throw err;
+      await sleep(300 * (attempt + 1));
+    }
   }
-  const json = await res.json();
-  return json?.result?.items || [];
+  return [];
+}
+
+/**
+ * FANZA APIのキーワード検索は「作品の概要欄（紹介文・コメント）」も全文検索対象になるため、
+ * 概要欄によく書かれる「AIで作成しています」「生成AI」「AIを使用」「AI生成」などのフレーズで
+ * 検索を実行し、概要欄にAI表記がある作品のIDとサークルIDを網羅的に収集する。
+ */
+async function scanAiWorksFromDescriptions() {
+  console.log("🔍 作品の概要欄（商品説明文）に「AIで作成」「生成AI」「AIを使用」等の記載がある作品をスキャン中...");
+
+  const aiQueries = [
+    { keyword: "AI生成", sort: "rank", offset: 1 },
+    { keyword: "AI生成", sort: "rank", offset: 101 },
+    { keyword: "AI生成", sort: "rank", offset: 201 },
+    { keyword: "AI生成", sort: "rank", offset: 301 },
+    { keyword: "AI生成", sort: "rank", offset: 401 },
+    { keyword: "AI生成", sort: "date", offset: 1 },
+    { keyword: "AI生成", sort: "date", offset: 101 },
+    { keyword: "AI生成", sort: "date", offset: 201 },
+    { keyword: "AI生成", sort: "date", offset: 301 },
+    { keyword: "生成AI", sort: "rank", offset: 1 },
+    { keyword: "生成AI", sort: "rank", offset: 101 },
+    { keyword: "生成AI", sort: "rank", offset: 201 },
+    { keyword: "生成AI", sort: "rank", offset: 301 },
+    { keyword: "生成AI", sort: "rank", offset: 401 },
+    { keyword: "生成AI", sort: "date", offset: 1 },
+    { keyword: "生成AI", sort: "date", offset: 101 },
+    { keyword: "生成AI", sort: "date", offset: 201 },
+    { keyword: "生成AI", sort: "date", offset: 301 },
+    { keyword: "AIイラスト", sort: "rank", offset: 1 },
+    { keyword: "AIイラスト", sort: "rank", offset: 101 },
+    { keyword: "AIイラスト", sort: "date", offset: 1 },
+    { keyword: "AIイラスト", sort: "date", offset: 101 },
+    { keyword: "AI加筆", sort: "rank", offset: 1 },
+    { keyword: "AI加筆", sort: "date", offset: 1 },
+    { keyword: "AI出力", sort: "rank", offset: 1 },
+    { keyword: "AI出力", sort: "date", offset: 1 },
+    { keyword: "AIグラビア", sort: "rank", offset: 1 },
+    { keyword: "AI美女", sort: "rank", offset: 1 },
+    { keyword: "AI漫画", sort: "rank", offset: 1 },
+    { keyword: "AIコミック", sort: "rank", offset: 1 },
+    { keyword: "AI音声", sort: "rank", offset: 1 },
+    { keyword: "AIボイス", sort: "rank", offset: 1 },
+    { keyword: "Stable Diffusion", sort: "rank", offset: 1 },
+    { keyword: "NovelAI", sort: "rank", offset: 1 },
+    { keyword: "フルカラー AI生成", sort: "rank", offset: 1 },
+    { keyword: "フルカラー 生成AI", sort: "rank", offset: 1 },
+    { keyword: "フルカラー AIイラスト", sort: "rank", offset: 1 },
+    { keyword: "CG集 AI生成", sort: "rank", offset: 1 },
+    { keyword: "CG集 生成AI", sort: "rank", offset: 1 },
+    { keyword: "CG集 AIイラスト", sort: "rank", offset: 1 },
+    { keyword: "CG集 AI加筆", sort: "rank", offset: 1 },
+    { keyword: "総集編 AI生成", sort: "rank", offset: 1 },
+    { keyword: "総集編 生成AI", sort: "rank", offset: 1 },
+    { keyword: "バイノーラル AI生成", sort: "rank", offset: 1 },
+    { keyword: "バイノーラル 生成AI", sort: "rank", offset: 1 },
+    { keyword: "耳かき AI生成", sort: "rank", offset: 1 },
+    { keyword: "描き下ろし AI生成", sort: "rank", offset: 1 },
+    { article: "genre", article_id: "160132", sort: "rank", offset: 1 }
+  ];
+
+  const aiCidMap = new Map();
+  const aiMakerSet = new Set();
+
+  const chunkSize = 4;
+  for (let i = 0; i < aiQueries.length; i += chunkSize) {
+    const chunk = aiQueries.slice(i, i + chunkSize);
+    const results = await Promise.all(
+      chunk.map(async (q) => {
+        try {
+          const items = await fetchFanzaList({
+            sort: q.sort,
+            hits: 100,
+            offset: q.offset,
+            keyword: q.keyword || "",
+            article: q.article || "",
+            article_id: q.article_id || ""
+          });
+          return { q, items };
+        } catch (e) {
+          return { q, items: [] };
+        }
+      })
+    );
+
+    for (const { q, items } of results) {
+      const label = q.keyword || "AI生成ジャンル";
+      for (const it of items) {
+        if (!aiCidMap.has(it.content_id)) {
+          aiCidMap.set(it.content_id, label);
+        }
+        const makerId = it.iteminfo?.maker?.[0]?.id;
+        if (makerId) {
+          aiMakerSet.add(`maker_${makerId}`);
+        }
+      }
+    }
+
+    if (i + chunkSize < aiQueries.length) {
+      await sleep(220);
+    }
+  }
+
+  console.log(`   ✔ 概要欄AIスキャン完了: AI記載作品 ${aiCidMap.size}件 / AI使用確認サークル ${aiMakerSet.size}組 を特定`);
+  return { aiCidMap, aiMakerSet };
 }
 
 /**
@@ -217,14 +330,16 @@ function normalizeItem(item, rankNumber) {
  * 既存の保存済みワークデータも最新ルールで再正規化する
  */
 function renormalizeExistingWork(w) {
-  const category = detectCategory(w.imageUrl, w.tags || [], w.spec || "", w.title || "");
+  const cleanTags = (w.tags || []).filter((t) => t !== "AI生成");
+  const category = detectCategory(w.imageUrl, cleanTags, w.spec || "", w.title || "");
   const spec = formatSpec(w.spec, category);
-  const isAi = Boolean(w.isAi) || detectIsAi(w.tags || [], w.title || "", w.circle || w.author || "");
+  const isAi = detectIsAi(cleanTags, w.title || "", w.circle || w.author || "");
   const code = w.code || w.id;
   const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
   const affiliateUrl = `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(DMM_SITE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
   return {
     ...w,
+    tags: cleanTags,
     category,
     spec,
     isAi,
@@ -386,12 +501,33 @@ async function main() {
     }
   }
 
-  const works = Array.from(mergedMap.values());
+  // 作品の概要欄（商品説明文）からのAI表記スキャンを実行して全作品に反映
+  const { aiCidMap, aiMakerSet } = await scanAiWorksFromDescriptions();
 
-  // カテゴリ別集計
+  const works = Array.from(mergedMap.values()).map((w) => {
+    const summaryAiHit = aiCidMap.has(w.id);
+    const makerAiHit = aiMakerSet.has(w.creatorId);
+    const isAi = Boolean(w.isAi || summaryAiHit || makerAiHit);
+    const tags = Array.isArray(w.tags) ? [...w.tags] : [];
+    if (isAi && !tags.includes("AI生成") && !tags.includes("AI使用")) {
+      if (tags.length >= 6) tags.pop();
+      tags.push("AI生成");
+    }
+    return {
+      ...w,
+      isAi,
+      tags
+    };
+  });
+
+  // カテゴリ別＆AI/非AI集計
   const stats = { comic: 0, audio: 0, cg: 0, game: 0 };
+  let aiTotal = 0;
+  let nonAiTotal = 0;
   works.forEach((w) => {
     stats[w.category] = (stats[w.category] || 0) + 1;
+    if (w.isAi) aiTotal++;
+    else nonAiTotal++;
   });
 
   const creators = analyzeTopCreators(works);
@@ -400,6 +536,8 @@ async function main() {
     updatedAt: new Date().toISOString(),
     mode: "live",
     totalCount: works.length,
+    aiCount: aiTotal,
+    nonAiCount: nonAiTotal,
     categoryCounts: stats,
     works,
     creators
@@ -412,8 +550,8 @@ async function main() {
   const jsContent = `// 自動生成ファイル: node scripts/fetch_works.js により出力\nwindow.FANZA_LIVE_DATA = ${JSON.stringify(payload)};\n`;
   fs.writeFileSync(outJsFile, jsContent, "utf8");
 
-  console.log(`\n✅ 大量取得・カテゴリ精密分類が完了しました！`);
-  console.log(`   - 総作品数: ${works.length}件`);
+  console.log(`\n✅ 大量取得・カテゴリ精密分類・概要欄AI分別が完了しました！`);
+  console.log(`   - 総作品数: ${works.length}件（非AI: ${nonAiTotal}件 / AI作品: ${aiTotal}件）`);
   console.log(`     ・同人誌・漫画 (comic): ${stats.comic}件`);
   console.log(`     ・同人音声・ASMR (audio): ${stats.audio}件`);
   console.log(`     ・CG・イラスト集 (cg): ${stats.cg}件`);

@@ -1160,7 +1160,15 @@
 
     function applyDataset(data) {
       if (!data || !Array.isArray(data.works) || data.works.length === 0) return false;
-      WORKS = data.works.map(normalizeWorkOnClient);
+      const prevAiMap = new Map(WORKS.map((w) => [w.id, Boolean(w.isAi)]));
+      WORKS = data.works.map((w) => {
+        const norm = normalizeWorkOnClient(w);
+        if (prevAiMap.get(norm.id)) {
+          norm.isAi = true;
+          if (!norm.tags.includes("AI生成")) norm.tags = [...norm.tags.slice(0, 5), "AI生成"];
+        }
+        return norm;
+      });
 
       // サークルごとのAI作品比率を算出してサークル一覧でも非AI/AIフィルターを機能させる
       const creatorAiStat = new Map();
