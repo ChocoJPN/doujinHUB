@@ -1002,12 +1002,13 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      max-width: 900px;
+      max-width: 880px;
       width: 100%;
-      max-height: 90vh;
+      max-height: 92vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85);
     }
 
     .modal-header {
@@ -1017,6 +1018,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      background: rgba(18, 18, 22, 0.96);
     }
 
     .modal-title {
@@ -1041,23 +1043,65 @@
     .modal-body {
       padding: 18px;
       overflow-y: auto;
+      scroll-behavior: smooth;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+      background: #070709;
     }
 
+    /* 1ページずつ縦に大きくスライドして読める縦スクロールビューア */
     .sample-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .sample-page-card {
+      width: 100%;
+      max-width: 740px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+    }
+
+    .sample-page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 14px;
+      background: rgba(24, 24, 31, 0.95);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
     .sample-img {
       width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+      height: auto;
       background: var(--bg);
       display: block;
+    }
+
+    .sample-end-cta {
+      width: 100%;
+      max-width: 740px;
+      margin: 8px auto 4px;
+      padding: 24px 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.16), rgba(124, 58, 237, 0.14));
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
     }
 
     .modal-footer {
@@ -2077,20 +2121,65 @@
         ${w.discount > 0 ? `<span style="color:var(--text-muted); text-decoration:line-through; margin-left:8px; font-size:0.85rem;">¥${Number(w.origPrice || 0).toLocaleString()}</span> <span class="discount-badge" style="margin-left:6px;">${w.discount}%OFF</span>` : ""}
       `;
 
-      const images = w.sampleImages && w.sampleImages.length > 0 ? w.sampleImages : w.imageUrl ? [w.imageUrl] : [];
-      document.getElementById("modalBody").innerHTML = `
-        <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; font-size:0.82rem; color:var(--text-sub);">
-          <span style="padding:3px 10px; border-radius:6px; background:var(--bg); border:1px solid var(--border); color:var(--text);">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
-          ${w.isAi ? `<span class="ai-label">AI生成作品</span>` : ""}
-          <span>サークル: <strong style="color:var(--text);">${w.circle}</strong></span>
-          <span>仕様: ${w.spec}</span>
-          <span>配信日: ${w.date}</span>
+      const fanzaUrl = buildFanzaUrl(w);
+      const rawSamples = w.sampleImages && w.sampleImages.length > 0 ? w.sampleImages : [];
+      // 表紙画像がサンプル配列に含まれていない場合は先頭に表紙（パッケージ画像）も追加して1ページずつ縦に見せる
+      const allPages = [];
+      if (w.imageUrl && !rawSamples.includes(w.imageUrl)) {
+        allPages.push({ src: w.imageUrl, label: "表紙（メインビジュアル）" });
+      }
+      rawSamples.forEach((src, i) => {
+        const hiResSrc = String(src).replace(/js-(\d+\.jpg)$/i, "jp-$1");
+        allPages.push({
+          src: hiResSrc,
+          fallback: src,
+          label: `サンプル ${i + 1} / ${rawSamples.length} ページ`
+        });
+      });
+
+      const modalBody = document.getElementById("modalBody");
+      modalBody.innerHTML = `
+        <div style="width:100%; max-width:740px; margin:0 auto; padding:12px 14px; border-radius:10px; background:var(--surface); border:1px solid var(--border); display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; font-size:0.82rem; color:var(--text-sub);">
+          <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+            <span class="type-label cat-${w.category}" style="font-size:0.74rem; padding:3px 9px;">${(CATEGORY_META[w.category] || CATEGORY_META.comic).label}</span>
+            ${w.isAi ? `<span class="ai-label">AI生成作品</span>` : `<span style="padding:2px 8px; border-radius:4px; background:rgba(16,185,129,0.15); border:1px solid rgba(16,185,129,0.4); color:#6ee7b7; font-size:0.72rem; font-weight:700;">非AI（手描き・通常）</span>`}
+            <span>サークル: <strong style="color:var(--text);">${w.circle}</strong></span>
+            <span>仕様: <strong style="color:var(--text);">${w.spec}</strong></span>
+            <span>配信日: ${w.date}</span>
+          </div>
+          <span style="font-size:0.75rem; color:#fda4af; font-weight:700;">⬇ 下にスクロールして1ページずつ閲覧（全${allPages.length}枚）</span>
         </div>
+
         <div class="sample-gallery">
-          ${images.map((src, i) => `<img src="${src}" alt="サンプル ${i + 1}" class="sample-img" loading="lazy" />`).join("")}
+          ${allPages
+            .map(
+              (p, idx) => `
+              <div class="sample-page-card">
+                <div class="sample-page-header">
+                  <span>${p.label}</span>
+                  <span>PAGE ${idx + 1} / ${allPages.length}</span>
+                </div>
+                <img src="${p.src}" ${p.fallback && p.fallback !== p.src ? `onerror="this.onerror=null;this.src='${p.fallback}';"` : ""} alt="${p.label}" class="sample-img" loading="${idx < 2 ? "eager" : "lazy"}" />
+              </div>
+            `
+            )
+            .join("")}
+        </div>
+
+        <div class="sample-end-cta">
+          <div style="font-size:0.95rem; font-weight:800; color:var(--text);">
+            📖 サンプルプレビューはここまでです（本編: ${w.spec}）
+          </div>
+          <div style="font-size:0.8rem; color:var(--text-sub);">
+            続きの全ページ・高画質フル版はFANZA公式ページにてすぐにお楽しみいただけます。
+          </div>
+          <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn" style="padding:12px 26px; font-size:0.95rem; margin-top:4px;">
+            FANZA公式ページで本編を見る ↗
+          </a>
         </div>
       `;
       modal.classList.add("open");
+      modalBody.scrollTop = 0;
     }
 
     document.addEventListener("click", (e) => {

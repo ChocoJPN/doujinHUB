@@ -288,10 +288,12 @@ function normalizeItem(item, rankNumber) {
   const rating = Number(item.review?.average || 0);
   const reviewsCount = Number(item.review?.count || 0);
 
-  // サンプル画像リストの抽出 (立ち読みプレビュー用・高画質優先)
+  // サンプル画像リストの抽出 (立ち読みプレビュー用・高画質jp優先、最大20ページまで保持)
   const sampleLarge = item.sampleImageURL?.sample_l?.image || [];
-  const sampleSmall = item.sampleImageURL?.sample_s?.image || [];
-  const sampleImages = (sampleLarge.length > 0 ? sampleLarge : sampleSmall).slice(0, 10);
+  const sampleSmall = (item.sampleImageURL?.sample_s?.image || []).map((u) =>
+    String(u).replace(/js-(\d+\.jpg)$/i, "jp-$1")
+  );
+  const sampleImages = (sampleLarge.length > 0 ? sampleLarge : sampleSmall).slice(0, 20);
 
   // キャンペーン情報
   const campaignTitle = item.campaign?.[0]?.title || (discount > 0 ? `${discount}%OFFセール` : "");
@@ -337,12 +339,14 @@ function renormalizeExistingWork(w) {
   const code = w.code || w.id;
   const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
   const affiliateUrl = `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(DMM_SITE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
+  const sampleImages = (w.sampleImages || []).map((u) => String(u).replace(/js-(\d+\.jpg)$/i, "jp-$1"));
   return {
     ...w,
     tags: cleanTags,
     category,
     spec,
     isAi,
+    sampleImages,
     affiliateUrl
   };
 }
@@ -392,7 +396,7 @@ function analyzeTopCreators(works) {
       const scoreB = b.works * 120 + b.totalReviews * 5 + (300 - Math.min(300, b.bestRank)) * 8;
       return scoreB - scoreA;
     })
-    .slice(0, 60)
+    .slice(0, 120)
     .map((c) => {
       const avgRating = (c.ratingSum / c.works).toFixed(2);
       const topTags = Array.from(c.tagsSet).slice(0, 4);
@@ -450,22 +454,66 @@ async function main() {
 
   console.log("📡 FANZA WebサービスAPIから大量作品データを取得しています...");
 
-  // バッチ取得クエリ定義（ランキング300件、新着300件、同人音声・同人誌・CG特化キーワード）
+  // バッチ取得クエリ定義（ランキング1000件、新着800件、高評価ロングセラー500件、各ジャンル特化キーワード）
   const fetchPlan = [
+    // 1. 総合人気ランキング 1〜1000位
     { label: "総合人気ランキング 1〜100位", sort: "rank", hits: 100, offset: 1, isRankBase: true, rankOffset: 0 },
     { label: "総合人気ランキング 101〜200位", sort: "rank", hits: 100, offset: 101, isRankBase: true, rankOffset: 100 },
     { label: "総合人気ランキング 201〜300位", sort: "rank", hits: 100, offset: 201, isRankBase: true, rankOffset: 200 },
+    { label: "総合人気ランキング 301〜400位", sort: "rank", hits: 100, offset: 301, isRankBase: true, rankOffset: 300 },
+    { label: "総合人気ランキング 401〜500位", sort: "rank", hits: 100, offset: 401, isRankBase: true, rankOffset: 400 },
+    { label: "総合人気ランキング 501〜600位", sort: "rank", hits: 100, offset: 501, isRankBase: true, rankOffset: 500 },
+    { label: "総合人気ランキング 601〜700位", sort: "rank", hits: 100, offset: 601, isRankBase: true, rankOffset: 600 },
+    { label: "総合人気ランキング 701〜800位", sort: "rank", hits: 100, offset: 701, isRankBase: true, rankOffset: 700 },
+    { label: "総合人気ランキング 801〜900位", sort: "rank", hits: 100, offset: 801, isRankBase: true, rankOffset: 800 },
+    { label: "総合人気ランキング 901〜1000位", sort: "rank", hits: 100, offset: 901, isRankBase: true, rankOffset: 900 },
+
+    // 2. 最新作（新着順）1〜800件
     { label: "最新作（新着順）1〜100件", sort: "date", hits: 100, offset: 1 },
     { label: "最新作（新着順）101〜200件", sort: "date", hits: 100, offset: 101 },
     { label: "最新作（新着順）201〜300件", sort: "date", hits: 100, offset: 201 },
-    { label: "同人音声・バイノーラル人気作品", sort: "rank", hits: 100, offset: 1, keyword: "バイノーラル" },
+    { label: "最新作（新着順）301〜400件", sort: "date", hits: 100, offset: 301 },
+    { label: "最新作（新着順）401〜500件", sort: "date", hits: 100, offset: 401 },
+    { label: "最新作（新着順）501〜600件", sort: "date", hits: 100, offset: 501 },
+    { label: "最新作（新着順）601〜700件", sort: "date", hits: 100, offset: 601 },
+    { label: "最新作（新着順）701〜800件", sort: "date", hits: 100, offset: 701 },
+
+    // 3. レビュー高評価・ロングセラー名作 1〜500件
+    { label: "レビュー高評価順 1〜100件", sort: "review", hits: 100, offset: 1 },
+    { label: "レビュー高評価順 101〜200件", sort: "review", hits: 100, offset: 101 },
+    { label: "レビュー高評価順 201〜300件", sort: "review", hits: 100, offset: 201 },
+    { label: "レビュー高評価順 301〜400件", sort: "review", hits: 100, offset: 301 },
+    { label: "レビュー高評価順 401〜500件", sort: "review", hits: 100, offset: 401 },
+
+    // 4. 同人音声・ASMR 強化取得
+    { label: "同人音声・バイノーラル人気 1〜100", sort: "rank", hits: 100, offset: 1, keyword: "バイノーラル" },
+    { label: "同人音声・バイノーラル人気 101〜200", sort: "rank", hits: 100, offset: 101, keyword: "バイノーラル" },
+    { label: "同人音声・バイノーラル人気 201〜300", sort: "rank", hits: 100, offset: 201, keyword: "バイノーラル" },
     { label: "同人音声・KU100高音質作品", sort: "rank", hits: 100, offset: 1, keyword: "KU100" },
     { label: "同人音声・耳かき/ささやきASMR", sort: "rank", hits: 100, offset: 1, keyword: "耳かき" },
-    { label: "同人音声・新着ボイス作品", sort: "date", hits: 100, offset: 1, keyword: "バイノーラル" },
-    { label: "同人誌・人気総集編シリーズ", sort: "rank", hits: 100, offset: 1, keyword: "総集編" },
-    { label: "同人誌・フルカラー人気作品", sort: "rank", hits: 100, offset: 1, keyword: "フルカラー" },
-    { label: "同人誌・描き下ろし特典付き作品", sort: "rank", hits: 100, offset: 1, keyword: "描き下ろし" },
-    { label: "CG・イラスト集人気作品", sort: "rank", hits: 100, offset: 1, keyword: "CG集" }
+    { label: "同人音声・ささやきボイス", sort: "rank", hits: 100, offset: 1, keyword: "ささやき" },
+    { label: "同人音声・新着ボイス 1〜100", sort: "date", hits: 100, offset: 1, keyword: "バイノーラル" },
+    { label: "同人音声・新着ボイス 101〜200", sort: "date", hits: 100, offset: 101, keyword: "バイノーラル" },
+
+    // 5. 同人誌・漫画 強化取得
+    { label: "同人誌・人気総集編 1〜100", sort: "rank", hits: 100, offset: 1, keyword: "総集編" },
+    { label: "同人誌・人気総集編 101〜200", sort: "rank", hits: 100, offset: 101, keyword: "総集編" },
+    { label: "同人誌・フルカラー人気 1〜100", sort: "rank", hits: 100, offset: 1, keyword: "フルカラー" },
+    { label: "同人誌・フルカラー人気 101〜200", sort: "rank", hits: 100, offset: 101, keyword: "フルカラー" },
+    { label: "同人誌・描き下ろし特典付き 1〜100", sort: "rank", hits: 100, offset: 1, keyword: "描き下ろし" },
+    { label: "同人誌・描き下ろし特典付き 101〜200", sort: "rank", hits: 100, offset: 101, keyword: "描き下ろし" },
+    { label: "同人誌・FANZA専売人気作品", sort: "rank", hits: 100, offset: 1, keyword: "専売" },
+
+    // 6. CG・イラスト集 強化取得
+    { label: "CG・イラスト集人気 1〜100", sort: "rank", hits: 100, offset: 1, keyword: "CG集" },
+    { label: "CG・イラスト集人気 101〜200", sort: "rank", hits: 100, offset: 101, keyword: "CG集" },
+    { label: "CG・イラスト集新着 1〜100", sort: "date", hits: 100, offset: 1, keyword: "CG集" },
+
+    // 7. 同人ゲーム・動画 強化取得
+    { label: "同人ゲーム・RPG人気作品", sort: "rank", hits: 100, offset: 1, keyword: "RPG" },
+    { label: "同人ゲーム・シミュレーション人気", sort: "rank", hits: 100, offset: 1, keyword: "シミュレーション" },
+    { label: "同人ゲーム・スマホ対応人気", sort: "rank", hits: 100, offset: 1, keyword: "スマホ対応" },
+    { label: "同人動画・アニメーション人気", sort: "rank", hits: 100, offset: 1, keyword: "アニメーション" }
   ];
 
   // API負荷を抑えつつ3並列ずつ順番に取得
@@ -487,12 +535,10 @@ async function main() {
 
     for (const { q, items } of results) {
       items.forEach((item, idx) => {
-        const rankNum = q.isRankBase ? q.rankOffset + idx + 1 : mergedMap.get(item.content_id)?.rank || 999;
+        const existing = mergedMap.get(item.content_id);
+        const rankNum = q.isRankBase ? q.rankOffset + idx + 1 : existing?.rank || 999;
         const norm = normalizeItem(item, rankNum);
-        const existing = mergedMap.get(norm.id);
-        if (!existing || q.isRankBase || norm.rank < existing.rank) {
-          mergedMap.set(norm.id, norm);
-        }
+        mergedMap.set(norm.id, norm);
       });
     }
 
