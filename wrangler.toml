@@ -6,3 +6,7 @@ pages_build_output_dir = "."
 # Settings > Environment variables、またはローカルの .dev.vars に設定します:
 # DMM_API_ID = "あなたのAPI_ID"
 # DMM_AFFILIATE_ID = "あなたのアフィリエイトID-990"
+#
+# コミュニティ感想投稿の全ユーザー共有用 KV バインディング:
+# Cloudflare Pages 管理画面 > Settings > Functions > KV namespace bindings
+# Variable name: COMMUNITY_KV / KV namespace: 作成したKVネームスペースを選択

@@ -1114,6 +1114,454 @@
       gap: 12px;
       background: var(--bg);
     }
+
+    /* ============================================================
+       コミュニティ（感想・レビュー・雑談掲示板）スタイル
+       ============================================================ */
+    .comm-hero {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.14) 0%, rgba(124, 58, 237, 0.14) 55%, rgba(6, 182, 212, 0.10) 100%);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .comm-hero-title {
+      font-size: 1.2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 4px;
+    }
+
+    .comm-hero-sub {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+
+    .comm-mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #6ee7b7;
+    }
+
+    .comm-mode-pill.local {
+      background: rgba(245, 158, 11, 0.14);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #fcd34d;
+    }
+
+    .comm-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 390px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .comm-layout {
+        grid-template-columns: 1fr;
+      }
+      .comm-sidebar {
+        order: -1;
+      }
+    }
+
+    .comm-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .comm-type-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .comm-filter-btn {
+      padding: 5px 11px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-sub);
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .comm-filter-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    .comm-filter-btn.active {
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      border-color: transparent;
+      color: #ffffff;
+    }
+
+    .comm-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .comm-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: border-color 0.15s ease;
+    }
+
+    .comm-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .comm-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .comm-author-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .comm-type-badge {
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+
+    .comm-type-badge.type-review {
+      background: rgba(225, 29, 72, 0.2);
+      border: 1px solid rgba(244, 63, 94, 0.45);
+      color: #fda4af;
+    }
+
+    .comm-type-badge.type-recommend {
+      background: rgba(245, 158, 11, 0.2);
+      border: 1px solid rgba(251, 191, 36, 0.45);
+      color: #fcd34d;
+    }
+
+    .comm-type-badge.type-question {
+      background: rgba(6, 182, 212, 0.2);
+      border: 1px solid rgba(34, 211, 238, 0.45);
+      color: #67e8f9;
+    }
+
+    .comm-type-badge.type-talk {
+      background: rgba(139, 92, 246, 0.2);
+      border: 1px solid rgba(167, 139, 250, 0.45);
+      color: #c4b5fd;
+    }
+
+    .comm-nickname {
+      font-size: 0.86rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .comm-stars {
+      color: #fbbf24;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      font-weight: 800;
+    }
+
+    .comm-date {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .comm-work-embed {
+      display: flex;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(9, 9, 11, 0.65);
+      border: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .comm-work-thumb {
+      width: 96px;
+      height: 72px;
+      border-radius: 7px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .comm-work-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .comm-work-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .comm-work-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: var(--text-sub);
+    }
+
+    .comm-work-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .comm-work-embed {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .comm-work-thumb {
+        width: 100%;
+        height: 140px;
+      }
+      .comm-work-actions {
+        flex-direction: row;
+      }
+    }
+
+    .comm-body-text {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #f4f4f5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .comm-spoiler-box {
+      padding: 16px;
+      border-radius: 9px;
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px dashed rgba(245, 158, 11, 0.45);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comm-card-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .comm-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 11px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text-sub);
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .comm-action-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    .comm-action-btn.liked {
+      background: rgba(225, 29, 72, 0.18);
+      border-color: rgba(244, 63, 94, 0.5);
+      color: #fda4af;
+    }
+
+    .comm-replies {
+      margin-top: 4px;
+      padding: 12px;
+      border-radius: 9px;
+      background: rgba(9, 9, 11, 0.55);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .comm-reply-item {
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 0.82rem;
+    }
+
+    .comm-reply-item:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .comm-reply-form {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .comm-composer {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      position: sticky;
+      top: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comm-field-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin-bottom: 5px;
+    }
+
+    .comm-input, .comm-textarea {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 11px;
+      font-size: 0.83rem;
+      color: var(--text);
+    }
+
+    .comm-input:focus, .comm-textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .comm-textarea {
+      min-height: 110px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .comm-work-dropdown {
+      margin-top: 4px;
+      max-height: 220px;
+      overflow-y: auto;
+      background: #0d0d11;
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .comm-work-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text);
+      font-size: 0.78rem;
+    }
+
+    .comm-work-option:hover {
+      background: rgba(225, 29, 72, 0.14);
+    }
+
+    .star-picker {
+      display: inline-flex;
+      gap: 4px;
+    }
+
+    .star-pick-btn {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .star-pick-btn.active {
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.5);
+      background: rgba(251, 191, 36, 0.12);
+    }
+
+    .modal-reviews-section {
+      width: 100%;
+      max-width: 740px;
+      margin: 4px auto 0;
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
   </style>
 </head>
 
@@ -1155,6 +1603,10 @@
       <nav class="tab-list" aria-label="メインタブ">
         <button type="button" class="tab-btn active" data-tab="portal">
           <span>総合トップ</span>
+        </button>
+        <button type="button" class="tab-btn" data-tab="community">
+          <span>💬 感想・コミュニティ</span>
+          <span id="communityCount" class="count-pill">0</span>
         </button>
         <button type="button" class="tab-btn" data-tab="pop_ranking">
           <span>人気ランキング</span>
@@ -1387,7 +1839,7 @@
     }
 
     const state = {
-      tab: "portal",       // 'portal' | 'pop_ranking' | 'sales_ranking' | 'format_ranking' | 'pickup' | 'new' | 'creators' | 'sale' | 'favorites'
+      tab: "portal",       // 'portal' | 'community' | 'pop_ranking' | 'sales_ranking' | 'format_ranking' | 'pickup' | 'new' | 'creators' | 'sale' | 'favorites'
       popPeriod: "24h",    // '24h' | 'weekly' | 'monthly'
       salesSub: "new_release", // 'new_release' | 'semi_new' | 'long_seller' | 'sales_count'
       formatCat: "comic",  // 'comic' | 'audio' | 'cg' | 'game'
@@ -1400,6 +1852,376 @@
       limit: 30,           // 横5列 × 6段 = 30件単位
       favs: []
     };
+
+    /* ============================================================
+       コミュニティ（感想・レビュー・雑談）データ管理 & API連動
+       ============================================================ */
+    const COMM_STORAGE_KEY = "doujin_index_comm_posts_v1";
+    const COMM_LIKES_KEY = "doujin_index_comm_likes_v1";
+    const COMM_NICK_KEY = "doujin_index_comm_nickname_v1";
+
+    const COMM_TYPE_META = {
+      review: { label: "作品感想", icon: "📝", cls: "type-review" },
+      recommend: { label: "おすすめ紹介", icon: "🔥", cls: "type-recommend" },
+      question: { label: "作品探し・質問", icon: "🔍", cls: "type-question" },
+      talk: { label: "雑談・語り合い", icon: "💬", cls: "type-talk" }
+    };
+
+    function escapeHtml(str) {
+      return String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatCommDate(isoStr) {
+      try {
+        const d = new Date(isoStr);
+        if (Number.isNaN(d.getTime())) return "";
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, "0");
+        const dd = String(d.getDate()).padStart(2, "0");
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mi = String(d.getMinutes()).padStart(2, "0");
+        return `${yyyy}/${mm}/${dd} ${hh}:${mi}`;
+      } catch (e) {
+        return "";
+      }
+    }
+
+    function safeJsonParse(raw, fallback) {
+      try {
+        const v = JSON.parse(raw);
+        return v ?? fallback;
+      } catch (e) {
+        return fallback;
+      }
+    }
+
+    const communityState = {
+      mode: "local", // 'cloud' | 'local'
+      posts: [],
+      likedIds: new Set(safeJsonParse(localStorage.getItem(COMM_LIKES_KEY) || "[]", [])),
+      revealedSpoilers: new Set(),
+      openReplyIds: new Set(),
+      filterType: "all",
+      sortBy: "newest",
+      draft: {
+        postType: "review",
+        workId: null,
+        workQuery: "",
+        rating: 5,
+        nickname: localStorage.getItem(COMM_NICK_KEY) || "",
+        body: "",
+        spoiler: false
+      }
+    };
+
+    function buildStarterPosts() {
+      const topComic = WORKS.find((w) => w.category === "comic" && !w.isAi) || WORKS[0];
+      const topAudio = WORKS.find((w) => w.category === "audio" && !w.isAi) || WORKS[1];
+      const topGame = WORKS.find((w) => w.category === "game") || WORKS[2];
+      const now = Date.now();
+      const starters = [];
+
+      if (topComic) {
+        starters.push({
+          id: "seed_post_1",
+          postType: "review",
+          nickname: "手描き同人マニア",
+          rating: 5,
+          spoiler: false,
+          body: `絵の書き込みとページ数のボリュームが凄すぎて大満足でした！\nサンプルを縦読みでチェックして即購入しましたが、ストーリーのテンポも良くて最後まで一気に読めました。セール中なら間違いなく買いだと思います。`,
+          workId: topComic.id,
+          workTitle: topComic.title,
+          workCircle: topComic.circle,
+          workImageUrl: topComic.imageUrl,
+          workCategory: topComic.category,
+          workIsAi: topComic.isAi,
+          workPrice: topComic.price,
+          workDiscount: topComic.discount,
+          likes: 12,
+          replies: [
+            {
+              id: "seed_reply_1",
+              nickname: "深夜の読者",
+              body: "わかります！このサークルの作品はハズレがないので毎回新作を楽しみにしています。",
+              createdAt: new Date(now - 1000 * 60 * 35).toISOString()
+            }
+          ],
+          createdAt: new Date(now - 1000 * 60 * 95).toISOString()
+        });
+      }
+
+      if (topAudio) {
+        starters.push({
+          id: "seed_post_2",
+          postType: "recommend",
+          nickname: "ASMR沼の住人",
+          rating: 5,
+          spoiler: false,
+          body: `イヤホンで聴くと距離感と臨場感が段違いです🎧\n声優さんの演技が自然で没入感がすごいので、バイノーラル音声が好きな人にはぜひ一度チェックしてほしい一作です！`,
+          workId: topAudio.id,
+          workTitle: topAudio.title,
+          workCircle: topAudio.circle,
+          workImageUrl: topAudio.imageUrl,
+          workCategory: topAudio.category,
+          workIsAi: topAudio.isAi,
+          workPrice: topAudio.price,
+          workDiscount: topAudio.discount,
+          likes: 8,
+          replies: [],
+          createdAt: new Date(now - 1000 * 60 * 180).toISOString()
+        });
+      }
+
+      if (topGame) {
+        starters.push({
+          id: "seed_post_3",
+          postType: "review",
+          nickname: "週末ゲーマー",
+          rating: 4,
+          spoiler: true,
+          body: `中盤以降の分岐イベントの演出が想像以上に作り込まれていて驚きました！\nギャラリー解放機能もあるので、周回プレイで全シーン回収するのが楽しかったです。`,
+          workId: topGame.id,
+          workTitle: topGame.title,
+          workCircle: topGame.circle,
+          workImageUrl: topGame.imageUrl,
+          workCategory: topGame.category,
+          workIsAi: topGame.isAi,
+          workPrice: topGame.price,
+          workDiscount: topGame.discount,
+          likes: 5,
+          replies: [],
+          createdAt: new Date(now - 1000 * 60 * 310).toISOString()
+        });
+      }
+
+      starters.push({
+        id: "seed_post_4",
+        postType: "talk",
+        nickname: "管理人＠DOUJIN INDEX",
+        rating: null,
+        spoiler: false,
+        body: `【ようこそ！感想・おすすめ共有コミュニティへ】\n最近読んで良かった同人誌の感想や、「こんなシチュエーションの隠れた名作を探しています！」といった質問など、自由に書き込んで語り合ってください✨\n右側のフォームから作品を検索して紐付けると、他の人もそのままサンプル立ち読みができます！`,
+        workId: null,
+        workTitle: "",
+        workCircle: "",
+        workImageUrl: "",
+        workCategory: "",
+        workIsAi: false,
+        workPrice: 0,
+        workDiscount: 0,
+        likes: 15,
+        replies: [],
+        createdAt: new Date(now - 1000 * 60 * 600).toISOString()
+      });
+
+      return starters;
+    }
+
+    function saveLocalCommunityPosts() {
+      try {
+        localStorage.setItem(COMM_STORAGE_KEY, JSON.stringify(communityState.posts.slice(0, 200)));
+      } catch (e) { }
+    }
+
+    function initLocalCommunityPosts() {
+      const saved = safeJsonParse(localStorage.getItem(COMM_STORAGE_KEY) || "null", null);
+      if (Array.isArray(saved) && saved.length > 0) {
+        communityState.posts = saved;
+      } else {
+        communityState.posts = buildStarterPosts();
+        saveLocalCommunityPosts();
+      }
+    }
+
+    async function syncCommunityFromServer() {
+      try {
+        const res = await fetch("/api/community", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data && data.ok && data.mode === "cloud" && Array.isArray(data.posts)) {
+          communityState.mode = "cloud";
+          if (data.posts.length > 0) {
+            communityState.posts = data.posts;
+          } else {
+            communityState.posts = buildStarterPosts();
+          }
+          render();
+          if (currentModalWorkId && document.getElementById("sampleModal").classList.contains("open")) {
+            refreshModalReviews(currentModalWorkId);
+          }
+        }
+      } catch (e) { }
+    }
+
+    function getWorkReviewCount(workId) {
+      return communityState.posts.filter((p) => p.workId === workId).length;
+    }
+
+    async function createCommunityPost(draftObj) {
+      const nickname = (draftObj.nickname || "").trim().slice(0, 30) || "名無しの同人ファン";
+      const body = (draftObj.body || "").trim().slice(0, 1000);
+      if (body.length < 4) {
+        alert("感想・本文は4文字以上入力してください。");
+        return false;
+      }
+      if (/https?:\/\/|www\./i.test(body) || /https?:\/\/|www\./i.test(nickname)) {
+        alert("スパム対策のため、本文やニックネームにURLは含められません。");
+        return false;
+      }
+
+      if (draftObj.nickname && draftObj.nickname.trim()) {
+        try { localStorage.setItem(COMM_NICK_KEY, nickname); } catch (e) { }
+      }
+
+      const linkedWork = draftObj.workId ? WORKS.find((w) => w.id === draftObj.workId) : null;
+      const postType = COMM_TYPE_META[draftObj.postType] ? draftObj.postType : "review";
+      const rating = postType === "review" || postType === "recommend" ? (Number(draftObj.rating) || 5) : null;
+
+      const payload = {
+        action: "create",
+        postType,
+        nickname,
+        rating,
+        spoiler: Boolean(draftObj.spoiler),
+        body,
+        workId: linkedWork ? linkedWork.id : null,
+        workTitle: linkedWork ? linkedWork.title : "",
+        workCircle: linkedWork ? linkedWork.circle : "",
+        workImageUrl: linkedWork ? linkedWork.imageUrl : "",
+        workCategory: linkedWork ? linkedWork.category : "",
+        workIsAi: linkedWork ? Boolean(linkedWork.isAi) : false,
+        workPrice: linkedWork ? Number(linkedWork.price) || 0 : 0,
+        workDiscount: linkedWork ? Number(linkedWork.discount) || 0 : 0
+      };
+
+      let savedPost = null;
+      try {
+        const res = await fetch("/api/community", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.ok && data.mode === "cloud" && data.post) {
+            communityState.mode = "cloud";
+            savedPost = data.post;
+          }
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          if (errData.error) {
+            alert(errData.error);
+            return false;
+          }
+        }
+      } catch (e) { }
+
+      if (!savedPost) {
+        savedPost = {
+          id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+          ...payload,
+          likes: 0,
+          replies: [],
+          createdAt: new Date().toISOString()
+        };
+      }
+
+      // 初回クラウド投稿時にスターター投稿だけだった場合は置き換え
+      if (communityState.mode === "cloud" && communityState.posts.every((p) => String(p.id).startsWith("seed_"))) {
+        communityState.posts = [savedPost];
+      } else {
+        communityState.posts.unshift(savedPost);
+      }
+
+      if (communityState.mode !== "cloud") {
+        saveLocalCommunityPosts();
+      }
+      return true;
+    }
+
+    async function addCommunityReply(postId, nicknameRaw, bodyRaw) {
+      const nickname = (nicknameRaw || "").trim().slice(0, 30) || "名無しの同人ファン";
+      const body = (bodyRaw || "").trim().slice(0, 400);
+      if (body.length < 2) {
+        alert("返信は2文字以上入力してください。");
+        return false;
+      }
+      if (/https?:\/\/|www\./i.test(body)) {
+        alert("スパム対策のため、返信にURLは含められません。");
+        return false;
+      }
+      if (nicknameRaw && nicknameRaw.trim()) {
+        try { localStorage.setItem(COMM_NICK_KEY, nickname); } catch (e) { }
+        communityState.draft.nickname = nickname;
+      }
+
+      const target = communityState.posts.find((p) => p.id === postId);
+      if (!target) return false;
+      if (!Array.isArray(target.replies)) target.replies = [];
+
+      let savedReply = null;
+      if (communityState.mode === "cloud" && !String(postId).startsWith("seed_")) {
+        try {
+          const res = await fetch("/api/community", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "reply", postId, nickname, body })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.ok && data.reply) savedReply = data.reply;
+          }
+        } catch (e) { }
+      }
+
+      if (!savedReply) {
+        savedReply = {
+          id: `r_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+          nickname,
+          body,
+          createdAt: new Date().toISOString()
+        };
+      }
+
+      target.replies.push(savedReply);
+      if (communityState.mode !== "cloud") {
+        saveLocalCommunityPosts();
+      }
+      return true;
+    }
+
+    async function likeCommunityPost(postId) {
+      if (communityState.likedIds.has(postId)) return;
+      const target = communityState.posts.find((p) => p.id === postId);
+      if (!target) return;
+
+      communityState.likedIds.add(postId);
+      try {
+        localStorage.setItem(COMM_LIKES_KEY, JSON.stringify(Array.from(communityState.likedIds)));
+      } catch (e) { }
+
+      target.likes = (Number(target.likes) || 0) + 1;
+      render();
+
+      if (communityState.mode === "cloud" && !String(postId).startsWith("seed_")) {
+        try {
+          await fetch("/api/community", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: "like", postId })
+          });
+        } catch (e) { }
+      } else {
+        saveLocalCommunityPosts();
+      }
+    }
+
+    initLocalCommunityPosts();
 
     const POP_PERIOD_META = {
       "24h": { label: "24時間", desc: "直近24時間のリアルタイム注目・人気ランキング" },
@@ -1673,6 +2495,8 @@
       document.getElementById("totalCreatorsCount").textContent = aiFilteredCreators.length;
       document.getElementById("saleWorksCount").textContent = aiFilteredWorks.filter((w) => w.discount > 0).length;
       document.getElementById("favCount").textContent = state.favs.length;
+      const commCountEl = document.getElementById("communityCount");
+      if (commCountEl) commCountEl.textContent = communityState.posts.length;
 
       const counts = { all: aiFilteredWorks.length, comic: 0, audio: 0, cg: 0, game: 0 };
       aiFilteredWorks.forEach((w) => {
@@ -1694,6 +2518,7 @@
 
     function renderCard(w, displayRank) {
       const isFav = state.favs.includes(w.id);
+      const commReviewCount = getWorkReviewCount(w.id);
       const fanzaUrl = buildFanzaUrl(w);
       const coverStyle = w.imageUrl
         ? `background-image:url('${w.imageUrl}'); background-color:#18181b;`
@@ -1745,6 +2570,9 @@
               ${w.discount > 0 ? `<span class="price-orig">¥${Number(w.origPrice || 0).toLocaleString()}</span>` : ""}
             </div>
             <div class="footer-actions">
+              <button type="button" class="icon-btn" data-review-work="${w.id}" title="この作品の感想を見る・書く" style="${commReviewCount > 0 ? "color:#fda4af; border-color:rgba(244,63,94,0.45);" : ""}">
+                <span style="font-size:0.72rem; font-weight:800;">💬${commReviewCount > 0 ? commReviewCount : ""}</span>
+              </button>
               <button type="button" class="icon-btn ${isFav ? "active" : ""}" data-fav="${w.id}" title="お気に入り保存">
                 <svg width="14" height="14" fill="${isFav ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
@@ -1912,6 +2740,13 @@
 
       const view = document.getElementById("mainView");
       const sortWrap = document.getElementById("sortWrap");
+
+      // 感想・コミュニティタブ
+      if (state.tab === "community") {
+        sortWrap.style.display = "none";
+        view.innerHTML = renderCommunityView();
+        return;
+      }
 
       // サークル一覧タブ
       if (state.tab === "creators") {
@@ -2098,6 +2933,392 @@
       `;
     }
 
+    function renderCommunityPostCard(p) {
+      const meta = COMM_TYPE_META[p.postType] || COMM_TYPE_META.review;
+      const linkedWork = p.workId ? WORKS.find((w) => w.id === p.workId) : null;
+      const workTitle = linkedWork ? linkedWork.title : p.workTitle;
+      const workCircle = linkedWork ? linkedWork.circle : p.workCircle;
+      const workImg = linkedWork ? linkedWork.imageUrl : p.workImageUrl;
+      const workCat = linkedWork ? linkedWork.category : (p.workCategory || "comic");
+      const workIsAi = linkedWork ? linkedWork.isAi : Boolean(p.workIsAi);
+      const workPrice = linkedWork ? linkedWork.price : p.workPrice;
+      const workDiscount = linkedWork ? linkedWork.discount : p.workDiscount;
+      const fanzaUrl = linkedWork ? buildFanzaUrl(linkedWork) : (p.workId ? buildFanzaUrl({ id: p.workId, code: p.workId }) : "");
+
+      const isLiked = communityState.likedIds.has(p.id);
+      const isSpoilerHidden = Boolean(p.spoiler) && !communityState.revealedSpoilers.has(p.id);
+      const replies = Array.isArray(p.replies) ? p.replies : [];
+      const isRepliesOpen = communityState.openReplyIds.has(p.id) || replies.length > 0;
+      const starsHtml = p.rating
+        ? `<span class="comm-stars" title="評価 ${p.rating} / 5">${"★".repeat(p.rating)}${"☆".repeat(Math.max(0, 5 - p.rating))} ${Number(p.rating).toFixed(1)}</span>`
+        : "";
+
+      const embedHtml = p.workId && workTitle
+        ? `
+          <div class="comm-work-embed">
+            ${workImg ? `<img src="${escapeHtml(workImg)}" alt="${escapeHtml(workTitle)}" class="comm-work-thumb" data-preview="${escapeHtml(p.workId)}" title="クリックでサンプル立ち読み" loading="lazy" />` : ""}
+            <div class="comm-work-info">
+              <div class="comm-work-title">${escapeHtml(workTitle)}</div>
+              <div class="comm-work-meta">
+                <span class="type-label cat-${escapeHtml(workCat)}">${(CATEGORY_META[workCat] || CATEGORY_META.comic).short}</span>
+                ${workIsAi ? `<span class="ai-label">AI</span>` : `<span style="color:#6ee7b7; font-weight:700;">非AI</span>`}
+                <span>サークル: <strong style="color:var(--text);">${escapeHtml(workCircle)}</strong></span>
+                ${workPrice ? `<span style="color:${workDiscount > 0 ? "#fb7185" : "var(--text)"}; font-weight:800;">¥${Number(workPrice).toLocaleString()}</span>` : ""}
+                ${workDiscount > 0 ? `<span class="discount-badge">${workDiscount}%OFF</span>` : ""}
+              </div>
+            </div>
+            <div class="comm-work-actions">
+              <button type="button" class="comm-action-btn" data-preview="${escapeHtml(p.workId)}" style="justify-content:center;">📖 立ち読み</button>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn" style="text-align:center; padding:6px 10px;">FANZA ↗</a>
+            </div>
+          </div>
+        `
+        : "";
+
+      const bodyHtml = isSpoilerHidden
+        ? `
+          <div class="comm-spoiler-box">
+            <div style="font-size:0.8rem; font-weight:800; color:#fcd34d;">⚠️ ネタバレを含む感想です</div>
+            <button type="button" class="comm-action-btn" data-reveal-spoiler="${escapeHtml(p.id)}">👁️ クリックして感想を表示する</button>
+          </div>
+        `
+        : `<div class="comm-body-text">${escapeHtml(p.body)}</div>`;
+
+      const repliesHtml = isRepliesOpen
+        ? `
+          <div class="comm-replies">
+            ${replies.length > 0
+              ? replies.map((r) => `
+                <div class="comm-reply-item">
+                  <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:3px;">
+                    <strong style="color:#fda4af; font-size:0.78rem;">↳ ${escapeHtml(r.nickname)}</strong>
+                    <span class="comm-date">${formatCommDate(r.createdAt)}</span>
+                  </div>
+                  <div style="color:#e4e4e7; white-space:pre-wrap; line-height:1.55;">${escapeHtml(r.body)}</div>
+                </div>
+              `).join("")
+              : `<div style="font-size:0.76rem; color:var(--text-muted);">まだ返信はありません。最初のコメントを書いてみましょう！</div>`
+            }
+            <div class="comm-reply-form" data-reply-form="${escapeHtml(p.id)}">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <input type="text" class="comm-input" data-reply-nick="${escapeHtml(p.id)}" placeholder="ニックネーム（任意）" value="${escapeHtml(communityState.draft.nickname)}" style="width:160px; flex-shrink:0; padding:6px 9px; font-size:0.76rem;" maxlength="30" />
+                <input type="text" class="comm-input" data-reply-body="${escapeHtml(p.id)}" placeholder="この感想へ返信する..." style="flex:1; min-width:180px; padding:6px 9px; font-size:0.78rem;" maxlength="400" />
+                <button type="button" class="primary-btn" data-submit-reply="${escapeHtml(p.id)}" style="padding:6px 12px; font-size:0.76rem; cursor:pointer; border:none;">返信</button>
+              </div>
+            </div>
+          </div>
+        `
+        : "";
+
+      return `
+        <article class="comm-card">
+          <div class="comm-card-head">
+            <div class="comm-author-group">
+              <span class="comm-type-badge ${meta.cls}">${meta.icon} ${meta.label}</span>
+              <span class="comm-nickname">${escapeHtml(p.nickname)}</span>
+              ${starsHtml}
+              ${p.spoiler ? `<span style="font-size:0.68rem; color:#fcd34d; border:1px solid rgba(251,191,36,0.35); padding:1px 6px; border-radius:4px;">ネタバレあり</span>` : ""}
+            </div>
+            <span class="comm-date">${formatCommDate(p.createdAt)}</span>
+          </div>
+          ${embedHtml}
+          ${bodyHtml}
+          <div class="comm-card-footer">
+            <button type="button" class="comm-action-btn ${isLiked ? "liked" : ""}" data-like-post="${escapeHtml(p.id)}">
+              👍 参考になった (${Number(p.likes) || 0})
+            </button>
+            <button type="button" class="comm-action-btn" data-toggle-reply="${escapeHtml(p.id)}">
+              💬 返信 (${replies.length})
+            </button>
+          </div>
+          ${repliesHtml}
+        </article>
+      `;
+    }
+
+    function renderCommunityView() {
+      const draft = communityState.draft;
+      const selectedWork = draft.workId ? WORKS.find((w) => w.id === draft.workId) : null;
+
+      // 作品検索サジェスト
+      let workMatches = [];
+      if (!selectedWork && draft.workQuery.trim().length > 0) {
+        const q = draft.workQuery.trim().toLowerCase();
+        workMatches = WORKS.filter((w) =>
+          (w.title || "").toLowerCase().includes(q) ||
+          (w.circle || "").toLowerCase().includes(q) ||
+          (w.id || "").toLowerCase().includes(q)
+        ).slice(0, 8);
+      }
+
+      // 投稿フィルタリング＆並び替え
+      let filtered = communityState.posts.filter((p) => {
+        if (communityState.filterType !== "all" && p.postType !== communityState.filterType) return false;
+        const linked = p.workId ? WORKS.find((w) => w.id === p.workId) : null;
+        const pCat = linked ? linked.category : p.workCategory;
+        const pIsAi = linked ? linked.isAi : p.workIsAi;
+        if (state.cat !== "all" && p.workId && pCat && pCat !== state.cat) return false;
+        if (state.aiFilter === "non_ai" && p.workId && pIsAi) return false;
+        if (state.aiFilter === "ai" && (!p.workId || !pIsAi)) return false;
+        if (state.query) {
+          const q = state.query.toLowerCase();
+          return (
+            (p.body || "").toLowerCase().includes(q) ||
+            (p.nickname || "").toLowerCase().includes(q) ||
+            (p.workTitle || "").toLowerCase().includes(q) ||
+            (p.workCircle || "").toLowerCase().includes(q)
+          );
+        }
+        return true;
+      });
+
+      filtered = [...filtered];
+      if (communityState.sortBy === "likes") {
+        filtered.sort((a, b) => (Number(b.likes) || 0) - (Number(a.likes) || 0));
+      } else if (communityState.sortBy === "rating") {
+        filtered.sort((a, b) => (Number(b.rating) || 0) - (Number(a.rating) || 0));
+      } else {
+        filtered.sort((a, b) => String(b.createdAt || "").localeCompare(String(a.createdAt || "")));
+      }
+
+      // 話題の作品集計（感想が多い順）
+      const workPostCounts = new Map();
+      communityState.posts.forEach((p) => {
+        if (!p.workId) return;
+        workPostCounts.set(p.workId, (workPostCounts.get(p.workId) || 0) + 1);
+      });
+      const hotWorks = Array.from(workPostCounts.entries())
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([id, cnt]) => ({ work: WORKS.find((w) => w.id === id), count: cnt }))
+        .filter((x) => x.work);
+
+      const modeBadge = communityState.mode === "cloud"
+        ? `<span class="comm-mode-pill">☁️ クラウド共有中（全ユーザー連動）</span>`
+        : `<span class="comm-mode-pill local" title="Cloudflare KV (COMMUNITY_KV) を設定すると全ユーザーと自動共有されます">💾 ブラウザ保存モード（KV設定で全員共有化）</span>`;
+
+      const showStars = draft.postType === "review" || draft.postType === "recommend";
+
+      return `
+        <section class="comm-hero">
+          <div>
+            <h1 class="comm-hero-title">💬 同人作品 感想・レビューコミュニティ ${modeBadge}</h1>
+            <p class="comm-hero-sub">
+              読んだ同人誌・聴いたASMR音声・遊んだゲームの感想を自由に語り合えるコミュニティページです。作品を紐付けて投稿すると、そのまま立ち読み＆紹介ができます！
+            </p>
+          </div>
+          <button type="button" class="primary-btn" id="focusComposerBtn" style="padding:10px 18px; font-size:0.84rem; cursor:pointer; border:none;">
+            ✍️ 感想・トピックを書く
+          </button>
+        </section>
+
+        <div class="comm-layout">
+          <div class="comm-main">
+            <div class="comm-toolbar">
+              <div class="comm-type-filters">
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "all" ? "active" : ""}" data-comm-filter="all">すべて (${communityState.posts.length})</button>
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "review" ? "active" : ""}" data-comm-filter="review">📝 作品感想</button>
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "recommend" ? "active" : ""}" data-comm-filter="recommend">🔥 おすすめ紹介</button>
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "question" ? "active" : ""}" data-comm-filter="question">🔍 作品探し・質問</button>
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "talk" ? "active" : ""}" data-comm-filter="talk">💬 雑談</button>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px; font-size:0.76rem; color:var(--text-sub);">
+                <span>並び順:</span>
+                <select id="commSortSelect" class="select-box">
+                  <option value="newest" ${communityState.sortBy === "newest" ? "selected" : ""}>新着順</option>
+                  <option value="likes" ${communityState.sortBy === "likes" ? "selected" : ""}>参考になった順</option>
+                  <option value="rating" ${communityState.sortBy === "rating" ? "selected" : ""}>星評価が高い順</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="comm-list">
+              ${filtered.length > 0
+                ? filtered.map((p) => renderCommunityPostCard(p)).join("")
+                : `<div style="text-align:center; padding:50px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
+                    該当する感想・投稿はまだありません。右のフォームから最初の感想を投稿してみませんか？
+                  </div>`
+              }
+            </div>
+          </div>
+
+          <aside class="comm-sidebar">
+            <div class="comm-composer" id="commComposerBox">
+              <div style="font-size:0.98rem; font-weight:800; display:flex; align-items:center; gap:7px;">
+                <span class="section-title-bar" style="height:18px;"></span>
+                <span>感想・レビューを投稿する</span>
+              </div>
+
+              <div>
+                <span class="comm-field-label">投稿の種類</span>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                  ${Object.entries(COMM_TYPE_META).map(([key, m]) => `
+                    <button type="button" class="comm-filter-btn ${draft.postType === key ? "active" : ""}" data-draft-type="${key}" style="text-align:center;">
+                      ${m.icon} ${m.label}
+                    </button>
+                  `).join("")}
+                </div>
+              </div>
+
+              <div>
+                <span class="comm-field-label">対象作品を紐付ける（任意・${WORKS.length.toLocaleString()}作品から検索）</span>
+                ${selectedWork
+                  ? `
+                    <div style="display:flex; align-items:center; gap:8px; padding:8px; border-radius:8px; background:rgba(225,29,72,0.12); border:1px solid rgba(244,63,94,0.4);">
+                      ${selectedWork.imageUrl ? `<img src="${escapeHtml(selectedWork.imageUrl)}" style="width:48px; height:36px; object-fit:cover; border-radius:5px;" />` : ""}
+                      <div style="flex:1; min-width:0;">
+                        <div style="font-size:0.76rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(selectedWork.title)}</div>
+                        <div style="font-size:0.68rem; color:var(--text-sub);">${escapeHtml(selectedWork.circle)}</div>
+                      </div>
+                      <button type="button" id="clearDraftWorkBtn" style="background:var(--bg); border:1px solid var(--border); color:var(--text-sub); border-radius:6px; padding:3px 7px; font-size:0.7rem; cursor:pointer;">✕</button>
+                    </div>
+                  `
+                  : `
+                    <input type="text" id="commWorkSearchInput" class="comm-input" placeholder="作品名・サークル名で検索して選択..." value="${escapeHtml(draft.workQuery)}" />
+                    ${workMatches.length > 0
+                      ? `<div class="comm-work-dropdown">
+                          ${workMatches.map((w) => `
+                            <button type="button" class="comm-work-option" data-pick-work="${escapeHtml(w.id)}">
+                              ${w.imageUrl ? `<img src="${escapeHtml(w.imageUrl)}" style="width:40px; height:30px; object-fit:cover; border-radius:4px; flex-shrink:0;" />` : ""}
+                              <div style="min-width:0; flex:1;">
+                                <div style="font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(w.title)}</div>
+                                <div style="font-size:0.68rem; color:var(--text-sub);">${escapeHtml(w.circle)} ・ ${(CATEGORY_META[w.category] || CATEGORY_META.comic).short}</div>
+                              </div>
+                            </button>
+                          `).join("")}
+                        </div>`
+                      : ""
+                    }
+                  `
+                }
+              </div>
+
+              ${showStars
+                ? `
+                  <div>
+                    <span class="comm-field-label">おすすめ度（星評価）</span>
+                    <div class="star-picker">
+                      ${[1, 2, 3, 4, 5].map((n) => `
+                        <button type="button" class="star-pick-btn ${draft.rating >= n ? "active" : ""}" data-draft-star="${n}">★</button>
+                      `).join("")}
+                      <span style="margin-left:6px; align-self:center; font-size:0.82rem; font-weight:800; color:#fbbf24;">${draft.rating}.0</span>
+                    </div>
+                  </div>
+                `
+                : ""
+              }
+
+              <div>
+                <label class="comm-field-label" for="commNickInput">ニックネーム（任意）</label>
+                <input type="text" id="commNickInput" class="comm-input" placeholder="名無しの同人ファン" value="${escapeHtml(draft.nickname)}" maxlength="30" />
+              </div>
+
+              <div>
+                <label class="comm-field-label" for="commBodyInput">感想・コメント（必須・4〜1000文字）</label>
+                <textarea id="commBodyInput" class="comm-textarea" placeholder="作画の良かった点、刺さったシチュエーション、おすすめポイントなどを自由に書いてみよう！" maxlength="1000">${escapeHtml(draft.body)}</textarea>
+              </div>
+
+              <label style="display:flex; align-items:center; gap:7px; font-size:0.78rem; color:#fcd34d; cursor:pointer; user-select:none;">
+                <input type="checkbox" id="commSpoilerCheck" ${draft.spoiler ? "checked" : ""} />
+                <span>⚠️ ネタバレあり（クリックするまで本文を隠す）</span>
+              </label>
+
+              <button type="button" id="submitCommunityBtn" class="primary-btn" style="width:100%; padding:11px; font-size:0.88rem; cursor:pointer; border:none;">
+                📝 コミュニティに投稿する
+              </button>
+
+              ${hotWorks.length > 0
+                ? `
+                  <div style="margin-top:8px; padding-top:12px; border-top:1px solid var(--border);">
+                    <div style="font-size:0.78rem; font-weight:800; color:var(--text-sub); margin-bottom:8px;">🔥 感想が集まっている注目作品</div>
+                    <div style="display:flex; flex-direction:column; gap:7px;">
+                      ${hotWorks.map(({ work, count }) => `
+                        <button type="button" data-preview="${escapeHtml(work.id)}" style="display:flex; align-items:center; gap:8px; padding:6px; border-radius:8px; border:1px solid var(--border); background:var(--bg); cursor:pointer; text-align:left; color:var(--text);">
+                          ${work.imageUrl ? `<img src="${escapeHtml(work.imageUrl)}" style="width:44px; height:33px; object-fit:cover; border-radius:4px; flex-shrink:0;" />` : ""}
+                          <div style="min-width:0; flex:1;">
+                            <div style="font-size:0.74rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(work.title)}</div>
+                            <div style="font-size:0.68rem; color:#fda4af; font-weight:700;">💬 感想 ${count}件 ・ ${escapeHtml(work.circle)}</div>
+                          </div>
+                        </button>
+                      `).join("")}
+                    </div>
+                  </div>
+                `
+                : ""
+              }
+            </div>
+          </aside>
+        </div>
+      `;
+    }
+
+    function renderModalReviewsHtml(workId) {
+      const posts = communityState.posts.filter((p) => p.workId === workId);
+      return `
+        <div class="modal-reviews-section">
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+            <div style="font-size:0.92rem; font-weight:800; display:flex; align-items:center; gap:7px;">
+              <span class="section-title-bar" style="height:16px; background:linear-gradient(180deg, #a855f7, #6366f1);"></span>
+              <span>💬 この作品のみんなの感想（${posts.length}件）</span>
+            </div>
+            <button type="button" class="comm-action-btn" data-jump-review-work="${escapeHtml(workId)}" style="color:#fda4af; border-color:rgba(244,63,94,0.45);">
+              コミュニティで全件見る →
+            </button>
+          </div>
+
+          ${posts.length > 0
+            ? `<div style="display:flex; flex-direction:column; gap:10px;">
+                ${posts.slice(0, 5).map((p) => `
+                  <div style="padding:10px 12px; border-radius:8px; background:rgba(9,9,11,0.65); border:1px solid var(--border);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px; font-size:0.76rem;">
+                      <div style="display:flex; align-items:center; gap:6px;">
+                        <strong style="color:var(--text);">${escapeHtml(p.nickname)}</strong>
+                        ${p.rating ? `<span style="color:#fbbf24; font-weight:800;">${"★".repeat(p.rating)}</span>` : ""}
+                      </div>
+                      <span class="comm-date">${formatCommDate(p.createdAt)}</span>
+                    </div>
+                    <div style="font-size:0.82rem; color:#e4e4e7; white-space:pre-wrap; line-height:1.55;">
+                      ${p.spoiler ? `<span style="color:#fcd34d;">[ネタバレあり] コミュニティページで本文を開けます</span>` : escapeHtml(p.body)}
+                    </div>
+                  </div>
+                `).join("")}
+              </div>`
+            : `<div style="font-size:0.8rem; color:var(--text-sub);">まだこの作品の感想はありません。読んだ感想を一番乗りで書いてみませんか？</div>`
+          }
+
+          <div style="padding-top:10px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px;">
+            <div style="font-size:0.78rem; font-weight:700; color:#fda4af;">✍️ この作品の感想をすぐ投稿する</div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <input type="text" id="modalReviewNick" class="comm-input" placeholder="ニックネーム（任意）" value="${escapeHtml(communityState.draft.nickname)}" style="width:170px; padding:6px 10px; font-size:0.78rem;" maxlength="30" />
+              <select id="modalReviewRating" class="select-box" style="font-size:0.78rem;">
+                <option value="5">★★★★★ (5.0 最高！)</option>
+                <option value="4">★★★★☆ (4.0 おすすめ)</option>
+                <option value="3">★★★☆☆ (3.0 普通)</option>
+                <option value="2">★★☆☆☆ (2.0 いまいち)</option>
+                <option value="1">★☆☆☆☆ (1.0)</option>
+              </select>
+              <label style="display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; color:#fcd34d; cursor:pointer;">
+                <input type="checkbox" id="modalReviewSpoiler" /> ネタバレあり
+              </label>
+            </div>
+            <textarea id="modalReviewBody" class="comm-textarea" style="min-height:72px;" placeholder="この作品の良かったところ・感想を書いて共有しよう！（4文字以上）" maxlength="1000"></textarea>
+            <div style="display:flex; justify-content:flex-end;">
+              <button type="button" id="submitModalReviewBtn" class="primary-btn" data-modal-review-work="${escapeHtml(workId)}" style="padding:8px 16px; font-size:0.8rem; cursor:pointer; border:none;">
+                💬 この作品の感想を投稿する
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function refreshModalReviews(workId) {
+      const wrap = document.getElementById("modalReviewsWrap");
+      if (wrap) {
+        wrap.innerHTML = renderModalReviewsHtml(workId);
+      }
+    }
+
     let currentModalWorkId = null;
 
     function buildSiteShareUrl(workId) {
@@ -2176,6 +3397,10 @@
           <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn" style="padding:12px 26px; font-size:0.95rem; margin-top:4px;">
             FANZA公式ページで本編を見る ↗
           </a>
+        </div>
+
+        <div id="modalReviewsWrap" style="width:100%;">
+          ${renderModalReviewsHtml(w.id)}
         </div>
       `;
       modal.classList.add("open");
@@ -2281,6 +3506,182 @@
         openPreviewModal(preview.dataset.preview);
         return;
       }
+
+      // 作品カードの「💬」ボタン → コミュニティへ移動してその作品を自動セット
+      const reviewWork = e.target.closest("[data-review-work]");
+      if (reviewWork) {
+        communityState.draft.workId = reviewWork.dataset.reviewWork;
+        communityState.draft.postType = "review";
+        state.tab = "community";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        setTimeout(() => {
+          const box = document.getElementById("commBodyInput");
+          if (box) box.focus();
+        }, 60);
+        return;
+      }
+
+      // モーダル内の「コミュニティで全件見る」ボタン
+      const jumpReviewWork = e.target.closest("[data-jump-review-work]");
+      if (jumpReviewWork) {
+        document.getElementById("sampleModal").classList.remove("open");
+        communityState.draft.workId = jumpReviewWork.dataset.jumpReviewWork;
+        state.tab = "community";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        return;
+      }
+
+      // コミュニティ：絞り込みフィルタ
+      const commFilter = e.target.closest("[data-comm-filter]");
+      if (commFilter) {
+        communityState.filterType = commFilter.dataset.commFilter;
+        render();
+        return;
+      }
+
+      // コミュニティ：投稿種別切り替え
+      const draftType = e.target.closest("[data-draft-type]");
+      if (draftType) {
+        communityState.draft.postType = draftType.dataset.draftType;
+        render();
+        return;
+      }
+
+      // コミュニティ：星評価選択
+      const draftStar = e.target.closest("[data-draft-star]");
+      if (draftStar) {
+        communityState.draft.rating = Number(draftStar.dataset.draftStar) || 5;
+        render();
+        return;
+      }
+
+      // コミュニティ：作品サジェスト選択 / 解除
+      const pickWork = e.target.closest("[data-pick-work]");
+      if (pickWork) {
+        communityState.draft.workId = pickWork.dataset.pickWork;
+        communityState.draft.workQuery = "";
+        render();
+        return;
+      }
+      if (e.target.closest("#clearDraftWorkBtn")) {
+        communityState.draft.workId = null;
+        communityState.draft.workQuery = "";
+        render();
+        return;
+      }
+
+      // コミュニティ：投稿フォームへスクロール＆フォーカス
+      if (e.target.closest("#focusComposerBtn")) {
+        const el = document.getElementById("commComposerBox");
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        const bodyInput = document.getElementById("commBodyInput");
+        if (bodyInput) bodyInput.focus();
+        return;
+      }
+
+      // コミュニティ：ネタバレ表示
+      const revealBtn = e.target.closest("[data-reveal-spoiler]");
+      if (revealBtn) {
+        communityState.revealedSpoilers.add(revealBtn.dataset.revealSpoiler);
+        render();
+        return;
+      }
+
+      // コミュニティ：いいね（参考になった）
+      const likeBtn = e.target.closest("[data-like-post]");
+      if (likeBtn) {
+        likeCommunityPost(likeBtn.dataset.likePost);
+        return;
+      }
+
+      // コミュニティ：返信欄の開閉
+      const toggleReply = e.target.closest("[data-toggle-reply]");
+      if (toggleReply) {
+        const pid = toggleReply.dataset.toggleReply;
+        if (communityState.openReplyIds.has(pid)) communityState.openReplyIds.delete(pid);
+        else communityState.openReplyIds.add(pid);
+        render();
+        return;
+      }
+
+      // コミュニティ：返信送信
+      const submitReply = e.target.closest("[data-submit-reply]");
+      if (submitReply) {
+        const pid = submitReply.dataset.submitReply;
+        const nickEl = document.querySelector(`[data-reply-nick="${pid}"]`);
+        const bodyEl = document.querySelector(`[data-reply-body="${pid}"]`);
+        submitReply.disabled = true;
+        addCommunityReply(pid, nickEl ? nickEl.value : "", bodyEl ? bodyEl.value : "").then((ok) => {
+          submitReply.disabled = false;
+          if (ok) {
+            communityState.openReplyIds.add(pid);
+            render();
+          }
+        });
+        return;
+      }
+
+      // コミュニティ：メインフォームから新規投稿
+      if (e.target.closest("#submitCommunityBtn")) {
+        const btn = document.getElementById("submitCommunityBtn");
+        const nickEl = document.getElementById("commNickInput");
+        const bodyEl = document.getElementById("commBodyInput");
+        const spoilerEl = document.getElementById("commSpoilerCheck");
+        if (nickEl) communityState.draft.nickname = nickEl.value;
+        if (bodyEl) communityState.draft.body = bodyEl.value;
+        if (spoilerEl) communityState.draft.spoiler = spoilerEl.checked;
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = "投稿中...";
+        }
+        createCommunityPost(communityState.draft).then((ok) => {
+          if (ok) {
+            communityState.draft.body = "";
+            communityState.draft.spoiler = false;
+            communityState.filterType = "all";
+            communityState.sortBy = "newest";
+            render();
+          } else if (btn) {
+            btn.disabled = false;
+            btn.textContent = "📝 コミュニティに投稿する";
+          }
+        });
+        return;
+      }
+
+      // 作品プレビューモーダル内からのクイック感想投稿
+      const modalReviewBtn = e.target.closest("#submitModalReviewBtn");
+      if (modalReviewBtn) {
+        const wid = modalReviewBtn.dataset.modalReviewWork;
+        const nick = document.getElementById("modalReviewNick")?.value || "";
+        const rating = Number(document.getElementById("modalReviewRating")?.value || 5);
+        const spoiler = Boolean(document.getElementById("modalReviewSpoiler")?.checked);
+        const body = document.getElementById("modalReviewBody")?.value || "";
+        modalReviewBtn.disabled = true;
+        modalReviewBtn.textContent = "投稿中...";
+        createCommunityPost({
+          postType: "review",
+          workId: wid,
+          nickname: nick,
+          rating,
+          spoiler,
+          body
+        }).then((ok) => {
+          if (ok) {
+            communityState.draft.nickname = nick.trim() || communityState.draft.nickname;
+            updateCounters();
+            refreshModalReviews(wid);
+            if (state.tab === "community") render();
+          } else {
+            modalReviewBtn.disabled = false;
+            modalReviewBtn.textContent = "💬 この作品の感想を投稿する";
+          }
+        });
+        return;
+      }
+
       if (e.target.closest("#loadMoreBtn")) {
         state.limit += 30;
         render();
@@ -2310,6 +3711,33 @@
         state.limit = 30;
         document.getElementById("searchInput").value = "";
         render();
+      }
+    });
+
+    // コミュニティフォームの入力・並び替えイベント（フォーカスを切らさず滑らかに反映）
+    document.addEventListener("input", (e) => {
+      if (e.target.id === "commNickInput") {
+        communityState.draft.nickname = e.target.value;
+      } else if (e.target.id === "commBodyInput") {
+        communityState.draft.body = e.target.value;
+      } else if (e.target.id === "commWorkSearchInput") {
+        const pos = e.target.selectionStart || e.target.value.length;
+        communityState.draft.workQuery = e.target.value;
+        render();
+        const nextInput = document.getElementById("commWorkSearchInput");
+        if (nextInput) {
+          nextInput.focus();
+          nextInput.setSelectionRange(pos, pos);
+        }
+      }
+    });
+
+    document.addEventListener("change", (e) => {
+      if (e.target.id === "commSortSelect") {
+        communityState.sortBy = e.target.value;
+        render();
+      } else if (e.target.id === "commSpoilerCheck") {
+        communityState.draft.spoiler = e.target.checked;
       }
     });
 
@@ -2349,6 +3777,7 @@
     applyUrlQueryParams();
     render();
     tryFetchLiveFanzaData();
+    syncCommunityFromServer();
   </script>
 </body>
 
