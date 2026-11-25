@@ -3036,20 +3036,45 @@
       `;
     }
 
-    function renderCommunityView() {
-      const draft = communityState.draft;
-      const selectedWork = draft.workId ? WORKS.find((w) => w.id === draft.workId) : null;
-
-      // 作品検索サジェスト
-      let workMatches = [];
-      if (!selectedWork && draft.workQuery.trim().length > 0) {
-        const q = draft.workQuery.trim().toLowerCase();
-        workMatches = WORKS.filter((w) =>
+    function renderCommWorkDropdownHtml(query) {
+      const q = String(query || "").trim().toLowerCase();
+      if (!q) return "";
+      const workMatches = [];
+      for (let i = 0; i < WORKS.length; i++) {
+        const w = WORKS[i];
+        if (
           (w.title || "").toLowerCase().includes(q) ||
           (w.circle || "").toLowerCase().includes(q) ||
           (w.id || "").toLowerCase().includes(q)
-        ).slice(0, 8);
+        ) {
+          workMatches.push(w);
+          if (workMatches.length >= 8) break;
+        }
       }
+      if (workMatches.length === 0) return "";
+      return `<div class="comm-work-dropdown">
+        ${workMatches.map((w) => `
+          <button type="button" class="comm-work-option" data-pick-work="${escapeHtml(w.id)}">
+            ${w.imageUrl ? `<img src="${escapeHtml(w.imageUrl)}" style="width:40px; height:30px; object-fit:cover; border-radius:4px; flex-shrink:0;" />` : ""}
+            <div style="min-width:0; flex:1;">
+              <div style="font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(w.title)}</div>
+              <div style="font-size:0.68rem; color:var(--text-sub);">${escapeHtml(w.circle)} ・ ${(CATEGORY_META[w.category] || CATEGORY_META.comic).short}</div>
+            </div>
+          </button>
+        `).join("")}
+      </div>`;
+    }
+
+    function updateCommWorkDropdown(query) {
+      const wrap = document.getElementById("commWorkDropdownWrap");
+      if (wrap) {
+        wrap.innerHTML = renderCommWorkDropdownHtml(query);
+      }
+    }
+
+    function renderCommunityView() {
+      const draft = communityState.draft;
+      const selectedWork = draft.workId ? WORKS.find((w) => w.id === draft.workId) : null;
 
       // 投稿フィルタリング＆並び替え
       let filtered = communityState.posts.filter((p) => {
@@ -3174,21 +3199,8 @@
                     </div>
                   `
                   : `
-                    <input type="text" id="commWorkSearchInput" class="comm-input" placeholder="作品名・サークル名で検索して選択..." value="${escapeHtml(draft.workQuery)}" />
-                    ${workMatches.length > 0
-                      ? `<div class="comm-work-dropdown">
-                          ${workMatches.map((w) => `
-                            <button type="button" class="comm-work-option" data-pick-work="${escapeHtml(w.id)}">
-                              ${w.imageUrl ? `<img src="${escapeHtml(w.imageUrl)}" style="width:40px; height:30px; object-fit:cover; border-radius:4px; flex-shrink:0;" />` : ""}
-                              <div style="min-width:0; flex:1;">
-                                <div style="font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(w.title)}</div>
-                                <div style="font-size:0.68rem; color:var(--text-sub);">${escapeHtml(w.circle)} ・ ${(CATEGORY_META[w.category] || CATEGORY_META.comic).short}</div>
-                              </div>
-                            </button>
-                          `).join("")}
-                        </div>`
-                      : ""
-                    }
+                    <input type="text" id="commWorkSearchInput" class="comm-input" placeholder="作品名・サークル名で検索して選択..." value="${escapeHtml(draft.workQuery)}" autocomplete="off" />
+                    <div id="commWorkDropdownWrap">${renderCommWorkDropdownHtml(draft.workQuery)}</div>
                   `
                 }
               </div>
@@ -3714,21 +3726,24 @@
       }
     });
 
-    // コミュニティフォームの入力・並び替えイベント（フォーカスを切らさず滑らかに反映）
+    // コミュニティフォームの入力・並び替えイベント（フォーカスやIME変換を切らさず滑らかに反映）
     document.addEventListener("input", (e) => {
       if (e.target.id === "commNickInput") {
         communityState.draft.nickname = e.target.value;
       } else if (e.target.id === "commBodyInput") {
         communityState.draft.body = e.target.value;
       } else if (e.target.id === "commWorkSearchInput") {
-        const pos = e.target.selectionStart || e.target.value.length;
         communityState.draft.workQuery = e.target.value;
-        render();
-        const nextInput = document.getElementById("commWorkSearchInput");
-        if (nextInput) {
-          nextInput.focus();
-          nextInput.setSelectionRange(pos, pos);
+        if (!e.isComposing || !e.target.value) {
+          updateCommWorkDropdown(e.target.value);
         }
+      }
+    });
+
+    document.addEventListener("compositionend", (e) => {
+      if (e.target.id === "commWorkSearchInput") {
+        communityState.draft.workQuery = e.target.value;
+        updateCommWorkDropdown(e.target.value);
       }
     });
 
