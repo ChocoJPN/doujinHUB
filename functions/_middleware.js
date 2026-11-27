@@ -335,15 +335,35 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  // API・静的アセット（JS/CSS/JSON/XML/TXT/画像等）はそのまま透過
+  // 独自ドメイン（SITE_URL）設定時、旧ドメイン (*.pages.dev 等) からのアクセスを自動で 301 リダイレクト
+  if (env && env.SITE_URL && !pathname.startsWith("/api/")) {
+    try {
+      const targetOrigin = new URL(String(env.SITE_URL)).origin;
+      const isLocal = url.hostname === "localhost" || url.hostname === "127.0.0.1";
+      if (!isLocal && url.origin !== targetOrigin) {
+        return Response.redirect(`${targetOrigin}${url.pathname}${url.search}`, 301);
+      }
+    } catch (e) { }
+  }
+
+  // API・静的アセット・SSR専用ページ(/work/*)はそのまま透過
   if (
     pathname.startsWith("/api/") ||
     pathname.startsWith("/data/") ||
     pathname.startsWith("/js/") ||
     pathname.startsWith("/css/") ||
+    pathname.startsWith("/work/") ||
     (pathname !== "/" && pathname !== "/index.html")
   ) {
     return next();
+  }
+
+  const baseOrigin = (env && env.SITE_URL ? String(env.SITE_URL).replace(/\/+$/, "") : "") || url.origin;
+
+  // 旧 ?id=<workId> URLは SEO評価集約のため SSR作品詳細ページ /work/<workId> へ 301リダイレクト
+  const legacyWorkId = url.searchParams.get("id") || url.searchParams.get("work") || url.searchParams.get("cid");
+  if (legacyWorkId && /^[a-zA-Z0-9_-]{3,40}$/.test(legacyWorkId)) {
+    return Response.redirect(`${baseOrigin}/work/${encodeURIComponent(legacyWorkId)}`, 301);
   }
 
   const response = await next();
@@ -352,16 +372,8 @@ export async function onRequest(context) {
     return response;
   }
 
-  const baseOrigin = (env && env.SITE_URL ? String(env.SITE_URL).replace(/\/+$/, "") : "") || url.origin;
   const seoIndex = await loadSeoIndex(url, env);
-
-  const workId = url.searchParams.get("id") || url.searchParams.get("work") || url.searchParams.get("cid");
-  let fallbackWork = null;
-  if (workId && !(seoIndex && seoIndex.works && seoIndex.works[workId])) {
-    fallbackWork = await fetchSingleWorkFromDmmApi(workId, env);
-  }
-
-  const meta = buildMetaContext(url, seoIndex, fallbackWork, baseOrigin);
+  const meta = buildMetaContext(url, seoIndex, null, baseOrigin);
   const originalHtml = await response.text();
   const updatedHtml = injectSeoMeta(originalHtml, meta);
 

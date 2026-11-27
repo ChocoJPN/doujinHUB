@@ -615,10 +615,13 @@ function generateSeoAssets(works, creators, updatedAt) {
     worksIndex[w.id] = {
       t: w.title || "",
       c: w.circle || w.author || "",
+      cid: w.creatorId || "",
       pub: w.publisher || "",
+      ser: w.series || "",
       s: w.source === "books" ? "books" : "doujin",
       cat: w.category || "comic",
       pr: Number(w.price) || 0,
+      op: Number(w.origPrice) || Number(w.price) || 0,
       d: Number(w.discount) || 0,
       sp: w.spec || "",
       dt: w.date || "",
@@ -626,7 +629,10 @@ function generateSeoAssets(works, creators, updatedAt) {
       rc: Number(w.reviewsCount) || 0,
       img: w.imageUrl || "",
       ai: Boolean(w.isAi),
-      tg: Array.isArray(w.tags) ? w.tags.slice(0, 4) : []
+      u: w.directUrl || "",
+      tu: w.tachiyomiUrl || "",
+      sm: Array.isArray(w.sampleImages) ? w.sampleImages.slice(0, 4) : [],
+      tg: Array.isArray(w.tags) ? w.tags.slice(0, 6) : []
     };
   }
 
@@ -703,10 +709,10 @@ function generateSeoAssets(works, creators, updatedAt) {
     addUrl(`${SITE_URL}/?tag=${encodeURIComponent(tagName)}`, todayIso, "daily", "0.7");
   }
 
-  // 個別作品ページ（同人上位1,000件 + ブックス上位500件）
+  // 個別作品ページ（クリーンなSSR専用URL /work/<id>：同人上位1,000件 + ブックス上位500件）
   const selectedWorks = [...doujinSorted.slice(0, 1000), ...booksSorted.slice(0, 500)];
   for (const w of selectedWorks) {
-    addUrl(`${SITE_URL}/?id=${encodeURIComponent(w.id)}`, toIsoDate(w.date, todayIso), "weekly", "0.6");
+    addUrl(`${SITE_URL}/work/${encodeURIComponent(w.id)}`, toIsoDate(w.date, todayIso), "weekly", "0.8");
   }
 
   const sitemapXml = [

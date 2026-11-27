@@ -2023,7 +2023,10 @@
     <div class="modal-box">
       <div class="modal-header">
         <h3 class="modal-title" id="modalTitle">サンプルプレビュー</h3>
-        <button type="button" class="modal-close" id="closeModalBtn">✕ 閉じる</button>
+        <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+          <a href="#" id="modalWorkPageLink" class="modal-close" style="text-decoration:none; color:#93c5fd; border-color:rgba(59,130,246,0.4);">📄 専用ページ</a>
+          <button type="button" class="modal-close" id="closeModalBtn">✕ 閉じる</button>
+        </div>
       </div>
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-footer">
@@ -3030,7 +3033,10 @@
             <div class="card-body">
               <div class="circle-row">
                 <button type="button" class="circle-link" data-creator="${w.creatorId}" title="${escapeHtml(creatorTitle)}">${escapeHtml(w.circle)}</button>
-                <span class="rating-meta">★${Number(w.rating || 4.5).toFixed(1)}${w.reviewsCount ? `(${w.reviewsCount})` : ""}</span>
+                <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
+                  <span class="rating-meta">★${Number(w.rating || 4.5).toFixed(1)}${w.reviewsCount ? `(${w.reviewsCount})` : ""}</span>
+                  <a href="/work/${encodeURIComponent(w.id)}" style="font-size:0.66rem; color:var(--text-muted); text-decoration:none; padding:1px 4px; border:1px solid var(--border); border-radius:4px;" title="作品詳細・立ち読み専用ページを開く">詳細</a>
+                </div>
               </div>
               <a href="${fanzaUrl}" target="_blank" rel="noopener" class="card-title-link" title="${escapeHtml(w.title)}">${escapeHtml(w.title)}</a>
               <div class="tags">
@@ -4009,7 +4015,7 @@
 
     function buildSiteShareUrl(workId) {
       const base = getSiteBaseUrl();
-      return workId ? `${base}?id=${encodeURIComponent(workId)}` : base;
+      return workId ? `${base}work/${encodeURIComponent(workId)}` : base;
     }
 
     function buildXPostText(w) {
@@ -4073,6 +4079,10 @@
       modalLinkEl.href = buildFanzaUrl(w);
       modalLinkEl.textContent = isBooks ? "FANZAブックス公式ページで見る ↗" : "FANZA公式ページで見る ↗";
       modalLinkEl.classList.toggle("is-books", isBooks);
+      const modalPageEl = document.getElementById("modalWorkPageLink");
+      if (modalPageEl) {
+        modalPageEl.href = `/work/${encodeURIComponent(w.id)}`;
+      }
       const postToXEl = document.getElementById("postToXLink");
       if (postToXEl) {
         postToXEl.href = buildXIntentUrl(w);
