@@ -47,6 +47,11 @@
       padding: 0;
     }
 
+    html {
+      overflow-x: clip;
+      -webkit-text-size-adjust: 100%;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
       background-color: var(--bg);
@@ -59,11 +64,14 @@
       line-height: 1.45;
       -webkit-font-smoothing: antialiased;
       padding-bottom: 80px;
+      overflow-x: clip;
+      touch-action: manipulation;
     }
 
     button,
     input,
-    select {
+    select,
+    textarea {
       font-family: inherit;
       color: inherit;
     }
@@ -184,10 +192,32 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 8px 14px 8px 34px;
+      padding: 8px 34px 8px 34px;
       font-size: 0.84rem;
       color: var(--text);
       transition: border-color 0.15s;
+    }
+
+    .search-clear-btn {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-sub);
+      font-size: 0.72rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-clear-btn.visible {
+      display: inline-flex;
     }
 
     .search-input:focus {
@@ -216,11 +246,21 @@
       border-bottom: 1px solid var(--border);
     }
 
+    .tab-bar-wrap {
+      position: relative;
+    }
+
     .tab-list {
       display: flex;
       align-items: center;
       gap: 4px;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tab-list::-webkit-scrollbar {
+      display: none;
     }
 
     .tab-btn {
@@ -474,28 +514,96 @@
     }
 
     @media (max-width: 740px) {
+      .container {
+        padding: 0 12px;
+      }
+
       .grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px;
       }
 
+      .grid.mobile-single-col {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 12px;
+      }
+
       .creator-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .header {
+        padding-top: 10px;
+      }
+
+      .header-top {
+        gap: 8px;
+        padding-bottom: 10px;
+      }
+
+      .brand-group {
+        width: 100%;
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .brand-bar {
+        height: 22px;
+        width: 5px;
+      }
+
+      .brand-name {
+        font-size: 1.05rem;
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .status-pill {
+        font-size: 0.66rem;
+        padding: 2px 8px;
+        max-width: 100%;
+      }
+
+      .age-pr-badge {
+        font-size: 0.64rem;
+        padding: 2px 6px;
+      }
+
+      .header-controls {
+        width: 100%;
       }
 
       .search-box {
         width: 100%;
       }
 
+      .tab-bar-wrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 28px;
+        background: linear-gradient(90deg, transparent, rgba(18, 18, 21, 0.96));
+        pointer-events: none;
+      }
+
+      .tab-list {
+        padding-right: 24px;
+      }
+
       .tab-btn {
         padding: 10px 12px;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
+        gap: 5px;
       }
     }
 
-    @media (max-width: 430px) {
+    @media (max-width: 340px) {
       .grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -710,7 +818,7 @@
 
     @media (max-width: 860px) {
       .promo-strip {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -1428,6 +1536,7 @@
       font-weight: 900;
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 9px;
       margin-bottom: 4px;
     }
@@ -1448,6 +1557,7 @@
       background: rgba(16, 185, 129, 0.14);
       border: 1px solid rgba(16, 185, 129, 0.35);
       color: #6ee7b7;
+      max-width: 100%;
     }
 
     .comm-mode-pill.local {
@@ -1461,14 +1571,82 @@
       grid-template-columns: minmax(0, 1fr) 390px;
       gap: 20px;
       align-items: start;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .comm-main,
+    .comm-sidebar {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .comm-composer-toggle {
+      display: none;
+    }
+
+    .comm-composer-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-width: 0;
     }
 
     @media (max-width: 1024px) {
       .comm-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
       }
+
       .comm-sidebar {
         order: -1;
+      }
+
+      .comm-composer {
+        position: static !important;
+        padding: 12px 14px;
+      }
+
+      .comm-composer-heading {
+        display: none !important;
+      }
+
+      .comm-composer-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        width: 100%;
+        background: transparent;
+        border: none;
+        padding: 4px 0;
+        cursor: pointer;
+        text-align: left;
+        color: var(--text);
+        font-size: 0.92rem;
+        font-weight: 800;
+      }
+
+      .comm-composer-toggle-pill {
+        font-size: 0.74rem;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 99px;
+        background: rgba(244, 63, 94, 0.16);
+        border: 1px solid rgba(244, 63, 94, 0.45);
+        color: #fda4af;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .comm-composer:not(.is-open) .comm-composer-body {
+        display: none;
+      }
+
+      .comm-composer.is-open .comm-composer-body {
+        margin-top: 8px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
       }
     }
 
@@ -1483,16 +1661,18 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
+      max-width: 100%;
     }
 
     .comm-type-filters {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
+      min-width: 0;
     }
 
     .comm-filter-btn {
-      padding: 5px 11px;
+      padding: 6px 11px;
       border-radius: 7px;
       border: 1px solid var(--border);
       background: var(--bg);
@@ -1501,6 +1681,7 @@
       font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
+      white-space: nowrap;
     }
 
     .comm-filter-btn:hover {
@@ -1518,6 +1699,8 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .comm-card {
@@ -1529,6 +1712,9 @@
       flex-direction: column;
       gap: 12px;
       transition: border-color 0.15s ease;
+      min-width: 0;
+      max-width: 100%;
+      overflow-wrap: anywhere;
     }
 
     .comm-card:hover {
@@ -1608,6 +1794,8 @@
       background: rgba(9, 9, 11, 0.65);
       border: 1px solid var(--border);
       align-items: center;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .comm-work-thumb {
@@ -1635,6 +1823,7 @@
       overflow: hidden;
       line-height: 1.35;
       margin-bottom: 4px;
+      word-break: break-word;
     }
 
     .comm-work-meta {
@@ -1644,6 +1833,7 @@
       gap: 6px;
       font-size: 0.72rem;
       color: var(--text-sub);
+      min-width: 0;
     }
 
     .comm-work-actions {
@@ -1657,13 +1847,23 @@
       .comm-work-embed {
         flex-direction: column;
         align-items: stretch;
+        gap: 10px;
       }
+
       .comm-work-thumb {
         width: 100%;
-        height: 140px;
+        height: 156px;
       }
+
       .comm-work-actions {
         flex-direction: row;
+        width: 100%;
+      }
+
+      .comm-work-actions > * {
+        flex: 1;
+        justify-content: center;
+        min-height: 36px;
       }
     }
 
@@ -1673,6 +1873,7 @@
       color: #f4f4f5;
       white-space: pre-wrap;
       word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .comm-spoiler-box {
@@ -1690,7 +1891,8 @@
     .comm-card-footer {
       display: flex;
       align-items: center;
-      gap: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
       padding-top: 10px;
       border-top: 1px solid var(--border);
     }
@@ -1699,15 +1901,16 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      padding: 5px 11px;
+      padding: 6px 12px;
       border-radius: 7px;
       border: 1px solid var(--border);
       background: var(--bg);
       color: var(--text-sub);
-      font-size: 0.75rem;
+      font-size: 0.76rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
+      min-height: 34px;
     }
 
     .comm-action-btn:hover {
@@ -1730,12 +1933,17 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .comm-reply-item {
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       font-size: 0.82rem;
+      min-width: 0;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
 
     .comm-reply-item:last-of-type {
@@ -1749,6 +1957,38 @@
       gap: 7px;
       padding-top: 8px;
       border-top: 1px solid var(--border);
+      min-width: 0;
+    }
+
+    .comm-reply-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .comm-reply-nick {
+      width: 150px;
+      flex-shrink: 0;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      min-width: 0;
+    }
+
+    .comm-reply-body {
+      flex: 1;
+      min-width: 160px;
+      padding: 7px 10px;
+      font-size: 0.8rem;
+    }
+
+    .comm-reply-submit {
+      padding: 7px 14px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      border: none;
+      justify-content: center;
     }
 
     .comm-composer {
@@ -1761,6 +2001,51 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .comm-selected-work {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(225, 29, 72, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .comm-hot-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .comm-hot-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      text-align: left;
+      color: var(--text);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .comm-hot-btn:hover {
+      border-color: var(--border-hover);
     }
 
     .comm-field-label {
@@ -1771,8 +2056,11 @@
       margin-bottom: 5px;
     }
 
-    .comm-input, .comm-textarea {
+    .comm-input,
+    .comm-textarea {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -1781,7 +2069,8 @@
       color: var(--text);
     }
 
-    .comm-input:focus, .comm-textarea:focus {
+    .comm-input:focus,
+    .comm-textarea:focus {
       outline: none;
       border-color: var(--accent);
     }
@@ -1801,13 +2090,15 @@
       border-radius: 8px;
       display: flex;
       flex-direction: column;
+      width: 100%;
+      max-width: 100%;
     }
 
     .comm-work-option {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 10px;
+      padding: 8px 10px;
       border: none;
       border-bottom: 1px solid var(--border);
       background: transparent;
@@ -1815,6 +2106,10 @@
       cursor: pointer;
       color: var(--text);
       font-size: 0.78rem;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .comm-work-option:hover {
@@ -1823,6 +2118,8 @@
 
     .star-picker {
       display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
       gap: 4px;
     }
 
@@ -1830,10 +2127,12 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 0.9rem;
+      padding: 6px 10px;
+      font-size: 0.95rem;
       cursor: pointer;
       color: var(--text-muted);
+      min-width: 38px;
+      min-height: 36px;
     }
 
     .star-pick-btn.active {
@@ -1853,6 +2152,681 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      min-width: 0;
+    }
+
+    .modal-review-item {
+      padding: 11px 12px;
+      border-radius: 9px;
+      background: rgba(9, 9, 11, 0.65);
+      border: 1px solid var(--border);
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .modal-review-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 5px;
+      font-size: 0.76rem;
+    }
+
+    .modal-review-form-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .modal-review-nick {
+      width: 180px;
+      padding: 7px 10px;
+      font-size: 0.8rem;
+    }
+
+    .modal-review-rating {
+      font-size: 0.8rem;
+      max-width: 100%;
+    }
+
+    .modal-inline-share {
+      display: none;
+      width: 100%;
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ============================================================
+       スマホ向け 絞り込みバー・ボトムナビ・レイアウト最適化
+       ============================================================ */
+    .mobile-filter-bar {
+      display: none;
+    }
+
+    .mobile-filter-heading {
+      display: none;
+    }
+
+    .mobile-collapsible-filters {
+      display: contents;
+    }
+
+    .mobile-filter-group {
+      display: contents;
+    }
+
+    .mobile-bottom-nav {
+      display: none;
+    }
+
+    .toast-banner {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(16px);
+      z-index: 350;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(20, 20, 30, 0.96);
+      border: 1px solid rgba(244, 63, 94, 0.55);
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      max-width: calc(100vw - 24px);
+      text-align: center;
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 740px) {
+      body {
+        padding-bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+        background-attachment: scroll;
+      }
+
+      /* iOS Safari 入力欄フォーカス時の自動ズーム＆横ズレを完全防止 */
+      input,
+      textarea,
+      select {
+        font-size: 16px !important;
+      }
+
+      .subbar {
+        padding: 8px 0;
+        margin-bottom: 14px;
+      }
+
+      .subbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .filter-groups {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .source-segment {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: 100%;
+      }
+
+      .source-btn {
+        justify-content: center;
+        padding: 7px 6px;
+        font-size: 0.74rem;
+        gap: 3px;
+        min-height: 36px;
+      }
+
+      .source-btn .cat-count {
+        display: none;
+      }
+
+      .mobile-filter-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        width: 100%;
+      }
+
+      .mobile-filter-toggle-btn {
+        flex: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 9px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 0.78rem;
+        font-weight: 700;
+        cursor: pointer;
+        min-height: 38px;
+        min-width: 0;
+      }
+
+      .mobile-filter-toggle-btn.has-active {
+        border-color: rgba(244, 63, 94, 0.55);
+        background: rgba(244, 63, 94, 0.1);
+      }
+
+      .mobile-filter-summary {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #fda4af;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .mobile-layout-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 8px 10px;
+        border-radius: 9px;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text-sub);
+        font-size: 0.74rem;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        min-height: 38px;
+        flex-shrink: 0;
+      }
+
+      .mobile-collapsible-filters {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px;
+        border-radius: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        width: 100%;
+      }
+
+      .mobile-filter-group {
+        display: block;
+        width: 100%;
+      }
+
+      .subbar.mobile-filters-open .mobile-collapsible-filters {
+        display: flex;
+      }
+
+      .mobile-filter-heading {
+        display: block;
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        margin-bottom: 5px;
+      }
+
+      .cat-segment,
+      .ai-segment {
+        width: 100%;
+        background: var(--bg);
+      }
+
+      .cat-btn,
+      .ai-btn {
+        padding: 7px 10px;
+        font-size: 0.76rem;
+        min-height: 34px;
+      }
+
+      .sort-wrap {
+        width: 100%;
+        justify-content: space-between;
+        padding-top: 8px;
+        border-top: 1px solid var(--border);
+      }
+
+      .select-box {
+        flex: 1;
+        max-width: 220px;
+        padding: 7px 10px;
+      }
+
+      /* プロモ・セクション */
+      .promo-strip {
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .promo-card {
+        padding: 12px 13px;
+        gap: 10px;
+      }
+
+      .promo-title {
+        font-size: 0.88rem;
+      }
+
+      .promo-desc {
+        font-size: 0.73rem;
+      }
+
+      .promo-actions {
+        width: 100%;
+      }
+
+      .promo-actions > * {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+        min-height: 36px;
+      }
+
+      .fanza-section {
+        padding: 14px 11px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+      }
+
+      .section-head {
+        gap: 8px;
+        margin-bottom: 12px;
+        padding-bottom: 10px;
+      }
+
+      .section-title {
+        font-size: 0.98rem;
+        line-height: 1.35;
+      }
+
+      .section-update-meta {
+        font-size: 0.68rem;
+        padding: 2px 7px;
+      }
+
+      .section-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .subtab-group {
+        max-width: 100%;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .subtab-group::-webkit-scrollbar {
+        display: none;
+      }
+
+      .subtab-btn {
+        padding: 6px 10px;
+        font-size: 0.75rem;
+      }
+
+      .more-link-btn {
+        font-size: 0.73rem;
+        padding: 6px 10px;
+      }
+
+      /* 作品カード 2列表示時の美しいレイアウト */
+      .card-cover {
+        padding: 6px 7px;
+      }
+
+      .type-label,
+      .rank-badge,
+      .discount-badge,
+      .sample-pill,
+      .tachiyomi-pill,
+      .ai-label {
+        font-size: 0.62rem;
+        padding: 2px 5px;
+      }
+
+      .mono-meta {
+        font-size: 0.64rem;
+      }
+
+      .card-body {
+        padding: 8px 9px;
+      }
+
+      .circle-row {
+        font-size: 0.68rem;
+        gap: 4px;
+        margin-bottom: 4px;
+      }
+
+      .rating-meta {
+        font-size: 0.66rem;
+      }
+
+      .card-detail-chip {
+        display: none;
+      }
+
+      .card-title-link {
+        font-size: 0.79rem;
+        min-height: 2.75em;
+        margin-bottom: 6px;
+        line-height: 1.38;
+      }
+
+      .tags {
+        max-height: 22px;
+      }
+
+      .tag {
+        font-size: 0.62rem;
+        padding: 1px 5px;
+      }
+
+      .card-footer {
+        padding: 7px 9px 9px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+      }
+
+      .grid.mobile-single-col .card-footer {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .grid.mobile-single-col .card-detail-chip {
+        display: inline-block;
+      }
+
+      .grid.mobile-single-col .card-title-link {
+        font-size: 0.9rem;
+      }
+
+      .price-current {
+        font-size: 0.92rem;
+      }
+
+      .footer-actions {
+        width: 100%;
+        gap: 5px;
+      }
+
+      .grid.mobile-single-col .footer-actions {
+        width: auto;
+      }
+
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+      }
+
+      .footer-actions .primary-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 7px 6px;
+        font-size: 0.72rem;
+        min-height: 34px;
+      }
+
+      /* コミュニティ・レビューのスマホ最適化（右はみ出しゼロ） */
+      .comm-hero {
+        padding: 14px;
+        margin-bottom: 14px;
+        gap: 10px;
+      }
+
+      .comm-hero-title {
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+
+      .comm-hero-sub {
+        font-size: 0.76rem;
+      }
+
+      #focusComposerBtn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .comm-toolbar {
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .comm-type-filters {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 2px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .comm-type-filters::-webkit-scrollbar {
+        display: none;
+      }
+
+      .comm-sort-wrap {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .comm-card {
+        padding: 13px 12px;
+        gap: 10px;
+      }
+
+      .comm-card-head {
+        gap: 6px;
+      }
+
+      .comm-body-text {
+        font-size: 0.86rem;
+        line-height: 1.65;
+      }
+
+      .comm-replies {
+        padding: 10px;
+      }
+
+      .comm-reply-row {
+        flex-direction: column;
+        gap: 7px;
+      }
+
+      .comm-reply-nick,
+      .comm-reply-body,
+      .comm-reply-submit {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .comm-reply-submit {
+        min-height: 38px;
+      }
+
+      /* モーダルのスマホフルスクリーン最適化 */
+      .modal-backdrop {
+        padding: 0;
+        align-items: flex-end;
+      }
+
+      .modal-box {
+        max-width: 100%;
+        width: 100%;
+        height: 100dvh;
+        max-height: 100dvh;
+        border-radius: 0;
+        border: none;
+      }
+
+      .modal-header {
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      .modal-title {
+        font-size: 0.84rem;
+      }
+
+      .modal-close {
+        padding: 7px 11px;
+        min-height: 36px;
+        font-size: 0.76rem;
+        white-space: nowrap;
+      }
+
+      .modal-body {
+        padding: 12px 10px 20px;
+        gap: 12px;
+      }
+
+      .modal-reviews-section {
+        padding: 12px;
+      }
+
+      .modal-review-form-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .modal-review-nick,
+      .modal-review-rating {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .modal-inline-share {
+        display: flex;
+      }
+
+      .modal-footer {
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+        gap: 8px;
+        flex-wrap: nowrap;
+      }
+
+      .modal-footer-extra {
+        display: none !important;
+      }
+
+      .modal-footer-main {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      #modalFanzaLink {
+        width: 100%;
+        justify-content: center;
+        padding: 10px 12px !important;
+        font-size: 0.82rem !important;
+      }
+
+      .sale-filter-bar,
+      .fav-sale-alert,
+      .filter-notice {
+        padding: 10px 12px;
+        gap: 8px;
+      }
+
+      /* スマホ専用 画面下部ナビゲーション */
+      .mobile-bottom-nav {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 120;
+        background: rgba(15, 15, 22, 0.97);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid var(--border);
+        padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+        box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.55);
+      }
+
+      .bottom-nav-btn {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        padding: 4px 2px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.64rem;
+        font-weight: 700;
+        transition: color 0.15s, background 0.15s;
+      }
+
+      .bottom-nav-btn .bnav-icon {
+        font-size: 1.12rem;
+        line-height: 1.1;
+      }
+
+      .bottom-nav-btn.active {
+        color: #fda4af;
+        background: rgba(244, 63, 94, 0.12);
+      }
+
+      .bnav-badge {
+        position: absolute;
+        top: 1px;
+        right: 12%;
+        min-width: 16px;
+        height: 16px;
+        padding: 0 4px;
+        border-radius: 99px;
+        background: var(--accent);
+        color: #ffffff;
+        font-size: 0.6rem;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+      }
+
+      .toast-banner {
+        bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+      }
     }
   </style>
 </head>
@@ -1884,6 +2858,7 @@
             <path d="m21 21-4.3-4.3"></path>
           </svg>
           <input type="text" id="searchInput" class="search-input" placeholder="作品名・作家・サークル・タグで検索..." />
+          <button type="button" id="searchClearBtn" class="search-clear-btn" aria-label="検索キーワードをクリア">✕</button>
         </div>
       </div>
     </div>
@@ -1891,7 +2866,7 @@
 
   <!-- 2. メインタブバー（FANZA同人ページ準拠のランキング＆メニュー構成） -->
   <div class="tab-bar">
-    <div class="container">
+    <div class="container tab-bar-wrap">
       <nav class="tab-list" aria-label="メインタブ">
         <button type="button" class="tab-btn active" data-tab="portal">
           <span>総合トップ</span>
@@ -1941,48 +2916,67 @@
         <div class="source-segment" aria-label="同人・ブックス切り替え">
           <button type="button" class="source-btn active" data-source="all">すべて <span class="cat-count"
               id="sourceCountAll"></span></button>
-          <button type="button" class="source-btn" data-source="doujin">📘 FANZA同人 <span class="cat-count"
+          <button type="button" class="source-btn" data-source="doujin">📘 同人 <span class="cat-count"
               id="sourceCountDoujin"></span></button>
-          <button type="button" class="source-btn" data-source="books">📚 FANZAブックス <span class="cat-count"
+          <button type="button" class="source-btn" data-source="books">📚 ブックス <span class="cat-count"
               id="sourceCountBooks"></span></button>
         </div>
 
-        <!-- ジャンル切替 -->
-        <div class="cat-segment" id="catSegment" aria-label="ジャンル絞り込み">
-          <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count"
-              id="catCountAll"></span></button>
-          <button type="button" class="cat-btn" data-cat="comic" data-source-only="doujin">同人誌・漫画 <span class="cat-count"
-              id="catCountComic"></span></button>
-          <button type="button" class="cat-btn" data-cat="books" data-source-only="books">ブックス（商業） <span class="cat-count"
-              id="catCountBooks"></span></button>
-          <button type="button" class="cat-btn" data-cat="audio" data-source-only="doujin">同人音声・ASMR <span class="cat-count"
-              id="catCountAudio"></span></button>
-          <button type="button" class="cat-btn" data-cat="cg" data-source-only="doujin">CG・イラスト集 <span class="cat-count"
-              id="catCountCg"></span></button>
-          <button type="button" class="cat-btn" data-cat="game" data-source-only="doujin">ゲーム・動画 <span class="cat-count"
-              id="catCountGame"></span></button>
+        <!-- スマホ向けコンパクト操作バー（絞り込み開閉 + 1列/2列切替） -->
+        <div class="mobile-filter-bar">
+          <button type="button" id="mobileFilterToggleBtn" class="mobile-filter-toggle-btn" aria-expanded="false">
+            <span>🎛 絞り込み・AI切替</span>
+            <span id="mobileFilterSummary" class="mobile-filter-summary">開く ▼</span>
+          </button>
+          <button type="button" id="mobileLayoutToggleBtn" class="mobile-layout-btn" title="スマホでの作品列数を切り替え">
+            ⊞ 2列
+          </button>
         </div>
 
-        <!-- AI作品 / 非AI作品 切替 -->
-        <div class="ai-segment" aria-label="AI作品フィルター">
-          <button type="button" class="ai-btn active" data-ai="all">すべて <span class="cat-count"
-              id="aiCountAll"></span></button>
-          <button type="button" class="ai-btn" data-ai="non_ai">非AI（手描き・通常） <span class="cat-count"
-              id="aiCountNonAi"></span></button>
-          <button type="button" class="ai-btn" data-ai="ai">AI作品のみ <span class="cat-count"
-              id="aiCountAi"></span></button>
-        </div>
-      </div>
+        <div class="mobile-collapsible-filters">
+          <!-- ジャンル切替 -->
+          <div class="mobile-filter-group" id="catFilterGroup">
+            <span class="mobile-filter-heading">ジャンル</span>
+            <div class="cat-segment" id="catSegment" aria-label="ジャンル絞り込み">
+              <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count"
+                  id="catCountAll"></span></button>
+              <button type="button" class="cat-btn" data-cat="comic" data-source-only="doujin">同人誌・漫画 <span class="cat-count"
+                  id="catCountComic"></span></button>
+              <button type="button" class="cat-btn" data-cat="books" data-source-only="books">ブックス（商業） <span class="cat-count"
+                  id="catCountBooks"></span></button>
+              <button type="button" class="cat-btn" data-cat="audio" data-source-only="doujin">同人音声・ASMR <span class="cat-count"
+                  id="catCountAudio"></span></button>
+              <button type="button" class="cat-btn" data-cat="cg" data-source-only="doujin">CG・イラスト集 <span class="cat-count"
+                  id="catCountCg"></span></button>
+              <button type="button" class="cat-btn" data-cat="game" data-source-only="doujin">ゲーム・動画 <span class="cat-count"
+                  id="catCountGame"></span></button>
+            </div>
+          </div>
 
-      <div class="sort-wrap" id="sortWrap">
-        <span class="result-summary" id="resultSummary"></span>
-        <span>並び順:</span>
-        <select id="sortSelect" class="select-box">
-          <option value="newest">配信日が新しい順</option>
-          <option value="popular">人気・レビュー順</option>
-          <option value="discountDesc">割引率が高い順</option>
-          <option value="priceAsc">価格が安い順</option>
-        </select>
+          <!-- AI作品 / 非AI作品 切替 -->
+          <div class="mobile-filter-group">
+            <span class="mobile-filter-heading">AI生成フィルター</span>
+            <div class="ai-segment" aria-label="AI作品フィルター">
+              <button type="button" class="ai-btn active" data-ai="all">すべて <span class="cat-count"
+                  id="aiCountAll"></span></button>
+              <button type="button" class="ai-btn" data-ai="non_ai">非AI（手描き・通常） <span class="cat-count"
+                  id="aiCountNonAi"></span></button>
+              <button type="button" class="ai-btn" data-ai="ai">AI作品のみ <span class="cat-count"
+                  id="aiCountAi"></span></button>
+            </div>
+          </div>
+
+          <div class="sort-wrap" id="sortWrap">
+            <span class="result-summary" id="resultSummary"></span>
+            <span>並び順:</span>
+            <select id="sortSelect" class="select-box">
+              <option value="newest">配信日が新しい順</option>
+              <option value="popular">人気・レビュー順</option>
+              <option value="discountDesc">割引率が高い順</option>
+              <option value="priceAsc">価格が安い順</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2019,29 +3013,58 @@
     </div>
   </footer>
 
+  <!-- スマホ専用 画面下部ナビゲーション -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav" aria-label="スマホ下部メニュー">
+    <button type="button" class="bottom-nav-btn active" data-bottom-tab="portal">
+      <span class="bnav-icon">🏠</span>
+      <span>トップ</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-bottom-tab="pop_ranking">
+      <span class="bnav-icon">🏆</span>
+      <span>ランキング</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-bottom-tab="sale">
+      <span class="bnav-icon">🔥</span>
+      <span>セール</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-bottom-tab="community">
+      <span class="bnav-icon">💬</span>
+      <span>感想</span>
+      <span id="bottomCommBadge" class="bnav-badge" style="display:none;">0</span>
+    </button>
+    <button type="button" class="bottom-nav-btn" data-bottom-tab="favorites">
+      <span class="bnav-icon">🔖</span>
+      <span>保存</span>
+      <span id="bottomFavBadge" class="bnav-badge" style="display:none;">0</span>
+    </button>
+  </nav>
+
+  <!-- 操作フィードバック用トースト -->
+  <div class="toast-banner" id="toastBanner" role="status" aria-live="polite"></div>
+
   <!-- 4. サンプル立ち読み・プレビュー用モーダル -->
   <div class="modal-backdrop" id="sampleModal">
     <div class="modal-box">
       <div class="modal-header">
         <h3 class="modal-title" id="modalTitle">サンプルプレビュー</h3>
-        <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
-          <a href="#" id="modalWorkPageLink" class="modal-close" style="text-decoration:none; color:#93c5fd; border-color:rgba(59,130,246,0.4);">📄 専用ページ</a>
+        <div style="display:flex; align-items:center; gap:6px; flex-shrink:0;">
+          <a href="#" id="modalWorkPageLink" class="modal-close" style="text-decoration:none; color:#93c5fd; border-color:rgba(59,130,246,0.4);">📄 詳細</a>
           <button type="button" class="modal-close" id="closeModalBtn">✕ 閉じる</button>
         </div>
       </div>
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-footer">
-        <div id="modalPriceInfo"></div>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <a href="#" target="_blank" rel="noopener" id="postToXLink" class="x-post-btn"
+        <div id="modalPriceInfo" style="flex-shrink:0;"></div>
+        <div class="modal-footer-main" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <a href="#" target="_blank" rel="noopener" id="postToXLink" class="x-post-btn modal-footer-extra"
             title="表紙カード付きのX（Twitter）紹介ポストを作成">
             𝕏 Xに投稿
           </a>
-          <button type="button" id="copyXPostBtn" class="x-copy-btn"
+          <button type="button" id="copyXPostBtn" class="x-copy-btn modal-footer-extra"
             title="X（Twitter）にそのまま貼れる紹介文とURLをコピー">
             📋 X紹介文をコピー
           </button>
-          <button type="button" id="copyShareUrlBtn" class="x-copy-btn"
+          <button type="button" id="copyShareUrlBtn" class="x-copy-btn modal-footer-extra"
             title="動的OGPカード対応のURLのみをコピー">
             🔗 URLコピー
           </button>
@@ -2194,6 +3217,19 @@
 
     const FAVS_STORAGE_KEY = "doujin_index_favs_v1";
     const RECENT_STORAGE_KEY = "doujin_index_recent_v1";
+    const MOBILE_COLS_KEY = "doujin_index_mobile_cols_v1";
+
+    let toastTimer = null;
+    function showToast(message) {
+      const el = document.getElementById("toastBanner");
+      if (!el) return;
+      el.textContent = message;
+      el.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.remove("show");
+      }, 2200);
+    }
 
     function loadStoredIdList(key, maxLen = 200) {
       try {
@@ -2226,9 +3262,24 @@
       tag: null,
       query: "",
       limit: 30,           // 横5列 × 6段 = 30件単位
+      mobileCols: (function () {
+        try { return localStorage.getItem(MOBILE_COLS_KEY) === "1" ? "1" : "2"; } catch (e) { return "2"; }
+      })(),
+      mobileFiltersOpen: false,
       favs: loadStoredIdList(FAVS_STORAGE_KEY, 300),
       recentIds: loadStoredIdList(RECENT_STORAGE_KEY, 15)
     };
+
+    function gridClass() {
+      return state.mobileCols === "1" ? "grid mobile-single-col" : "grid";
+    }
+
+    function scrollActiveTabIntoView() {
+      const activeTab = document.querySelector(".tab-btn.active");
+      if (activeTab && typeof activeTab.scrollIntoView === "function") {
+        activeTab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
+    }
 
     /* ============================================================
        コミュニティ（感想・レビュー・雑談）データ管理 & API連動
@@ -2283,6 +3334,7 @@
       likedIds: new Set(safeJsonParse(localStorage.getItem(COMM_LIKES_KEY) || "[]", [])),
       revealedSpoilers: new Set(),
       openReplyIds: new Set(),
+      mobileComposerOpen: false,
       filterType: "all",
       sortBy: "newest",
       draft: {
@@ -2382,7 +3434,7 @@
         nickname: "管理人＠DOUJIN INDEX",
         rating: null,
         spoiler: false,
-        body: `【ようこそ！感想・おすすめ共有コミュニティへ】\n最近読んで良かった同人誌の感想や、「こんなシチュエーションの隠れた名作を探しています！」といった質問など、自由に書き込んで語り合ってください✨\n右側のフォームから作品を検索して紐付けると、他の人もそのままサンプル立ち読みができます！`,
+        body: `【ようこそ！感想・おすすめ共有コミュニティへ】\n最近読んで良かった同人誌の感想や、「こんなシチュエーションの隠れた名作を探しています！」といった質問など、自由に書き込んで語り合ってください✨\n投稿フォームから作品を検索して紐付けると、他の人もそのままサンプル立ち読みができます！`,
         workId: null,
         workTitle: "",
         workCircle: "",
@@ -2937,8 +3989,11 @@
 
       // ストア選択に合わせてカテゴリセグメントの表示をスッキリ制御
       const catSegment = document.getElementById("catSegment");
+      const catFilterGroup = document.getElementById("catFilterGroup");
       if (catSegment) {
-        catSegment.style.display = state.source === "books" ? "none" : "inline-flex";
+        const hideCat = state.source === "books";
+        catSegment.style.display = hideCat ? "none" : "inline-flex";
+        if (catFilterGroup) catFilterGroup.style.display = hideCat ? "none" : "";
         catSegment.querySelectorAll("[data-source-only]").forEach((btn) => {
           const reqSrc = btn.dataset.sourceOnly;
           btn.style.display = state.source === "all" || state.source === reqSrc ? "inline-flex" : "none";
@@ -2959,6 +4014,50 @@
       document.getElementById("favCount").textContent = state.favs.length;
       const commCountEl = document.getElementById("communityCount");
       if (commCountEl) commCountEl.textContent = communityState.posts.length;
+
+      // スマホボトムナビのバッジ同期
+      const bottomCommBadge = document.getElementById("bottomCommBadge");
+      if (bottomCommBadge) {
+        const cnt = communityState.posts.length;
+        bottomCommBadge.textContent = cnt > 99 ? "99+" : String(cnt);
+        bottomCommBadge.style.display = cnt > 0 ? "inline-flex" : "none";
+      }
+      const bottomFavBadge = document.getElementById("bottomFavBadge");
+      if (bottomFavBadge) {
+        const fcnt = state.favs.length;
+        bottomFavBadge.textContent = fcnt > 99 ? "99+" : String(fcnt);
+        bottomFavBadge.style.display = fcnt > 0 ? "inline-flex" : "none";
+      }
+
+      // スマホ絞り込みバーの現在条件サマリー同期
+      const subBar = document.getElementById("subBar");
+      if (subBar) {
+        subBar.classList.toggle("mobile-filters-open", state.mobileFiltersOpen);
+      }
+      const toggleBtn = document.getElementById("mobileFilterToggleBtn");
+      const summaryEl = document.getElementById("mobileFilterSummary");
+      if (toggleBtn && summaryEl) {
+        const activeLabels = [];
+        if (state.cat !== "all") activeLabels.push((CATEGORY_META[state.cat] || CATEGORY_META.comic).short);
+        if (state.aiFilter === "non_ai") activeLabels.push("非AI");
+        else if (state.aiFilter === "ai") activeLabels.push("AIのみ");
+        const hasActive = activeLabels.length > 0;
+        toggleBtn.classList.toggle("has-active", hasActive);
+        toggleBtn.setAttribute("aria-expanded", String(state.mobileFiltersOpen));
+        summaryEl.textContent = state.mobileFiltersOpen
+          ? "閉じる ▲"
+          : hasActive
+            ? `${activeLabels.join("・")} ▼`
+            : "開く ▼";
+      }
+      const layoutBtn = document.getElementById("mobileLayoutToggleBtn");
+      if (layoutBtn) {
+        layoutBtn.textContent = state.mobileCols === "1" ? "▤ 1列" : "⊞ 2列";
+      }
+      const searchClearBtn = document.getElementById("searchClearBtn");
+      if (searchClearBtn) {
+        searchClearBtn.classList.toggle("visible", Boolean(state.query));
+      }
 
       const counts = { all: aiFilteredWorks.length, comic: 0, books: 0, audio: 0, cg: 0, game: 0 };
       aiFilteredWorks.forEach((w) => {
@@ -3036,7 +4135,7 @@
                 <button type="button" class="circle-link" data-creator="${w.creatorId}" title="${escapeHtml(creatorTitle)}">${escapeHtml(w.circle)}</button>
                 <div style="display:inline-flex; align-items:center; gap:5px; flex-shrink:0;">
                   <span class="rating-meta">★${Number(w.rating || 4.5).toFixed(1)}${w.reviewsCount ? `(${w.reviewsCount})` : ""}</span>
-                  <a href="/work/${encodeURIComponent(w.id)}" style="font-size:0.66rem; color:var(--text-muted); text-decoration:none; padding:1px 4px; border:1px solid var(--border); border-radius:4px;" title="作品詳細・立ち読み専用ページを開く">詳細</a>
+                  <a href="/work/${encodeURIComponent(w.id)}" class="card-detail-chip" style="font-size:0.66rem; color:var(--text-muted); text-decoration:none; padding:1px 4px; border:1px solid var(--border); border-radius:4px;" title="作品詳細・立ち読み専用ページを開く">詳細</a>
                 </div>
               </div>
               <a href="${fanzaUrl}" target="_blank" rel="noopener" class="card-title-link" title="${escapeHtml(w.title)}">${escapeHtml(w.title)}</a>
@@ -3061,7 +4160,7 @@
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                 </svg>
               </button>
-              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn ${isBooks ? "is-books" : ""}">${isBooks ? "ブックス ↗" : "FANZAで見る ↗"}</a>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn ${isBooks ? "is-books" : ""}">${isBooks ? "ブックス ↗" : "FANZA ↗"}</a>
             </div>
           </div>
         </article>
@@ -3115,7 +4214,7 @@
                 <button type="button" class="more-link-btn" data-jump-source="doujin" data-jump-cat="comic">同人誌ランキングをすべて見る →</button>
               </div>
             </div>
-            <div class="grid">
+            <div class="${gridClass()}">
               ${doujinComicTop.map((w, idx) => renderCard(w, idx + 1)).join("")}
             </div>
           </section>
@@ -3133,7 +4232,7 @@
                 <button type="button" class="more-link-btn" style="border-color:rgba(59,130,246,0.45); background:rgba(37,99,235,0.14); color:#93c5fd;" data-jump-source="books">ブックスをすべて見る →</button>
               </div>
             </div>
-            <div class="grid">
+            <div class="${gridClass()}">
               ${booksComicTop.map((w, idx) => renderCard(w, idx + 1)).join("")}
             </div>
           </section>
@@ -3162,7 +4261,7 @@
               <button type="button" class="more-link-btn" data-jump-tab="pop_ranking">人気ランキングをすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${popWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
@@ -3190,7 +4289,7 @@
               <button type="button" class="more-link-btn" data-jump-tab="format_ranking">形式別ランキングをすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${formatWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
@@ -3212,7 +4311,7 @@
               <button type="button" class="more-link-btn" data-jump-tab="pickup">ピックアップ作品をすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${pickupWorks.map((w) => renderCard(w, null)).join("")}
           </div>
         </section>
@@ -3228,7 +4327,7 @@
               <button type="button" class="more-link-btn" data-jump-sales="new_release">新作ランキングをすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${newReleaseWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
@@ -3244,7 +4343,7 @@
               <button type="button" class="more-link-btn" data-jump-sales="semi_new">準新作ランキングをすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${semiNewWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
@@ -3260,7 +4359,7 @@
               <button type="button" class="more-link-btn" data-jump-sales="long_seller">ロングセラーランキングをすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${longSellerWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
@@ -3276,7 +4375,7 @@
               <button type="button" class="more-link-btn" data-jump-sales="sales_count">販売数ランキングをすべて見る →</button>
             </div>
           </div>
-          <div class="grid">
+          <div class="${gridClass()}">
             ${salesCountWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
@@ -3290,6 +4389,13 @@
       const ts = getFormattedTimestamps();
 
       document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
+      document.querySelectorAll("[data-bottom-tab]").forEach((b) => {
+        const bt = b.dataset.bottomTab;
+        const isActive =
+          bt === state.tab ||
+          (bt === "pop_ranking" && (state.tab === "sales_ranking" || state.tab === "format_ranking"));
+        b.classList.toggle("active", isActive);
+      });
       document.querySelectorAll(".source-btn").forEach((b) => b.classList.toggle("active", b.dataset.source === state.source));
       document.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.cat));
       document.querySelectorAll(".ai-btn").forEach((b) => b.classList.toggle("active", b.dataset.ai === state.aiFilter));
@@ -3564,7 +4670,7 @@
                   <span class="section-update-meta">${recentWorks.length}件</span>
                 </div>
               </div>
-              <div class="grid">
+              <div class="${gridClass()}">
                 ${recentWorks.map((w) => renderCard(w, null)).join("")}
               </div>
             </section>
@@ -3590,7 +4696,7 @@
 
       view.innerHTML = `
         ${headerBannerHtml}
-        <div class="grid">
+        <div class="${gridClass()}">
           ${visibleList.map((w, idx) => renderCard(w, isRankedView ? idx + 1 : null)).join("")}
         </div>
         ${hasMore
@@ -3672,10 +4778,10 @@
               : `<div style="font-size:0.76rem; color:var(--text-muted);">まだ返信はありません。最初のコメントを書いてみましょう！</div>`
             }
             <div class="comm-reply-form" data-reply-form="${escapeHtml(p.id)}">
-              <div style="display:flex; gap:6px; flex-wrap:wrap;">
-                <input type="text" class="comm-input" data-reply-nick="${escapeHtml(p.id)}" placeholder="ニックネーム（任意）" value="${escapeHtml(communityState.draft.nickname)}" style="width:160px; flex-shrink:0; padding:6px 9px; font-size:0.76rem;" maxlength="30" />
-                <input type="text" class="comm-input" data-reply-body="${escapeHtml(p.id)}" placeholder="この感想へ返信する..." style="flex:1; min-width:180px; padding:6px 9px; font-size:0.78rem;" maxlength="400" />
-                <button type="button" class="primary-btn" data-submit-reply="${escapeHtml(p.id)}" style="padding:6px 12px; font-size:0.76rem; cursor:pointer; border:none;">返信</button>
+              <div class="comm-reply-row">
+                <input type="text" class="comm-input comm-reply-nick" data-reply-nick="${escapeHtml(p.id)}" placeholder="ニックネーム（任意）" value="${escapeHtml(communityState.draft.nickname)}" maxlength="30" />
+                <input type="text" class="comm-input comm-reply-body" data-reply-body="${escapeHtml(p.id)}" placeholder="この感想へ返信する..." maxlength="400" />
+                <button type="button" class="primary-btn comm-reply-submit" data-submit-reply="${escapeHtml(p.id)}">返信</button>
               </div>
             </div>
           </div>
@@ -3793,21 +4899,22 @@
         .filter((x) => x.work);
 
       const modeBadge = communityState.mode === "cloud"
-        ? `<span class="comm-mode-pill">☁️ クラウド共有中（全ユーザー連動）</span>`
-        : `<span class="comm-mode-pill local" title="Cloudflare KV (COMMUNITY_KV) を設定すると全ユーザーと自動共有されます">💾 ブラウザ保存モード（KV設定で全員共有化）</span>`;
+        ? `<span class="comm-mode-pill">☁️ クラウド共有中</span>`
+        : `<span class="comm-mode-pill local" title="Cloudflare KV (COMMUNITY_KV) を設定すると全ユーザーと自動共有されます">💾 ブラウザ保存</span>`;
 
       const showStars = draft.postType === "review" || draft.postType === "recommend";
+      const isComposerOpen = Boolean(communityState.mobileComposerOpen);
 
       return `
         <section class="comm-hero">
-          <div>
-            <h1 class="comm-hero-title">💬 同人作品 感想・レビューコミュニティ ${modeBadge}</h1>
+          <div style="min-width:0; flex:1;">
+            <h1 class="comm-hero-title">💬 感想・レビューコミュニティ ${modeBadge}</h1>
             <p class="comm-hero-sub">
-              読んだ同人誌・聴いたASMR音声・遊んだゲームの感想を自由に語り合えるコミュニティページです。作品を紐付けて投稿すると、そのまま立ち読み＆紹介ができます！
+              読んだ同人誌・聴いたASMR音声・遊んだゲームの感想を自由に語り合えるコミュニティです。作品を紐付けて投稿すると、そのまま立ち読み＆紹介ができます！
             </p>
           </div>
           <button type="button" class="primary-btn" id="focusComposerBtn" style="padding:10px 18px; font-size:0.84rem; cursor:pointer; border:none;">
-            ✍️ 感想・トピックを書く
+            ✍️ 感想・レビューを書く
           </button>
         </section>
 
@@ -3817,11 +4924,11 @@
               <div class="comm-type-filters">
                 <button type="button" class="comm-filter-btn ${communityState.filterType === "all" ? "active" : ""}" data-comm-filter="all">すべて (${communityState.posts.length})</button>
                 <button type="button" class="comm-filter-btn ${communityState.filterType === "review" ? "active" : ""}" data-comm-filter="review">📝 作品感想</button>
-                <button type="button" class="comm-filter-btn ${communityState.filterType === "recommend" ? "active" : ""}" data-comm-filter="recommend">🔥 おすすめ紹介</button>
-                <button type="button" class="comm-filter-btn ${communityState.filterType === "question" ? "active" : ""}" data-comm-filter="question">🔍 作品探し・質問</button>
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "recommend" ? "active" : ""}" data-comm-filter="recommend">🔥 おすすめ</button>
+                <button type="button" class="comm-filter-btn ${communityState.filterType === "question" ? "active" : ""}" data-comm-filter="question">🔍 質問・探し</button>
                 <button type="button" class="comm-filter-btn ${communityState.filterType === "talk" ? "active" : ""}" data-comm-filter="talk">💬 雑談</button>
               </div>
-              <div style="display:flex; align-items:center; gap:6px; font-size:0.76rem; color:var(--text-sub);">
+              <div class="comm-sort-wrap" style="display:flex; align-items:center; gap:6px; font-size:0.76rem; color:var(--text-sub);">
                 <span>並び順:</span>
                 <select id="commSortSelect" class="select-box">
                   <option value="newest" ${communityState.sortBy === "newest" ? "selected" : ""}>新着順</option>
@@ -3834,25 +4941,33 @@
             <div class="comm-list">
               ${filtered.length > 0
                 ? filtered.map((p) => renderCommunityPostCard(p)).join("")
-                : `<div style="text-align:center; padding:50px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
-                    該当する感想・投稿はまだありません。右のフォームから最初の感想を投稿してみませんか？
+                : `<div style="text-align:center; padding:42px 18px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
+                    該当する感想・投稿はまだありません。投稿フォームから最初の感想を書いてみませんか？
                   </div>`
               }
             </div>
           </div>
 
           <aside class="comm-sidebar">
-            <div class="comm-composer" id="commComposerBox">
-              <div style="font-size:0.98rem; font-weight:800; display:flex; align-items:center; gap:7px;">
+            <div class="comm-composer ${isComposerOpen ? "is-open" : ""}" id="commComposerBox">
+              <div class="comm-composer-heading" style="font-size:0.98rem; font-weight:800; display:flex; align-items:center; gap:7px;">
                 <span class="section-title-bar" style="height:18px;"></span>
                 <span>感想・レビューを投稿する</span>
               </div>
+              <button type="button" class="comm-composer-toggle" id="toggleCommComposerBtn" aria-expanded="${isComposerOpen}">
+                <span style="display:flex; align-items:center; gap:7px; min-width:0;">
+                  <span class="section-title-bar" style="height:16px;"></span>
+                  <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${selectedWork ? `✍️ 「${escapeHtml(selectedWork.title)}」の感想` : "✍️ 感想・レビューを投稿する"}</span>
+                </span>
+                <span class="comm-composer-toggle-pill">${isComposerOpen ? "閉じる ▲" : "フォームを開く ▼"}</span>
+              </button>
 
+              <div class="comm-composer-body">
               <div>
                 <span class="comm-field-label">投稿の種類</span>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px;">
+                <div style="display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:6px;">
                   ${Object.entries(COMM_TYPE_META).map(([key, m]) => `
-                    <button type="button" class="comm-filter-btn ${draft.postType === key ? "active" : ""}" data-draft-type="${key}" style="text-align:center;">
+                    <button type="button" class="comm-filter-btn ${draft.postType === key ? "active" : ""}" data-draft-type="${key}" style="text-align:center; min-width:0; overflow:hidden; text-overflow:ellipsis;">
                       ${m.icon} ${m.label}
                     </button>
                   `).join("")}
@@ -3863,13 +4978,13 @@
                 <span class="comm-field-label">対象作品を紐付ける（任意・${WORKS.length.toLocaleString()}作品から検索）</span>
                 ${selectedWork
                   ? `
-                    <div style="display:flex; align-items:center; gap:8px; padding:8px; border-radius:8px; background:rgba(225,29,72,0.12); border:1px solid rgba(244,63,94,0.4);">
-                      ${selectedWork.imageUrl ? `<img src="${escapeHtml(selectedWork.imageUrl)}" style="width:48px; height:36px; object-fit:cover; border-radius:5px;" />` : ""}
+                    <div class="comm-selected-work">
+                      ${selectedWork.imageUrl ? `<img src="${escapeHtml(selectedWork.imageUrl)}" style="width:48px; height:36px; object-fit:cover; border-radius:5px; flex-shrink:0;" />` : ""}
                       <div style="flex:1; min-width:0;">
                         <div style="font-size:0.76rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(selectedWork.title)}</div>
-                        <div style="font-size:0.68rem; color:var(--text-sub);">${escapeHtml(selectedWork.circle)}</div>
+                        <div style="font-size:0.68rem; color:var(--text-sub); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(selectedWork.circle)}</div>
                       </div>
-                      <button type="button" id="clearDraftWorkBtn" style="background:var(--bg); border:1px solid var(--border); color:var(--text-sub); border-radius:6px; padding:3px 7px; font-size:0.7rem; cursor:pointer;">✕</button>
+                      <button type="button" id="clearDraftWorkBtn" style="background:var(--bg); border:1px solid var(--border); color:var(--text-sub); border-radius:6px; padding:4px 8px; font-size:0.72rem; cursor:pointer; flex-shrink:0;">✕</button>
                     </div>
                   `
                   : `
@@ -3906,24 +5021,24 @@
 
               <label style="display:flex; align-items:center; gap:7px; font-size:0.78rem; color:#fcd34d; cursor:pointer; user-select:none;">
                 <input type="checkbox" id="commSpoilerCheck" ${draft.spoiler ? "checked" : ""} />
-                <span>⚠️ ネタバレあり（クリックするまで本文を隠す）</span>
+                <span>⚠️ ネタバレあり（タップするまで本文を隠す）</span>
               </label>
 
-              <button type="button" id="submitCommunityBtn" class="primary-btn" style="width:100%; padding:11px; font-size:0.88rem; cursor:pointer; border:none;">
+              <button type="button" id="submitCommunityBtn" class="primary-btn" style="width:100%; padding:11px; font-size:0.88rem; cursor:pointer; border:none; justify-content:center;">
                 📝 コミュニティに投稿する
               </button>
 
               ${hotWorks.length > 0
                 ? `
-                  <div style="margin-top:8px; padding-top:12px; border-top:1px solid var(--border);">
+                  <div style="margin-top:8px; padding-top:12px; border-top:1px solid var(--border); min-width:0;">
                     <div style="font-size:0.78rem; font-weight:800; color:var(--text-sub); margin-bottom:8px;">🔥 感想が集まっている注目作品</div>
-                    <div style="display:flex; flex-direction:column; gap:7px;">
+                    <div class="comm-hot-list">
                       ${hotWorks.map(({ work, count }) => `
-                        <button type="button" data-preview="${escapeHtml(work.id)}" style="display:flex; align-items:center; gap:8px; padding:6px; border-radius:8px; border:1px solid var(--border); background:var(--bg); cursor:pointer; text-align:left; color:var(--text);">
+                        <button type="button" data-preview="${escapeHtml(work.id)}" class="comm-hot-btn">
                           ${work.imageUrl ? `<img src="${escapeHtml(work.imageUrl)}" style="width:44px; height:33px; object-fit:cover; border-radius:4px; flex-shrink:0;" />` : ""}
                           <div style="min-width:0; flex:1;">
                             <div style="font-size:0.74rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(work.title)}</div>
-                            <div style="font-size:0.68rem; color:#fda4af; font-weight:700;">💬 感想 ${count}件 ・ ${escapeHtml(work.circle)}</div>
+                            <div style="font-size:0.68rem; color:#fda4af; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">💬 感想 ${count}件 ・ ${escapeHtml(work.circle)}</div>
                           </div>
                         </button>
                       `).join("")}
@@ -3932,6 +5047,7 @@
                 `
                 : ""
               }
+              </div>
             </div>
           </aside>
         </div>
@@ -3948,48 +5064,53 @@
               <span>💬 この作品のみんなの感想（${posts.length}件）</span>
             </div>
             <button type="button" class="comm-action-btn" data-jump-review-work="${escapeHtml(workId)}" style="color:#fda4af; border-color:rgba(244,63,94,0.45);">
-              コミュニティで全件見る →
+              コミュニティで見る →
             </button>
           </div>
 
           ${posts.length > 0
-            ? `<div style="display:flex; flex-direction:column; gap:10px;">
-                ${posts.slice(0, 5).map((p) => `
-                  <div style="padding:10px 12px; border-radius:8px; background:rgba(9,9,11,0.65); border:1px solid var(--border);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:4px; font-size:0.76rem;">
-                      <div style="display:flex; align-items:center; gap:6px;">
+            ? `<div style="display:flex; flex-direction:column; gap:10px; min-width:0;">
+                ${posts.slice(0, 5).map((p) => {
+                  const isHidden = Boolean(p.spoiler) && !communityState.revealedSpoilers.has(p.id);
+                  return `
+                  <div class="modal-review-item">
+                    <div class="modal-review-item-head">
+                      <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px; min-width:0;">
                         <strong style="color:var(--text);">${escapeHtml(p.nickname)}</strong>
                         ${p.rating ? `<span style="color:#fbbf24; font-weight:800;">${"★".repeat(p.rating)}</span>` : ""}
                       </div>
                       <span class="comm-date">${formatCommDate(p.createdAt)}</span>
                     </div>
-                    <div style="font-size:0.82rem; color:#e4e4e7; white-space:pre-wrap; line-height:1.55;">
-                      ${p.spoiler ? `<span style="color:#fcd34d;">[ネタバレあり] コミュニティページで本文を開けます</span>` : escapeHtml(p.body)}
+                    <div style="font-size:0.84rem; color:#e4e4e7; white-space:pre-wrap; line-height:1.6; word-break:break-word;">
+                      ${isHidden
+                        ? `<button type="button" class="comm-action-btn" data-modal-reveal-spoiler="${escapeHtml(p.id)}" style="width:100%; justify-content:center; color:#fcd34d; border-style:dashed; border-color:rgba(251,191,36,0.45);">⚠️ ネタバレあり — タップして表示</button>`
+                        : escapeHtml(p.body)}
                     </div>
                   </div>
-                `).join("")}
+                `;
+                }).join("")}
               </div>`
             : `<div style="font-size:0.8rem; color:var(--text-sub);">まだこの作品の感想はありません。読んだ感想を一番乗りで書いてみませんか？</div>`
           }
 
-          <div style="padding-top:10px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px;">
-            <div style="font-size:0.78rem; font-weight:700; color:#fda4af;">✍️ この作品の感想をすぐ投稿する</div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-              <input type="text" id="modalReviewNick" class="comm-input" placeholder="ニックネーム（任意）" value="${escapeHtml(communityState.draft.nickname)}" style="width:170px; padding:6px 10px; font-size:0.78rem;" maxlength="30" />
-              <select id="modalReviewRating" class="select-box" style="font-size:0.78rem;">
+          <div style="padding-top:10px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:8px; min-width:0;">
+            <div style="font-size:0.8rem; font-weight:700; color:#fda4af;">✍️ この作品の感想をすぐ投稿する</div>
+            <div class="modal-review-form-row">
+              <input type="text" id="modalReviewNick" class="comm-input modal-review-nick" placeholder="ニックネーム（任意）" value="${escapeHtml(communityState.draft.nickname)}" maxlength="30" />
+              <select id="modalReviewRating" class="select-box modal-review-rating">
                 <option value="5">★★★★★ (5.0 最高！)</option>
                 <option value="4">★★★★☆ (4.0 おすすめ)</option>
                 <option value="3">★★★☆☆ (3.0 普通)</option>
                 <option value="2">★★☆☆☆ (2.0 いまいち)</option>
                 <option value="1">★☆☆☆☆ (1.0)</option>
               </select>
-              <label style="display:inline-flex; align-items:center; gap:5px; font-size:0.75rem; color:#fcd34d; cursor:pointer;">
+              <label style="display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; color:#fcd34d; cursor:pointer; padding:4px 0;">
                 <input type="checkbox" id="modalReviewSpoiler" /> ネタバレあり
               </label>
             </div>
-            <textarea id="modalReviewBody" class="comm-textarea" style="min-height:72px;" placeholder="この作品の良かったところ・感想を書いて共有しよう！（4文字以上）" maxlength="1000"></textarea>
+            <textarea id="modalReviewBody" class="comm-textarea" style="min-height:76px;" placeholder="この作品の良かったところ・感想を書いて共有しよう！（4文字以上）" maxlength="1000"></textarea>
             <div style="display:flex; justify-content:flex-end;">
-              <button type="button" id="submitModalReviewBtn" class="primary-btn" data-modal-review-work="${escapeHtml(workId)}" style="padding:8px 16px; font-size:0.8rem; cursor:pointer; border:none;">
+              <button type="button" id="submitModalReviewBtn" class="primary-btn" data-modal-review-work="${escapeHtml(workId)}" style="padding:10px 18px; font-size:0.84rem; cursor:pointer; border:none; width:100%; justify-content:center; max-width:280px;">
                 💬 この作品の感想を投稿する
               </button>
             </div>
@@ -4151,6 +5272,12 @@
             </div>
           </div>
 
+          <div class="modal-inline-share">
+            <a href="${escapeHtml(buildXIntentUrl(w))}" target="_blank" rel="noopener" class="x-post-btn" style="flex:1; justify-content:center;">𝕏 Xに投稿</a>
+            <button type="button" class="x-copy-btn" data-copy-x-post="1" style="flex:1;">📋 紹介文コピー</button>
+            <button type="button" class="x-copy-btn" data-copy-share-url="1" style="flex:1;">🔗 URLコピー</button>
+          </div>
+
           <div id="modalReviewsWrap" style="width:100%;">
             ${renderModalReviewsHtml(w.id)}
           </div>
@@ -4215,6 +5342,12 @@
           </a>
         </div>
 
+        <div class="modal-inline-share">
+          <a href="${escapeHtml(buildXIntentUrl(w))}" target="_blank" rel="noopener" class="x-post-btn" style="flex:1; justify-content:center;">𝕏 Xに投稿</a>
+          <button type="button" class="x-copy-btn" data-copy-x-post="1" style="flex:1;">📋 紹介文コピー</button>
+          <button type="button" class="x-copy-btn" data-copy-share-url="1" style="flex:1;">🔗 URLコピー</button>
+        </div>
+
         <div id="modalReviewsWrap" style="width:100%;">
           ${renderModalReviewsHtml(w.id)}
         </div>
@@ -4234,6 +5367,42 @@
           state.sort = "discountDesc";
         }
         state.limit = 30;
+        render();
+        scrollActiveTabIntoView();
+        return;
+      }
+      const bottomTab = e.target.closest("[data-bottom-tab]");
+      if (bottomTab) {
+        state.tab = bottomTab.dataset.bottomTab;
+        if (state.tab === "sale" && state.sort === "newest") {
+          state.sort = "discountDesc";
+        }
+        state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        scrollActiveTabIntoView();
+        return;
+      }
+      if (e.target.closest("#mobileFilterToggleBtn")) {
+        state.mobileFiltersOpen = !state.mobileFiltersOpen;
+        updateCounters();
+        return;
+      }
+      if (e.target.closest("#mobileLayoutToggleBtn")) {
+        state.mobileCols = state.mobileCols === "1" ? "2" : "1";
+        try { localStorage.setItem(MOBILE_COLS_KEY, state.mobileCols); } catch (err) { }
+        render();
+        showToast(state.mobileCols === "1" ? "▤ 1列（大きく表示）に切り替えました" : "⊞ 2列（一覧表示）に切り替えました");
+        return;
+      }
+      if (e.target.closest("#searchClearBtn")) {
+        state.query = "";
+        state.limit = 30;
+        const searchEl = document.getElementById("searchInput");
+        if (searchEl) {
+          searchEl.value = "";
+          searchEl.focus();
+        }
         render();
         return;
       }
@@ -4366,10 +5535,12 @@
       if (fav) {
         const id = fav.dataset.fav;
         const i = state.favs.indexOf(id);
+        const added = i < 0;
         if (i >= 0) state.favs.splice(i, 1);
         else state.favs.unshift(id);
         saveStoredIdList(FAVS_STORAGE_KEY, state.favs, 300);
         render();
+        showToast(added ? "🔖 お気に入りに保存しました" : "お気に入りから削除しました");
         return;
       }
       const preview = e.target.closest("[data-preview]");
@@ -4378,28 +5549,47 @@
         return;
       }
 
-      // 作品カードの「💬」ボタン → コミュニティへ移動してその作品を自動セット
+      // 作品カードの「💬」ボタン → コミュニティへ移動してその作品を自動セット＆フォームを開く
       const reviewWork = e.target.closest("[data-review-work]");
       if (reviewWork) {
         communityState.draft.workId = reviewWork.dataset.reviewWork;
         communityState.draft.postType = "review";
+        communityState.mobileComposerOpen = true;
         state.tab = "community";
         window.scrollTo({ top: 0, behavior: "smooth" });
         render();
+        scrollActiveTabIntoView();
         setTimeout(() => {
           const box = document.getElementById("commBodyInput");
           if (box) box.focus();
-        }, 60);
+        }, 80);
         return;
       }
 
-      // モーダル内の「コミュニティで全件見る」ボタン
+      // モーダル内の「コミュニティで見る」ボタン
       const jumpReviewWork = e.target.closest("[data-jump-review-work]");
       if (jumpReviewWork) {
         document.getElementById("sampleModal").classList.remove("open");
         communityState.draft.workId = jumpReviewWork.dataset.jumpReviewWork;
+        communityState.mobileComposerOpen = false;
         state.tab = "community";
         window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        scrollActiveTabIntoView();
+        return;
+      }
+
+      // モーダル内レビューのネタバレ展開
+      const modalRevealBtn = e.target.closest("[data-modal-reveal-spoiler]");
+      if (modalRevealBtn) {
+        communityState.revealedSpoilers.add(modalRevealBtn.dataset.modalRevealSpoiler);
+        if (currentModalWorkId) refreshModalReviews(currentModalWorkId);
+        return;
+      }
+
+      // スマホ用：コミュニティ投稿フォームの開閉トグル
+      if (e.target.closest("#toggleCommComposerBtn")) {
+        communityState.mobileComposerOpen = !communityState.mobileComposerOpen;
         render();
         return;
       }
@@ -4443,12 +5633,16 @@
         return;
       }
 
-      // コミュニティ：投稿フォームへスクロール＆フォーカス
+      // コミュニティ：投稿フォームへスクロール＆フォーカス（スマホでは自動展開）
       if (e.target.closest("#focusComposerBtn")) {
-        const el = document.getElementById("commComposerBox");
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-        const bodyInput = document.getElementById("commBodyInput");
-        if (bodyInput) bodyInput.focus();
+        communityState.mobileComposerOpen = true;
+        render();
+        setTimeout(() => {
+          const el = document.getElementById("commComposerBox");
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+          const bodyInput = document.getElementById("commBodyInput");
+          if (bodyInput) bodyInput.focus();
+        }, 40);
         return;
       }
 
@@ -4489,6 +5683,7 @@
           if (ok) {
             communityState.openReplyIds.add(pid);
             render();
+            showToast("✅ 返信を投稿しました！");
           }
         });
         return;
@@ -4513,7 +5708,9 @@
             communityState.draft.spoiler = false;
             communityState.filterType = "all";
             communityState.sortBy = "newest";
+            communityState.mobileComposerOpen = false;
             render();
+            showToast("✅ 感想を投稿しました！");
           } else if (btn) {
             btn.disabled = false;
             btn.textContent = "📝 コミュニティに投稿する";
@@ -4545,6 +5742,7 @@
             updateCounters();
             refreshModalReviews(wid);
             if (state.tab === "community") render();
+            showToast("✅ この作品の感想を投稿しました！");
           } else {
             modalReviewBtn.disabled = false;
             modalReviewBtn.textContent = "💬 この作品の感想を投稿する";
@@ -4558,24 +5756,26 @@
         render();
         return;
       }
-      if (e.target.closest("#copyXPostBtn")) {
+      if (e.target.closest("#copyXPostBtn") || e.target.closest("[data-copy-x-post]")) {
         if (currentModalWorkId) {
           const w = WORKS.find((x) => x.id === currentModalWorkId || x.code === currentModalWorkId);
           if (w) {
             navigator.clipboard.writeText(buildXPostText(w)).then(() => {
               const btn = document.getElementById("copyXPostBtn");
               if (btn) btn.textContent = "✅ 紹介文をコピーしました！";
+              showToast("✅ X紹介文をコピーしました！");
             });
           }
         }
         return;
       }
-      if (e.target.closest("#copyShareUrlBtn")) {
+      if (e.target.closest("#copyShareUrlBtn") || e.target.closest("[data-copy-share-url]")) {
         if (currentModalWorkId) {
           const shareUrl = buildSiteShareUrl(currentModalWorkId);
           navigator.clipboard.writeText(shareUrl).then(() => {
             const btn = document.getElementById("copyShareUrlBtn");
             if (btn) btn.textContent = "✅ URLコピー完了！";
+            showToast("✅ 作品URLをコピーしました！");
           });
         }
         return;

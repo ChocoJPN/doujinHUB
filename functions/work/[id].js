@@ -414,6 +414,7 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
       --books-grad: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
       background-color: var(--bg);
@@ -423,6 +424,8 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
       color: var(--text);
       line-height: 1.55;
       padding-bottom: 64px;
+      overflow-x: clip;
+      touch-action: manipulation;
     }
     a { color: inherit; }
     .container { max-width: 1180px; margin: 0 auto; padding: 0 18px; }
@@ -441,14 +444,15 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
     .brand-name { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.01em; }
     .top-nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .nav-pill {
-      padding: 5px 11px; border-radius: 7px; border: 1px solid var(--border);
+      padding: 6px 11px; border-radius: 7px; border: 1px solid var(--border);
       background: var(--surface); color: var(--text-sub); text-decoration: none;
-      font-size: 0.78rem; font-weight: 700; transition: all 0.15s;
+      font-size: 0.78rem; font-weight: 700; transition: all 0.15s; white-space: nowrap;
     }
     .nav-pill:hover { color: #fff; border-color: #f43f5e; }
     .breadcrumb {
       display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
       font-size: 0.76rem; color: var(--text-muted); margin: 16px 0 14px;
+      word-break: break-word;
     }
     .breadcrumb a { color: var(--text-sub); text-decoration: none; }
     .breadcrumb a:hover { color: #fda4af; text-decoration: underline; }
@@ -462,8 +466,9 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
       gap: 24px;
       margin-bottom: 26px;
     }
+    .hero-card > * { min-width: 0; }
     @media (max-width: 840px) {
-      .hero-card { grid-template-columns: 1fr; padding: 16px; }
+      .hero-card { grid-template-columns: minmax(0, 1fr); padding: 14px; gap: 16px; }
     }
     .hero-cover-wrap {
       border-radius: 12px; overflow: hidden; border: 1px solid var(--border);
@@ -483,13 +488,14 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
     .badge.non-ai { background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.45); color: #6ee7b7; }
     .badge.is-ai { background: linear-gradient(135deg, #7c3aed, #a855f7); }
     .badge.sale { background: linear-gradient(135deg, #f43f5e, #f97316); }
-    h1 { font-size: 1.42rem; font-weight: 900; line-height: 1.4; margin-bottom: 14px; letter-spacing: -0.01em; }
+    h1 { font-size: 1.42rem; font-weight: 900; line-height: 1.4; margin-bottom: 14px; letter-spacing: -0.01em; word-break: break-word; }
     .meta-table {
-      display: grid; grid-template-columns: 110px 1fr; gap: 7px 12px;
+      display: grid; grid-template-columns: 106px minmax(0, 1fr); gap: 7px 12px;
       font-size: 0.84rem; padding: 12px 14px; border-radius: 10px;
       background: rgba(9, 9, 14, 0.65); border: 1px solid var(--border); margin-bottom: 16px;
     }
     .meta-label { color: var(--text-muted); font-weight: 700; }
+    .meta-val { min-width: 0; word-break: break-word; overflow-wrap: anywhere; }
     .meta-val a { color: #93c5fd; text-decoration: none; font-weight: 700; }
     .meta-val a:hover { text-decoration: underline; }
     .price-box {
@@ -505,25 +511,26 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
       padding: 13px 22px; border-radius: 10px; background: var(--accent-grad);
       color: #fff; font-size: 0.95rem; font-weight: 800; text-decoration: none;
       box-shadow: 0 4px 16px rgba(244, 63, 94, 0.4); flex: 1; min-width: 210px;
+      text-align: center;
     }
     .btn-primary.is-books { background: var(--books-grad); box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45); }
     .btn-tachiyomi {
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
       padding: 13px 20px; border-radius: 10px; background: linear-gradient(135deg, #0ea5e9, #2563eb);
       color: #fff; font-size: 0.92rem; font-weight: 800; text-decoration: none;
-      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35); text-align: center;
     }
     .share-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
     .btn-sub {
-      padding: 8px 13px; border-radius: 8px; border: 1px solid var(--border);
+      padding: 9px 13px; border-radius: 8px; border: 1px solid var(--border);
       background: var(--surface-2); color: var(--text-sub); font-size: 0.78rem;
-      font-weight: 700; text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+      font-weight: 700; text-decoration: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 5px;
     }
     .btn-sub:hover { color: #fff; border-color: #64748b; }
     .btn-x { background: #0f1419; border-color: #38444d; color: #fff; }
     .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
     .tag-link {
-      font-size: 0.75rem; padding: 3px 9px; border-radius: 6px;
+      font-size: 0.75rem; padding: 4px 9px; border-radius: 6px;
       background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border);
       color: var(--text-sub); text-decoration: none;
     }
@@ -531,7 +538,7 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
     .promo-note {
       margin-top: 12px; padding: 10px 13px; border-radius: 9px;
       background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(251, 191, 36, 0.35);
-      font-size: 0.78rem; color: #fde68a;
+      font-size: 0.78rem; color: #fde68a; word-break: break-word;
     }
     .promo-note a { color: #fff; font-weight: 800; margin-left: 6px; }
     .section-box {
@@ -542,15 +549,34 @@ function renderWorkPageHtml(workId, w, related, baseOrigin, env) {
       font-size: 1.08rem; font-weight: 800; margin-bottom: 14px;
       display: flex; align-items: center; gap: 8px;
     }
-    .section-bar { width: 5px; height: 18px; border-radius: 3px; background: var(--accent-grad); display: inline-block; }
+    .section-bar { width: 5px; height: 18px; border-radius: 3px; background: var(--accent-grad); display: inline-block; flex-shrink: 0; }
     .sample-stack { display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .sample-img-wrap { width: 100%; max-width: 720px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); background: #070709; }
     .sample-img-cap { padding: 6px 12px; font-size: 0.74rem; color: var(--text-sub); background: #181822; border-bottom: 1px solid var(--border); }
     .sample-img-wrap img { width: 100%; height: auto; display: block; }
-    .summary-p { font-size: 0.88rem; color: #e4e4e7; line-height: 1.8; }
+    .summary-p { font-size: 0.88rem; color: #e4e4e7; line-height: 1.8; word-break: break-word; }
     .rel-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
     @media (max-width: 1024px) { .rel-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    @media (max-width: 640px) { .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 640px) {
+      .container { padding: 0 12px; }
+      .site-header { padding: 10px 0; }
+      .header-inner { gap: 8px; }
+      .top-nav {
+        width: 100%; flex-wrap: nowrap; overflow-x: auto;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px;
+      }
+      .top-nav::-webkit-scrollbar { display: none; }
+      .breadcrumb { font-size: 0.7rem; margin: 12px 0; }
+      h1 { font-size: 1.15rem; margin-bottom: 12px; }
+      .meta-table { grid-template-columns: 88px minmax(0, 1fr); gap: 6px 10px; padding: 10px 12px; font-size: 0.8rem; }
+      .price-now { font-size: 1.5rem; }
+      .cta-row { flex-direction: column; }
+      .btn-primary, .btn-tachiyomi { width: 100%; min-width: 0; font-size: 0.9rem; padding: 13px 16px; }
+      .share-row .btn-sub { flex: 1 1 calc(50% - 4px); }
+      .section-box { padding: 14px 12px; margin-bottom: 18px; }
+      .section-h2 { font-size: 0.98rem; }
+      .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    }
     .rel-card {
       background: #181824; border: 1px solid var(--border); border-radius: 10px;
       overflow: hidden; text-decoration: none; display: flex; flex-direction: column;
