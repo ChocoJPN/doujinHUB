@@ -26,16 +26,17 @@ jobs:
         env:
           DMM_API_ID: ${{ secrets.DMM_API_ID }}
           DMM_AFFILIATE_ID: ${{ secrets.DMM_AFFILIATE_ID }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://doujin-index-17g.pages.dev' }}
         run: node scripts/fetch_works.js
 
       - name: Commit and push updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/fanza_latest.json data/fanza_latest.js
+          git add data/fanza_latest.json data/fanza_latest.js data/seo_index.json sitemap.xml robots.txt
           if git diff --staged --quiet; then
             echo "データに変更はありませんでした"
           else
-            git commit -m "chore(data): update FANZA works and analytics"
+            git commit -m "chore(data): update FANZA works, SEO index and sitemap"
             git push
           fi

@@ -4,9 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- SEO_META_START -->
   <title>DOUJIN INDEX — FANZA同人・ブックス 新着・ランキング・有名作家まとめ</title>
   <meta name="description"
     content="FANZA同人（同人誌・音声ASMR・CG集・ゲーム）とFANZAブックス（商業コミック）の新着、人気ランキング、有名作家・サークル別まとめサイト。同人・ブックス切替とAI/非AIフィルター対応。" />
+  <link rel="canonical" href="https://doujin-index-17g.pages.dev/" />
+  <meta property="og:site_name" content="DOUJIN INDEX" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="DOUJIN INDEX — FANZA同人・ブックス 新着・ランキング・有名作家まとめ" />
+  <meta property="og:description"
+    content="FANZA同人（同人誌・音声ASMR・CG集・ゲーム）とFANZAブックス（商業コミック）の新着、人気ランキング、有名作家・サークル別まとめサイト。同人・ブックス切替とAI/非AIフィルター対応。" />
+  <meta property="og:url" content="https://doujin-index-17g.pages.dev/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DOUJIN INDEX — FANZA同人・ブックス 新着・ランキング・有名作家まとめ" />
+  <meta name="twitter:description"
+    content="FANZA同人・ブックスの人気ランキング、新着、セール割引、非AI（手描き）作品まとめ。" />
+  <!-- SEO_META_END -->
   <style>
     :root {
       --bg: #0b0b10;
@@ -643,6 +656,173 @@
     .tachiyomi-cta-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 6px 18px rgba(14, 165, 233, 0.55);
+    }
+
+    .x-post-btn {
+      padding: 9px 14px;
+      border-radius: 8px;
+      background: #0f1419;
+      border: 1px solid #38444d;
+      color: #ffffff;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+      white-space: nowrap;
+    }
+
+    .x-post-btn:hover {
+      background: #1d262f;
+      border-color: #64748b;
+      transform: translateY(-1px);
+    }
+
+    .x-copy-btn {
+      padding: 9px 13px;
+      border-radius: 8px;
+      background: var(--surface-hover);
+      border: 1px solid var(--border-hover);
+      color: var(--text-sub);
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .x-copy-btn:hover {
+      color: var(--text);
+      border-color: rgba(244, 63, 94, 0.5);
+    }
+
+    /* クーポン・開催中セール訴求ストリップ（CVR強化） */
+    .promo-strip {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 860px) {
+      .promo-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .promo-card {
+      border-radius: 13px;
+      padding: 15px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .promo-card.promo-doujin {
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.16) 0%, rgba(249, 115, 22, 0.12) 55%, rgba(20, 20, 32, 0.96) 100%);
+      border-color: rgba(244, 63, 94, 0.38);
+    }
+
+    .promo-card.promo-books {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.18) 0%, rgba(99, 102, 241, 0.14) 55%, rgba(20, 20, 32, 0.96) 100%);
+      border-color: rgba(59, 130, 246, 0.42);
+    }
+
+    .promo-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-bottom: 5px;
+    }
+
+    .promo-tag.doujin {
+      background: rgba(244, 63, 94, 0.22);
+      border: 1px solid rgba(251, 113, 133, 0.5);
+      color: #fecdd3;
+    }
+
+    .promo-tag.books {
+      background: rgba(37, 99, 235, 0.24);
+      border: 1px solid rgba(96, 165, 250, 0.5);
+      color: #bfdbfe;
+    }
+
+    .promo-title {
+      font-size: 0.96rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 3px;
+    }
+
+    .promo-desc {
+      font-size: 0.76rem;
+      color: var(--text-sub);
+      line-height: 1.45;
+    }
+
+    .promo-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .promo-sub-btn {
+      padding: 7px 12px;
+      border-radius: 7px;
+      border: 1px solid var(--border-hover);
+      background: rgba(11, 11, 16, 0.65);
+      color: var(--text);
+      font-size: 0.74rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .promo-sub-btn:hover {
+      border-color: #fda4af;
+      background: rgba(244, 63, 94, 0.14);
+    }
+
+    .sale-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(225, 29, 72, 0.12), rgba(249, 115, 22, 0.08));
+      border: 1px solid rgba(244, 63, 94, 0.35);
+    }
+
+    .fav-sale-alert {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 13px 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.14), rgba(244, 63, 94, 0.12));
+      border: 1px solid rgba(251, 191, 36, 0.45);
     }
 
     .type-label.cat-audio {
@@ -1799,6 +1979,7 @@
         <select id="sortSelect" class="select-box">
           <option value="newest">配信日が新しい順</option>
           <option value="popular">人気・レビュー順</option>
+          <option value="discountDesc">割引率が高い順</option>
           <option value="priceAsc">価格が安い順</option>
         </select>
       </div>
@@ -1848,9 +2029,17 @@
       <div class="modal-footer">
         <div id="modalPriceInfo"></div>
         <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <button type="button" id="copyShareUrlBtn"
-            style="padding:9px 14px; border-radius:8px; background:var(--surface-hover); border:1px solid var(--border-hover); color:var(--text-sub); font-size:0.78rem; font-weight:700; cursor:pointer;">
-            🔗 X紹介用URLをコピー
+          <a href="#" target="_blank" rel="noopener" id="postToXLink" class="x-post-btn"
+            title="表紙カード付きのX（Twitter）紹介ポストを作成">
+            𝕏 Xに投稿
+          </a>
+          <button type="button" id="copyXPostBtn" class="x-copy-btn"
+            title="X（Twitter）にそのまま貼れる紹介文とURLをコピー">
+            📋 X紹介文をコピー
+          </button>
+          <button type="button" id="copyShareUrlBtn" class="x-copy-btn"
+            title="動的OGPカード対応のURLのみをコピー">
+            🔗 URLコピー
           </button>
           <a href="#" target="_blank" rel="noopener" class="primary-btn" id="modalFanzaLink"
             style="padding:10px 18px; font-size:0.86rem;">
@@ -1999,12 +2188,33 @@
       applyDataset(window.FANZA_LIVE_DATA);
     }
 
+    const FAVS_STORAGE_KEY = "doujin_index_favs_v1";
+    const RECENT_STORAGE_KEY = "doujin_index_recent_v1";
+
+    function loadStoredIdList(key, maxLen = 200) {
+      try {
+        const parsed = JSON.parse(localStorage.getItem(key) || "[]");
+        if (Array.isArray(parsed)) {
+          return parsed.filter((x) => typeof x === "string" && x.length > 0).slice(0, maxLen);
+        }
+      } catch (e) { }
+      return [];
+    }
+
+    function saveStoredIdList(key, list, maxLen = 200) {
+      try {
+        localStorage.setItem(key, JSON.stringify((list || []).slice(0, maxLen)));
+      } catch (e) { }
+    }
+
     const state = {
       tab: "portal",       // 'portal' | 'community' | 'pop_ranking' | 'sales_ranking' | 'format_ranking' | 'pickup' | 'new' | 'creators' | 'sale' | 'favorites'
       source: "all",       // 'all' | 'doujin' | 'books'
       popPeriod: "24h",    // '24h' | 'weekly' | 'monthly'
       salesSub: "new_release", // 'new_release' | 'semi_new' | 'long_seller' | 'sales_count'
       formatCat: "comic",  // 'comic' | 'books' | 'audio' | 'cg' | 'game'
+      saleFilter: "all",   // 'all' | 'off50' | 'off70' | 'under500'
+      favSaleOnly: false,
       cat: "all",
       aiFilter: "all",     // 'all' | 'non_ai' | 'ai'
       sort: "newest",
@@ -2012,7 +2222,8 @@
       tag: null,
       query: "",
       limit: 30,           // 横5列 × 6段 = 30件単位
-      favs: []
+      favs: loadStoredIdList(FAVS_STORAGE_KEY, 300),
+      recentIds: loadStoredIdList(RECENT_STORAGE_KEY, 15)
     };
 
     /* ============================================================
@@ -2634,6 +2845,52 @@
       return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(ACTIVE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
     }
 
+    function buildCampaignAffiliateUrl(directUrl) {
+      if (!ACTIVE_AFFILIATE_ID) return directUrl;
+      return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(ACTIVE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
+    }
+
+    function renderPromoStripHtml() {
+      const saleWorks = WORKS.filter((w) => w.discount > 0);
+      const off50Count = saleWorks.filter((w) => w.discount >= 50).length;
+      const maxDiscount = saleWorks.reduce((m, w) => Math.max(m, w.discount || 0), 0);
+      const doujinOfficialUrl = buildCampaignAffiliateUrl("https://www.dmm.co.jp/dc/doujin/");
+      const booksOfficialUrl = buildCampaignAffiliateUrl("https://book.dmm.co.jp/");
+
+      return `
+        <div class="promo-strip" aria-label="開催中セール・初回限定クーポン案内">
+          <div class="promo-card promo-doujin">
+            <div style="flex:1; min-width:210px;">
+              <div class="promo-tag doujin">🔥 開催中セール・PR</div>
+              <div class="promo-title">FANZA同人 割引セール ${saleWorks.length > 0 ? `（現在 ${saleWorks.length.toLocaleString()}作品 / 最大${maxDiscount}%OFF）` : ""}</div>
+              <div class="promo-desc">
+                ${off50Count > 0 ? `50%OFF以上の大幅割引作品が ${off50Count.toLocaleString()}件！` : "期間限定の割引キャンペーン作品をチェックできます。"}
+                終了前にお得な作品をまとめてチェック。
+              </div>
+            </div>
+            <div class="promo-actions">
+              <button type="button" class="promo-sub-btn" data-jump-sale-filter="off50">🔥 50%OFF以上を見る</button>
+              <a href="${doujinOfficialUrl}" target="_blank" rel="noopener" class="primary-btn" style="padding:8px 13px;">同人公式セール ↗</a>
+            </div>
+          </div>
+
+          <div class="promo-card promo-books">
+            <div style="flex:1; min-width:210px;">
+              <div class="promo-tag books">🎁 初回クーポン・商業コミック / PR</div>
+              <div class="promo-title">FANZAブックス 商業コミック＆限定キャンペーン</div>
+              <div class="promo-desc">
+                初回購入限定クーポンやポイント還元キャンペーンはFANZAブックス公式にて随時開催中。無料立ち読みからすぐ試せます。
+              </div>
+            </div>
+            <div class="promo-actions">
+              <button type="button" class="promo-sub-btn" data-jump-source="books">📚 ブックス人気順</button>
+              <a href="${booksOfficialUrl}" target="_blank" rel="noopener" class="primary-btn is-books" style="padding:8px 13px;">公式クーポン確認 ↗</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     async function tryFetchLiveFanzaData() {
       try {
         const res = await fetch("./data/fanza_latest.json", { cache: "no-store" });
@@ -2933,6 +3190,7 @@
       `;
 
       return `
+        ${renderPromoStripHtml()}
         ${splitShowcaseHtml}
         ${mainPopSectionHtml}
 
@@ -3206,14 +3464,72 @@
         `;
       } else {
         sortWrap.style.display = "flex";
-        list = baseWorks.filter((w) => {
-          if (state.tab === "favorites" && !state.favs.includes(w.id)) return false;
-          if (state.tab === "sale" && w.discount <= 0) return false;
-          return true;
-        });
+        const sortSelectEl = document.getElementById("sortSelect");
+        if (sortSelectEl && sortSelectEl.value !== state.sort) {
+          sortSelectEl.value = state.sort;
+        }
+
+        if (state.tab === "sale") {
+          const allSaleWorks = baseWorks.filter((w) => w.discount > 0);
+          const cntAll = allSaleWorks.length;
+          const cnt50 = allSaleWorks.filter((w) => w.discount >= 50).length;
+          const cnt70 = allSaleWorks.filter((w) => w.discount >= 70).length;
+          const cntUnder500 = allSaleWorks.filter((w) => w.price > 0 && w.price <= 500).length;
+
+          list = allSaleWorks.filter((w) => {
+            if (state.saleFilter === "off50") return w.discount >= 50;
+            if (state.saleFilter === "off70") return w.discount >= 70;
+            if (state.saleFilter === "under500") return w.price > 0 && w.price <= 500;
+            return true;
+          });
+
+          headerBannerHtml = `
+            ${renderPromoStripHtml()}
+            <div class="sale-filter-bar">
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <strong style="font-size:0.86rem; color:#fda4af;">🔥 セール割引絞り込み:</strong>
+                <div class="subtab-group" aria-label="セール絞り込み">
+                  <button type="button" class="subtab-btn ${state.saleFilter === "all" ? "active" : ""}" data-sale-filter="all">すべて (${cntAll})</button>
+                  <button type="button" class="subtab-btn ${state.saleFilter === "off50" ? "active" : ""}" data-sale-filter="off50">🔥 50%OFF以上 (${cnt50})</button>
+                  <button type="button" class="subtab-btn ${state.saleFilter === "off70" ? "active" : ""}" data-sale-filter="off70">⚡ 70%OFF以上 (${cnt70})</button>
+                  <button type="button" class="subtab-btn ${state.saleFilter === "under500" ? "active" : ""}" data-sale-filter="under500">🪙 500円以下 (${cntUnder500})</button>
+                </div>
+              </div>
+              <span style="font-size:0.75rem; color:var(--text-sub);">※価格は取得時点の情報です。最新価格はFANZA公式でご確認ください。</span>
+            </div>
+          `;
+        } else if (state.tab === "favorites") {
+          const allFavWorks = baseWorks.filter((w) => state.favs.includes(w.id));
+          const favSaleWorks = allFavWorks.filter((w) => w.discount > 0);
+          list = state.favSaleOnly ? favSaleWorks : allFavWorks;
+
+          if (favSaleWorks.length > 0) {
+            headerBannerHtml = `
+              <div class="fav-sale-alert">
+                <div style="font-size:0.86rem; font-weight:800; color:#fde68a;">
+                  🎉 お気に入り登録中の <span style="color:#fb7185; font-size:1rem;">${favSaleWorks.length}作品</span> が現在セール割引中です！（ブラウザ自動保存済み）
+                </div>
+                <button type="button" class="subtab-btn ${state.favSaleOnly ? "active" : ""}" data-toggle-fav-sale="1" style="border:1px solid rgba(251,191,36,0.45);">
+                  ${state.favSaleOnly ? "すべてのお気に入りに戻す" : `🔥 セール中の${favSaleWorks.length}作品だけ表示`}
+                </button>
+              </div>
+            `;
+          } else {
+            headerBannerHtml = `
+              <div style="margin-bottom:16px; padding:10px 14px; border-radius:10px; background:var(--surface); border:1px solid var(--border); font-size:0.78rem; color:var(--text-sub); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+                <span>💾 お気に入りはブラウザに自動保存されます。次回アクセス時にお気に入り作品がセール中になるとお知らせします。</span>
+                <button type="button" class="promo-sub-btn" data-jump-sale-filter="off50">🔥 50%OFF以上のセールを見る</button>
+              </div>
+            `;
+          }
+        } else {
+          list = [...baseWorks];
+        }
 
         if (state.sort === "popular") {
           list.sort((a, b) => (b.dlCount || 0) - (a.dlCount || 0));
+        } else if (state.sort === "discountDesc") {
+          list.sort((a, b) => (b.discount || 0) - (a.discount || 0) || (b.dlCount || 0) - (a.dlCount || 0));
         } else if (state.sort === "priceAsc") {
           list.sort((a, b) => (a.price || 0) - (b.price || 0));
         } else {
@@ -3225,12 +3541,42 @@
       const visibleList = list.slice(0, state.limit);
       const hasMore = list.length > state.limit;
 
+      // お気に入りタブの下部に「最近チェックした作品」を表示して再訪・買い逃しを防止
+      let recentSectionHtml = "";
+      if (state.tab === "favorites" && state.recentIds.length > 0) {
+        const recentWorks = state.recentIds
+          .map((id) => WORKS.find((w) => w.id === id))
+          .filter(Boolean)
+          .slice(0, 10);
+        if (recentWorks.length > 0) {
+          recentSectionHtml = `
+            <section class="fanza-section" style="margin-top:30px;">
+              <div class="section-head">
+                <div class="section-title-group">
+                  <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #06b6d4, #3b82f6);"></span>🕒 最近チェックした作品（履歴）</h2>
+                  <span class="section-update-meta">${recentWorks.length}件</span>
+                </div>
+              </div>
+              <div class="grid">
+                ${recentWorks.map((w) => renderCard(w, null)).join("")}
+              </div>
+            </section>
+          `;
+        }
+      }
+
       if (visibleList.length === 0) {
+        const emptyMsg =
+          state.tab === "favorites"
+            ? "まだお気に入り登録された作品がありません。気になる作品のブックマーク（🔖）ボタンを押すと保存され、セール時にもすぐ見つけられます。"
+            : "該当する作品が見つかりませんでした。検索条件やフィルターを変更してお試しください。";
         view.innerHTML = `
           ${headerBannerHtml}
-          <div style="text-align:center; padding:60px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub);">
-            該当する作品が見つかりませんでした。検索条件やフィルターを変更してお試しください。
+          <div style="text-align:center; padding:52px 20px; background:var(--surface); border:1px solid var(--border); border-radius:12px; color:var(--text-sub); display:flex; flex-direction:column; align-items:center; gap:14px;">
+            <div>${emptyMsg}</div>
+            ${state.tab === "favorites" ? `<button type="button" class="primary-btn" data-jump-tab="pop_ranking" style="padding:10px 20px; font-size:0.84rem;">人気ランキングから探す →</button>` : ""}
           </div>
+          ${recentSectionHtml}
         `;
         return;
       }
@@ -3248,6 +3594,7 @@
               </div>`
           : ""
         }
+        ${recentSectionHtml}
       `;
     }
 
@@ -3653,25 +4000,90 @@
 
     let currentModalWorkId = null;
 
+    function getSiteBaseUrl() {
+      if (window.location && /^https?:$/i.test(window.location.protocol)) {
+        return `${window.location.origin}/`;
+      }
+      return "https://doujin-index-17g.pages.dev/";
+    }
+
     function buildSiteShareUrl(workId) {
-      const base = "https://doujin-index-17g.pages.dev/";
+      const base = getSiteBaseUrl();
       return workId ? `${base}?id=${encodeURIComponent(workId)}` : base;
+    }
+
+    function buildXPostText(w) {
+      const isBooks = w.source === "books" || w.category === "books";
+      const shareUrl = buildSiteShareUrl(w.id);
+      const badge =
+        w.discount > 0
+          ? `🔥【${w.discount}%OFFセール中！】`
+          : isBooks
+            ? "📚【FANZAブックス注目作】"
+            : !w.isAi
+              ? "✨【手描き・非AIおすすめ】"
+              : "📘【FANZA同人注目作】";
+      const titleClean = String(w.title || "").length > 42 ? `${String(w.title).slice(0, 42)}…` : String(w.title || "");
+      const creatorLine = isBooks && w.publisher ? `${w.circle}（${w.publisher}）` : w.circle;
+      const pricePart = w.price ? `¥${Number(w.price).toLocaleString()}` : "";
+      const discountPart = w.discount > 0 ? `（${w.discount}%OFF）` : "";
+      const ratingPart = w.reviewsCount ? ` / ★${Number(w.rating || 4.5).toFixed(1)}(${w.reviewsCount}件)` : "";
+      const specPart = w.spec ? `${w.spec} / ` : "";
+      const previewNote = isBooks
+        ? w.tachiyomiUrl
+          ? "📖無料立ち読み＆詳細👇"
+          : "📚作品詳細はこちら👇"
+        : (w.sampleImages || []).length > 0
+          ? `📖サンプル${w.sampleImages.length}枚を縦読みチェック👇`
+          : "📘作品詳細はこちら👇";
+      const baseTag = isBooks ? "#FANZAブックス #商業コミック" : "#FANZA同人 #同人誌";
+      const extraTags = (w.tags || [])
+        .filter((t) => t && !/[ #/\\]/.test(t) && t.length <= 12)
+        .slice(0, 2)
+        .map((t) => `#${t}`)
+        .join(" ");
+
+      return [
+        `${badge}`,
+        `『${titleClean}』`,
+        `${isBooks ? "著者" : "サークル"}: ${creatorLine}`,
+        `${specPart}${pricePart}${discountPart}${ratingPart}`,
+        `${previewNote}`,
+        shareUrl,
+        `${baseTag}${extraTags ? ` ${extraTags}` : ""} #PR`
+      ].join("\n");
+    }
+
+    function buildXIntentUrl(w) {
+      return `https://twitter.com/intent/tweet?text=${encodeURIComponent(buildXPostText(w))}`;
     }
 
     function openPreviewModal(workId) {
       const w = WORKS.find((x) => x.id === workId || x.code === workId);
       if (!w) return;
       currentModalWorkId = w.id;
+      // 最近チェックした作品履歴を更新・保存（最大15件）
+      state.recentIds = [w.id, ...state.recentIds.filter((id) => id !== w.id)].slice(0, 15);
+      saveStoredIdList(RECENT_STORAGE_KEY, state.recentIds, 15);
       const isBooks = w.source === "books" || w.category === "books";
       const modal = document.getElementById("sampleModal");
       document.getElementById("modalTitle").textContent = `${w.title} — ${w.circle}`;
+      document.title = `${w.discount > 0 ? `【${w.discount}%OFF】` : ""}${w.title} / ${w.circle} | DOUJIN INDEX`;
       const modalLinkEl = document.getElementById("modalFanzaLink");
       modalLinkEl.href = buildFanzaUrl(w);
       modalLinkEl.textContent = isBooks ? "FANZAブックス公式ページで見る ↗" : "FANZA公式ページで見る ↗";
       modalLinkEl.classList.toggle("is-books", isBooks);
+      const postToXEl = document.getElementById("postToXLink");
+      if (postToXEl) {
+        postToXEl.href = buildXIntentUrl(w);
+      }
+      const copyXBtn = document.getElementById("copyXPostBtn");
+      if (copyXBtn) {
+        copyXBtn.textContent = "📋 X紹介文をコピー";
+      }
       const copyBtn = document.getElementById("copyShareUrlBtn");
       if (copyBtn) {
-        copyBtn.textContent = "🔗 X紹介用URLをコピー";
+        copyBtn.textContent = "🔗 URLコピー";
       }
       document.getElementById("modalPriceInfo").innerHTML = `
         <span style="font-size:1.15rem; font-weight:800;">¥${Number(w.price || 0).toLocaleString()}</span>
@@ -3715,8 +4127,8 @@
             </div>
             <div style="font-size:0.8rem; color:var(--text-sub);">
               ${tachiyomiUrl
-                ? "FANZAブックス公式ビューアで無料立ち読み（試し読み）がすぐにご覧いただけます。"
-                : "作品の詳細情報・試し読み・購入はFANZAブックス公式ページにてご確認いただけます。"}
+                ? "FANZAブックス公式ビューアで無料立ち読み（試し読み）がすぐにご覧いただけます。初回購入限定クーポン・ポイント還元キャンペーンも公式ページでチェックできます。"
+                : "作品の詳細情報・試し読み・初回購入限定クーポンはFANZAブックス公式ページにてご確認いただけます。"}
             </div>
             <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:4px;">
               ${tachiyomiUrl
@@ -3785,7 +4197,7 @@
             📖 サンプルプレビューはここまでです（本編: ${w.spec}）
           </div>
           <div style="font-size:0.8rem; color:var(--text-sub);">
-            続きの全ページ・高画質フル版はFANZA公式ページにてすぐにお楽しみいただけます。
+            続きの全ページ・高画質フル版はFANZA公式ページにてすぐにお楽しみいただけます。（初回限定クーポン・開催中セールも公式ページでご確認いただけます）
           </div>
           <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn" style="padding:12px 26px; font-size:0.95rem; margin-top:4px;">
             FANZA公式ページで本編を見る ↗
@@ -3807,6 +4219,33 @@
       const tab = e.target.closest("[data-tab]");
       if (tab) {
         state.tab = tab.dataset.tab;
+        if (state.tab === "sale" && state.sort === "newest") {
+          state.sort = "discountDesc";
+        }
+        state.limit = 30;
+        render();
+        return;
+      }
+      const saleFilterBtn = e.target.closest("[data-sale-filter]");
+      if (saleFilterBtn) {
+        state.saleFilter = saleFilterBtn.dataset.saleFilter;
+        state.limit = 30;
+        render();
+        return;
+      }
+      const jumpSaleFilterBtn = e.target.closest("[data-jump-sale-filter]");
+      if (jumpSaleFilterBtn) {
+        state.tab = "sale";
+        state.saleFilter = jumpSaleFilterBtn.dataset.jumpSaleFilter || "all";
+        state.sort = "discountDesc";
+        state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        return;
+      }
+      const toggleFavSaleBtn = e.target.closest("[data-toggle-fav-sale]");
+      if (toggleFavSaleBtn) {
+        state.favSaleOnly = !state.favSaleOnly;
         state.limit = 30;
         render();
         return;
@@ -3917,7 +4356,8 @@
         const id = fav.dataset.fav;
         const i = state.favs.indexOf(id);
         if (i >= 0) state.favs.splice(i, 1);
-        else state.favs.push(id);
+        else state.favs.unshift(id);
+        saveStoredIdList(FAVS_STORAGE_KEY, state.favs, 300);
         render();
         return;
       }
@@ -4107,18 +4547,31 @@
         render();
         return;
       }
+      if (e.target.closest("#copyXPostBtn")) {
+        if (currentModalWorkId) {
+          const w = WORKS.find((x) => x.id === currentModalWorkId || x.code === currentModalWorkId);
+          if (w) {
+            navigator.clipboard.writeText(buildXPostText(w)).then(() => {
+              const btn = document.getElementById("copyXPostBtn");
+              if (btn) btn.textContent = "✅ 紹介文をコピーしました！";
+            });
+          }
+        }
+        return;
+      }
       if (e.target.closest("#copyShareUrlBtn")) {
         if (currentModalWorkId) {
           const shareUrl = buildSiteShareUrl(currentModalWorkId);
           navigator.clipboard.writeText(shareUrl).then(() => {
             const btn = document.getElementById("copyShareUrlBtn");
-            if (btn) btn.textContent = "✅ コピーしました！";
+            if (btn) btn.textContent = "✅ URLコピー完了！";
           });
         }
         return;
       }
       if (e.target.closest("#closeModalBtn") || e.target.id === "sampleModal") {
         document.getElementById("sampleModal").classList.remove("open");
+        document.title = "DOUJIN INDEX — FANZA同人・ブックス 新着・ランキング・有名作家まとめ";
         return;
       }
       if (e.target.closest("#clearFilterBtn") || e.target.closest("#logoReset")) {
@@ -4127,6 +4580,8 @@
         state.source = "all";
         state.cat = "all";
         state.aiFilter = "all";
+        state.saleFilter = "all";
+        state.favSaleOnly = false;
         state.query = "";
         state.tab = "portal";
         state.limit = 30;
@@ -4188,6 +4643,17 @@
         if (cat && ["all", "comic", "books", "audio", "cg", "game"].includes(cat)) state.cat = cat;
         const tab = params.get("tab");
         if (tab) state.tab = tab;
+        const tag = params.get("tag");
+        if (tag) {
+          state.tag = tag;
+          if (!tab) state.tab = "new";
+        }
+        const q = params.get("q");
+        if (q) {
+          state.query = q.trim();
+          const searchEl = document.getElementById("searchInput");
+          if (searchEl) searchEl.value = state.query;
+        }
         const creator = params.get("creator");
         if (creator) {
           state.creatorId = creator;

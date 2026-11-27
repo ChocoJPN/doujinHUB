@@ -45,6 +45,8 @@ const DMM_AFFILIATE_ID = process.env.DMM_AFFILIATE_ID || "";
 const DMM_SITE_AFFILIATE_ID =
   process.env.DMM_SITE_AFFILIATE_ID ||
   (DMM_AFFILIATE_ID ? DMM_AFFILIATE_ID.replace(/-\d+$/, "-001") : "douzinINFO-001");
+// サイトマップ・robots.txt・正規URL用のベースURL（独自ドメイン設定時は SITE_URL 環境変数を指定）
+const SITE_URL = (process.env.SITE_URL || "https://doujin-index-17g.pages.dev").replace(/\/+$/, "");
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -571,12 +573,193 @@ function analyzeTopCreators(works) {
   return [...doujinCreators, ...booksCreators];
 }
 
+function escapeXml(str) {
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function toIsoDate(dateStr, fallbackIso) {
+  const m = String(dateStr || "").match(/^(\d{4})[./-](\d{2})[./-](\d{2})/);
+  if (m) return `${m[1]}-${m[2]}-${m[3]}`;
+  return String(fallbackIso || new Date().toISOString()).slice(0, 10);
+}
+
+/**
+ * 動的OGP & SEO用の軽量インデックス (data/seo_index.json)、
+ * 検索エンジン向け sitemap.xml、robots.txt を自動生成する
+ */
+function generateSeoAssets(works, creators, updatedAt) {
+  const rootDir = path.join(__dirname, "..");
+  const outDir = path.join(rootDir, "data");
+  const seoIndexFile = path.join(outDir, "seo_index.json");
+  const sitemapFile = path.join(rootDir, "sitemap.xml");
+  const robotsFile = path.join(rootDir, "robots.txt");
+  const todayIso = String(updatedAt || new Date().toISOString()).slice(0, 10);
+
+  // 1. 軽量 OGP/SEO インデックス（Cloudflare Workers で高速ロード可能な最小構造：上位5,000件を常駐・残りはAPIフォールバック）
+  const worksIndex = {};
+  const doujinSorted = works
+    .filter((w) => w.source !== "books")
+    .sort((a, b) => (a.rank || 999) - (b.rank || 999) || (b.date || "").localeCompare(a.date || "") || (b.reviewsCount || 0) - (a.reviewsCount || 0));
+  const booksSorted = works
+    .filter((w) => w.source === "books")
+    .sort((a, b) => (a.rank || 999) - (b.rank || 999) || (b.date || "").localeCompare(a.date || "") || (b.reviewsCount || 0) - (a.reviewsCount || 0));
+
+  const seoWorksPool = [...doujinSorted.slice(0, 3500), ...booksSorted.slice(0, 1500)];
+  for (const w of seoWorksPool) {
+    if (!w || !w.id) continue;
+    worksIndex[w.id] = {
+      t: w.title || "",
+      c: w.circle || w.author || "",
+      pub: w.publisher || "",
+      s: w.source === "books" ? "books" : "doujin",
+      cat: w.category || "comic",
+      pr: Number(w.price) || 0,
+      d: Number(w.discount) || 0,
+      sp: w.spec || "",
+      dt: w.date || "",
+      r: Number(w.rating) || 4.5,
+      rc: Number(w.reviewsCount) || 0,
+      img: w.imageUrl || "",
+      ai: Boolean(w.isAi),
+      tg: Array.isArray(w.tags) ? w.tags.slice(0, 4) : []
+    };
+  }
+
+  const creatorsIndex = {};
+  for (const c of creators) {
+    if (!c || !c.id) continue;
+    creatorsIndex[c.id] = {
+      n: c.circle || c.name || "",
+      pub: c.publisher || "",
+      s: c.source === "books" ? "books" : "doujin",
+      cat: c.category || "comic",
+      w: Number(c.works) || 0,
+      r: Number(c.avgRating) || 4.5,
+      rc: Number(c.totalReviews) || 0,
+      img: c.imageUrl || ""
+    };
+  }
+
+  const seoIndexPayload = {
+    updatedAt: updatedAt || new Date().toISOString(),
+    defaultImage: doujinSorted.find((w) => !w.isAi && w.imageUrl)?.imageUrl || doujinSorted[0]?.imageUrl || "",
+    booksImage: booksSorted.find((w) => w.imageUrl)?.imageUrl || "",
+    works: worksIndex,
+    creators: creatorsIndex
+  };
+
+  fs.writeFileSync(seoIndexFile, JSON.stringify(seoIndexPayload), "utf8");
+
+  // 2. sitemap.xml 生成（トップ + 主要切り口 + 作家/サークル + 人気タグ + 人気/最新作品）
+  const urlEntries = [];
+  const addedLocs = new Set();
+  function addUrl(loc, lastmod, changefreq, priority) {
+    if (addedLocs.has(loc)) return;
+    addedLocs.add(loc);
+    urlEntries.push({ loc, lastmod: lastmod || todayIso, changefreq, priority });
+  }
+
+  // トップ & 主要切り口ページ
+  addUrl(`${SITE_URL}/`, todayIso, "hourly", "1.0");
+  const landingQueries = [
+    "?source=doujin",
+    "?source=books",
+    "?source=doujin&ai=non_ai",
+    "?cat=comic&ai=non_ai",
+    "?cat=audio",
+    "?cat=cg",
+    "?cat=game",
+    "?tab=pop_ranking",
+    "?tab=sale",
+    "?tab=creators",
+    "?tab=community"
+  ];
+  for (const q of landingQueries) {
+    addUrl(`${SITE_URL}/${q}`, todayIso, "daily", "0.9");
+  }
+
+  // 人気サークル・作家ページ
+  for (const c of creators) {
+    addUrl(`${SITE_URL}/?creator=${encodeURIComponent(c.id)}`, toIsoDate(c.latest, todayIso), "weekly", "0.7");
+  }
+
+  // 人気タグページ（上位60タグ）
+  const tagCounts = new Map();
+  for (const w of works) {
+    for (const t of w.tags || []) {
+      if (!t || t.length > 24) continue;
+      tagCounts.set(t, (tagCounts.get(t) || 0) + 1);
+    }
+  }
+  const topTags = Array.from(tagCounts.entries())
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 60);
+  for (const [tagName] of topTags) {
+    addUrl(`${SITE_URL}/?tag=${encodeURIComponent(tagName)}`, todayIso, "daily", "0.7");
+  }
+
+  // 個別作品ページ（同人上位1,000件 + ブックス上位500件）
+  const selectedWorks = [...doujinSorted.slice(0, 1000), ...booksSorted.slice(0, 500)];
+  for (const w of selectedWorks) {
+    addUrl(`${SITE_URL}/?id=${encodeURIComponent(w.id)}`, toIsoDate(w.date, todayIso), "weekly", "0.6");
+  }
+
+  const sitemapXml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ...urlEntries.map(
+      (u) =>
+        `  <url><loc>${escapeXml(u.loc)}</loc><lastmod>${u.lastmod}</lastmod><changefreq>${u.changefreq}</changefreq><priority>${u.priority}</priority></url>`
+    ),
+    "</urlset>",
+    ""
+  ].join("\n");
+
+  fs.writeFileSync(sitemapFile, sitemapXml, "utf8");
+
+  // 3. robots.txt 生成
+  const robotsTxt = [
+    "User-agent: *",
+    "Allow: /",
+    "Disallow: /api/",
+    "",
+    `Sitemap: ${SITE_URL}/sitemap.xml`,
+    ""
+  ].join("\n");
+
+  fs.writeFileSync(robotsFile, robotsTxt, "utf8");
+
+  return {
+    seoIndexBytes: Buffer.byteLength(JSON.stringify(seoIndexPayload), "utf8"),
+    sitemapUrlCount: urlEntries.length
+  };
+}
+
 async function main() {
   const outDir = path.join(__dirname, "..", "data");
   const outJsonFile = path.join(outDir, "fanza_latest.json");
   const outJsFile = path.join(outDir, "fanza_latest.js");
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
+  }
+
+  // --seo-only 指定時は既存の fanza_latest.json から SEO/OGP アセットのみ即時生成
+  if (process.argv.includes("--seo-only")) {
+    if (!fs.existsSync(outJsonFile)) {
+      throw new Error("data/fanza_latest.json が見つかりません。先に通常実行してください。");
+    }
+    const existingData = JSON.parse(fs.readFileSync(outJsonFile, "utf8"));
+    const seoRes = generateSeoAssets(existingData.works || [], existingData.creators || [], existingData.updatedAt);
+    console.log(`✅ SEO/OGPアセットを再生成しました！`);
+    console.log(`   - data/seo_index.json: ${(seoRes.seoIndexBytes / 1024 / 1024).toFixed(2)} MB`);
+    console.log(`   - sitemap.xml: ${seoRes.sitemapUrlCount} URLs (BASE: ${SITE_URL})`);
+    console.log(`   - robots.txt: 更新完了`);
+    return;
   }
 
   if (!DMM_API_ID || !DMM_AFFILIATE_ID || DMM_API_ID === "あなたのDMM_API_ID") {
@@ -782,7 +965,10 @@ async function main() {
   const jsContent = `// 自動生成ファイル: node scripts/fetch_works.js により出力\nwindow.FANZA_LIVE_DATA = ${JSON.stringify(payload)};\n`;
   fs.writeFileSync(outJsFile, jsContent, "utf8");
 
-  console.log(`\n✅ 大量取得・同人/ブックス分離・カテゴリ分類が完了しました！`);
+  // 3. 動的OGP/SEOインデックス・sitemap.xml・robots.txt を自動生成
+  const seoRes = generateSeoAssets(works, creators, payload.updatedAt);
+
+  console.log(`\n✅ 大量取得・同人/ブックス分離・カテゴリ分類・SEO生成が完了しました！`);
   console.log(`   - 総作品数: ${works.length}件（FANZA同人: ${sourceCounts.doujin}件 / FANZAブックス: ${sourceCounts.books}件）`);
   console.log(`   - AI分別: 非AI ${nonAiTotal}件 / AI作品 ${aiTotal}件`);
   console.log(`     ・同人誌・漫画 (comic): ${stats.comic}件`);
@@ -791,6 +977,7 @@ async function main() {
   console.log(`     ・CG・イラスト集 (cg): ${stats.cg}件`);
   console.log(`     ・同人ゲーム・動画 (game): ${stats.game}件`);
   console.log(`   - 抽出された人気サークル/作家数: ${creators.length}組`);
+  console.log(`   - SEO/OGP生成: data/seo_index.json (${(seoRes.seoIndexBytes / 1024 / 1024).toFixed(2)} MB) / sitemap.xml (${seoRes.sitemapUrlCount} URLs) / robots.txt`);
   console.log(`   - 保存先: data/fanza_latest.json および data/fanza_latest.js`);
 }
 

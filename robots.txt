@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://doujin-index-17g.pages.dev/sitemap.xml
