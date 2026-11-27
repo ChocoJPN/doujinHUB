@@ -27,13 +27,13 @@ export async function onRequestGet(context) {
     );
   }
 
-  async function callFanza({ sort = "rank", hits = 100, offset = 1, keyword = "" }) {
+  async function callFanza({ service = "doujin", floor = "digital_doujin", sort = "rank", hits = 100, offset = 1, keyword = "" }) {
     const params = new URLSearchParams({
       api_id: apiId,
       affiliate_id: affiliateId,
       site: "FANZA",
-      service: "doujin",
-      floor: "digital_doujin",
+      service,
+      floor,
       hits: String(hits),
       offset: String(offset),
       sort,
@@ -48,7 +48,22 @@ export async function onRequestGet(context) {
   }
 
   try {
-    const [rank1, rank2, new1, new2, audio1, audio2, comic1, ai1, ai2, ai3, ai4] = await Promise.all([
+    const [
+      rank1,
+      rank2,
+      new1,
+      new2,
+      audio1,
+      audio2,
+      comic1,
+      ai1,
+      ai2,
+      ai3,
+      ai4,
+      booksRank1,
+      booksRank2,
+      booksNew1
+    ] = await Promise.all([
       callFanza({ sort: "rank", hits: 100, offset: 1 }),
       callFanza({ sort: "rank", hits: 100, offset: 101 }),
       callFanza({ sort: "date", hits: 100, offset: 1 }),
@@ -59,7 +74,10 @@ export async function onRequestGet(context) {
       callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "AI生成" }),
       callFanza({ sort: "rank", hits: 100, offset: 1, keyword: "生成AI" }),
       callFanza({ sort: "date", hits: 100, offset: 1, keyword: "AI生成" }),
-      callFanza({ sort: "date", hits: 100, offset: 1, keyword: "生成AI" })
+      callFanza({ sort: "date", hits: 100, offset: 1, keyword: "生成AI" }),
+      callFanza({ service: "ebook", floor: "comic", sort: "rank", hits: 100, offset: 1 }),
+      callFanza({ service: "ebook", floor: "comic", sort: "rank", hits: 100, offset: 101 }),
+      callFanza({ service: "ebook", floor: "comic", sort: "date", hits: 100, offset: 1 })
     ]);
 
     const aiCidSet = new Set();
@@ -90,8 +108,22 @@ export async function onRequestGet(context) {
       });
     }
 
+    booksRank1.forEach((item, idx) => {
+      const norm = normalizeBooksItem(item, idx + 1);
+      mergedMap.set(norm.id, norm);
+    });
+    booksRank2.forEach((item, idx) => {
+      const norm = normalizeBooksItem(item, idx + 101);
+      if (!mergedMap.has(norm.id)) mergedMap.set(norm.id, norm);
+    });
+    booksNew1.forEach((item) => {
+      if (!mergedMap.has(item.content_id)) {
+        mergedMap.set(item.content_id, normalizeBooksItem(item, 999));
+      }
+    });
+
     const works = Array.from(mergedMap.values()).map((w) => {
-      if (aiCidSet.has(w.id) || aiMakerSet.has(w.creatorId)) {
+      if (w.source !== "books" && (aiCidSet.has(w.id) || aiMakerSet.has(w.creatorId))) {
         w.isAi = true;
         if (!w.tags.includes("AI生成")) {
           if (w.tags.length >= 6) w.tags.pop();
@@ -101,12 +133,17 @@ export async function onRequestGet(context) {
       return w;
     });
     const creators = analyzeTopCreators(works);
+    const sourceCounts = { doujin: 0, books: 0 };
+    works.forEach((w) => {
+      sourceCounts[w.source === "books" ? "books" : "doujin"]++;
+    });
 
     return new Response(
       JSON.stringify({
         ok: true,
         mode: "live",
         totalCount: works.length,
+        sourceCounts,
         works,
         creators
       }),
@@ -157,13 +194,15 @@ function detectCategory(imageUrl, genres, volumeStr, titleStr) {
 
 function formatSpec(rawSpec, category) {
   const s = String(rawSpec || "").trim();
-  if (!s || s === "同人誌" || s === "ボイス・ASMR" || s === "CG集") {
+  if (!s || s === "同人誌" || s === "ボイス・ASMR" || s === "CG集" || s === "商業コミック") {
+    if (category === "books") return "商業コミック";
     if (category === "audio") return "ボイス・ASMR";
     if (category === "cg") return "CG・イラスト集";
     if (category === "game") return "同人ゲーム・動画";
     return "同人誌・漫画";
   }
   if (/^\d+$/.test(s)) {
+    if (category === "books") return `コミック ${s}P`;
     if (category === "comic") return `漫画 ${s}P`;
     if (category === "cg") return `CG ${s}枚`;
     if (category === "audio") return `音声 ${s}分`;
@@ -220,12 +259,15 @@ function normalizeItem(item, rankNumber) {
   return {
     id: cid,
     code: cid,
+    source: "doujin",
     title: titleStr,
     category,
     isAi,
     creatorId: circleId,
     author: circleName,
     circle: circleName,
+    publisher: "",
+    series: item.iteminfo?.series?.[0]?.name || "",
     date: (item.date || "").split(" ")[0].replace(/-/g, "."),
     spec,
     price,
@@ -237,62 +279,161 @@ function normalizeItem(item, rankNumber) {
     rank: rankNumber || 999,
     imageUrl,
     sampleImages,
+    directUrl,
     affiliateUrl: siteAffiliateUrl,
+    tachiyomiUrl: "",
+    tags: baseTags
+  };
+}
+
+function normalizeBooksItem(item, rankNumber) {
+  const genres = (item.iteminfo?.genre || []).map((g) => g.name);
+  const authors = item.iteminfo?.author || [];
+  const manufactures = item.iteminfo?.manufacture || [];
+  const publisherName = manufactures[0]?.name || "";
+  const seriesName = item.iteminfo?.series?.[0]?.name || "";
+  const authorName =
+    authors.length > 0
+      ? authors
+          .slice(0, 2)
+          .map((a) => a.name)
+          .join(" / ")
+      : publisherName || "商業コミック作家";
+  const creatorId = authors[0]?.id
+    ? `author_${authors[0].id}`
+    : manufactures[0]?.id
+      ? `pub_${manufactures[0].id}`
+      : `books_${authorName}`;
+
+  const imageUrl = item.imageURL?.large || item.imageURL?.list || "";
+  const volumeStr = String(item.volume || "");
+  const titleStr = String(item.title || "");
+  const category = "books";
+  const spec = formatSpec(volumeStr, category);
+  const isAi = detectIsAi(genres, titleStr, authorName);
+
+  const baseTags = genres.slice(0, 6);
+  const priceStr = String(item.prices?.price || "0").replace(/[^0-9]/g, "");
+  const listPriceStr = String(item.prices?.list_price || priceStr).replace(/[^0-9]/g, "");
+  const price = Number(priceStr) || 0;
+  const origPrice = Number(listPriceStr) || price;
+  const discount = origPrice > price ? Math.round(((origPrice - price) / origPrice) * 100) : 0;
+
+  const rating = Number(item.review?.average || 0);
+  const reviewsCount = Number(item.review?.count || 0);
+  const cid = item.content_id;
+  const directUrl = item.URL || `https://book.dmm.co.jp/detail/${cid}/`;
+  const siteAffiliateUrl = `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=douzinINFO-001&ch=toolbar&ch_id=link`;
+  const tachiyomiRawUrl = item.tachiyomi?.URL || "";
+  const tachiyomiUrl = tachiyomiRawUrl
+    ? `https://al.fanza.co.jp/?lurl=${encodeURIComponent(tachiyomiRawUrl)}&af_id=douzinINFO-001&ch=toolbar&ch_id=link`
+    : "";
+
+  return {
+    id: cid,
+    code: cid,
+    source: "books",
+    title: titleStr,
+    category,
+    isAi,
+    creatorId,
+    author: authorName,
+    circle: authorName,
+    publisher: publisherName,
+    series: seriesName,
+    date: (item.date || "").split(" ")[0].replace(/-/g, "."),
+    spec,
+    price,
+    origPrice,
+    discount,
+    rating: rating > 0 ? Number(rating.toFixed(2)) : 4.5,
+    reviewsCount,
+    dlCount: reviewsCount * 35 + (rankNumber && rankNumber <= 300 ? Math.max(0, 310 - rankNumber) * 30 : 120),
+    rank: rankNumber || 999,
+    imageUrl,
+    sampleImages: [],
+    directUrl,
+    affiliateUrl: siteAffiliateUrl,
+    tachiyomiUrl,
     tags: baseTags
   };
 }
 
 function analyzeTopCreators(works) {
-  const map = new Map();
-  for (const w of works) {
-    const existing = map.get(w.creatorId) || {
-      id: w.creatorId,
-      name: w.author,
-      circle: w.circle,
-      categoryCounts: { comic: 0, audio: 0, cg: 0, game: 0 },
-      works: 0,
-      totalReviews: 0,
-      ratingSum: 0,
-      bestRank: 999,
-      latest: w.date || "",
-      topWorkTitle: w.title || "",
-      sampleImageUrl: w.imageUrl || ""
-    };
-    existing.works++;
-    existing.categoryCounts[w.category] = (existing.categoryCounts[w.category] || 0) + 1;
-    existing.totalReviews += w.reviewsCount || 0;
-    existing.ratingSum += w.rating || 4.5;
-    if (w.rank < existing.bestRank) {
-      existing.bestRank = w.rank;
-      existing.topWorkTitle = w.title;
-      if (w.imageUrl) existing.sampleImageUrl = w.imageUrl;
+  function aggregateGroup(groupWorks, sourceType, limit) {
+    const map = new Map();
+    for (const w of groupWorks) {
+      const existing = map.get(w.creatorId) || {
+        id: w.creatorId,
+        source: sourceType,
+        name: w.author,
+        circle: w.circle,
+        publisher: w.publisher || "",
+        categoryCounts: { comic: 0, books: 0, audio: 0, cg: 0, game: 0 },
+        works: 0,
+        totalReviews: 0,
+        ratingSum: 0,
+        bestRank: 999,
+        latest: w.date || "",
+        topWorkTitle: w.title || "",
+        sampleImageUrl: w.imageUrl || ""
+      };
+      existing.works++;
+      existing.categoryCounts[w.category] = (existing.categoryCounts[w.category] || 0) + 1;
+      existing.totalReviews += w.reviewsCount || 0;
+      existing.ratingSum += w.rating || 4.5;
+      if (!existing.publisher && w.publisher) existing.publisher = w.publisher;
+      if (w.rank < existing.bestRank) {
+        existing.bestRank = w.rank;
+        existing.topWorkTitle = w.title;
+        if (w.imageUrl) existing.sampleImageUrl = w.imageUrl;
+      }
+      if ((w.date || "") > existing.latest) existing.latest = w.date;
+      map.set(w.creatorId, existing);
     }
-    if ((w.date || "") > existing.latest) existing.latest = w.date;
-    map.set(w.creatorId, existing);
+
+    return Array.from(map.values())
+      .sort((a, b) => {
+        const scoreA = a.works * 120 + a.totalReviews * 5 + (300 - Math.min(300, a.bestRank)) * 8;
+        const scoreB = b.works * 120 + b.totalReviews * 5 + (300 - Math.min(300, b.bestRank)) * 8;
+        return scoreB - scoreA;
+      })
+      .slice(0, limit)
+      .map((c) => {
+        const avgRating = (c.ratingSum / c.works).toFixed(2);
+        const mainCategory =
+          sourceType === "books"
+            ? "books"
+            : Object.entries(c.categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "comic";
+        const shortTitle = c.topWorkTitle.length > 30 ? `${c.topWorkTitle.slice(0, 30)}...` : c.topWorkTitle;
+        const pubNote = sourceType === "books" && c.publisher ? `【${c.publisher}】` : "";
+        return {
+          id: c.id,
+          source: sourceType,
+          name: c.name,
+          circle: c.circle,
+          publisher: c.publisher,
+          category: mainCategory,
+          works: c.works,
+          totalReviews: c.totalReviews,
+          avgRating: Number(avgRating),
+          latest: c.latest,
+          imageUrl: c.sampleImageUrl,
+          bio: `${pubNote}代表作『${shortTitle}』など計${c.works}作品を配信中（平均評価 ★${avgRating} / レビュー計${c.totalReviews}件）。`
+        };
+      });
   }
 
-  return Array.from(map.values())
-    .sort((a, b) => {
-      const scoreA = a.works * 120 + a.totalReviews * 5 + (300 - Math.min(300, a.bestRank)) * 8;
-      const scoreB = b.works * 120 + b.totalReviews * 5 + (300 - Math.min(300, b.bestRank)) * 8;
-      return scoreB - scoreA;
-    })
-    .slice(0, 60)
-    .map((c) => {
-      const avgRating = (c.ratingSum / c.works).toFixed(2);
-      const mainCategory = Object.entries(c.categoryCounts).sort((a, b) => b[1] - a[1])[0]?.[0] || "comic";
-      const shortTitle = c.topWorkTitle.length > 30 ? `${c.topWorkTitle.slice(0, 30)}...` : c.topWorkTitle;
-      return {
-        id: c.id,
-        name: c.name,
-        circle: c.circle,
-        category: mainCategory,
-        works: c.works,
-        totalReviews: c.totalReviews,
-        avgRating: Number(avgRating),
-        latest: c.latest,
-        imageUrl: c.sampleImageUrl,
-        bio: `代表作『${shortTitle}』など計${c.works}作品を配信中（平均評価 ★${avgRating} / レビュー計${c.totalReviews}件）。`
-      };
-    });
+  return [
+    ...aggregateGroup(
+      works.filter((w) => w.source !== "books"),
+      "doujin",
+      60
+    ),
+    ...aggregateGroup(
+      works.filter((w) => w.source === "books"),
+      "books",
+      60
+    )
+  ];
 }

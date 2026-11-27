@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DOUJIN INDEX — FANZA同人 新着・ランキング・有名作家まとめ</title>
+  <title>DOUJIN INDEX — FANZA同人・ブックス 新着・ランキング・有名作家まとめ</title>
   <meta name="description"
-    content="FANZA同人の同人誌・同人音声(ASMR)・CG集の新着、人気ランキング、有名作家・サークル別まとめサイト。AI作品と非AI（手描き・通常）作品の切り替えフィルター対応。" />
+    content="FANZA同人（同人誌・音声ASMR・CG集・ゲーム）とFANZAブックス（商業コミック）の新着、人気ランキング、有名作家・サークル別まとめサイト。同人・ブックス切替とAI/非AIフィルター対応。" />
   <style>
     :root {
       --bg: #0b0b10;
@@ -269,6 +269,7 @@
       gap: 10px;
     }
 
+    .source-segment,
     .cat-segment,
     .ai-segment {
       display: inline-flex;
@@ -280,6 +281,7 @@
       flex-wrap: wrap;
     }
 
+    .source-btn,
     .cat-btn,
     .ai-btn {
       padding: 6px 12px;
@@ -297,9 +299,30 @@
       white-space: nowrap;
     }
 
+    .source-btn:hover,
     .cat-btn:hover,
     .ai-btn:hover {
       color: var(--text);
+    }
+
+    .source-btn.active[data-source="all"] {
+      background: #2e2e42;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .source-btn.active[data-source="doujin"] {
+      background: linear-gradient(135deg, #e11d48 0%, #f43f5e 100%);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 2px 10px rgba(244, 63, 94, 0.4);
+    }
+
+    .source-btn.active[data-source="books"] {
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+      color: #ffffff;
+      font-weight: 800;
+      box-shadow: 0 2px 10px rgba(37, 99, 235, 0.45);
     }
 
     .cat-btn.active {
@@ -312,6 +335,12 @@
     .cat-btn.active[data-cat="comic"] {
       background: linear-gradient(135deg, #f43f5e 0%, #fb7185 100%);
       color: #ffffff;
+    }
+
+    .cat-btn.active[data-cat="books"] {
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
     }
 
     .cat-btn.active[data-cat="audio"] {
@@ -528,10 +557,92 @@
       white-space: nowrap;
     }
 
+    .card-cover.is-books {
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    .card-cover.is-books::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(10px) brightness(0.42);
+      -webkit-backdrop-filter: blur(10px) brightness(0.42);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .books-cover-img {
+      position: absolute;
+      inset: 4px 0;
+      width: 100%;
+      height: calc(100% - 8px);
+      object-fit: contain;
+      z-index: 1;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.72));
+    }
+
+    .card-cover.is-books::before {
+      z-index: 2;
+    }
+
+    .card-cover.is-books .cover-top,
+    .card-cover.is-books .cover-bottom {
+      z-index: 3;
+    }
+
     .type-label.cat-comic {
       background: rgba(244, 63, 94, 0.88);
       border-color: rgba(253, 164, 175, 0.45);
       color: #ffffff;
+    }
+
+    .type-label.cat-books {
+      background: rgba(37, 99, 235, 0.92);
+      border-color: rgba(147, 197, 253, 0.5);
+      color: #ffffff;
+    }
+
+    .tachiyomi-pill {
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(16, 40, 68, 0.9);
+      color: #93c5fd;
+      border: 1px solid rgba(96, 165, 250, 0.45);
+      white-space: nowrap;
+    }
+
+    .primary-btn.is-books {
+      background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.36);
+    }
+
+    .primary-btn.is-books:hover {
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.55);
+    }
+
+    .tachiyomi-cta-btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .tachiyomi-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(14, 165, 233, 0.55);
     }
 
     .type-label.cat-audio {
@@ -1575,7 +1686,7 @@
           <span class="brand-bar"></span>
           <div>
             <span class="brand-name">DOUJIN INDEX</span>
-            <span class="brand-sub">FANZA同人 新着・ランキング・有名作家まとめ</span>
+            <span class="brand-sub">FANZA同人・ブックス 新着・ランキング・有名作家まとめ</span>
           </div>
         </button>
         <div class="status-pill">
@@ -1641,21 +1752,33 @@
     </div>
   </div>
 
-  <!-- 3. ジャンル切り替え ＆ AI作品分離フィルター ＆ 並び替えバー -->
+  <!-- 3. 同人/ブックス切替 ＆ ジャンル切り替え ＆ AI作品分離フィルター ＆ 並び替えバー -->
   <div class="subbar" id="subBar">
     <div class="container subbar-inner">
       <div class="filter-groups">
+        <!-- ストア切替（同人 / ブックス分離） -->
+        <div class="source-segment" aria-label="同人・ブックス切り替え">
+          <button type="button" class="source-btn active" data-source="all">すべて <span class="cat-count"
+              id="sourceCountAll"></span></button>
+          <button type="button" class="source-btn" data-source="doujin">📘 FANZA同人 <span class="cat-count"
+              id="sourceCountDoujin"></span></button>
+          <button type="button" class="source-btn" data-source="books">📚 FANZAブックス <span class="cat-count"
+              id="sourceCountBooks"></span></button>
+        </div>
+
         <!-- ジャンル切替 -->
-        <div class="cat-segment" aria-label="ジャンル絞り込み">
+        <div class="cat-segment" id="catSegment" aria-label="ジャンル絞り込み">
           <button type="button" class="cat-btn active" data-cat="all">すべて <span class="cat-count"
               id="catCountAll"></span></button>
-          <button type="button" class="cat-btn" data-cat="comic">同人誌・漫画 <span class="cat-count"
+          <button type="button" class="cat-btn" data-cat="comic" data-source-only="doujin">同人誌・漫画 <span class="cat-count"
               id="catCountComic"></span></button>
-          <button type="button" class="cat-btn" data-cat="audio">同人音声・ASMR <span class="cat-count"
+          <button type="button" class="cat-btn" data-cat="books" data-source-only="books">ブックス（商業） <span class="cat-count"
+              id="catCountBooks"></span></button>
+          <button type="button" class="cat-btn" data-cat="audio" data-source-only="doujin">同人音声・ASMR <span class="cat-count"
               id="catCountAudio"></span></button>
-          <button type="button" class="cat-btn" data-cat="cg">CG・イラスト集 <span class="cat-count"
+          <button type="button" class="cat-btn" data-cat="cg" data-source-only="doujin">CG・イラスト集 <span class="cat-count"
               id="catCountCg"></span></button>
-          <button type="button" class="cat-btn" data-cat="game">ゲーム・動画 <span class="cat-count"
+          <button type="button" class="cat-btn" data-cat="game" data-source-only="doujin">ゲーム・動画 <span class="cat-count"
               id="catCountGame"></span></button>
         </div>
 
@@ -1701,9 +1824,9 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <div class="footer-brand">DOUJIN INDEX — FANZA同人 新着・ランキング・有名作家まとめ</div>
+        <div class="footer-brand">DOUJIN INDEX — FANZA同人・ブックス 新着・ランキング・有名作家まとめ</div>
         <div class="footer-disclaimer">
-          ※当サイトは成人向け（18歳未満閲覧禁止）の同人作品情報まとめサイトです。18歳未満の方の閲覧は固くお断りいたします。<br />
+          ※当サイトは成人向け（18歳未満閲覧禁止）の同人作品・商業コミック情報まとめサイトです。18歳未満の方の閲覧は固くお断りいたします。<br />
           ※当サイトはアフィリエイト広告（DMMアフィリエイトプログラム）を利用しており、各作品リンクにはプロモーション（PR）が含まれます。<br />
           ※掲載されている画像・作品データの著作権は各サークル・著作者および株式会社デジタルコマースに帰属します。
         </div>
@@ -1743,10 +1866,17 @@
 
   <script>
     const CATEGORY_META = {
-      comic: { label: "同人誌・漫画", short: "漫画" },
+      comic: { label: "同人誌・漫画", short: "同人誌" },
+      books: { label: "ブックス（商業コミック）", short: "ブックス" },
       audio: { label: "同人音声・ASMR", short: "音声・ASMR" },
       cg: { label: "CG・イラスト集", short: "CG集" },
       game: { label: "ゲーム・動画", short: "ゲーム" }
+    };
+
+    const SOURCE_META = {
+      all: { label: "すべて（同人・ブックス）", short: "すべて" },
+      doujin: { label: "FANZA同人", short: "FANZA同人" },
+      books: { label: "FANZAブックス（商業コミック）", short: "FANZAブックス" }
     };
 
     /**
@@ -1764,26 +1894,46 @@
 
     function normalizeWorkOnClient(w) {
       const url = String(w.imageUrl || "");
-      let category = w.category || "comic";
-      if (url.includes("/digital/voice/")) category = "audio";
-      else if (url.includes("/digital/comic/")) category = "comic";
-      else if (url.includes("/digital/cg/")) category = "cg";
-      else if (url.includes("/digital/game/")) category = "game";
+      const directUrl = String(w.directUrl || "");
+      const isBooks =
+        w.source === "books" ||
+        w.category === "books" ||
+        url.includes("/digital/e-book/") ||
+        directUrl.includes("book.dmm.co.jp");
+
+      let category = isBooks ? "books" : w.category || "comic";
+      if (!isBooks) {
+        if (url.includes("/digital/voice/")) category = "audio";
+        else if (url.includes("/digital/comic/")) category = "comic";
+        else if (url.includes("/digital/cg/")) category = "cg";
+        else if (url.includes("/digital/game/")) category = "game";
+      }
 
       let spec = String(w.spec || "").trim();
       if (/^\d+$/.test(spec)) {
-        spec = category === "comic" ? `漫画 ${spec}P` : category === "cg" ? `CG ${spec}枚` : `${spec}P`;
-      } else if (!spec || spec === "同人誌" || spec === "ボイス・ASMR") {
-        spec = (CATEGORY_META[category] || CATEGORY_META.comic).short;
+        spec =
+          category === "books"
+            ? `コミック ${spec}P`
+            : category === "comic"
+              ? `漫画 ${spec}P`
+              : category === "cg"
+                ? `CG ${spec}枚`
+                : `${spec}P`;
+      } else if (!spec || spec === "同人誌" || spec === "ボイス・ASMR" || spec === "商業コミック") {
+        spec = category === "books" ? "商業コミック" : (CATEGORY_META[category] || CATEGORY_META.comic).short;
       }
 
       const isAi = detectWorkIsAi(w);
 
       return {
         ...w,
+        source: isBooks ? "books" : "doujin",
         category,
         spec,
         isAi,
+        publisher: w.publisher || "",
+        series: w.series || "",
+        tachiyomiUrl: w.tachiyomiUrl || "",
         tags: Array.isArray(w.tags) ? w.tags : [],
         sampleImages: Array.isArray(w.sampleImages) ? w.sampleImages : []
       };
@@ -1797,14 +1947,14 @@
       const prevAiMap = new Map(WORKS.map((w) => [w.id, Boolean(w.isAi)]));
       WORKS = data.works.map((w) => {
         const norm = normalizeWorkOnClient(w);
-        if (prevAiMap.get(norm.id)) {
+        if (norm.source !== "books" && prevAiMap.get(norm.id)) {
           norm.isAi = true;
           if (!norm.tags.includes("AI生成")) norm.tags = [...norm.tags.slice(0, 5), "AI生成"];
         }
         return norm;
       });
 
-      // サークルごとのAI作品比率を算出してサークル一覧でも非AI/AIフィルターを機能させる
+      // サークル・作家ごとのAI作品比率を算出して一覧でも非AI/AIフィルターを機能させる
       const creatorAiStat = new Map();
       WORKS.forEach((w) => {
         const cur = creatorAiStat.get(w.creatorId) || { total: 0, ai: 0 };
@@ -1816,21 +1966,32 @@
       if (Array.isArray(data.creators) && data.creators.length > 0) {
         CREATORS = data.creators.map((c) => {
           const url = String(c.imageUrl || "");
-          let cat = c.category || "comic";
-          if (url.includes("/digital/voice/")) cat = "audio";
-          else if (url.includes("/digital/comic/")) cat = "comic";
-          else if (url.includes("/digital/cg/")) cat = "cg";
-          else if (url.includes("/digital/game/")) cat = "game";
+          const isBooks = c.source === "books" || c.category === "books" || url.includes("/digital/e-book/");
+          let cat = isBooks ? "books" : c.category || "comic";
+          if (!isBooks) {
+            if (url.includes("/digital/voice/")) cat = "audio";
+            else if (url.includes("/digital/comic/")) cat = "comic";
+            else if (url.includes("/digital/cg/")) cat = "cg";
+            else if (url.includes("/digital/game/")) cat = "game";
+          }
 
           const st = creatorAiStat.get(c.id);
           const isAiCreator = st
             ? st.ai > 0 && st.ai >= st.total / 2
             : detectWorkIsAi({ title: c.bio || "", circle: c.circle || "", tags: c.tags || [] });
 
-          return { ...c, category: cat, isAi: isAiCreator };
+          return {
+            ...c,
+            source: isBooks ? "books" : "doujin",
+            category: cat,
+            isAi: isAiCreator
+          };
         });
       }
-      document.getElementById("liveStatusText").textContent = `収録: ${WORKS.length.toLocaleString()}作品 / ${CREATORS.length}サークル`;
+      const doujinCount = WORKS.filter((w) => w.source !== "books").length;
+      const booksCount = WORKS.filter((w) => w.source === "books").length;
+      document.getElementById("liveStatusText").textContent =
+        `収録: ${WORKS.length.toLocaleString()}作品（同人 ${doujinCount.toLocaleString()} / ブックス ${booksCount.toLocaleString()}）`;
       return true;
     }
 
@@ -1840,9 +2001,10 @@
 
     const state = {
       tab: "portal",       // 'portal' | 'community' | 'pop_ranking' | 'sales_ranking' | 'format_ranking' | 'pickup' | 'new' | 'creators' | 'sale' | 'favorites'
+      source: "all",       // 'all' | 'doujin' | 'books'
       popPeriod: "24h",    // '24h' | 'weekly' | 'monthly'
       salesSub: "new_release", // 'new_release' | 'semi_new' | 'long_seller' | 'sales_count'
-      formatCat: "comic",  // 'comic' | 'audio' | 'cg' | 'game'
+      formatCat: "comic",  // 'comic' | 'books' | 'audio' | 'cg' | 'game'
       cat: "all",
       aiFilter: "all",     // 'all' | 'non_ai' | 'ai'
       sort: "newest",
@@ -2262,8 +2424,9 @@
       return Number.isNaN(t) ? 0 : t;
     }
 
-    function getBaseFilteredWorks(ignoreCategory = false) {
+    function getBaseFilteredWorks(ignoreCategory = false, ignoreSource = false) {
       return WORKS.filter((w) => {
+        if (!ignoreSource && state.source !== "all" && w.source !== state.source) return false;
         if (!ignoreCategory && state.cat !== "all" && w.category !== state.cat) return false;
         if (state.aiFilter === "non_ai" && w.isAi) return false;
         if (state.aiFilter === "ai" && !w.isAi) return false;
@@ -2275,6 +2438,8 @@
             (w.title || "").toLowerCase().includes(q) ||
             (w.author || "").toLowerCase().includes(q) ||
             (w.circle || "").toLowerCase().includes(q) ||
+            (w.publisher || "").toLowerCase().includes(q) ||
+            (w.series || "").toLowerCase().includes(q) ||
             (w.tags || []).some((t) => t.toLowerCase().includes(q))
           );
         }
@@ -2433,7 +2598,7 @@
      * 作品形式別ランキング
      */
     function getFormatRanking(formatCat) {
-      const base = getBaseFilteredWorks(true).filter((w) => w.category === formatCat);
+      const base = getBaseFilteredWorks(true, true).filter((w) => w.category === formatCat);
       return getPopularityRanking("24h", base);
     }
 
@@ -2446,6 +2611,21 @@
 
     function buildFanzaUrl(w) {
       const code = w.code || w.id;
+      const isBooks =
+        w.source === "books" ||
+        w.category === "books" ||
+        String(w.directUrl || "").includes("book.dmm.co.jp") ||
+        String(w.imageUrl || "").includes("/digital/e-book/");
+
+      if (isBooks) {
+        if (w.affiliateUrl && String(w.affiliateUrl).includes("book.dmm.co.jp")) {
+          return w.affiliateUrl;
+        }
+        const directUrl = w.directUrl || `https://book.dmm.co.jp/detail/${code}/`;
+        if (!ACTIVE_AFFILIATE_ID) return directUrl;
+        return `https://al.fanza.co.jp/?lurl=${encodeURIComponent(directUrl)}&af_id=${encodeURIComponent(ACTIVE_AFFILIATE_ID)}&ch=toolbar&ch_id=link`;
+      }
+
       const directUrl = `https://www.dmm.co.jp/dc/doujin/-/detail/=/cid=${code}/`;
 
       if (!ACTIVE_AFFILIATE_ID) {
@@ -2479,13 +2659,34 @@
     }
 
     function updateCounters() {
-      const aiFilteredWorks = WORKS.filter((w) => {
+      const aiOnlyWorks = WORKS.filter((w) => {
         if (state.aiFilter === "non_ai") return !w.isAi;
         if (state.aiFilter === "ai") return w.isAi;
         return true;
       });
 
+      const doujinCount = aiOnlyWorks.filter((w) => w.source !== "books").length;
+      const booksCount = aiOnlyWorks.filter((w) => w.source === "books").length;
+      const elSrcAll = document.getElementById("sourceCountAll");
+      const elSrcDoujin = document.getElementById("sourceCountDoujin");
+      const elSrcBooks = document.getElementById("sourceCountBooks");
+      if (elSrcAll) elSrcAll.textContent = `(${aiOnlyWorks.length})`;
+      if (elSrcDoujin) elSrcDoujin.textContent = `(${doujinCount})`;
+      if (elSrcBooks) elSrcBooks.textContent = `(${booksCount})`;
+
+      // ストア選択に合わせてカテゴリセグメントの表示をスッキリ制御
+      const catSegment = document.getElementById("catSegment");
+      if (catSegment) {
+        catSegment.style.display = state.source === "books" ? "none" : "inline-flex";
+        catSegment.querySelectorAll("[data-source-only]").forEach((btn) => {
+          const reqSrc = btn.dataset.sourceOnly;
+          btn.style.display = state.source === "all" || state.source === reqSrc ? "inline-flex" : "none";
+        });
+      }
+
+      const aiFilteredWorks = aiOnlyWorks.filter((w) => state.source === "all" || w.source === state.source);
       const aiFilteredCreators = CREATORS.filter((c) => {
+        if (state.source !== "all" && c.source !== state.source) return false;
         if (state.aiFilter === "non_ai") return !c.isAi;
         if (state.aiFilter === "ai") return c.isAi;
         return true;
@@ -2498,17 +2699,22 @@
       const commCountEl = document.getElementById("communityCount");
       if (commCountEl) commCountEl.textContent = communityState.posts.length;
 
-      const counts = { all: aiFilteredWorks.length, comic: 0, audio: 0, cg: 0, game: 0 };
+      const counts = { all: aiFilteredWorks.length, comic: 0, books: 0, audio: 0, cg: 0, game: 0 };
       aiFilteredWorks.forEach((w) => {
         counts[w.category] = (counts[w.category] || 0) + 1;
       });
       document.getElementById("catCountAll").textContent = `(${counts.all})`;
       document.getElementById("catCountComic").textContent = `(${counts.comic})`;
+      const catBooksEl = document.getElementById("catCountBooks");
+      if (catBooksEl) catBooksEl.textContent = `(${counts.books})`;
       document.getElementById("catCountAudio").textContent = `(${counts.audio})`;
       document.getElementById("catCountCg").textContent = `(${counts.cg})`;
       document.getElementById("catCountGame").textContent = `(${counts.game})`;
 
-      const catFilteredWorks = WORKS.filter((w) => state.cat === "all" || w.category === state.cat);
+      const catFilteredWorks = WORKS.filter((w) => {
+        if (state.source !== "all" && w.source !== state.source) return false;
+        return state.cat === "all" || w.category === state.cat;
+      });
       const nonAiCount = catFilteredWorks.filter((w) => !w.isAi).length;
       const aiCount = catFilteredWorks.filter((w) => w.isAi).length;
       document.getElementById("aiCountAll").textContent = `(${catFilteredWorks.length})`;
@@ -2518,6 +2724,7 @@
 
     function renderCard(w, displayRank) {
       const isFav = state.favs.includes(w.id);
+      const isBooks = w.source === "books" || w.category === "books";
       const commReviewCount = getWorkReviewCount(w.id);
       const fanzaUrl = buildFanzaUrl(w);
       const coverStyle = w.imageUrl
@@ -2534,10 +2741,21 @@
               ? "rank-badge rank-3"
               : "rank-badge";
 
+      const bottomRightPill = isBooks
+        ? w.tachiyomiUrl
+          ? `<span class="tachiyomi-pill">📖 試し読み可</span>`
+          : `<span class="mono-meta">${w.date}</span>`
+        : sampleCount > 0
+          ? `<span class="sample-pill">サンプル ${sampleCount}枚</span>`
+          : `<span class="mono-meta">${w.date}</span>`;
+
+      const creatorTitle = isBooks && w.publisher ? `${w.circle}（${w.publisher}）` : w.circle;
+
       return `
         <article class="card">
           <div>
-            <div class="card-cover" style="${coverStyle}" data-preview="${w.id}" title="クリックでサンプル画像をプレビュー">
+            <div class="card-cover ${isBooks ? "is-books" : ""}" style="${coverStyle}" data-preview="${w.id}" title="${isBooks ? "クリックで詳細・立ち読みリンクを表示" : "クリックでサンプル画像をプレビュー"}">
+              ${isBooks && w.imageUrl ? `<img src="${w.imageUrl}" alt="${escapeHtml(w.title)}" class="books-cover-img" loading="lazy" />` : ""}
               <div class="cover-top">
                 <div class="badge-group">
                   ${displayRank ? `<span class="${rankClass}">${displayRank}位</span>` : ""}
@@ -2548,18 +2766,19 @@
               </div>
               <div class="cover-bottom">
                 <span class="mono-meta">${w.spec}</span>
-                ${sampleCount > 0 ? `<span class="sample-pill">サンプル ${sampleCount}枚</span>` : `<span class="mono-meta">${w.date}</span>`}
+                ${bottomRightPill}
               </div>
             </div>
 
             <div class="card-body">
               <div class="circle-row">
-                <button type="button" class="circle-link" data-creator="${w.creatorId}" title="${w.circle}">${w.circle}</button>
+                <button type="button" class="circle-link" data-creator="${w.creatorId}" title="${escapeHtml(creatorTitle)}">${escapeHtml(w.circle)}</button>
                 <span class="rating-meta">★${Number(w.rating || 4.5).toFixed(1)}${w.reviewsCount ? `(${w.reviewsCount})` : ""}</span>
               </div>
-              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="card-title-link" title="${w.title}">${w.title}</a>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="card-title-link" title="${escapeHtml(w.title)}">${escapeHtml(w.title)}</a>
               <div class="tags">
-                ${(w.tags || []).slice(0, 4).map((t) => `<button type="button" class="tag" data-tag="${t}">#${t}</button>`).join("")}
+                ${isBooks && w.publisher ? `<span class="tag" style="color:#93c5fd; border-color:rgba(59,130,246,0.35); cursor:default;">${escapeHtml(w.publisher)}</span>` : ""}
+                ${(w.tags || []).slice(0, isBooks && w.publisher ? 3 : 4).map((t) => `<button type="button" class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</button>`).join("")}
               </div>
             </div>
           </div>
@@ -2578,7 +2797,7 @@
                   <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
                 </svg>
               </button>
-              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn">FANZAで見る ↗</a>
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn ${isBooks ? "is-books" : ""}">${isBooks ? "ブックス ↗" : "FANZAで見る ↗"}</a>
             </div>
           </div>
         </article>
@@ -2592,14 +2811,82 @@
       const semiNewWorks = getSalesSubRanking("semi_new", baseWorks).slice(0, 10);
       const longSellerWorks = getSalesSubRanking("long_seller", baseWorks).slice(0, 10);
       const salesCountWorks = getSalesSubRanking("sales_count", baseWorks).slice(0, 10);
-      const formatWorks = getFormatRanking(state.formatCat).slice(0, 10);
+      const activeFormatCat =
+        state.source === "doujin" && state.formatCat === "books" ? "comic" : state.formatCat;
+      const formatWorks = getFormatRanking(activeFormatCat).slice(0, 10);
 
-      return `
+      const sourceSuffix =
+        state.source === "doujin"
+          ? " — FANZA同人"
+          : state.source === "books"
+            ? " — FANZAブックス"
+            : "";
+
+      // 「すべて」表示かつカテゴリ未絞り込み時は、同人誌とブックス（商業コミック）をはっきり分けて並べる
+      let splitShowcaseHtml = "";
+      if (state.source === "all" && state.cat === "all") {
+        const doujinComicTop = getPopularityRanking(
+          state.popPeriod,
+          baseWorks.filter((w) => w.source !== "books" && w.category === "comic")
+        ).slice(0, 10);
+        const booksComicTop = getPopularityRanking(
+          state.popPeriod,
+          baseWorks.filter((w) => w.source === "books")
+        ).slice(0, 10);
+
+        splitShowcaseHtml = `
+          <!-- 同人誌・漫画 専用ピックアップランキング -->
+          <section class="fanza-section">
+            <div class="section-head">
+              <div class="section-title-group">
+                <h2 class="section-title"><span class="section-title-bar"></span>📘 同人誌・漫画 人気ランキング（${POP_PERIOD_META[state.popPeriod].label}）</h2>
+                <span class="section-update-meta">FANZA同人 / ${ts.hourlyUpdate}</span>
+              </div>
+              <div class="section-controls">
+                <div class="subtab-group" aria-label="人気ランキング期間切替">
+                  <button type="button" class="subtab-btn ${state.popPeriod === "24h" ? "active" : ""}" data-pop-period="24h">24時間</button>
+                  <button type="button" class="subtab-btn ${state.popPeriod === "weekly" ? "active" : ""}" data-pop-period="weekly">週間</button>
+                  <button type="button" class="subtab-btn ${state.popPeriod === "monthly" ? "active" : ""}" data-pop-period="monthly">月間</button>
+                </div>
+                <button type="button" class="more-link-btn" data-jump-source="doujin" data-jump-cat="comic">同人誌ランキングをすべて見る →</button>
+              </div>
+            </div>
+            <div class="grid">
+              ${doujinComicTop.map((w, idx) => renderCard(w, idx + 1)).join("")}
+            </div>
+          </section>
+
+          <!-- FANZAブックス（商業コミック） 専用ピックアップランキング -->
+          ${booksComicTop.length > 0
+            ? `
+          <section class="fanza-section" style="border-color:rgba(59,130,246,0.35);">
+            <div class="section-head">
+              <div class="section-title-group">
+                <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #3b82f6, #6366f1); box-shadow:0 0 10px rgba(59,130,246,0.5);"></span>📚 FANZAブックス（商業コミック）人気ランキング（${POP_PERIOD_META[state.popPeriod].label}）</h2>
+                <span class="section-update-meta">FANZAブックス / ${ts.hourlyUpdate}</span>
+              </div>
+              <div class="section-controls">
+                <button type="button" class="more-link-btn" style="border-color:rgba(59,130,246,0.45); background:rgba(37,99,235,0.14); color:#93c5fd;" data-jump-source="books">ブックスをすべて見る →</button>
+              </div>
+            </div>
+            <div class="grid">
+              ${booksComicTop.map((w, idx) => renderCard(w, idx + 1)).join("")}
+            </div>
+          </section>
+          `
+            : ""}
+        `;
+      }
+
+      const mainPopSectionHtml =
+        state.source === "all" && state.cat === "all"
+          ? ""
+          : `
         <!-- 1. 人気ランキング (24時間 / 週間 / 月間) -->
-        <section class="fanza-section">
+        <section class="fanza-section" ${state.source === "books" ? 'style="border-color:rgba(59,130,246,0.35);"' : ""}>
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar"></span>人気ランキング（${POP_PERIOD_META[state.popPeriod].label}）</h2>
+              <h2 class="section-title"><span class="section-title-bar" ${state.source === "books" ? 'style="background:linear-gradient(180deg, #3b82f6, #6366f1); box-shadow:0 0 10px rgba(59,130,246,0.5);"' : ""}></span>人気ランキング（${POP_PERIOD_META[state.popPeriod].label}）${sourceSuffix}</h2>
               <span class="section-update-meta">${ts.hourlyUpdate}</span>
             </div>
             <div class="section-controls">
@@ -2615,12 +2902,45 @@
             ${popWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
           </div>
         </section>
+      `;
+
+      const formatSectionHtml =
+        state.source === "books"
+          ? ""
+          : `
+        <!-- 7. 作品形式別ランキング / YYYY-MM-DD HH:00 更新 -->
+        <section class="fanza-section">
+          <div class="section-head">
+            <div class="section-title-group">
+              <h2 class="section-title"><span class="section-title-bar" style="background:#3b82f6;"></span>作品形式別ランキング（${CATEGORY_META[activeFormatCat].label}）</h2>
+              <span class="section-update-meta">/ ${ts.hourlyUpdate}</span>
+            </div>
+            <div class="section-controls">
+              <div class="subtab-group" aria-label="作品形式別ランキング切替">
+                <button type="button" class="subtab-btn ${activeFormatCat === "comic" ? "active" : ""}" data-format-cat="comic">同人誌・漫画</button>
+                ${state.source === "all" ? `<button type="button" class="subtab-btn ${activeFormatCat === "books" ? "active" : ""}" data-format-cat="books">ブックス（商業）</button>` : ""}
+                <button type="button" class="subtab-btn ${activeFormatCat === "audio" ? "active" : ""}" data-format-cat="audio">同人音声・ASMR</button>
+                <button type="button" class="subtab-btn ${activeFormatCat === "cg" ? "active" : ""}" data-format-cat="cg">CG・イラスト集</button>
+                <button type="button" class="subtab-btn ${activeFormatCat === "game" ? "active" : ""}" data-format-cat="game">ゲーム・動画</button>
+              </div>
+              <button type="button" class="more-link-btn" data-jump-tab="format_ranking">形式別ランキングをすべて見る →</button>
+            </div>
+          </div>
+          <div class="grid">
+            ${formatWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
+          </div>
+        </section>
+      `;
+
+      return `
+        ${splitShowcaseHtml}
+        ${mainPopSectionHtml}
 
         <!-- 2. ピックアップ作品 / ※毎日0時ごろに更新 -->
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar" style="background:#f59e0b;"></span>ピックアップ作品</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:#f59e0b;"></span>ピックアップ作品${sourceSuffix}</h2>
               <span class="section-update-meta">※毎日0時ごろに更新 (${ts.dailyMidnight})</span>
             </div>
             <div class="section-controls">
@@ -2636,7 +2956,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #10b981, #059669); box-shadow:0 0 10px rgba(16,185,129,0.4);"></span>新作ランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #10b981, #059669); box-shadow:0 0 10px rgba(16,185,129,0.4);"></span>新作ランキング${sourceSuffix}</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -2652,7 +2972,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #06b6d4, #2563eb); box-shadow:0 0 10px rgba(6,182,212,0.4);"></span>準新作ランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #06b6d4, #2563eb); box-shadow:0 0 10px rgba(6,182,212,0.4);"></span>準新作ランキング${sourceSuffix}</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -2668,7 +2988,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #a855f7, #6366f1); box-shadow:0 0 10px rgba(168,85,247,0.4);"></span>ロングセラーランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #a855f7, #6366f1); box-shadow:0 0 10px rgba(168,85,247,0.4);"></span>ロングセラーランキング${sourceSuffix}</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -2684,7 +3004,7 @@
         <section class="fanza-section">
           <div class="section-head">
             <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #f97316, #e11d48); box-shadow:0 0 10px rgba(249,115,22,0.4);"></span>販売数ランキング</h2>
+              <h2 class="section-title"><span class="section-title-bar" style="background:linear-gradient(180deg, #f97316, #e11d48); box-shadow:0 0 10px rgba(249,115,22,0.4);"></span>販売数ランキング${sourceSuffix}</h2>
               <span class="section-update-meta">/ 60分毎に更新 (${ts.hourlyUpdate})</span>
             </div>
             <div class="section-controls">
@@ -2696,27 +3016,7 @@
           </div>
         </section>
 
-        <!-- 7. 作品形式別ランキング / YYYY-MM-DD HH:00 更新 -->
-        <section class="fanza-section">
-          <div class="section-head">
-            <div class="section-title-group">
-              <h2 class="section-title"><span class="section-title-bar" style="background:#3b82f6;"></span>作品形式別ランキング（${CATEGORY_META[state.formatCat].label}）</h2>
-              <span class="section-update-meta">/ ${ts.hourlyUpdate}</span>
-            </div>
-            <div class="section-controls">
-              <div class="subtab-group" aria-label="作品形式別ランキング切替">
-                <button type="button" class="subtab-btn ${state.formatCat === "comic" ? "active" : ""}" data-format-cat="comic">同人誌・漫画</button>
-                <button type="button" class="subtab-btn ${state.formatCat === "audio" ? "active" : ""}" data-format-cat="audio">同人音声・ASMR</button>
-                <button type="button" class="subtab-btn ${state.formatCat === "cg" ? "active" : ""}" data-format-cat="cg">CG・イラスト集</button>
-                <button type="button" class="subtab-btn ${state.formatCat === "game" ? "active" : ""}" data-format-cat="game">ゲーム・動画</button>
-              </div>
-              <button type="button" class="more-link-btn" data-jump-tab="format_ranking">形式別ランキングをすべて見る →</button>
-            </div>
-          </div>
-          <div class="grid">
-            ${formatWorks.map((w, idx) => renderCard(w, idx + 1)).join("")}
-          </div>
-        </section>
+        ${formatSectionHtml}
       `;
     }
 
@@ -2725,6 +3025,7 @@
       const ts = getFormattedTimestamps();
 
       document.querySelectorAll(".tab-btn").forEach((b) => b.classList.toggle("active", b.dataset.tab === state.tab));
+      document.querySelectorAll(".source-btn").forEach((b) => b.classList.toggle("active", b.dataset.source === state.source));
       document.querySelectorAll(".cat-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.cat));
       document.querySelectorAll(".ai-btn").forEach((b) => b.classList.toggle("active", b.dataset.ai === state.aiFilter));
 
@@ -2732,8 +3033,10 @@
       if (state.creatorId || state.tag) {
         notice.style.display = "flex";
         const c = state.creatorId ? CREATORS.find((x) => x.id === state.creatorId) : null;
-        const cName = c ? c.circle : (WORKS.find((w) => w.creatorId === state.creatorId)?.circle || state.creatorId);
-        document.getElementById("filterNoticeText").textContent = [state.creatorId ? `サークル: ${cName}` : "", state.tag ? `タグ: #${state.tag}` : ""].filter(Boolean).join(" / ");
+        const wSample = state.creatorId ? WORKS.find((w) => w.creatorId === state.creatorId) : null;
+        const cName = c ? c.circle : (wSample?.circle || state.creatorId);
+        const creatorLabel = (c?.source === "books" || wSample?.source === "books") ? "作家" : "サークル";
+        document.getElementById("filterNoticeText").textContent = [state.creatorId ? `${creatorLabel}: ${cName}` : "", state.tag ? `タグ: #${state.tag}` : ""].filter(Boolean).join(" / ");
       } else {
         notice.style.display = "none";
       }
@@ -2748,16 +3051,22 @@
         return;
       }
 
-      // サークル一覧タブ
+      // サークル・作家一覧タブ
       if (state.tab === "creators") {
         sortWrap.style.display = "none";
         const creatorList = CREATORS.filter((c) => {
+          if (state.source !== "all" && c.source !== state.source) return false;
           if (state.cat !== "all" && c.category && c.category !== state.cat) return false;
           if (state.aiFilter === "non_ai" && c.isAi) return false;
           if (state.aiFilter === "ai" && !c.isAi) return false;
           if (state.query) {
             const q = state.query.toLowerCase();
-            return (c.name || "").toLowerCase().includes(q) || (c.circle || "").toLowerCase().includes(q) || (c.bio || "").toLowerCase().includes(q);
+            return (
+              (c.name || "").toLowerCase().includes(q) ||
+              (c.circle || "").toLowerCase().includes(q) ||
+              (c.publisher || "").toLowerCase().includes(q) ||
+              (c.bio || "").toLowerCase().includes(q)
+            );
           }
           return true;
         });
@@ -2765,30 +3074,32 @@
         view.innerHTML = `
           <div class="creator-grid">
             ${creatorList
-            .map(
-              (c) => `
+            .map((c) => {
+              const isBooksCreator = c.source === "books" || c.category === "books";
+              return `
               <div class="card" style="padding:16px; gap:12px;">
                 <div style="display:flex; gap:12px; align-items:flex-start;">
-                  ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${c.circle}" class="creator-thumb" loading="lazy" />` : ""}
+                  ${c.imageUrl ? `<img src="${c.imageUrl}" alt="${escapeHtml(c.circle)}" class="creator-thumb" loading="lazy" />` : ""}
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.7rem; color:var(--text-muted); margin-bottom:5px; gap:4px;">
-                      <div style="display:flex; gap:4px; align-items:center;">
-                        <span style="padding:2px 6px; border-radius:4px; background:var(--bg); border:1px solid var(--border); color:var(--text-sub); font-weight:600;">${(CATEGORY_META[c.category] || CATEGORY_META.comic).short}</span>
+                      <div style="display:flex; gap:4px; align-items:center; flex-wrap:wrap;">
+                        <span class="type-label cat-${c.category}" style="font-size:0.65rem; padding:1px 6px;">${(CATEGORY_META[c.category] || CATEGORY_META.comic).short}</span>
+                        ${isBooksCreator && c.publisher ? `<span style="padding:1px 6px; border-radius:4px; background:rgba(37,99,235,0.14); border:1px solid rgba(59,130,246,0.35); color:#93c5fd; font-weight:600;">${escapeHtml(c.publisher)}</span>` : ""}
                         ${c.isAi ? `<span class="ai-label">AI</span>` : ""}
                       </div>
                       <span>最新: ${c.latest || "-"}</span>
                     </div>
-                    <h3 style="font-size:0.95rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${c.circle}</h3>
-                    <p style="font-size:0.76rem; color:var(--text-sub); margin-top:4px; line-height:1.4;">${c.bio || ""}</p>
+                    <h3 style="font-size:0.95rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(c.circle)}</h3>
+                    <p style="font-size:0.76rem; color:var(--text-sub); margin-top:4px; line-height:1.4;">${escapeHtml(c.bio || "")}</p>
                   </div>
                 </div>
                 <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--border);">
                   <span style="font-size:0.76rem; color:var(--text-sub);">収録数: <strong style="color:var(--text);">${c.works}作品</strong></span>
-                  <button type="button" class="primary-btn" data-creator="${c.id}">作品一覧を見る →</button>
+                  <button type="button" class="primary-btn ${isBooksCreator ? "is-books" : ""}" data-creator="${c.id}">作品一覧を見る →</button>
                 </div>
               </div>
-            `
-            )
+            `;
+            })
             .join("")}
           </div>
         `;
@@ -2853,19 +3164,26 @@
       } else if (state.tab === "format_ranking") {
         sortWrap.style.display = "none";
         isRankedView = true;
-        list = getFormatRanking(state.formatCat);
+        const activeFormatCat =
+          state.source === "books"
+            ? "books"
+            : state.source === "doujin" && state.formatCat === "books"
+              ? "comic"
+              : state.formatCat;
+        list = getFormatRanking(activeFormatCat);
         headerBannerHtml = `
           <div class="fanza-section" style="margin-bottom:20px; padding:16px 20px;">
             <div class="section-head" style="margin-bottom:10px; padding-bottom:10px;">
               <div class="section-title-group">
-                <h2 class="section-title"><span class="section-title-bar" style="background:#3b82f6;"></span>作品形式別ランキング（${CATEGORY_META[state.formatCat].label}）</h2>
+                <h2 class="section-title"><span class="section-title-bar" style="background:#3b82f6;"></span>作品形式別ランキング（${CATEGORY_META[activeFormatCat].label}）</h2>
                 <span class="section-update-meta">/ ${ts.hourlyUpdate}</span>
               </div>
               <div class="subtab-group">
-                <button type="button" class="subtab-btn ${state.formatCat === "comic" ? "active" : ""}" data-format-cat="comic">同人誌・漫画</button>
-                <button type="button" class="subtab-btn ${state.formatCat === "audio" ? "active" : ""}" data-format-cat="audio">同人音声・ASMR</button>
-                <button type="button" class="subtab-btn ${state.formatCat === "cg" ? "active" : ""}" data-format-cat="cg">CG・イラスト集</button>
-                <button type="button" class="subtab-btn ${state.formatCat === "game" ? "active" : ""}" data-format-cat="game">ゲーム・動画</button>
+                ${state.source !== "books" ? `<button type="button" class="subtab-btn ${activeFormatCat === "comic" ? "active" : ""}" data-format-cat="comic">同人誌・漫画</button>` : ""}
+                ${state.source !== "doujin" ? `<button type="button" class="subtab-btn ${activeFormatCat === "books" ? "active" : ""}" data-format-cat="books">ブックス（商業）</button>` : ""}
+                ${state.source !== "books" ? `<button type="button" class="subtab-btn ${activeFormatCat === "audio" ? "active" : ""}" data-format-cat="audio">同人音声・ASMR</button>` : ""}
+                ${state.source !== "books" ? `<button type="button" class="subtab-btn ${activeFormatCat === "cg" ? "active" : ""}" data-format-cat="cg">CG・イラスト集</button>` : ""}
+                ${state.source !== "books" ? `<button type="button" class="subtab-btn ${activeFormatCat === "game" ? "active" : ""}" data-format-cat="game">ゲーム・動画</button>` : ""}
               </div>
             </div>
             <div style="font-size:0.8rem; color:var(--text-sub);">作品形式別の人気ランキング（対象: ${list.length}作品）</div>
@@ -3080,8 +3398,10 @@
       let filtered = communityState.posts.filter((p) => {
         if (communityState.filterType !== "all" && p.postType !== communityState.filterType) return false;
         const linked = p.workId ? WORKS.find((w) => w.id === p.workId) : null;
+        const pSrc = linked ? linked.source : (p.workCategory === "books" ? "books" : "doujin");
         const pCat = linked ? linked.category : p.workCategory;
         const pIsAi = linked ? linked.isAi : p.workIsAi;
+        if (state.source !== "all" && p.workId && pSrc !== state.source) return false;
         if (state.cat !== "all" && p.workId && pCat && pCat !== state.cat) return false;
         if (state.aiFilter === "non_ai" && p.workId && pIsAi) return false;
         if (state.aiFilter === "ai" && (!p.workId || !pIsAi)) return false;
@@ -3342,9 +3662,13 @@
       const w = WORKS.find((x) => x.id === workId || x.code === workId);
       if (!w) return;
       currentModalWorkId = w.id;
+      const isBooks = w.source === "books" || w.category === "books";
       const modal = document.getElementById("sampleModal");
       document.getElementById("modalTitle").textContent = `${w.title} — ${w.circle}`;
-      document.getElementById("modalFanzaLink").href = buildFanzaUrl(w);
+      const modalLinkEl = document.getElementById("modalFanzaLink");
+      modalLinkEl.href = buildFanzaUrl(w);
+      modalLinkEl.textContent = isBooks ? "FANZAブックス公式ページで見る ↗" : "FANZA公式ページで見る ↗";
+      modalLinkEl.classList.toggle("is-books", isBooks);
       const copyBtn = document.getElementById("copyShareUrlBtn");
       if (copyBtn) {
         copyBtn.textContent = "🔗 X紹介用URLをコピー";
@@ -3355,6 +3679,64 @@
       `;
 
       const fanzaUrl = buildFanzaUrl(w);
+      const modalBody = document.getElementById("modalBody");
+
+      if (isBooks) {
+        const tachiyomiUrl = w.tachiyomiUrl || "";
+        modalBody.innerHTML = `
+          <div style="width:100%; max-width:740px; margin:0 auto; padding:12px 14px; border-radius:10px; background:var(--surface); border:1px solid rgba(59,130,246,0.35); display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; font-size:0.82rem; color:var(--text-sub);">
+            <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
+              <span class="type-label cat-books" style="font-size:0.74rem; padding:3px 9px;">${CATEGORY_META.books.label}</span>
+              ${w.isAi ? `<span class="ai-label">AI生成作品</span>` : ""}
+              <span>著者: <strong style="color:var(--text);">${escapeHtml(w.circle)}</strong></span>
+              ${w.publisher ? `<span>出版社: <strong style="color:#93c5fd;">${escapeHtml(w.publisher)}</strong></span>` : ""}
+              <span>仕様: <strong style="color:var(--text);">${escapeHtml(w.spec)}</strong></span>
+              <span>配信日: ${escapeHtml(w.date)}</span>
+            </div>
+          </div>
+
+          <div class="sample-gallery">
+            ${w.imageUrl
+              ? `
+                <div class="sample-page-card" style="max-width:440px;">
+                  <div class="sample-page-header">
+                    <span>表紙（FANZAブックス）</span>
+                    <span>${escapeHtml(w.spec)}</span>
+                  </div>
+                  <img src="${w.imageUrl}" alt="${escapeHtml(w.title)}" class="sample-img" loading="eager" />
+                </div>
+              `
+              : ""}
+          </div>
+
+          <div class="sample-end-cta" style="background:linear-gradient(135deg, rgba(37,99,235,0.16), rgba(79,70,229,0.14)); border-color:rgba(59,130,246,0.45);">
+            <div style="font-size:0.95rem; font-weight:800; color:var(--text);">
+              📚 FANZAブックス（商業コミック） — ${escapeHtml(w.spec)}
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-sub);">
+              ${tachiyomiUrl
+                ? "FANZAブックス公式ビューアで無料立ち読み（試し読み）がすぐにご覧いただけます。"
+                : "作品の詳細情報・試し読み・購入はFANZAブックス公式ページにてご確認いただけます。"}
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:4px;">
+              ${tachiyomiUrl
+                ? `<a href="${tachiyomiUrl}" target="_blank" rel="noopener" class="tachiyomi-cta-btn">📖 FANZAブックスで無料立ち読み ↗</a>`
+                : ""}
+              <a href="${fanzaUrl}" target="_blank" rel="noopener" class="primary-btn is-books" style="padding:12px 24px; font-size:0.92rem;">
+                FANZAブックス公式ページで見る ↗
+              </a>
+            </div>
+          </div>
+
+          <div id="modalReviewsWrap" style="width:100%;">
+            ${renderModalReviewsHtml(w.id)}
+          </div>
+        `;
+        modal.classList.add("open");
+        modalBody.scrollTop = 0;
+        return;
+      }
+
       const rawSamples = w.sampleImages && w.sampleImages.length > 0 ? w.sampleImages : [];
       // 表紙画像がサンプル配列に含まれていない場合は先頭に表紙（パッケージ画像）も追加して1ページずつ縦に見せる
       const allPages = [];
@@ -3370,7 +3752,6 @@
         });
       });
 
-      const modalBody = document.getElementById("modalBody");
       modalBody.innerHTML = `
         <div style="width:100%; max-width:740px; margin:0 auto; padding:12px 14px; border-radius:10px; background:var(--surface); border:1px solid var(--border); display:flex; flex-wrap:wrap; gap:8px; align-items:center; justify-content:space-between; font-size:0.82rem; color:var(--text-sub);">
           <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center;">
@@ -3468,6 +3849,32 @@
         render();
         return;
       }
+      const jumpSource = e.target.closest("[data-jump-source]");
+      if (jumpSource) {
+        state.source = jumpSource.dataset.jumpSource || "all";
+        state.cat = jumpSource.dataset.jumpCat || "all";
+        state.tab = "pop_ranking";
+        if (state.source === "books") state.formatCat = "books";
+        else if (state.cat !== "all") state.formatCat = state.cat;
+        state.limit = 30;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        render();
+        return;
+      }
+      const sourceBtn = e.target.closest("[data-source]");
+      if (sourceBtn) {
+        state.source = sourceBtn.dataset.source;
+        if (state.source === "books") {
+          state.cat = "all";
+          state.formatCat = "books";
+        } else if (state.source === "doujin") {
+          if (state.cat === "books") state.cat = "all";
+          if (state.formatCat === "books") state.formatCat = "comic";
+        }
+        state.limit = 30;
+        render();
+        return;
+      }
       const cat = e.target.closest("[data-cat]");
       if (cat) {
         state.cat = cat.dataset.cat;
@@ -3489,6 +3896,7 @@
       if (creator) {
         state.creatorId = creator.dataset.creator;
         state.tab = "new";
+        state.source = "all";
         state.cat = "all";
         state.limit = 30;
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -3716,6 +4124,7 @@
       if (e.target.closest("#clearFilterBtn") || e.target.closest("#logoReset")) {
         state.creatorId = null;
         state.tag = null;
+        state.source = "all";
         state.cat = "all";
         state.aiFilter = "all";
         state.query = "";
@@ -3771,10 +4180,12 @@
     function applyUrlQueryParams() {
       try {
         const params = new URLSearchParams(window.location.search);
+        const source = params.get("source");
+        if (source && ["all", "doujin", "books"].includes(source)) state.source = source;
         const ai = params.get("ai");
         if (ai && ["all", "non_ai", "ai"].includes(ai)) state.aiFilter = ai;
         const cat = params.get("cat");
-        if (cat && ["all", "comic", "audio", "cg", "game"].includes(cat)) state.cat = cat;
+        if (cat && ["all", "comic", "books", "audio", "cg", "game"].includes(cat)) state.cat = cat;
         const tab = params.get("tab");
         if (tab) state.tab = tab;
         const creator = params.get("creator");
